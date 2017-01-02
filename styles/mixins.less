@@ -19,10 +19,12 @@
 }
 
 .git-text-color(@color) {
-    color: @color;
+    & > .name, & > .header > .name {
+        color: @color;
 
-    &.selected {
-        color: lighten(@color, @git-text-color-selected-lighten-amount);
+        &.selected {
+            color: lighten(@color, @git-text-color-selected-lighten-amount);
+        }
     }
 }
 
