@@ -1,0 +1,47 @@
+.button-color(@background) {
+    background-color: @background;
+
+    &:hover, &:focus {
+        background-color: lighten(@background, 5%);
+    }
+
+    &:active {
+        background-color: darken(@background, 5%);
+    }
+
+    &.selected {
+        background-color: lighten(@background, 5%);
+
+        &:hover, &:focus {
+            background-color: lighten(@background, 10%);
+        }
+    }
+}
+
+.git-text-color(@color) {
+    color: @color;
+
+    &.selected {
+        color: lighten(@color, @git-text-color-selected-lighten-amount);
+    }
+}
+
+.loading-spinner(@size) {
+    display: block;
+    width: @size;
+    height: @size;
+    background-image: url(images/octocat-spinner-128.gif);
+    background-repeat: no-repeat;
+    background-size: @size @size;
+
+    &.inline-block {
+        display: inline-block;
+    }
+}
+
+.highlight-mixin(@color) {
+    padding: 1px 4px;
+    background-color: @color;
+    font-weight: normal;
+    border-radius: 0;
+}

@@ -1,0 +1,97 @@
+@base-background-color: black;
+
+@secondary-background-color-lighten-amount: 30%;
+@miscellaneous-color-lighten-amount: (
+    @secondary-background-color-lighten-amount / 2
+);
+
+@secondary-background-color: (
+    lighten(@base-background-color, @secondary-background-color-lighten-amount)
+);
+@miscellaneous-background-color: (
+    lighten(@base-background-color, @miscellaneous-color-lighten-amount)
+);
+
+@text-color: white;
+@text-color-subtle: darken(@text-color, 20%);
+
+@text-color-info: #6494ed;
+@text-color-success: #73c990;
+@text-color-warning: #e2c08d;
+@text-color-error: #ff6347;
+
+@background-color-info: #0088ff;
+@background-color-success: #1c9c71;
+@background-color-warning: #cc8533;
+@background-color-error: #d92626;
+
+@git-text-color-added: @text-color-success;
+@git-text-color-modified: @text-color-warning;
+@git-text-color-removed: @text-color-error;
+@git-text-color-renamed: @text-color-info;
+@git-text-color-ignored: @text-color-subtle;
+
+@git-text-color-selected-lighten-amount: @miscellaneous-color-lighten-amount;
+
+@background-color-highlight: @secondary-background-color;
+@background-color-selected: @secondary-background-color;
+
+
+@base-border-color: red;
+
+@pane-item-background-color: @base-background-color;
+@pane-item-border-color: @base-border-color;
+
+@input-background-color: @app-background-color;
+@input-border-color: @base-border-color;
+
+@tool-panel-background-color: @base-background-color;
+@tool-panel-border-color: @base-border-color;
+
+@inset-panel-background-color: lighten(@base-background-color, 4%);
+@inset-panel-border-color: @base-border-color;
+
+@panel-heading-background-color: lighten(@base-background-color, 4%);
+@panel-heading-border-color: @base-border-color;
+
+@overlay-background-color: lighten(@base-background-color, 5%);
+@overlay-border-color: @base-border-color;
+
+@button-background-color: @secondary-background-color;
+@button-background-color-hover: lighten(@button-background-color, 10%);
+@button-background-color-selected: @button-background-color-hover;
+@button-border-color: @base-border-color;
+
+@tab-bar-background-color: @base-background-color;
+@tab-bar-border-color: @base-border-color;
+@tab-background-color: @tab-bar-background-color;
+@tab-background-color-active: @secondary-background-color;
+@tab-border-color: @base-border-color;
+
+@tree-view-background-color: @base-background-color;
+
+@ui-site-color-1: #0088ff;
+@ui-site-color-2: #20b684;
+@ui-site-color-3: #cc8533;
+@ui-site-color-4: #d831b0;
+@ui-site-color-5: #ebdd5b;
+
+@font-size: 16px;
+@input-font-size: 14px;
+
+@disclosure-arrow-size: 12px;
+
+@component-padding: 10px;
+@component-icon-padding: 5px;
+@component-icon-size: 16px;
+@component-line-height: 25px;
+
+@tab-height: 40px;
+
+@font-family: '.SFNSText-Regular', 'SF UI Text', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
+
+// Atom variables
+@text-color-highlight: @text-color;
+@text-color-selected: @text-color;
+@app-background-color: @base-background-color;
+@tree-view-border-color: @base-border-color;

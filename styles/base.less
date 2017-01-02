@@ -1,0 +1,52 @@
+body {
+    font-size: @font-size;
+    color: @text-color;
+    background-color: @base-background-color;
+}
+
+.overlay, atom-panel.modal {
+    background: @base-background-color;
+}
+
+.badge.badge-info {
+    background: @secondary-background-color;
+}
+
+th, td {
+    border: none !important;
+}
+
+.link {
+    color: @text-color !important;
+    text-decoration: underline;
+}
+
+.alert {
+    border: none;
+    border-radius: 0;
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: @secondary-background-color;
+}
+
+::-webkit-scrollbar-corner {
+    display: none;
+}
+
+pre {
+    white-space: pre-wrap;
+}
+
+.section-heading {
+    font-weight: normal !important;
+
+    &.icon::before {
+        position: relative;
+        bottom: 5px;
+    }
+}

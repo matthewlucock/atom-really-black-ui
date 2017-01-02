@@ -1,0 +1,48 @@
+.list-group li {
+    padding-left: @component-padding / 2;
+
+    &.selected {
+        background-color: @background-color-selected;
+
+        &:before {
+            display: none;
+        }
+    }
+}
+
+.select-list {
+    li {
+        padding: @component-padding/2 @component-padding;
+    }
+
+    .status {
+        float: right;
+    }
+}
+
+.select-list.popover-list {
+    padding: @component-padding / 2;
+    background-color: @base-background-color;
+
+    .list-group {
+        margin-top: @component-padding / 2;
+
+        li {
+            padding-left: @component-padding / 2;
+        }
+    }
+}
+
+.list-group, .list-tree {
+    .selected::before {
+        height: 28px;
+    }
+
+    .icon::before {
+        top: 0;
+    }
+}
+
+.tree-view > .entry:first-child {
+    padding-top: 0;
+}

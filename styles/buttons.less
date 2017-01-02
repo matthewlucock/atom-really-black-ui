@@ -1,0 +1,32 @@
+.btn {
+    // This snippet fixes the "Open config menu" button in the settings sidebar.
+    height: auto;
+    border-radius: 0;
+    white-space: normal;
+
+    &:focus {
+        &, &:active {
+            outline: none;
+        }
+    }
+
+    &, &.btn-primary, &.btn-info {
+        .button-color(@secondary-background-color);
+    }
+
+    &.btn-success {
+        .button-color(@background-color-success);
+    }
+
+    &.btn-warning {
+        .button-color(@background-color-warning);
+    }
+
+    &.btn-error {
+        .button-color(@background-color-error);
+    }
+}
+
+.btn-group > .btn {
+    border: none;
+}

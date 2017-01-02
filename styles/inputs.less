@@ -1,0 +1,67 @@
+.input-text, .input-textarea, .input-search {
+    border: none;
+    border-radius: 0;
+    background: @miscellaneous-background-color;
+}
+
+.input-radio {
+    background: @secondary-background-color;
+    transition: none;
+
+    &:active, &:checked {
+        background: white;
+    }
+
+    &:before {
+        transition: none;
+    }
+}
+
+.input-checkbox, .settings-view input[type="checkbox"] {
+    border-radius: 0;
+    transition: none;
+
+    &, &:checked:active {
+        background: @secondary-background-color;
+    }
+
+    &:focus, &:checked {
+        box-shadow: none;
+    }
+
+    &:active, &:checked {
+        background: white;
+    }
+}
+
+.input-toggle {
+    background: @secondary-background-color;
+    transition: none;
+
+    &:checked {
+        background: white;
+    }
+}
+
+.input-range {
+    background: @secondary-background-color;
+    border-radius: 0;
+
+    &::-webkit-slider-thumb {
+        background: white;
+    }
+}
+
+.input-color {
+    border: none;
+}
+
+.input-number {
+    border: none;
+    border-radius: 0;
+}
+
+.input-select {
+    border: none;
+    border-radius: 0;
+}
