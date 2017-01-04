@@ -18,6 +18,8 @@
 }
 
 .input-checkbox, .settings-view input[type="checkbox"] {
+    border-radius: 0;
+    margin-top: 0;
     transition: none;
 
     &, &:checked:active {
@@ -63,4 +65,9 @@ input[type="color"] {
 .input-select {
     border: none;
     border-radius: 0;
+}
+
+.about-updates .input-checkbox, #show-welcome-on-startup {
+    position: relative;
+    bottom: 2px;
 }
