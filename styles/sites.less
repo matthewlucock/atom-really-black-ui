@@ -1,19 +1,11 @@
-.ui-site-1 {
-    background-color: @ui-site-color-1;
+.generate-ui-site-styles(@number, @i: 1) when (@i <= @number) {
+    @background-variable-name: "ui-site-color-@{i}";
+
+    .ui-site-@{i} {
+        background: @@background-variable-name;
+    }
+
+    .generate-ui-site-styles(@number, @i + 1);
 }
 
-.ui-site-2 {
-    background-color: @ui-site-color-2;
-}
-
-.ui-site-3 {
-    background-color: @ui-site-color-3;
-}
-
-.ui-site-4 {
-    background-color: @ui-site-color-4;
-}
-
-.ui-site-5 {
-    background-color: @ui-site-color-5;
-}
+.generate-ui-site-styles(5);
