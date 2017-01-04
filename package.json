@@ -9,5 +9,13 @@
     "engines": {
         "atom": ">=1.0.0 <2.0.0"
     },
-    "main": "main.js"
+    "main": "main.js",
+    "configSchema": {
+        "fontSize": {
+            "title": "Font size",
+            "type": "integer",
+            "default": 16,
+            "minimum": 0
+        }
+    }
 }
