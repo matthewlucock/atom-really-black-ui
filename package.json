@@ -9,7 +9,7 @@
     "engines": {
         "atom": ">=1.0.0 <2.0.0"
     },
-    "main": "main.js",
+    "main": "scripts/main",
     "configSchema": {
         "fontSize": {
             "title": "Font size",

@@ -1,6 +1,5 @@
 const fs = require("fs");
-const checkboxClass = "input-checkbox";
-const toggleClass = "input-toggle";
+const observePaneItemsCallback = require("./observePaneItemsCallback");
 
 const styleVariables = {};
 const styleVariablePrefix = "@";
@@ -13,21 +12,6 @@ injectedStylesElement.id = "really-black-ui-injected-styles";
 let fontSizeObserverTimeout;
 
 let themeHasActivated;
-
-const observePaneItemsCallback = function(paneItem) {
-    const checkboxes = paneItem.element.querySelectorAll(
-        "input[type=\"checkbox\"]"
-    );
-
-    for (const checkbox of checkboxes) {
-        if (
-                !checkbox.classList.contains(checkboxClass)
-                && !checkbox.classList.contains(toggleClass)
-        ) {
-            checkbox.classList.add(checkboxClass);
-        }
-    }
-};
 
 const injectStyles = function() {
     injectedStylesFileRead.then(function(cssToInject) {
