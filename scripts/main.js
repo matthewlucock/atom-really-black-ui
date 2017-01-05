@@ -1,4 +1,4 @@
-const fs = require("fs");
+const readFile = require("fs-readfile-promise");
 const observePaneItemsCallback = require("./observePaneItemsCallback");
 
 const styleVariables = {};
@@ -49,15 +49,7 @@ const fontSizeObserver = function(fontSize) {
 };
 
 const activate = function() {
-    injectedStylesFileRead = new Promise(function(resolve, reject) {
-        fs.readFile(injectedStylesFilePath, "utf8", function(error, data) {
-            if (error) {
-                reject(error);
-            }
-
-            resolve(data);
-        });
-    });
+    injectedStylesFileRead = readFile(injectedStylesFilePath, "utf8");
 
     setFontSize(atom.config.get("really-black-ui.fontSize"));
     document.head.appendChild(injectedStylesElement);
