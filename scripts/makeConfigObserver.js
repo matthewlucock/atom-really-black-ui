@@ -4,8 +4,8 @@ const themeHasActivated = require("./themeHasActivated");
 const timeouts = {};
 const observerTimeoutDuration = 500;
 
-module.exports = function(timeoutName, valueSettingFunction) {
-    const timeoutFunction = function(value) {
+module.exports = function(valueSettingFunction, timeoutName) {
+    const valueHandler = function(value) {
         valueSettingFunction(value);
         styleInjection.injectStyles();
     };
@@ -20,9 +20,13 @@ module.exports = function(timeoutName, valueSettingFunction) {
             delete timeouts[timeoutName];
         }
 
-        timeouts[timeoutName] = setTimeout(
-            timeoutFunction.bind(undefined, value),
-            observerTimeoutDuration
-        );
+        if (timeoutName) {
+            timeouts[timeoutName] = setTimeout(
+                valueHandler.bind(undefined, value),
+                observerTimeoutDuration
+            );
+        } else {
+            valueHandler(value);
+        }
     };
 };

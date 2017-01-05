@@ -1,6 +1,7 @@
 const KEY_PREFIX = "really-black-ui.";
 
 const KEY_SUFFIXES = [
+    "secondaryBackgroundColor",
     "mainFontSize",
     "statusBarFontSize"
 ];

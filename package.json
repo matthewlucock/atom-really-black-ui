@@ -11,6 +11,11 @@
   },
   "main": "scripts/main",
   "configSchema": {
+    "secondaryBackgroundColor": {
+      "title": "Secondary background color",
+      "type": "color",
+      "default": "#4d4d4d"
+    },
     "mainFontSize": {
       "title": "Main font size",
       "type": "integer",
@@ -24,6 +29,7 @@
     }
   },
   "dependencies": {
+    "color": "^1.0.3",
     "fs-readfile-promise": "^3.0.0"
   }
 }
