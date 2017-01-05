@@ -1,3 +1,11 @@
+/* Values beginning with @ represent variables to be manually replaced later
+ * with JavaScript.
+ */
+
 body, .tab-bar .tab {
-    font-size: @font-size;
+    font-size: @main-font-size;
+}
+
+.status-bar {
+    font-size: @status-bar-font-size;
 }

@@ -11,11 +11,16 @@
   },
   "main": "scripts/main",
   "configSchema": {
-    "fontSize": {
-      "title": "Font size",
+    "mainFontSize": {
+      "title": "Main font size",
       "type": "integer",
       "default": 16,
       "minimum": 0
+    },
+    "statusBarFontSize": {
+      "title": "Status bar font size",
+      "type": "string",
+      "default": "0.9em"
     }
   },
   "dependencies": {
