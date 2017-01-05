@@ -1,98 +1,49 @@
 const readFile = require("fs-readfile-promise");
-const observePaneItemsCallback = require("./observePaneItemsCallback");
 
-const styleVariables = {};
-const styleVariablePrefix = "@";
-const injectedStylesFilePath = "styles/injected-styles.css";
-let injectedStylesFileRead;
-
-let injectedStylesElement = document.createElement("style");
-injectedStylesElement.id = "really-black-ui-injected-styles";
-
-const observerTimeoutDuration = 500;
-let mainFontSizeObserverTimeout;
-let statusBarFontSizeObserverTimeout;
-
-let themeHasActivated;
-
-const injectStyles = function() {
-    injectedStylesFileRead.then(function(cssToInject) {
-        for (const variableName of Object.keys(styleVariables)) {
-            cssToInject = cssToInject.replace(
-                styleVariablePrefix + variableName,
-                styleVariables[variableName]
-            );
-        }
-
-        injectedStylesElement.textContent = cssToInject;
-    });
-};
+const configKeys = require("./configKeys");
+const styleInjection = require("./styleInjection");
+const makeConfigObserver = require("./makeConfigObserver");
+const paneItemsObserver = require("./paneItemsObserver");
+const themeHasActivated = require("./themeHasActivated");
 
 const setMainFontSize = function(fontSize) {
-    styleVariables["main-font-size"] = fontSize + "px";
+    styleInjection.styleVariables["main-font-size"] = fontSize + "px";
 };
 
 const setStatusBarFontSize = function(fontSize) {
-    styleVariables["status-bar-font-size"] = fontSize;
+    styleInjection.styleVariables["status-bar-font-size"] = fontSize;
 };
 
-const mainFontSizeObserver = function(fontSize) {
-    if (!themeHasActivated) {
-        return;
-    }
+const mainFontSizeObserver = makeConfigObserver(
+    "mainFontSize",
+    setMainFontSize
+);
 
-    if (mainFontSizeObserverTimeout) {
-        clearTimeout(mainFontSizeObserverTimeout);
-    }
-
-    mainFontSizeObserverTimeout = setTimeout(
-        function() {
-            setMainFontSize(fontSize);
-            injectStyles();
-        },
-        observerTimeoutDuration
-    );
-};
-
-const statusBarFontSizeObserver = function(fontSize) {
-    if (!themeHasActivated) {
-        return;
-    }
-
-    if (statusBarFontSizeObserverTimeout) {
-        clearTimeout(statusBarFontSizeObserverTimeout);
-    }
-
-    statusBarFontSizeObserverTimeout = setTimeout(
-        function() {
-            setStatusBarFontSize(fontSize);
-            injectStyles();
-        },
-        observerTimeoutDuration
-    )
-}
+const statusBarFontSizeObserver = makeConfigObserver(
+    "statusBarFontSize",
+    setStatusBarFontSize
+);
 
 const activate = function() {
-    injectedStylesFileRead = readFile(injectedStylesFilePath, "utf8");
+    styleInjection.init();
 
-    setMainFontSize(atom.config.get("really-black-ui.mainFontSize"));
-    setStatusBarFontSize(
-        atom.config.get("really-black-ui.statusBarFontSize")
-    );
-    injectStyles();
-    document.head.appendChild(injectedStylesElement);
-    atom.workspace.observePaneItems(observePaneItemsCallback);
-    atom.config.observe("really-black-ui.mainFontSize", mainFontSizeObserver);
+    setMainFontSize(atom.config.get(configKeys.mainFontSize));
+    setStatusBarFontSize(atom.config.get(configKeys.statusBarFontSize));
+    styleInjection.injectStyles();
+
+    atom.config.observe(configKeys.mainFontSize, mainFontSizeObserver);
     atom.config.observe(
-        "really-black-ui.statusBarFontSize",
+        configKeys.statusBarFontSize,
         statusBarFontSizeObserver
     );
-    themeHasActivated = true;
+
+    atom.workspace.observePaneItems(paneItemsObserver);
+
+    themeHasActivated.value = true;
 };
 
 const deactivate = function() {
-    clearTimeout(mainFontSizeObserverTimeout);
-    document.head.removeChild(injectedStylesElement);
+    styleInjection.removeStyles();
 };
 
 module.exports = {
