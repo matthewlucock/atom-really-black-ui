@@ -1,29 +1,29 @@
 const readFile = require("fs-readfile-promise");
 
-const FILE_PATH = "styles/injected-styles.css";
-const styleVariables = {};
-const STYLE_VARIABLE_PREFIX = "@";
+const FILE_PATH = "injected-styles.css";
+const styleVariables = new Map;
 
 const stylesElement = document.createElement("style");
 stylesElement.id = "really-black-ui-injected-styles";
 
-let fileRead;
+let fileReadPromise;
+
+const generateVariableRegExp = function(name) {
+    return RegExp("\"@" + name + "\"", "g");
+}
 
 const init = function() {
-    fileRead = readFile(FILE_PATH, "utf8");
+    fileReadPromise = readFile(FILE_PATH, "utf8");
     document.head.appendChild(stylesElement);
 };
 
 const injectStyles = function() {
-    fileRead.then(function(cssToInject) {
-        for (const variableName of Object.keys(styleVariables)) {
-            cssToInject = cssToInject.replace(
-                STYLE_VARIABLE_PREFIX + variableName,
-                styleVariables[variableName]
-            );
+    fileReadPromise.then(function(css) {
+        for (const [name, value] of styleVariables) {
+            css = css.replace(generateVariableRegExp(name), value);
         }
 
-        stylesElement.textContent = cssToInject;
+        stylesElement.textContent = css;
     });
 };
 

@@ -1,70 +1,63 @@
 const readFile = require("fs-readfile-promise");
 const Color = require("color");
 
-const configKeys = require("./configKeys");
 const styleInjection = require("./styleInjection");
 const makeConfigObserver = require("./makeConfigObserver");
 const paneItemsObserver = require("./paneItemsObserver");
 const themeHasActivated = require("./themeHasActivated");
 
+const CONFIG_KEY_PREFIX = "really-black-ui.";
+
 const setSecondaryBackgroundColor = function(passedColor) {
-    passedColor = passedColor.toHexString();
-    styleInjection.styleVariables["secondary-background-color"] = passedColor;
+    passedColor = Color(passedColor.toHexString());
 
-    passedColor = Color(passedColor);
-
-    styleInjection.styleVariables["standard-button-hover-focus-color"] = (
-        passedColor.lighten(0.05).hex()
-    );
-    styleInjection.styleVariables["standard-button-active-color"] = (
-        passedColor.darken(0.05).hex()
-    );
+    styleInjection.styleVariables
+        .set("secondary-background-color", passedColor)
+        .set(
+            "standard-button-hover-focus-color",
+            passedColor.lighten(0.05).string()
+        )
+        .set(
+            "standard-button-active-color",
+            passedColor.darken(0.05).string()
+        );
 };
 
 const setMainFontSize = function(fontSize) {
-    styleInjection.styleVariables["main-font-size"] = fontSize + "px";
+    styleInjection.styleVariables.set("main-font-size", fontSize + "px");
 };
 
 const setStatusBarFontSize = function(fontSize) {
-    styleInjection.styleVariables["status-bar-font-size"] = fontSize;
+    styleInjection.styleVariables.set("status-bar-font-size", fontSize);
 };
 
-const secondaryBackgroundColorObserver = makeConfigObserver(
-    setSecondaryBackgroundColor
-);
-
-const mainFontSizeObserver = makeConfigObserver(
-    setMainFontSize,
-    "mainFontSize"
-);
-
-const statusBarFontSizeObserver = makeConfigObserver(
-    setStatusBarFontSize,
-    "statusBarFontSize"
-);
+const configObservers = [
+    {
+        configKey: "secondaryBackgroundColor",
+        setter: setSecondaryBackgroundColor
+    },
+    {
+        configKey: "mainFontSize",
+        setter: setMainFontSize,
+        timeout: true
+    },
+    {
+        configKey: "statusBarFontSize",
+        setter: setStatusBarFontSize,
+        timeout: true
+    }
+];
 
 const activate = function() {
     styleInjection.init();
 
-    setSecondaryBackgroundColor(
-        atom.config.get(configKeys.secondaryBackgroundColor)
-    );
-    setMainFontSize(atom.config.get(configKeys.mainFontSize));
-    setStatusBarFontSize(atom.config.get(configKeys.statusBarFontSize));
+    for (const observer of configObservers) {
+        observer.configKey = CONFIG_KEY_PREFIX + observer.configKey;
+        atom.config.observe(observer.configKey, makeConfigObserver(observer));
+    }
+
     styleInjection.injectStyles();
-
-    atom.config.observe(
-        configKeys.secondaryBackgroundColor,
-        secondaryBackgroundColorObserver
-    );
-    atom.config.observe(configKeys.mainFontSize, mainFontSizeObserver);
-    atom.config.observe(
-        configKeys.statusBarFontSize,
-        statusBarFontSizeObserver
-    );
-
     atom.workspace.observePaneItems(paneItemsObserver);
-
     themeHasActivated.value = true;
 };
 

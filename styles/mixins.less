@@ -11,10 +11,6 @@
 
     &.selected {
         background-color: lighten(@background, 5%);
-
-        &:hover, &:focus {
-            background-color: lighten(@background, 10%);
-        }
     }
 }
 
@@ -46,4 +42,14 @@
     background-color: @color;
     font-weight: normal;
     border-radius: 0;
+}
+
+.generate-ui-site-styles(@number, @i: 1) when (@i <= @number) {
+    @background-variable-name: "ui-site-color-@{i}";
+
+    .ui-site-@{i} {
+        background: @@background-variable-name;
+    }
+
+    .generate-ui-site-styles(@number, @i + 1);
 }

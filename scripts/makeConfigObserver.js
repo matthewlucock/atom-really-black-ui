@@ -1,30 +1,28 @@
 const styleInjection = require("./styleInjection");
 const themeHasActivated = require("./themeHasActivated");
 
-const timeouts = {};
-const observerTimeoutDuration = 500;
+const timeouts = new Map;
+const timeoutDuration = 500;
 
-module.exports = function(valueSettingFunction, timeoutName) {
+module.exports = function(options) {
     const valueHandler = function(value) {
-        valueSettingFunction(value);
+        options.setter(value);
         styleInjection.injectStyles();
     };
 
     return function(value) {
-        if (!themeHasActivated.value) {
-            return;
-        }
+        if (options.timeout && themeHasActivated.value) {
+            if (timeouts.has(options.configKey)) {
+                clearTimeout(timeouts.get(options.configKey));
+                timeouts.delete(options.configKey);
+            }
 
-        if (timeouts[timeoutName]) {
-            clearTimeout(timeouts[timeoutName]);
-            delete timeouts[timeoutName];
-        }
-
-        if (timeoutName) {
-            timeouts[timeoutName] = setTimeout(
+            const timeoutId = setTimeout(
                 valueHandler.bind(undefined, value),
-                observerTimeoutDuration
+                timeoutDuration
             );
+
+            timeouts.set(options.configKey, timeoutId);
         } else {
             valueHandler(value);
         }

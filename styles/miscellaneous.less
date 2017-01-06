@@ -1,0 +1,107 @@
+.inset-panel {
+    background: none;
+}
+
+.panel-heading {
+    background: @secondary-background-color;
+}
+
+.tree-view .entry {
+    padding: 3px 0;
+}
+
+.section-heading {
+    font-weight: normal !important;
+
+    &.icon::before {
+        position: relative;
+        bottom: 5px;
+    }
+}
+
+.overlay, atom-panel.modal {
+    background: @base-background-color;
+}
+
+.badge.badge-info {
+    background: @secondary-background-color;
+}
+
+.status-added {
+    .git-text-color(@git-text-color-added);
+}
+
+.status-modified {
+    .git-text-color(@git-text-color-modified);
+}
+
+.status-removed {
+    .git-text-color(@git-text-color-removed);
+}
+
+.status-renamed {
+    .git-text-color(@git-text-color-renamed);
+}
+
+.status-ignored {
+    color: @git-text-color-ignored;
+}
+
+.key-binding {
+    display: inline-block;
+    padding: 0 5px;
+    font-size: .9em;
+    font-family: @font-family;
+    letter-spacing: 1px;
+    background-color: @miscellaneous-background-color;
+}
+
+.welcome-key {
+    .key-binding;
+    border: none;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.alert {
+    border: none;
+    border-radius: 0;
+}
+
+.about-updates .input-checkbox, #show-welcome-on-startup {
+    position: relative;
+    bottom: 2px;
+}
+
+.styleguide-header, .styleguide-sections > section {
+    border: none;
+}
+
+.styleguide .example {
+    .example-rendered, .example-code {
+        border: none;
+        border-radius: 0;
+    }
+
+    .example-code {
+        background: none;
+    }
+}
+
+.generate-ui-site-styles(5);
+
+.loading-spinner-tiny {
+    .loading-spinner(16px);
+}
+
+.loading-spinner-small {
+    .loading-spinner(32px);
+}
+
+.loading-spinner-medium {
+    .loading-spinner(48px);
+}
+
+.loading-spinner-large {
+    .loading-spinner(64px);
+}

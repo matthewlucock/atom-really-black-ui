@@ -1,16 +1,10 @@
-@base-background-color: black;
+@main-background-color: black;
 
 @secondary-background-color-lighten-amount: 30%;
-@miscellaneous-color-lighten-amount: (
-    @secondary-background-color-lighten-amount / 2
-);
+@miscellaneous-color-lighten-amount: 15%;
 
-@secondary-background-color: (
-    lighten(@base-background-color, @secondary-background-color-lighten-amount)
-);
-@miscellaneous-background-color: (
-    lighten(@base-background-color, @miscellaneous-color-lighten-amount)
-);
+@secondary-background-color: lighten(@main-background-color, 30%);
+@miscellaneous-background-color: lighten(@main-background-color, 15%);
 
 @text-color: white;
 @text-color-subtle: darken(@text-color, 20%);
@@ -39,22 +33,22 @@
 
 @base-border-color: red;
 
-@pane-item-background-color: @base-background-color;
+@pane-item-background-color: @main-background-color;
 @pane-item-border-color: @base-border-color;
 
 @input-background-color: @app-background-color;
 @input-border-color: @base-border-color;
 
-@tool-panel-background-color: @base-background-color;
+@tool-panel-background-color: @main-background-color;
 @tool-panel-border-color: @base-border-color;
 
-@inset-panel-background-color: lighten(@base-background-color, 4%);
+@inset-panel-background-color: lighten(@main-background-color, 4%);
 @inset-panel-border-color: @base-border-color;
 
-@panel-heading-background-color: lighten(@base-background-color, 4%);
+@panel-heading-background-color: lighten(@main-background-color, 4%);
 @panel-heading-border-color: @base-border-color;
 
-@overlay-background-color: lighten(@base-background-color, 5%);
+@overlay-background-color: lighten(@main-background-color, 5%);
 @overlay-border-color: @base-border-color;
 
 @button-background-color: @secondary-background-color;
@@ -62,13 +56,13 @@
 @button-background-color-selected: @button-background-color-hover;
 @button-border-color: @base-border-color;
 
-@tab-bar-background-color: @base-background-color;
+@tab-bar-background-color: @main-background-color;
 @tab-bar-border-color: @base-border-color;
 @tab-background-color: @tab-bar-background-color;
 @tab-background-color-active: @secondary-background-color;
 @tab-border-color: @base-border-color;
 
-@tree-view-background-color: @base-background-color;
+@tree-view-background-color: @main-background-color;
 
 @ui-site-color-1: #0088ff;
 @ui-site-color-2: #20b684;
@@ -91,7 +85,8 @@
 @font-family: '.SFNSText-Regular', 'SF UI Text', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
 
 // Atom variables
+@base-background-color: @main-background-color;
 @text-color-highlight: @text-color;
 @text-color-selected: @text-color;
-@app-background-color: @base-background-color;
+@app-background-color: @main-background-color;
 @tree-view-border-color: @base-border-color;

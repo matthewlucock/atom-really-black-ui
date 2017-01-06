@@ -4,14 +4,6 @@ body {
     background-color: @base-background-color;
 }
 
-.overlay, atom-panel.modal {
-    background: @base-background-color;
-}
-
-.badge.badge-info {
-    background: @secondary-background-color;
-}
-
 th, td {
     border: none !important;
 }
@@ -23,11 +15,6 @@ a:focus {
 atom-pane-container a, .link {
     color: @text-color !important;
     text-decoration: underline;
-}
-
-.alert {
-    border: none;
-    border-radius: 0;
 }
 
 ::-webkit-scrollbar {
@@ -46,15 +33,6 @@ pre {
     white-space: pre-wrap;
 }
 
-.section-heading {
-    font-weight: normal !important;
-
-    &.icon::before {
-        position: relative;
-        bottom: 5px;
-    }
-}
-
 label {
     margin-bottom: 0;
     font-weight: normal;
@@ -66,4 +44,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 code {
     background: @miscellaneous-background-color;
+}
+
+.status-bar {
+    font-size: .9em;
 }
