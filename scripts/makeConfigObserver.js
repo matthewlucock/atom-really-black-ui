@@ -7,7 +7,11 @@ const timeoutDuration = 500;
 module.exports = function(options) {
     const valueHandler = function(value) {
         options.setter(value);
-        styleInjection.injectStyles();
+
+        if (themeHasActivated.value) {
+            styleInjection.injectStyles();
+            styleInjection.updateVariablesFile();
+        }
     };
 
     return function(value) {

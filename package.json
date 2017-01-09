@@ -14,7 +14,7 @@
     "secondaryBackgroundColor": {
       "title": "Secondary background color",
       "type": "color",
-      "default": "#4d4d4d"
+      "default": "rgb(77, 77, 77)"
     },
     "mainFontSize": {
       "title": "Main font size",
@@ -25,15 +25,15 @@
     "statusBarFontSize": {
       "title": "Status bar font size",
       "type": "string",
-      "default": "0.9em"
+      "default": ".9em"
     }
   },
   "dependencies": {
     "color": "^1.0.3",
-    "fs-readfile-promise": "^3.0.0"
+    "fs-readfile-promise": "^3.0.0",
+    "fs-writefile-promise": "^2.0.0"
   },
   "devDependencies": {
-    "fs-writefile-promise": "^2.0.0",
     "less": "^2.7.2"
   }
 }

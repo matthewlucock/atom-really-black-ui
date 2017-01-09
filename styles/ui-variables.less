@@ -1,9 +1,11 @@
+@main-font-size: 16px;
+@status-bar-font-size: .9em;
+@secondary-background-color: #4d4d4d;
+
+@import "user-defined-variables";
+
 @main-background-color: black;
 
-@secondary-background-color-lighten-amount: 30%;
-@miscellaneous-color-lighten-amount: 15%;
-
-@secondary-background-color: lighten(@main-background-color, 30%);
 @miscellaneous-background-color: lighten(@main-background-color, 15%);
 
 @text-color: white;
@@ -67,7 +69,7 @@
 @ui-site-color-4: #d831b0;
 @ui-site-color-5: #ebdd5b;
 
-@font-size: 16px;
+@font-size: @main-font-size;
 @input-font-size: 14px;
 
 @disclosure-arrow-size: 12px;

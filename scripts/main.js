@@ -9,6 +9,7 @@ const themeHasActivated = require("./themeHasActivated");
 const CONFIG_KEY_PREFIX = "really-black-ui.";
 
 const setSecondaryBackgroundColor = function(passedColor) {
+    console.log(passedColor, atom.config.get("really-black-ui.secondaryBackgroundColor"));
     passedColor = Color(passedColor.toHexString());
 
     styleInjection.styleVariables
@@ -56,7 +57,6 @@ const activate = function() {
         atom.config.observe(observer.configKey, makeConfigObserver(observer));
     }
 
-    styleInjection.injectStyles();
     atom.workspace.observePaneItems(paneItemsObserver);
     themeHasActivated.value = true;
 };
