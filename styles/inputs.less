@@ -5,7 +5,6 @@
 }
 
 .input-radio {
-    background: @secondary-background-color;
     transition: none;
 
     &:active, &:checked {
@@ -22,10 +21,6 @@
     margin-top: 0;
     transition: none;
 
-    &, &:checked:active {
-        background: @secondary-background-color;
-    }
-
     &:focus, &:checked {
         box-shadow: none;
     }
@@ -36,7 +31,6 @@
 }
 
 .input-toggle {
-    background: @secondary-background-color;
     transition: none;
 
     &:checked {
@@ -45,7 +39,6 @@
 }
 
 .input-range {
-    background: @secondary-background-color;
     border-radius: 0;
 
     &::-webkit-slider-thumb {
@@ -77,13 +70,7 @@ atom-text-editor[mini] {
         background-color: @miscellaneous-background-color;
     }
 
-    &::shadow {
-        .placeholder-text {
-            color: @text-color-subtle;
-        }
-
-        .selection .region {
-            background-color: @background-color-selected;
-        }
+    &::shadow .placeholder-text {
+        color: @text-color-subtle;
     }
 }

@@ -1,0 +1,56 @@
+body {
+    font-size: @main-font-size;
+}
+
+.status-bar {
+    font-size: @status-bar-font-size;
+}
+
+.tab-bar .tab.active,
+.input-radio,
+.input-toggle,
+.input-range,
+.input-select,
+.panel-heading,
+.tooltip .tooltip-inner,
+.badge,
+.badge.badge-info,
+::-webkit-scrollbar-thumb,
+.panel-heading,
+.highlight,
+.highlight-info,
+atom-text-editor[mini]::shadow .selection .region,
+.list-group li.selected,
+.settings-view .config-menu .nav > .active > a,
+.styleguide-sections > .collapsed > .section-heading:hover,
+.settings-view .form-control,
+.list-group .selected::before,
+.list-tree .selected::before {
+    background: @secondary-background-color !important;
+}
+
+.btn {
+    &, &.btn-primary, &.btn-info {
+        background: @secondary-background-color;
+
+        &:hover, &:focus, &.selected {
+            background: @standard-button-hover-focus-color;
+        }
+
+        &:active {
+            background: @standard-button-active-color;
+        }
+    }
+}
+
+.input-checkbox, .settings-view input[type="checkbox"] {
+    &, &:checked:active {
+        background: @secondary-background-color;
+    }
+}
+
+.nav > li > a {
+    &:hover, &:focus {
+        background: @secondary-background-color !important;
+    }
+}

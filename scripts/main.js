@@ -9,18 +9,17 @@ const themeHasActivated = require("./themeHasActivated");
 const CONFIG_KEY_PREFIX = "really-black-ui.";
 
 const setSecondaryBackgroundColor = function(passedColor) {
-    console.log(passedColor, atom.config.get("really-black-ui.secondaryBackgroundColor"));
     passedColor = Color(passedColor.toHexString());
 
     styleInjection.styleVariables
         .set("secondary-background-color", passedColor)
         .set(
             "standard-button-hover-focus-color",
-            passedColor.lighten(0.05).string()
+            passedColor.lighten(0.05).rgb()
         )
         .set(
             "standard-button-active-color",
-            passedColor.darken(0.05).string()
+            passedColor.darken(0.05).rgb()
         );
 };
 

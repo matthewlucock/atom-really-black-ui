@@ -1,16 +1,12 @@
 .button-color(@background) {
     background-color: @background;
 
-    &:hover, &:focus {
+    &:hover, &:focus, &.selected {
         background-color: lighten(@background, 5%);
     }
 
     &:active {
         background-color: darken(@background, 5%);
-    }
-
-    &.selected {
-        background-color: lighten(@background, 5%);
     }
 }
 
@@ -31,13 +27,6 @@
     &.inline-block {
         display: inline-block;
     }
-}
-
-.highlight-mixin(@color) {
-    padding: 1px 4px;
-    background-color: @color;
-    font-weight: normal;
-    border-radius: 0;
 }
 
 .generate-ui-site-styles(@number, @i: 1) when (@i <= @number) {

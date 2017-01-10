@@ -2,10 +2,11 @@ const readFile = require("fs-readfile-promise");
 const writeFile = require("fs-writefile-promise");
 const less = require("less");
 
-readFile("styles/injected-styles.less", "utf8")
+readFile("styles/customisable-styles.less", "utf8")
     .then(function(lessToParse) {
+        lessToParse = lessToParse.replace(/@/g, "");
         return less.render(lessToParse);
     })
     .then(function(output) {
-        return writeFile("injected-styles.css", output.css);
+        return writeFile("styles/customisable-styles.css", output.css);
     });

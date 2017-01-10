@@ -1,12 +1,8 @@
 .list-group li {
     padding-left: @component-padding / 2;
 
-    &.selected {
-        background-color: @background-color-selected;
-
-        &:before {
-            display: none;
-        }
+    &.selected:before {
+        display: none;
     }
 }
 

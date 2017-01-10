@@ -1,0 +1,59 @@
+body {
+  font-size: main-font-size;
+}
+.status-bar {
+  font-size: status-bar-font-size;
+}
+.tab-bar .tab.active,
+.input-radio,
+.input-toggle,
+.input-range,
+.input-select,
+.panel-heading,
+.tooltip .tooltip-inner,
+.badge,
+.badge.badge-info,
+::-webkit-scrollbar-thumb,
+.panel-heading,
+.highlight,
+.highlight-info,
+atom-text-editor[mini]::shadow .selection .region,
+.list-group li.selected,
+.settings-view .config-menu .nav > .active > a,
+.styleguide-sections > .collapsed > .section-heading:hover,
+.settings-view .form-control,
+.list-group .selected::before,
+.list-tree .selected::before {
+  background: secondary-background-color !important;
+}
+.btn,
+.btn.btn-primary,
+.btn.btn-info {
+  background: secondary-background-color;
+}
+.btn:hover,
+.btn.btn-primary:hover,
+.btn.btn-info:hover,
+.btn:focus,
+.btn.btn-primary:focus,
+.btn.btn-info:focus,
+.btn.selected,
+.btn.btn-primary.selected,
+.btn.btn-info.selected {
+  background: standard-button-hover-focus-color;
+}
+.btn:active,
+.btn.btn-primary:active,
+.btn.btn-info:active {
+  background: standard-button-active-color;
+}
+.input-checkbox,
+.settings-view input[type="checkbox"],
+.input-checkbox:checked:active,
+.settings-view input[type="checkbox"]:checked:active {
+  background: secondary-background-color;
+}
+.nav > li > a:hover,
+.nav > li > a:focus {
+  background: secondary-background-color !important;
+}

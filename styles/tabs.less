@@ -5,16 +5,12 @@
         color: @text-color;
         height: @tab-height;
         line-height: @tab-height;
-        font-size: @font-size;
+        font-size: inherit;
         text-align: center;
         max-width: 180px;
 
-        &.active {
-            background-color: @tab-background-color-active;
-
-            .title {
-                padding: 0;
-            }
+        &.active .title {
+            padding: 0;
         }
 
         .close-icon {

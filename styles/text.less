@@ -21,18 +21,20 @@
     color: @text-color-error;
 }
 
-.highlight, .highlight-info {
-    .highlight-mixin(@background-color-highlight);
+.highlight {
+    padding: 1px 4px;
+    font-weight: normal;
+    border-radius: 0;
 }
 
 .highlight-warning {
-    .highlight-mixin(@background-color-warning);
+    background: @background-color-warning;
 }
 
 .highlight-error {
-    .highlight-mixin(@background-color-error);
+    background: @background-color-error;
 }
 
 .highlight-success {
-    .highlight-mixin(@background-color-success);
+    background: @background-color-success;
 }
