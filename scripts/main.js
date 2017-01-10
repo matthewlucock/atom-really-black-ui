@@ -33,16 +33,16 @@ const setStatusBarFontSize = function(fontSize) {
 
 const configObservers = [
     {
-        configKey: "secondaryBackgroundColor",
+        configKey: CONFIG_KEY_PREFIX + "secondaryBackgroundColor",
         setter: setSecondaryBackgroundColor
     },
     {
-        configKey: "mainFontSize",
+        configKey: CONFIG_KEY_PREFIX + "mainFontSize",
         setter: setMainFontSize,
         timeout: true
     },
     {
-        configKey: "statusBarFontSize",
+        configKey: CONFIG_KEY_PREFIX + "statusBarFontSize",
         setter: setStatusBarFontSize,
         timeout: true
     }
@@ -52,7 +52,6 @@ const activate = function() {
     styleInjection.init();
 
     for (const observer of configObservers) {
-        observer.configKey = CONFIG_KEY_PREFIX + observer.configKey;
         atom.config.observe(observer.configKey, makeConfigObserver(observer));
     }
 
