@@ -7,38 +7,42 @@ body {
 }
 
 .tab-bar .tab.active,
-.input-radio,
-.input-toggle,
-.input-range,
-.input-select,
 .panel-heading,
 .tooltip .tooltip-inner,
 .badge,
 .badge.badge-info,
-::-webkit-scrollbar-thumb,
-.panel-heading,
 .highlight,
 .highlight-info,
 atom-text-editor[mini]::shadow .selection .region,
 .list-group li.selected,
-.settings-view .config-menu .nav > .active > a,
-.styleguide-sections > .collapsed > .section-heading:hover,
-.settings-view .form-control,
-.list-group .selected::before,
-.list-tree .selected::before {
+.settings-view .config-menu .nav > li.active > a,
+.styleguide-sections > section.collapsed > .section-heading:hover,
+.settings-view select.form-control {
+    background: @secondary-background-color;
+    color: @secondary-text-color;
+}
+
+.input-radio,
+.input-toggle,
+.input-range,
+.input-select,
+::-webkit-scrollbar-thumb {
     background: @secondary-background-color !important;
 }
 
 .btn {
     &, &.btn-primary, &.btn-info {
         background: @secondary-background-color;
+        color: @secondary-text-color;
 
         &:hover, &:focus, &.selected {
-            background: @standard-button-hover-focus-color;
+            background: @lighter-secondary-background-color;
+            color: @lighter-secondary-text-color;
         }
 
         &:active {
-            background: @standard-button-active-color;
+            background: @darker-secondary-background-color;
+            color: @darker-secondary-text-color;
         }
     }
 }
@@ -52,5 +56,22 @@ atom-text-editor[mini]::shadow .selection .region,
 .nav > li > a {
     &:hover, &:focus {
         background: @secondary-background-color !important;
+        color: @secondary-text-color !important;
+    }
+}
+
+.tab-bar .tab.active.modified:not(:hover) .close-icon {
+    background: @secondary-text-color;
+}
+
+.list-group, .list-tree {
+    .selected {
+        &::before {
+            background: @secondary-background-color;
+        }
+
+        & > .name {
+            color: @secondary-text-color;
+        }
     }
 }

@@ -8,18 +8,38 @@ const themeHasActivated = require("./themeHasActivated");
 
 const CONFIG_KEY_PREFIX = "really-black-ui.";
 
+const getTextColorFromBackground = function(color) {
+    if (color.dark()) {
+        return "white";
+    } else {
+        return "black";
+    }
+}
+
 const setSecondaryBackgroundColor = function(passedColor) {
     passedColor = Color(passedColor.toHexString());
 
+    const lighterSecondaryBackgroundColor = passedColor.lighten(0.1);
+    const darkerSecondaryBackgroundColor = passedColor.darken(0.1);
+
     styleInjection.styleVariables
-        .set("secondary-background-color", passedColor)
+        .set("secondary-background-color", passedColor.rgb())
         .set(
-            "standard-button-hover-focus-color",
-            passedColor.lighten(0.05).rgb()
+            "lighter-secondary-background-color",
+            lighterSecondaryBackgroundColor.rgb()
         )
         .set(
-            "standard-button-active-color",
-            passedColor.darken(0.05).rgb()
+            "darker-secondary-background-color",
+            darkerSecondaryBackgroundColor.rgb()
+        )
+        .set("secondary-text-color", getTextColorFromBackground(passedColor))
+        .set(
+            "lighter-secondary-text-color",
+            getTextColorFromBackground(lighterSecondaryBackgroundColor)
+        )
+        .set(
+            "darker-secondary-text-color",
+            getTextColorFromBackground(darkerSecondaryBackgroundColor)
         );
 };
 

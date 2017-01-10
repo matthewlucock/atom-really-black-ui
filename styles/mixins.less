@@ -1,12 +1,22 @@
-.button-color(@background) {
-    background-color: @background;
+.contrasted-text-color(@background-color) {
+    color: contrast(@background-color, black, white);
+}
+
+.button-color(@background-color) {
+    @lighter-background-color: lighten(@background-color, 10%);
+    @darker-background-color: darken(@background-color, 10%);
+
+    .contrasted-text-color(@background-color);
+    background-color: @background-color;
 
     &:hover, &:focus, &.selected {
-        background-color: lighten(@background, 5%);
+        .contrasted-text-color(@lighter-background-color);
+        background-color: @lighter-background-color;
     }
 
     &:active {
-        background-color: darken(@background, 5%);
+        .contrasted-text-color(@darker-background-color);
+        background-color: @darker-background-color;
     }
 }
 

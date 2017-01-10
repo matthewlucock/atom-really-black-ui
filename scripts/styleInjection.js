@@ -30,7 +30,7 @@ const init = function() {
 const injectStyles = function() {
     injectedStylesReadPromise.then(function(css) {
         for (const [name, value] of styleVariables) {
-            css = css.replace(RegExp(name, "g"), value);
+            css = css.replace(RegExp("\"" + name + "\"", "g"), value);
         }
 
         stylesElement.textContent = css;
