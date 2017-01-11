@@ -2,7 +2,6 @@ const util = require("./util");
 const styleInjection = require("./styleInjection");
 const styleVariableSetters = require("./styleVariableSetters");
 const makeConfigObserver = require("./makeConfigObserver");
-const paneItemsObserver = require("./paneItemsObserver");
 
 const CONFIG_KEY_PREFIX = "really-black-ui.";
 
@@ -30,7 +29,6 @@ const activate = function() {
         atom.config.observe(observer.configKey, makeConfigObserver(observer));
     }
 
-    atom.workspace.observePaneItems(paneItemsObserver);
     util.themeHasActivated = true;
 };
 
