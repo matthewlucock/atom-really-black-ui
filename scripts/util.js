@@ -38,5 +38,6 @@ for (const [functionName, textColor] of GIT_TEXT_COLORS) {
 module.exports = {
     GIT_TEXT_COLORS,
     getMainTextColorFromBackground,
-    getGitTextColorsFromBackground
+    getGitTextColorsFromBackground,
+    themeHasActivated: false
 }

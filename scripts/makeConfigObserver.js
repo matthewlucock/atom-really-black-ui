@@ -1,5 +1,5 @@
+const util = require("./util");
 const styleInjection = require("./styleInjection");
-const themeHasActivated = require("./themeHasActivated");
 
 const timeouts = new Map;
 const timeoutDuration = 500;
@@ -8,14 +8,14 @@ module.exports = function(options) {
     const valueHandler = function(value) {
         options.setter(value);
 
-        if (themeHasActivated.value) {
+        if (util.themeHasActivated) {
             styleInjection.injectStyles();
             styleInjection.updateVariablesFile();
         }
     };
 
     return function(value) {
-        if (options.timeout && themeHasActivated.value) {
+        if (options.timeout && util.themeHasActivated) {
             if (timeouts.has(options.configKey)) {
                 clearTimeout(timeouts.get(options.configKey));
                 timeouts.delete(options.configKey);
