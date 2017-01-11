@@ -5,16 +5,9 @@ const styleInjection = require("./styleInjection");
 const makeConfigObserver = require("./makeConfigObserver");
 const paneItemsObserver = require("./paneItemsObserver");
 const themeHasActivated = require("./themeHasActivated");
+const util = require("./util");
 
 const CONFIG_KEY_PREFIX = "really-black-ui.";
-
-const getTextColorFromBackground = function(color) {
-    if (color.dark()) {
-        return "white";
-    } else {
-        return "black";
-    }
-}
 
 const setSecondaryBackgroundColor = function(passedColor) {
     passedColor = Color(passedColor.toHexString());
@@ -32,15 +25,25 @@ const setSecondaryBackgroundColor = function(passedColor) {
             "darker-secondary-background-color",
             darkerSecondaryBackgroundColor.rgb()
         )
-        .set("secondary-text-color", getTextColorFromBackground(passedColor))
+        .set(
+            "secondary-text-color",
+            util.getMainTextColorFromBackground(passedColor)
+        )
         .set(
             "lighter-secondary-text-color",
-            getTextColorFromBackground(lighterSecondaryBackgroundColor)
+            util.getMainTextColorFromBackground(lighterSecondaryBackgroundColor)
         )
         .set(
             "darker-secondary-text-color",
-            getTextColorFromBackground(darkerSecondaryBackgroundColor)
+            util.getMainTextColorFromBackground(darkerSecondaryBackgroundColor)
         );
+
+    for (const colorName of util.GIT_TEXT_COLORS.keys()) {
+        styleInjection.styleVariables.set(
+            "git-text-color-" + colorName + "-selected",
+            util.getGitTextColorsFromBackground[colorName](passedColor)
+        );
+    }
 };
 
 const setMainFontSize = function(fontSize) {

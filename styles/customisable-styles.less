@@ -75,3 +75,33 @@ atom-text-editor[mini]::shadow .selection .region,
         }
     }
 }
+
+.status-added.selected {
+    & > .name, & > .header > .name {
+        color: @git-text-color-added-selected;
+    }
+}
+
+.status-modified.selected {
+    & > .name, & > .header > .name {
+        color: @git-text-color-modified-selected;
+    }
+}
+
+.status-removed {
+    & > .name, & > .header > .name {
+        color: @git-text-color-removed-selected;
+    }
+}
+
+.status-renamed.selected {
+    & > .name, & > .header > .name {
+        color: @git-text-color-renamed-selected;
+    }
+}
+
+.status-ignored.selected {
+    & > .name, & > .header > .name {
+        color: @git-text-color-ignored-selected;
+    }
+}

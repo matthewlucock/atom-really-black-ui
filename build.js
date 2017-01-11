@@ -4,7 +4,7 @@ const less = require("less");
 
 readFile("styles/customisable-styles.less", "utf8")
     .then(function(lessToParse) {
-        lessToParse = lessToParse.replace(/@([^\s;]+)/g, "\"$1\"");
+        lessToParse = lessToParse.replace(/@([^\s;\)]+)/g, "\"$1\"");
         return less.render(lessToParse, {compress: true});
     })
     .then(function(output) {
