@@ -80,6 +80,25 @@
     }
 }
 
+.markdown-preview:not([data-use-github-style]) {
+    background: @main-background-color;
+    color: inherit;
+    font-size: 1.1em;
+    padding: 1em;
+
+    blockquote {
+        color: inherit;
+        border-color: @secondary-background-color;
+        border-left-width: 5px;
+    }
+
+    atom-text-editor {
+        background: none;
+        font-size: .95em;
+        border-radius: 0
+    }
+}
+
 .generate-ui-site-styles(5);
 
 .loading-spinner-tiny {
