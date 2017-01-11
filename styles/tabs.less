@@ -17,16 +17,18 @@
             top: -2px;
         }
 
-        &.modified:not(:hover) .close-icon {
-            top: 50%;
-            right: @component-padding + 4px; // 4px -> half of icon size
-            margin-top: -3px;
-            border: none;
-            background: @text-color;
-        }
+        &.modified {
+            &:not(:hover) .close-icon {
+                top: 50%;
+                right: @component-padding + 4px; // 4px -> half of icon size
+                margin-top: -3px;
+                border: none;
+                background: @text-color;
+            }
 
-        &.modified:hover .close-icon {
-            color: currentColor;
+            &:hover .close-icon {
+                color: currentColor;
+            }
         }
 
         &.is-dragging .close-icon {

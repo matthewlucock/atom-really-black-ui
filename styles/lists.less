@@ -8,7 +8,7 @@
 
 .select-list {
     li {
-        padding: @component-padding/2 @component-padding;
+        padding: @component-padding / 2 @component-padding;
     }
 
     .status {
@@ -39,10 +39,16 @@
     }
 }
 
-.tree-view > .entry:first-child {
-    padding-top: 0;
-}
+.tree-view {
+    & > .entry:first-child {
+        padding-top: 0;
+    }
 
-.tree-view .name {
-    color: @text-color;
+    .entry {
+        padding: 3px 0;
+    }
+
+    .name {
+        color: @text-color;
+    }
 }
