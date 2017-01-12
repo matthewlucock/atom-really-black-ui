@@ -76,6 +76,11 @@ atom-text-editor[mini].editor .selection .region,
     }
 }
 
+atom-text-editor .gutter .line-number.cursor-line {
+    background: @secondary-background-color !important;
+    color: @secondary-text-color !important;
+}
+
 .status-added.selected {
     & > .name, & > .header > .name {
         color: @git-text-color-added-selected;
