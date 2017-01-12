@@ -21,20 +21,23 @@
     color: @text-color-error;
 }
 
-.highlight {
+.highlight, .highlight-info {
     padding: 1px 4px;
     font-weight: normal;
     border-radius: 0;
 }
 
 .highlight-warning {
+    .highlight;
     background: @background-color-warning;
 }
 
 .highlight-error {
+    .highlight;
     background: @background-color-error;
 }
 
 .highlight-success {
+    .highlight;
     background: @background-color-success;
 }
