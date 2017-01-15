@@ -1,5 +1,7 @@
 const Color = require("color");
 
+const BLACK = Color("black");
+const WHITE = Color("white");
 const GIT_TEXT_COLOR_DARKEN_AMOUNT = 0.5;
 const GIT_TEXT_COLORS = new Map([
     ["added", "#73c990"],
@@ -20,8 +22,8 @@ const makeContrastedTextColorFunction = function(options) {
 };
 
 const getMainTextColorFromBackground = makeContrastedTextColorFunction({
-    lightColor: "white",
-    darkColor: "black"
+    lightColor: WHITE,
+    darkColor: BLACK
 });
 
 const getGitTextColorsFromBackground = {};
