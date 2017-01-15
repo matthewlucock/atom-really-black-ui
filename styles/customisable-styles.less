@@ -17,8 +17,8 @@ body {
 .settings-view .config-menu .nav > li.active > a,
 .styleguide-sections > section.collapsed > .section-heading:hover,
 .settings-view select.form-control {
-    background: @secondary-background-color;
-    color: @secondary-text-color;
+    background: @secondary-color;
+    color: @secondary-color-text-color;
 }
 
 .input-radio,
@@ -27,58 +27,58 @@ body {
 .input-select,
 atom-text-editor[mini].editor .selection .region,
 ::-webkit-scrollbar-thumb {
-    background: @secondary-background-color !important;
+    background: @secondary-color !important;
 }
 
 .btn {
     &, &.btn-primary, &.btn-info {
-        background: @secondary-background-color;
-        color: @secondary-text-color;
+        background: @secondary-color;
+        color: @secondary-color-text-color;
 
         &:hover, &:focus, &.selected {
-            background: @lighter-secondary-background-color;
-            color: @lighter-secondary-text-color;
+            background: @secondary-color-first-shade;
+            color: @secondary-color-first-shade-text-color;
         }
 
         &:active {
-            background: @darker-secondary-background-color;
-            color: @darker-secondary-text-color;
+            background: @secondary-color-second-shade;
+            color: @secondary-color-second-shade-text-color;
         }
     }
 }
 
 .input-checkbox, .settings-view input[type="checkbox"] {
     &, &:checked:active {
-        background: @secondary-background-color;
+        background: @secondary-color;
     }
 }
 
 .nav > li > a {
     &:hover, &:focus {
-        background: @secondary-background-color !important;
-        color: @secondary-text-color !important;
+        background: @secondary-color !important;
+        color: @secondary-color-text-color !important;
     }
 }
 
 .tab-bar .tab.active.modified:not(:hover) .close-icon {
-    background: @secondary-text-color;
+    background: @secondary-color-text-color;
 }
 
 .list-group, .list-tree {
     .selected {
         &::before {
-            background: @secondary-background-color;
+            background: @secondary-color;
         }
 
         & > .name {
-            color: @secondary-text-color;
+            color: @secondary-color-text-color;
         }
     }
 }
 
 atom-text-editor .gutter .line-number.cursor-line {
-    background: @secondary-background-color !important;
-    color: @secondary-text-color !important;
+    background: @secondary-color !important;
+    color: @secondary-color-text-color !important;
 }
 
 .status-added.selected {

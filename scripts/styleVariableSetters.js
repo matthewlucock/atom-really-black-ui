@@ -3,39 +3,36 @@ const Color = require("color");
 const util = require("./util");
 const styleInjection = require("./styleInjection");
 
-const setSecondaryBackgroundColor = function(passedColor) {
-    passedColor = Color(passedColor.toHexString());
+const setSecondaryColor = function(secondaryColor) {
+    secondaryColor = Color(secondaryColor.toHexString());
 
-    const lighterSecondaryBackgroundColor = passedColor.lighten(0.1);
-    const darkerSecondaryBackgroundColor = passedColor.darken(0.1);
+    const firstShade = secondaryColor.lighten(0.1);
+    const secondShade = secondaryColor.darken(0.1);
+
+    const textColor = util.getMainTextColorFromBackground(secondaryColor);
+    const firstShadeTextColor = util.getMainTextColorFromBackground(firstShade);
+    const secondShadeTextColor = util.getMainTextColorFromBackground(
+        secondShade
+    );
 
     styleInjection.styleVariables
-        .set("secondary-background-color", passedColor.rgb())
+        .set("secondary-color", secondaryColor.hex())
+        .set("secondary-color-first-shade", firstShade.hex())
+        .set("secondary-color-second-shade", secondShade.hex())
+        .set("secondary-color-text-color", textColor.hex())
         .set(
-            "lighter-secondary-background-color",
-            lighterSecondaryBackgroundColor.rgb()
+            "secondary-color-first-shade-text-color",
+            firstShadeTextColor.hex()
         )
         .set(
-            "darker-secondary-background-color",
-            darkerSecondaryBackgroundColor.rgb()
-        )
-        .set(
-            "secondary-text-color",
-            util.getMainTextColorFromBackground(passedColor)
-        )
-        .set(
-            "lighter-secondary-text-color",
-            util.getMainTextColorFromBackground(lighterSecondaryBackgroundColor)
-        )
-        .set(
-            "darker-secondary-text-color",
-            util.getMainTextColorFromBackground(darkerSecondaryBackgroundColor)
+            "secondary-color-second-shade-text-color",
+            secondShadeTextColor.hex()
         );
 
     for (const colorName of util.GIT_TEXT_COLORS.keys()) {
         styleInjection.styleVariables.set(
             "git-text-color-" + colorName + "-selected",
-            util.getGitTextColorsFromBackground[colorName](passedColor)
+            util.getGitTextColorsFromBackground[colorName](secondaryColor)
         );
     }
 };
@@ -49,7 +46,7 @@ const setStatusBarFontSize = function(fontSize) {
 };
 
 module.exports = {
-    setSecondaryBackgroundColor,
+    setSecondaryColor,
     setMainFontSize,
     setStatusBarFontSize
 };

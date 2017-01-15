@@ -7,8 +7,8 @@ const CONFIG_KEY_PREFIX = "really-black-ui.";
 
 const configObservers = [
     {
-        configKey: CONFIG_KEY_PREFIX + "secondaryBackgroundColor",
-        setter: styleVariableSetters.setSecondaryBackgroundColor
+        configKey: CONFIG_KEY_PREFIX + "secondaryColor",
+        setter: styleVariableSetters.setSecondaryColor
     },
     {
         configKey: CONFIG_KEY_PREFIX + "mainFontSize",

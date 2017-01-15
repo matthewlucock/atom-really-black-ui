@@ -11,8 +11,8 @@
   },
   "main": "scripts/main",
   "configSchema": {
-    "secondaryBackgroundColor": {
-      "title": "Secondary background color",
+    "secondaryColor": {
+      "title": "Secondary color",
       "type": "color",
       "default": "rgb(77, 77, 77)"
     },
