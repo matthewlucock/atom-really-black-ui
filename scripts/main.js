@@ -38,6 +38,7 @@ const activate = function() {
 
 const deactivate = function() {
     styleInjection.styleElement.remove();
+    util.themeHasActivated = false;
 };
 
 module.exports = {
