@@ -1,12 +1,20 @@
-const readFile = require("fs-readfile-promise");
-const writeFile = require("fs-writefile-promise");
+const fs = require("fs");
+
 const less = require("less");
 
-readFile("styles/customisable-styles.less", "utf8")
-    .then(function(lessToParse) {
-        lessToParse = lessToParse.replace(/@([^\s;\)]+)/g, "\"$1\"");
-        return less.render(lessToParse, {compress: true});
-    })
+const LESS_PATHS = [
+    "styles/customisable/general.less",
+    "styles/customisable/editor.less"
+];
+
+const DESTINATION_PATH = "styles/customisable/compiled.css";
+
+const lessToParse = LESS_PATHS
+    .map(filePath => fs.readFileSync(filePath, "utf8"))
+    .join("")
+    .replace(/@([^\s;\)]+)/g, "\"$1\"");
+
+less.render(lessToParse, {compress: true})
     .then(function(output) {
-        return writeFile("styles/customisable-styles.css", output.css);
+        fs.writeFileSync(DESTINATION_PATH, output.css);
     });

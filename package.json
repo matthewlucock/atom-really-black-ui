@@ -26,6 +26,11 @@
       "title": "Status bar font size",
       "type": "string",
       "default": ".9em"
+    },
+    "styleTheEditor": {
+      "title": "Style the editor",
+      "type": "boolean",
+      "default": true
     }
   },
   "dependencies": {
@@ -34,6 +39,7 @@
     "fs-writefile-promise": "^2.0.0"
   },
   "devDependencies": {
-    "less": "^2.7.2"
+    "less": "^2.7.2",
+    "replace-ext": "^1.0.0"
   }
 }

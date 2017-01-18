@@ -70,22 +70,3 @@ atom-text-editor[mini] {
         background-color: @miscellaneous-background-color;
     }
 }
-
-atom-text-editor:not([mini]) {
-    background: none !important;
-
-    .gutter {
-        background: none !important;
-        color: @text-color-subtle !important;
-
-        .line-number {
-            &, .icon-right {
-                opacity: 1 !important;
-            }
-
-            &[data-screen-row="undefined"] {
-                visibility: hidden;
-            }
-        }
-    }
-}

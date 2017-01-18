@@ -11,4 +11,8 @@
 @import "styles/about";
 @import "styles/welcome";
 @import "styles/miscellaneous";
-@import "styles/customisable-styles";
+@import "styles/customisable/general";
+
+& when (@style-the-editor = true) {
+    @import "styles/customisable/editor";
+}

@@ -6,7 +6,7 @@ const timeoutDuration = 500;
 
 module.exports = function(options) {
     const valueHandler = function(value) {
-        options.setter(value);
+        options.callback(value);
 
         if (util.themeHasActivated) {
             styleInjection.injectStyles();

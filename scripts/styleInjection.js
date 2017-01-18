@@ -1,44 +1,47 @@
 const readFile = require("fs-readfile-promise");
 const writeFile = require("fs-writefile-promise");
 
-const CUSTOMISABLE_STYLES_FILE_PATH = "styles/customisable-styles.css";
-const CUSTOMISABLE_VARIBALES_FILE_PATH = "styles/user-defined-variables.less";
+const PATHS = {
+    customisableStyles: "styles/customisable/compiled.css",
+    customisableVariables: "styles/user-defined-variables.less"
+};
 
 const styleVariables = new Map;
-
-const stylesElement = document.createElement("style");
-stylesElement.id = "really-black-ui-injected-styles";
-
-let injectedStylesReadPromise;
+let customisableStylesReadPromise;
 let customisableVariablesWritePromise;
+
+const styleElement = document.createElement("style");
+styleElement.id = "really-black-ui-customsiable-styles"
 
 const generateVariableSyntax = function(name, value) {
     return "@" + name + ": " + value + ";\n";
 };
 
+const insertStyleVariablesIntoCSS = function(css) {
+    for (const [name, value] of styleVariables) {
+        const nameRegExp = RegExp("\"" + name + "\"", "g");
+        css = css.replace(nameRegExp, value);
+    }
+
+    return css;
+};
+
 const makeWriteVariablesFunction = function(variablesText) {
     return function() {
-        return writeFile(CUSTOMISABLE_VARIBALES_FILE_PATH, variablesText);
+        return writeFile(PATHS.customisableVariables, variablesText);
     };
 };
 
 const init = function() {
-    injectedStylesReadPromise = readFile(CUSTOMISABLE_STYLES_FILE_PATH, "utf8");
-    document.head.appendChild(stylesElement);
+    customisableStylesReadPromise = readFile(PATHS.customisableStyles, "utf8");
+    document.head.appendChild(styleElement);
 };
 
 const injectStyles = function() {
-    injectedStylesReadPromise.then(function(css) {
-        for (const [name, value] of styleVariables) {
-            css = css.replace(RegExp("\"" + name + "\"", "g"), value);
-        }
-
-        stylesElement.textContent = css;
+    return customisableStylesReadPromise.then(function(css) {
+        css = insertStyleVariablesIntoCSS(css);
+        styleElement.textContent = css;
     });
-};
-
-const removeStyles = function() {
-    document.head.removeChild(stylesElement);
 };
 
 const updateVariablesFile = function() {
@@ -60,6 +63,6 @@ module.exports = {
     styleVariables,
     init,
     injectStyles,
-    removeStyles,
+    styleElement,
     updateVariablesFile
 };

@@ -1,24 +1,28 @@
 const util = require("./util");
 const styleInjection = require("./styleInjection");
-const styleVariableSetters = require("./styleVariableSetters");
 const makeConfigObserver = require("./makeConfigObserver");
+const configObserverCallbacks = require("./configObserverCallbacks");
 
 const CONFIG_KEY_PREFIX = "really-black-ui.";
 
 const configObservers = [
     {
         configKey: CONFIG_KEY_PREFIX + "secondaryColor",
-        setter: styleVariableSetters.setSecondaryColor
+        callback: configObserverCallbacks.setSecondaryColor
     },
     {
         configKey: CONFIG_KEY_PREFIX + "mainFontSize",
-        setter: styleVariableSetters.setMainFontSize,
+        callback: configObserverCallbacks.setMainFontSize,
         timeout: true
     },
     {
         configKey: CONFIG_KEY_PREFIX + "statusBarFontSize",
-        setter: styleVariableSetters.setStatusBarFontSize,
+        callback: configObserverCallbacks.setStatusBarFontSize,
         timeout: true
+    },
+    {
+        configKey: CONFIG_KEY_PREFIX + "styleTheEditor",
+        callback: configObserverCallbacks.setStyleTheEditor
     }
 ];
 
@@ -33,7 +37,7 @@ const activate = function() {
 };
 
 const deactivate = function() {
-    styleInjection.removeStyles();
+    styleInjection.styleElement.remove();
 };
 
 module.exports = {
