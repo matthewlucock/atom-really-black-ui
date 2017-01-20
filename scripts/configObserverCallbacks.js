@@ -5,7 +5,7 @@ const styleInjection = require("./styleInjection");
 
 const DONT_STYLE_THE_EDITOR_CLASS = "really-black-ui-dont-style-the-editor";
 
-const setSecondaryColor = function(secondaryColor) {
+const secondaryColor = function(secondaryColor) {
     secondaryColor = Color(secondaryColor.toHexString());
 
     const firstShade = secondaryColor.lighten(0.1);
@@ -39,15 +39,15 @@ const setSecondaryColor = function(secondaryColor) {
     }
 };
 
-const setMainFontSize = function(fontSize) {
+const mainFontSize = function(fontSize) {
     styleInjection.styleVariables.set("main-font-size", fontSize + "px");
 };
 
-const setStatusBarFontSize = function(fontSize) {
+const statusBarFontSize = function(fontSize) {
     styleInjection.styleVariables.set("status-bar-font-size", fontSize);
 };
 
-const setStyleTheEditor = function(value) {
+const styleTheEditor = function(value) {
     styleInjection.styleVariables.set("style-the-editor", value);
 
     if (value) {
@@ -58,8 +58,8 @@ const setStyleTheEditor = function(value) {
 };
 
 module.exports = {
-    setSecondaryColor,
-    setMainFontSize,
-    setStatusBarFontSize,
-    setStyleTheEditor
+    secondaryColor,
+    mainFontSize,
+    statusBarFontSize,
+    styleTheEditor
 };

@@ -1,36 +1,32 @@
-const util = require("./util");
-const styleInjection = require("./styleInjection");
-const makeConfigObserver = require("./makeConfigObserver");
 const configObserverCallbacks = require("./configObserverCallbacks");
+const makeConfigObserver = require("./makeConfigObserver");
+const styleInjection = require("./styleInjection");
+const util = require("./util");
 
 const CONFIG_KEY_PREFIX = "really-black-ui.";
 
-const configObservers = [
-    {
-        configKey: CONFIG_KEY_PREFIX + "secondaryColor",
-        callback: configObserverCallbacks.setSecondaryColor
-    },
-    {
-        configKey: CONFIG_KEY_PREFIX + "mainFontSize",
-        callback: configObserverCallbacks.setMainFontSize,
-        timeout: true
-    },
-    {
-        configKey: CONFIG_KEY_PREFIX + "statusBarFontSize",
-        callback: configObserverCallbacks.setStatusBarFontSize,
-        timeout: true
-    },
-    {
-        configKey: CONFIG_KEY_PREFIX + "styleTheEditor",
-        callback: configObserverCallbacks.setStyleTheEditor
-    }
+const CONFIG_KEYS = [
+    "secondaryColor",
+    "mainFontSize",
+    "statusBarFontSize",
+    "styleTheEditor"
+];
+
+const CONFIG_KEYS_WITH_OBSERVER_TIMEOUTS = [
+    "mainFontSize",
+    "statusBarFontSize"
 ];
 
 const activate = function() {
     styleInjection.init();
 
-    for (const observer of configObservers) {
-        atom.config.observe(observer.configKey, makeConfigObserver(observer));
+    for (const keySuffix of CONFIG_KEYS) {
+        const key = CONFIG_KEY_PREFIX + keySuffix;
+        const callback = configObserverCallbacks[keySuffix];
+        const hasTimeout = CONFIG_KEYS_WITH_OBSERVER_TIMEOUTS.includes(key);
+
+        const observer = makeConfigObserver({callback, hasTimeout});
+        atom.config.observe(key, observer);
     }
 
     util.themeHasActivated = true;

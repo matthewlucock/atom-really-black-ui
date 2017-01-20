@@ -3,12 +3,12 @@ const writeFile = require("fs-writefile-promise");
 
 const PATHS = {
     customisableStyles: "styles/customisable/compiled.css",
-    customisableVariables: "styles/user-defined-variables.less"
+    styleVariables: "styles/user-defined-variables.less"
 };
 
 const styleVariables = new Map;
 let customisableStylesReadPromise;
-let customisableVariablesWritePromise;
+let styleVariablesWritePromise;
 
 const styleElement = document.createElement("style");
 styleElement.id = "really-black-ui-customsiable-styles"
@@ -26,10 +26,21 @@ const insertStyleVariablesIntoCSS = function(css) {
     return css;
 };
 
-const makeWriteVariablesFunction = function(variablesText) {
-    return function() {
-        return writeFile(PATHS.customisableVariables, variablesText);
-    };
+const generateStyleVariablesText = function() {
+    let variablesText = "";
+
+    for (const [name, value] of styleVariables) {
+        variablesText += generateVariableSyntax(name, value);
+    }
+
+    return variablesText;
+};
+
+const writeStyleVariables = function() {
+    return new Promise(function() {
+        const variablesText = generateVariablesText();
+        return writeFile(PATHS.styleVariables, variablesText)
+    });
 };
 
 const init = function() {
@@ -44,19 +55,9 @@ const injectStyles = function() {
     });
 };
 
-const updateVariablesFile = function() {
-    let variablesText = "";
-
-    for (const [name, value] of styleVariables) {
-        variablesText += generateVariableSyntax(name, value);
-    }
-
-    const writeVariables = makeWriteVariablesFunction(variablesText);
-
-    customisableVariablesWritePromise = (
-        Promise.resolve(customisableVariablesWritePromise)
-            .then(writeVariables, writeVariables)
-    );
+const updateStyleVariablesFile = function() {
+    styleVariablesWritePromise = Promise.resolve(styleVariablesWritePromise)
+        .then(writeStyleVariables, writeStyleVariables)
 };
 
 module.exports = {
@@ -64,5 +65,5 @@ module.exports = {
     init,
     injectStyles,
     styleElement,
-    updateVariablesFile
+    updateStyleVariablesFile
 };

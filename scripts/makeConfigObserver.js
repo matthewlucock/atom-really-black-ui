@@ -4,31 +4,33 @@ const styleInjection = require("./styleInjection");
 const timeouts = new Map;
 const timeoutDuration = 500;
 
-module.exports = function(options) {
-    const valueHandler = function(value) {
-        options.callback(value);
+const makeCallbackWrapper = function(callback) {
+    return function(value) {
+        callback(value);
 
         if (util.themeHasActivated) {
             styleInjection.injectStyles();
-            styleInjection.updateVariablesFile();
+            styleInjection.updateStyleVariablesFile();
         }
     };
+};
+
+module.exports = function(options) {
+    const callbackWrapper = makeCallbackWrapper(options.callback);
+    const observerID = Math.random();
 
     return function(value) {
-        if (options.timeout && util.themeHasActivated) {
-            if (timeouts.has(options.configKey)) {
-                clearTimeout(timeouts.get(options.configKey));
-                timeouts.delete(options.configKey);
+        const boundCallbackWrapper = callbackWrapper.bind(undefined, value);
+
+        if (options.hasTimeout && util.themeHasActivated) {
+            if (timeouts.has(observerID)) {
+                clearTimeout(timeouts.get(observerID));
             }
 
-            const timeoutId = setTimeout(
-                valueHandler.bind(undefined, value),
-                timeoutDuration
-            );
-
-            timeouts.set(options.configKey, timeoutId);
+            const timeoutID = setTimeout(boundCallbackWrapper, timeoutDuration);
+            timeouts.set(observerID, timeoutID);
         } else {
-            valueHandler(value);
+            boundCallbackWrapper();
         }
     };
 };
