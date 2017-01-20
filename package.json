@@ -39,7 +39,6 @@
     "fs-writefile-promise": "^2.0.0"
   },
   "devDependencies": {
-    "less": "^2.7.2",
-    "replace-ext": "^1.0.0"
+    "less": "^2.7.2"
   }
 }
