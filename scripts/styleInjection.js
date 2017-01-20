@@ -39,7 +39,7 @@ const generateStyleVariablesText = function() {
 
 const writeStyleVariables = function() {
     return new Promise(function() {
-        const variablesText = generateVariablesText();
+        const variablesText = generateStyleVariablesText();
         return writeFile(PATHS.styleVariables, variablesText)
     });
 };
