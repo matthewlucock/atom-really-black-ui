@@ -1,3 +1,4 @@
+"use strict";
 const configObserverCallbacks = require("./configObserverCallbacks");
 const makeConfigObserver = require("./makeConfigObserver");
 const styleInjection = require("./styleInjection");

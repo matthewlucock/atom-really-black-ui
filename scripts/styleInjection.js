@@ -1,3 +1,4 @@
+"use strict";
 const readFile = require("fs-readfile-promise");
 const writeFile = require("fs-writefile-promise");
 
