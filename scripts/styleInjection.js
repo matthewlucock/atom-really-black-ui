@@ -12,7 +12,7 @@ let customisableStylesReadPromise;
 let styleVariablesWritePromise;
 
 const styleElement = document.createElement("style");
-styleElement.id = "really-black-ui-customsiable-styles"
+styleElement.id = "really-black-ui-customsiable-styles";
 
 const generateVariableSyntax = function(name, value) {
     return "@" + name + ": " + value + ";\n";
@@ -40,7 +40,7 @@ const generateStyleVariablesText = function() {
 const writeStyleVariables = function() {
     return new Promise(function() {
         const variablesText = generateStyleVariablesText();
-        return writeFile(PATHS.styleVariables, variablesText)
+        return writeFile(PATHS.styleVariables, variablesText);
     });
 };
 
@@ -58,7 +58,7 @@ const injectStyles = function() {
 
 const updateStyleVariablesFile = function() {
     styleVariablesWritePromise = Promise.resolve(styleVariablesWritePromise)
-        .then(writeStyleVariables, writeStyleVariables)
+        .then(writeStyleVariables, writeStyleVariables);
 };
 
 module.exports = {

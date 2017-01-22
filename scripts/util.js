@@ -16,9 +16,9 @@ const makeContrastedTextColorFunction = function(options) {
     return function(colorToContrast) {
         if (colorToContrast.dark()) {
             return options.lightColor;
-        } else {
-            return options.darkColor;
         }
+
+        return options.darkColor;
     };
 };
 
@@ -43,4 +43,4 @@ module.exports = {
     getMainTextColorFromBackground,
     getGitTextColorsFromBackground,
     themeHasActivated: false
-}
+};

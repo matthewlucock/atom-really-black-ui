@@ -39,6 +39,7 @@
     "fs-writefile-promise": "^2.0.0"
   },
   "devDependencies": {
+    "eslint": "^3.14.0",
     "less": "^2.7.2"
   }
 }
