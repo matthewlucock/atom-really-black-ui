@@ -98,6 +98,7 @@
         "prefer-destructuring": "error",
         "prefer-rest-params": "error",
         "prefer-spread": "error",
+        "prefer-template": "error",
         "quotes": ["error", "double"],
         "semi": "error",
         "semi-spacing": "error",

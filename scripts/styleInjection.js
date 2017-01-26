@@ -1,6 +1,9 @@
 "use strict";
+
 const readFile = require("fs-readfile-promise");
 const writeFile = require("fs-writefile-promise");
+
+const util = require("./util");
 
 const PATHS = {
     customisableStyles: "styles/customisable/compiled.css",
@@ -14,49 +17,45 @@ let styleVariablesWritePromise;
 const styleElement = document.createElement("style");
 styleElement.id = "really-black-ui-customsiable-styles";
 
-const generateVariableSyntax = function(name, value) {
-    return "@" + name + ": " + value + ";\n";
-};
-
-const insertStyleVariablesIntoCSS = function(css) {
+const insertStyleVariablesIntoCSS = css => {
     for (const [name, value] of styleVariables) {
-        const nameRegExp = RegExp("\"" + name + "\"", "g");
+        const nameRegExp = RegExp(`"${name}"`, "g");
         css = css.replace(nameRegExp, value);
     }
 
     return css;
 };
 
-const generateStyleVariablesText = function() {
+const generateStyleVariablesText = () => {
     let variablesText = "";
 
     for (const [name, value] of styleVariables) {
-        variablesText += generateVariableSyntax(name, value);
+        variablesText += util.generateLessVariableSyntax(name, value);
     }
 
     return variablesText;
 };
 
-const writeStyleVariables = function() {
-    return new Promise(function() {
+const writeStyleVariables = () => {
+    return new Promise(() => {
         const variablesText = generateStyleVariablesText();
         return writeFile(PATHS.styleVariables, variablesText);
     });
 };
 
-const init = function() {
+const init = () => {
     customisableStylesReadPromise = readFile(PATHS.customisableStyles, "utf8");
     document.head.appendChild(styleElement);
 };
 
-const injectStyles = function() {
-    return customisableStylesReadPromise.then(function(css) {
+const injectStyles = () => {
+    return customisableStylesReadPromise.then(css => {
         css = insertStyleVariablesIntoCSS(css);
         styleElement.textContent = css;
     });
 };
 
-const updateStyleVariablesFile = function() {
+const updateStyleVariablesFile = () => {
     styleVariablesWritePromise = Promise.resolve(styleVariablesWritePromise)
         .then(writeStyleVariables, writeStyleVariables);
 };

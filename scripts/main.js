@@ -1,4 +1,5 @@
 "use strict";
+
 const configObserverCallbacks = require("./configObserverCallbacks");
 const makeConfigObserver = require("./makeConfigObserver");
 const styleInjection = require("./styleInjection");
@@ -18,7 +19,7 @@ const CONFIG_KEYS_WITH_OBSERVER_TIMEOUTS = [
     "statusBarFontSize"
 ];
 
-const activate = function() {
+const activate = () => {
     styleInjection.init();
 
     for (const keySuffix of CONFIG_KEYS) {
@@ -33,7 +34,7 @@ const activate = function() {
     util.themeHasActivated = true;
 };
 
-const deactivate = function() {
+const deactivate = () => {
     styleInjection.styleElement.remove();
     util.themeHasActivated = false;
 };

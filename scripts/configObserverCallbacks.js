@@ -1,54 +1,29 @@
 "use strict";
-const Color = require("color");
 
-const util = require("./util");
+const mapAssign = require("map-assign");
+
 const styleInjection = require("./styleInjection");
+const util = require("./util");
 
 const DONT_STYLE_THE_EDITOR_CLASS = "really-black-ui-dont-style-the-editor";
 
-const secondaryColor = function(secondaryColor) {
-    secondaryColor = Color(secondaryColor.toHexString());
+const secondaryColor = secondaryColor => {
+    secondaryColor = util.handleAtomColor(secondaryColor);
 
-    const firstShade = secondaryColor.lighten(0.1);
-    const secondShade = secondaryColor.darken(0.1);
+    const variables = util.generateVariablesFromSecondaryColor(secondaryColor);
 
-    const textColor = util.getMainTextColorFromBackground(secondaryColor);
-    const firstShadeTextColor = util.getMainTextColorFromBackground(firstShade);
-    const secondShadeTextColor = util.getMainTextColorFromBackground(
-        secondShade
-    );
-
-    styleInjection.styleVariables
-        .set("secondary-color", secondaryColor.hex())
-        .set("secondary-color-first-shade", firstShade.hex())
-        .set("secondary-color-second-shade", secondShade.hex())
-        .set("secondary-color-text-color", textColor.hex())
-        .set(
-            "secondary-color-first-shade-text-color",
-            firstShadeTextColor.hex()
-        )
-        .set(
-            "secondary-color-second-shade-text-color",
-            secondShadeTextColor.hex()
-        );
-
-    for (const colorName of util.GIT_TEXT_COLORS.keys()) {
-        styleInjection.styleVariables.set(
-            "git-text-color-" + colorName + "-selected",
-            util.getGitTextColorsFromBackground[colorName](secondaryColor)
-        );
-    }
+    mapAssign(styleInjection.styleVariables, variables);
 };
 
-const mainFontSize = function(fontSize) {
-    styleInjection.styleVariables.set("main-font-size", fontSize + "px");
+const mainFontSize = fontSize => {
+    styleInjection.styleVariables.set("main-font-size", `${fontSize}px`);
 };
 
-const statusBarFontSize = function(fontSize) {
+const statusBarFontSize = fontSize => {
     styleInjection.styleVariables.set("status-bar-font-size", fontSize);
 };
 
-const styleTheEditor = function(value) {
+const styleTheEditor = value => {
     styleInjection.styleVariables.set("style-the-editor", value);
 
     if (value) {

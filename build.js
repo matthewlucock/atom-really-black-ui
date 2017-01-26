@@ -1,6 +1,6 @@
-/*eslint no-console: "off"*/
-
+/* eslint no-console: "off", no-process-exit: "off" */
 "use strict";
+
 const fs = require("fs");
 
 const eslint = require("eslint");
@@ -12,10 +12,19 @@ const LESS_PATHS = [
 ];
 const DESTINATION_CSS_PATH = "styles/customisable/compiled.css";
 
+const SCRIPTS_TO_LINT = [
+    "build.js",
+    "scripts"
+];
+
 const linter = new eslint.CLIEngine;
 const lintFormatter = linter.getFormatter("stylish");
-const lintReport = linter.executeOnFiles(["build.js", "scripts"]);
+const lintReport = linter.executeOnFiles(SCRIPTS_TO_LINT);
 console.log(lintFormatter(lintReport.results));
+
+if (lintReport.errorCount) {
+    process.exit(1);
+}
 
 const lessToParse = LESS_PATHS
     .map(filePath => fs.readFileSync(filePath, "utf8"))
@@ -23,6 +32,6 @@ const lessToParse = LESS_PATHS
     .replace(/@([^\s;)]+)/g, "\"$1\"");
 
 less.render(lessToParse, {compress: true})
-    .then(function(output) {
+    .then(output => {
         fs.writeFileSync(DESTINATION_CSS_PATH, output.css);
     });
