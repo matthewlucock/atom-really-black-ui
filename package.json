@@ -37,9 +37,7 @@
     "color": "^1.0.3",
     "fs-readfile-promise": "^3.0.0",
     "fs-writefile-promise": "^2.0.0",
-    "map-assign": "^1.0.0",
-    "map-map-keys": "^1.0.1",
-    "map-map-values": "^1.0.1"
+    "map-assign": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^3.14.0",

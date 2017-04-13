@@ -2,8 +2,6 @@
 
 const Color = require("color");
 const mapAssign = require("map-assign");
-const mapMapKeys = require("map-map-keys");
-const mapMapValues = require("map-map-values");
 
 const BLACK = Color("black");
 const WHITE = Color("white");
@@ -11,23 +9,22 @@ const WHITE = Color("white");
 const SECONDARY_COLOR_VARIABLE_PREFIX = "secondary-color-";
 const SECONDARY_COLOR_SHADE_MODIFIER = 0.1;
 
-const GIT_LIGHT_TEXT_COLOR_VARIABLES = (() => {
-    const variables = new Map([
+const GIT_LIGHT_TEXT_COLOR_VARIABLES = new Map(
+    [
         ["added", "#73c990"],
         ["modified", "#e2c08d"],
         ["removed", "#ff6347"],
         ["renamed", "#6494ed"],
         ["ignored", "#b3b3b3"]
-    ]);
-
-    return mapMapKeys(variables, key => `git-text-color-${key}-selected`);
-})();
+    ].map(([name, value]) => [`git-text-color-${name}-selected`, value])
+);
 
 const GIT_TEXT_COLOR_DARKEN_AMOUNT = 0.5;
 
-const GIT_DARK_TEXT_COLOR_VARIABLES = mapMapValues(
-    GIT_LIGHT_TEXT_COLOR_VARIABLES,
-    textColor => Color(textColor).darken(GIT_TEXT_COLOR_DARKEN_AMOUNT).hex()
+const GIT_DARK_TEXT_COLOR_VARIABLES = new Map(
+    [...GIT_LIGHT_TEXT_COLOR_VARIABLES].map(([name, value]) => {
+        return [name, Color(value).darken(GIT_TEXT_COLOR_DARKEN_AMOUNT).hex()];
+    })
 );
 
 const handleAtomColor = atomColor => Color(atomColor.toHexString());
@@ -66,22 +63,22 @@ const generateVariablesFromSecondaryColor = secondaryColor => {
     const firstShadeTextColor = getMainContrastedTextColor(firstShade);
     const secondShadeTextColor = getMainContrastedTextColor(secondShade);
 
-    let variables = new Map([
-        ["text-color", textColor],
-        ["first-shade", firstShade],
-        ["second-shade", secondShade],
-        ["first-shade-text-color", firstShadeTextColor],
-        ["second-shade-text-color", secondShadeTextColor]
-    ]);
-
-    variables = mapMapKeys(
-        variables,
-        key => SECONDARY_COLOR_VARIABLE_PREFIX + key
+    let variables = new Map(
+        [
+            ["text-color", textColor],
+            ["first-shade", firstShade],
+            ["second-shade", secondShade],
+            ["first-shade-text-color", firstShadeTextColor],
+            ["second-shade-text-color", secondShadeTextColor]
+        ].map(
+            ([name, value]) => [SECONDARY_COLOR_VARIABLE_PREFIX + name, value]
+        )
     );
 
     variables.set("secondary-color", secondaryColor);
-
-    variables = mapMapValues(variables, value => value.hex());
+    variables = new Map(
+        [...variables].map(([name, value]) => [name, value.hex()])
+    );
 
     const gitTextColorVariables = getGitTextColorVariables(secondaryColor);
     mapAssign(variables, gitTextColorVariables);
