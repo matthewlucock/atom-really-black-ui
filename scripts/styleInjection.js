@@ -1,7 +1,6 @@
 'use strict'
 
-const readFile = require('fs-readfile-promise')
-const writeFile = require('fs-writefile-promise')
+const fse = require('fs-extra')
 
 const util = require('./util')
 
@@ -36,15 +35,13 @@ const generateStyleVariablesText = () => {
   return variablesText
 }
 
-const writeStyleVariables = () => {
-  return new Promise(() => {
-    const variablesText = generateStyleVariablesText()
-    return writeFile(PATHS.styleVariables, variablesText)
-  })
+const writeStyleVariables = async () => {
+  const variablesText = generateStyleVariablesText()
+  await fse.writeFile(PATHS.styleVariables, variablesText)
 }
 
 const init = () => {
-  customisableStylesReadPromise = readFile(PATHS.customisableStyles, 'utf8')
+  customisableStylesReadPromise = fse.readFile(PATHS.customisableStyles, 'utf8')
   document.head.appendChild(styleElement)
 }
 
