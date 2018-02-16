@@ -29,7 +29,7 @@ const GIT_DARK_TEXT_COLOR_VARIABLES = new Map(
 
 const handleAtomColor = atomColor => Color(atomColor.toHexString())
 
-const generateLessVariableSyntax = (name, value) => `@${name}: ${value}\n`
+const generateLessVariableSyntax = (name, value) => `@${name}: ${value};\n`
 
 const getContrastedTextColors = options => {
   if (options.backgroundColor.dark()) {
