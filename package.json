@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "description": "",
   "keywords": [],
-  "repository": "https://github.com/matthewlucock/atom-really-black-ui",
+  "repository": "https://github.com/matthewlucock/really-black-ui",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
