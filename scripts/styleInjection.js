@@ -46,7 +46,7 @@ const init = () => {
 }
 
 const injectStyles = async () => {
-  const {css} = insertStyleVariablesIntoCSS(await customisableStylesReadPromise)
+  const css = insertStyleVariablesIntoCSS(await customisableStylesReadPromise)
   styleElement.textContent = css
 }
 
