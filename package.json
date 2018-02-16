@@ -11,7 +11,8 @@
   },
   "main": "scripts/main",
   "scripts": {
-    "build": "standard less.js | snazzy && standard scripts --global atom | snazzy && node less.js"
+    "lint": "standard less.js | snazzy && standard \"scripts/**/*.js\" --global atom | snazzy",
+    "build": "npm run lint && node less.js"
   },
   "configSchema": {
     "secondaryColor": {
