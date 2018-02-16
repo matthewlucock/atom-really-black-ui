@@ -3,34 +3,33 @@
 const styleInjection = require('./styleInjection')
 const util = require('./util')
 
-const timeouts = new Map()
+const observerTimeouts = new Map()
 const timeoutDuration = 500
 
-const makeCallbackWrapper = callback => {
+const wrapCallback = callback => {
   return value => {
     callback(value)
 
     if (util.themeHasActivated) {
       styleInjection.injectStyles()
-      styleInjection.updateStyleVariablesFile()
+      styleInjection.writeVariables()
     }
   }
 }
 
-module.exports = options => {
-  const callbackWrapper = makeCallbackWrapper(options.callback)
-  const observerID = Math.random()
+module.exports = ({callback, timeout}) => {
+  callback = wrapCallback(callback)
+  const observerId = Math.random()
 
   return value => {
-    const boundCallbackWrapper = callbackWrapper.bind(undefined, value)
+    const boundCallback = callback.bind(undefined, value)
 
-    if (options.hasTimeout && util.themeHasActivated) {
-      clearTimeout(timeouts.get(observerID))
-
-      const timeoutID = setTimeout(boundCallbackWrapper, timeoutDuration)
-      timeouts.set(observerID, timeoutID)
+    if (timeout && util.themeHasActivated) {
+      clearTimeout(observerTimeouts.get(observerId))
+      const timeoutId = setTimeout(boundCallback, timeoutDuration)
+      observerTimeouts.set(observerId, timeoutId)
     } else {
-      boundCallbackWrapper()
+      boundCallback()
     }
   }
 }

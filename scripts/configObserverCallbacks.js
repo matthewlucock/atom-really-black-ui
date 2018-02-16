@@ -7,26 +7,21 @@ const DONT_STYLE_THE_EDITOR_CLASS = 'really-black-ui-dont-style-the-editor'
 
 const secondaryColor = secondaryColor => {
   secondaryColor = util.handleAtomColor(secondaryColor)
-  const variables = util.generateVariablesFromSecondaryColor(secondaryColor)
-  Object.assign(styleInjection.styleVariables, variables)
+  const variables = util.generateSecondaryColorVariables(secondaryColor)
+  Object.assign(styleInjection.variables, variables)
 }
 
 const mainFontSize = fontSize => {
-  styleInjection.styleVariables['main-font-size'] =`${fontSize}px`
+  styleInjection.variables['main-font-size'] = `${fontSize}px`
 }
 
 const statusBarFontSize = fontSize => {
-  styleInjection.styleVariables['status-bar-font-size'] = fontSize
+  styleInjection.variables['status-bar-font-size'] = fontSize
 }
 
 const styleTheEditor = value => {
-  styleInjection.styleVariables['style-the-editor'] = value
-
-  if (value) {
-    document.body.classList.remove(DONT_STYLE_THE_EDITOR_CLASS)
-  } else {
-    document.body.classList.add(DONT_STYLE_THE_EDITOR_CLASS)
-  }
+  styleInjection.variables['style-the-editor'] = value
+  document.body.classList.toggle(DONT_STYLE_THE_EDITOR_CLASS, !value)
 }
 
 module.exports = {

@@ -21,10 +21,12 @@ const activate = () => {
 
   for (const keySuffix of CONFIG_KEYS) {
     const key = CONFIG_KEY_PREFIX + keySuffix
-    const callback = configObserverCallbacks[keySuffix]
-    const hasTimeout = CONFIG_KEYS_WITH_OBSERVER_TIMEOUTS.includes(key)
 
-    const observer = makeConfigObserver({callback, hasTimeout})
+    const observer = makeConfigObserver({
+      callback: configObserverCallbacks[keySuffix],
+      timeout: CONFIG_KEYS_WITH_OBSERVER_TIMEOUTS.includes(key)
+    })
+
     atom.config.observe(key, observer)
   }
 

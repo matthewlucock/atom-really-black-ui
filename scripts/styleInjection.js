@@ -2,38 +2,31 @@
 
 const fse = require('fs-extra')
 
-const util = require('./util')
-
 const PATHS = {
   customisableStyles: 'styles/customisable/compiled.css',
-  styleVariables: 'styles/user-defined-variables.less'
+  variables: 'styles/user-defined-variables.less'
 }
 
-const styleVariables = {}
+const variables = {}
 let customisableStylesReadPromise
-let styleVariablesWritePromise
+let variablesWritePromise
 
 const styleElement = document.createElement('style')
-styleElement.id = 'really-black-ui-customsiable-styles'
 
-const insertStyleVariablesIntoCSS = css => {
-  for (const [name, value] of Object.entries(styleVariables)) {
-    const nameRegExp = RegExp(`"${name}"`, 'g')
-    css = css.replace(nameRegExp, value)
+const generateLessVariableSyntax = (name, value) => `@${name}: ${value};`
+
+const insertStyleVariablesIntoCss = css => {
+  for (const [name, value] of Object.entries(variables)) {
+    css = css.replace(RegExp(`"${name}"`, 'g'), value)
   }
 
   return css
 }
 
-const generateStyleVariablesText = () => {
-  return Object.entries(styleVariables)
-    .map(variableData => util.generateLessVariableSyntax(...variableData))
+const generateVariablesText = () => {
+  return Object.entries(variables)
+    .map(variableData => generateLessVariableSyntax(...variableData))
     .join('\n')
-}
-
-const writeStyleVariables = async () => {
-  const variablesText = generateStyleVariablesText()
-  await fse.writeFile(PATHS.styleVariables, variablesText)
 }
 
 const init = () => {
@@ -42,24 +35,28 @@ const init = () => {
 }
 
 const injectStyles = async () => {
-  const css = insertStyleVariablesIntoCSS(await customisableStylesReadPromise)
-  styleElement.textContent = css
+  styleElement.textContent = insertStyleVariablesIntoCss(
+    await customisableStylesReadPromise
+  )
 }
 
-const updateStyleVariablesFile = () => {
-  styleVariablesWritePromise = (async () => {
-    try {
-      await styleVariablesWritePromise
-    } catch (_) {}
+const writeVariables = async () => {
+  try {
+    await variablesWritePromise
+  } catch (_) {}
 
-    return writeStyleVariables()
-  })()
+  variablesWritePromise = fse.writeFile(
+    PATHS.variables,
+    generateVariablesText()
+  )
+
+  await variablesWritePromise
 }
 
 module.exports = {
-  styleVariables,
+  variables,
+  styleElement,
   init,
   injectStyles,
-  styleElement,
-  updateStyleVariablesFile
+  writeVariables
 }
