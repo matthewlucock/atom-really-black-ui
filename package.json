@@ -10,6 +10,9 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "main": "scripts/main",
+  "scripts": {
+    "build": "standard | snazzy && node less.js"
+  },
   "configSchema": {
     "secondaryColor": {
       "title": "Secondary color",
@@ -40,7 +43,8 @@
     "map-assign": "^1.0.0"
   },
   "devDependencies": {
-    "eslint": "^3.14.0",
-    "less": "^2.7.2"
+    "less": "^2.7.2",
+    "snazzy": "^7.0.0",
+    "standard": "^10.0.3"
   }
 }
