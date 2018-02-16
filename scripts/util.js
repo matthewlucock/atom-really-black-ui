@@ -32,7 +32,7 @@ const handleAtomColor = atomColor => Color(atomColor.toHexString())
 const generateLessVariableSyntax = (name, value) => `@${name}: ${value};\n`
 
 const getContrastedTextColors = options => {
-  if (options.backgroundColor.dark()) return options.lightColors
+  if (options.backgroundColor.isDark()) return options.lightColors
   return options.darkColors
 }
 
