@@ -39,7 +39,7 @@
   "dependencies": {
     "color": "^3.0.0",
     "fs-extra": "^5.0.0",
-    "map-assign": "^1.0.0"
+    "map-obj": "^2.0.0"
   },
   "devDependencies": {
     "less": "^3.0.1",

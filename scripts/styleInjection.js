@@ -9,7 +9,7 @@ const PATHS = {
   styleVariables: 'styles/user-defined-variables.less'
 }
 
-const styleVariables = new Map()
+const styleVariables = {}
 let customisableStylesReadPromise
 let styleVariablesWritePromise
 
@@ -17,7 +17,7 @@ const styleElement = document.createElement('style')
 styleElement.id = 'really-black-ui-customsiable-styles'
 
 const insertStyleVariablesIntoCSS = css => {
-  for (const [name, value] of styleVariables) {
+  for (const [name, value] of Object.entries(styleVariables)) {
     const nameRegExp = RegExp(`"${name}"`, 'g')
     css = css.replace(nameRegExp, value)
   }
@@ -26,13 +26,9 @@ const insertStyleVariablesIntoCSS = css => {
 }
 
 const generateStyleVariablesText = () => {
-  let variablesText = ''
-
-  for (const [name, value] of styleVariables) {
-    variablesText += util.generateLessVariableSyntax(name, value)
-  }
-
-  return variablesText
+  return Object.entries(styleVariables)
+    .map(variableData => util.generateLessVariableSyntax(...variableData))
+    .join('\n')
 }
 
 const writeStyleVariables = async () => {
