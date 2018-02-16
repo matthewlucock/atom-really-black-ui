@@ -1,38 +1,38 @@
 .tab-bar {
-    background-color: @tab-bar-background-color;
+  background-color: @tab-bar-background-color;
 
-    .tab {
-        color: @text-color;
-        height: @tab-height;
-        line-height: @tab-height;
-        font-size: inherit;
-        text-align: center;
-        max-width: 180px;
+  .tab {
+    color: @text-color;
+    height: @tab-height;
+    line-height: @tab-height;
+    font-size: inherit;
+    text-align: center;
+    max-width: 180px;
 
-        &.active .title {
-            padding: 0;
-        }
-
-        .close-icon {
-            top: -2px;
-        }
-
-        &.modified {
-            &:not(:hover) .close-icon {
-                top: 50%;
-                right: @component-padding + 4px; // 4px -> half of icon size
-                margin-top: -3px;
-                border: none;
-                background: @text-color;
-            }
-
-            &:hover .close-icon {
-                color: currentColor;
-            }
-        }
-
-        &.is-dragging .close-icon {
-            display: none;
-        }
+    &.active .title {
+      padding: 0;
     }
+
+    .close-icon {
+      top: -2px;
+    }
+
+    &.modified {
+      &:not(:hover) .close-icon {
+        top: 50%;
+        right: @component-padding + 4px; // 4px -> half of icon size
+        margin-top: -3px;
+        border: none;
+        background: @text-color;
+      }
+
+      &:hover .close-icon {
+        color: currentColor;
+      }
+    }
+
+    &.is-dragging .close-icon {
+      display: none;
+    }
+  }
 }

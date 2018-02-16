@@ -1,23 +1,23 @@
 body:not(.really-black-ui-dont-style-the-editor) atom-text-editor:not([mini]) {
+  background: none !important;
+
+  .gutter {
     background: none !important;
+    color: #b3b3b3 !important;
 
-    .gutter {
-        background: none !important;
-        color: #b3b3b3 !important;
+    .line-number {
+      &, .icon-right {
+        opacity: 1 !important;
+      }
 
-        .line-number {
-            &, .icon-right {
-                opacity: 1 !important;
-            }
+      &.cursor-line {
+        background: @secondary-color !important;
+        color: @secondary-color-text-color !important;
+      }
 
-            &.cursor-line {
-                background: @secondary-color !important;
-                color: @secondary-color-text-color !important;
-            }
-
-            &[data-screen-row="undefined"] {
-                visibility: hidden;
-            }
-        }
+      &[data-screen-row="undefined"] {
+        visibility: hidden;
+      }
     }
+  }
 }

@@ -1,9 +1,9 @@
 body {
-    font-size: @main-font-size;
+  font-size: @main-font-size;
 }
 
 .status-bar {
-    font-size: @status-bar-font-size;
+  font-size: @status-bar-font-size;
 }
 
 .tab-bar .tab.active,
@@ -17,8 +17,8 @@ body {
 .settings-view .config-menu .nav > li.active > a,
 .styleguide-sections > section.collapsed > .section-heading:hover,
 .settings-view select.form-control {
-    background: @secondary-color;
-    color: @secondary-color-text-color;
+  background: @secondary-color;
+  color: @secondary-color-text-color;
 }
 
 .input-radio,
@@ -27,105 +27,105 @@ body {
 .input-select,
 atom-text-editor[mini].editor .selection .region,
 ::-webkit-scrollbar-thumb {
-    background: @secondary-color !important;
+  background: @secondary-color !important;
 }
 
 .btn {
-    &, &.btn-primary, &.btn-info {
-        background: @secondary-color;
-        color: @secondary-color-text-color;
+  &, &.btn-primary, &.btn-info {
+    background: @secondary-color;
+    color: @secondary-color-text-color;
 
-        &:hover, &:focus, &.selected {
-            background: @secondary-color-first-shade;
-            color: @secondary-color-first-shade-text-color;
-        }
-
-        &:active {
-            background: @secondary-color-second-shade;
-            color: @secondary-color-second-shade-text-color;
-        }
+    &:hover, &:focus, &.selected {
+      background: @secondary-color-first-shade;
+      color: @secondary-color-first-shade-text-color;
     }
+
+    &:active {
+      background: @secondary-color-second-shade;
+      color: @secondary-color-second-shade-text-color;
+    }
+  }
 }
 
 .input-checkbox, .settings-view input[type="checkbox"] {
-    &, &:checked:active {
-        background: @secondary-color;
-    }
+  &, &:checked:active {
+    background: @secondary-color;
+  }
 }
 
 .nav > li > a {
-    &:hover, &:focus {
-        background: @secondary-color !important;
-        color: @secondary-color-text-color !important;
-    }
+  &:hover, &:focus {
+    background: @secondary-color !important;
+    color: @secondary-color-text-color !important;
+  }
 }
 
 .tab-bar .tab.active.modified:not(:hover) .close-icon {
-    background: @secondary-color-text-color;
+  background: @secondary-color-text-color;
 }
 
 .list-group, .list-tree {
-    .selected {
-        &::before {
-            background: @secondary-color;
-        }
-
-        & > .name {
-            color: @secondary-color-text-color;
-        }
+  .selected {
+    &::before {
+      background: @secondary-color;
     }
+
+    & > .name {
+      color: @secondary-color-text-color;
+    }
+  }
 }
 
 body:not(.really-black-ui-dont-style-the-editor) atom-text-editor:not([mini]) {
+  background: none !important;
+
+  .gutter {
     background: none !important;
+    color: #b3b3b3 !important;
 
-    .gutter {
-        background: none !important;
-        color: #b3b3b3 !important;
+    .line-number {
+      &, .icon-right {
+        opacity: 1 !important;
+      }
 
-        .line-number {
-            &, .icon-right {
-                opacity: 1 !important;
-            }
+      &.cursor-line {
+        background: @secondary-color !important;
+        color: @secondary-color-text-color !important;
+      }
 
-            &.cursor-line {
-                background: @secondary-color !important;
-                color: @secondary-color-text-color !important;
-            }
-
-            &[data-screen-row="undefined"] {
-                visibility: hidden;
-            }
-        }
+      &[data-screen-row="undefined"] {
+        visibility: hidden;
+      }
     }
+  }
 }
 
 .status-added.selected {
-    & > .name, & > .header > .name {
-        color: @git-text-color-added-selected;
-    }
+  & > .name, & > .header > .name {
+    color: @git-text-color-added-selected;
+  }
 }
 
 .status-modified.selected {
-    & > .name, & > .header > .name {
-        color: @git-text-color-modified-selected;
-    }
+  & > .name, & > .header > .name {
+    color: @git-text-color-modified-selected;
+  }
 }
 
 .status-removed {
-    & > .name, & > .header > .name {
-        color: @git-text-color-removed-selected;
-    }
+  & > .name, & > .header > .name {
+    color: @git-text-color-removed-selected;
+  }
 }
 
 .status-renamed.selected {
-    & > .name, & > .header > .name {
-        color: @git-text-color-renamed-selected;
-    }
+  & > .name, & > .header > .name {
+    color: @git-text-color-renamed-selected;
+  }
 }
 
 .status-ignored.selected {
-    & > .name, & > .header > .name {
-        color: @git-text-color-ignored-selected;
-    }
+  & > .name, & > .header > .name {
+    color: @git-text-color-ignored-selected;
+  }
 }

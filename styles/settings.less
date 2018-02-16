@@ -1,86 +1,86 @@
 .settings-view {
-    .breadcrumbs {
-        padding-bottom: 0;
+  .breadcrumbs {
+    padding-bottom: 0;
+  }
+
+  .section {
+    border: none;
+    padding-top: 30px !important;
+    padding-left: 20px !important;
+    padding-bottom: 0 !important;
+
+    &:empty {
+      padding: 0 !important;
+    }
+  }
+
+  .repo-link, .icon-dashboard {
+    margin-left: 0 !important;
+  }
+
+  .color .settings-title {
+    margin-top: -0.15em;
+  }
+
+  .sub-section-heading.icon, .section-heading.icon {
+    &::before {
+      margin-right: 10px;
+    }
+  }
+
+  .config-menu {
+    border: none;
+    background: none;
+    padding: 0;
+  }
+
+  select.form-control {
+    border: none;
+    border-radius: 0;
+  }
+
+  .package-card {
+    border: none;
+    border-radius: 0;
+    background: none;
+
+    &:hover {
+      background: @miscellaneous-background-color;
     }
 
-    .section {
-        border: none;
-        padding-top: 30px !important;
-        padding-left: 20px !important;
-        padding-bottom: 0 !important;
-
-        &:empty {
-            padding: 0 !important;
-        }
+    .package-name {
+      font-weight: normal;
     }
 
-    .repo-link, .icon-dashboard {
-        margin-left: 0 !important;
+    .card-name {
+      margin: 0;
     }
+  }
 
-    .color .settings-title {
-        margin-top: -0.15em;
-    }
+  .alert-info {
+    background: @miscellaneous-background-color;
+    color: @text-color;
+  }
 
-    .sub-section-heading.icon, .section-heading.icon {
-        &::before {
-            margin-right: 10px;
-        }
-    }
-
-    .config-menu {
-        border: none;
-        background: none;
-        padding: 0;
-    }
-
-    select.form-control {
-        border: none;
-        border-radius: 0;
-    }
-
-    .package-card {
-        border: none;
-        border-radius: 0;
-        background: none;
-
-        &:hover {
-            background: @miscellaneous-background-color;
-        }
-
-        .package-name {
-            font-weight: normal;
-        }
-
-        .card-name {
-            margin: 0;
-        }
-    }
-
-    .alert-info {
-        background: @miscellaneous-background-color;
-        color: @text-color;
-    }
-
-    .packages .themes-label {
-        font-weight: normal;
-    }
+  .packages .themes-label {
+    font-weight: normal;
+  }
 }
 
 .checkbox .setting-title {
-    line-height: 1;
+  line-height: 1;
 }
 
 .package-detail .package-card {
-    padding: 0;
+  padding: 0;
 
-    &:hover {
-        background: none !important;
-    }
+  &:hover {
+    background: none !important;
+  }
 }
 
 .settings-panel {
-    border: none !important;
-    padding-top: 0;
-    padding-bottom: 0;
+  border: none !important;
+  padding-top: 0;
+  padding-bottom: 0;
 }
