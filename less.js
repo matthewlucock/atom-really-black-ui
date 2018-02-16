@@ -1,14 +1,21 @@
 'use strict'
 
 const fse = require('fs-extra')
+const path = require('path')
 
 const less = require('less')
 
+const CUSTOMISABLE_STYLES_DIRECTORY_PATH = 'styles/customisable'
+
 const LESS_PATHS = [
-  'styles/customisable/general.less',
-  'styles/customisable/editor.less'
+  path.join(CUSTOMISABLE_STYLES_DIRECTORY_PATH, 'general.less'),
+  path.join(CUSTOMISABLE_STYLES_DIRECTORY_PATH, 'editor.less')
 ]
-const DESTINATION_CSS_PATH = 'styles/customisable/compiled.css'
+
+const DESTINATION_CSS_PATH = path.join(
+  CUSTOMISABLE_STYLES_DIRECTORY_PATH,
+  'compiled.css'
+)
 
 const lessToParse = LESS_PATHS
   .map(filePath => fse.readFileSync(filePath, 'utf8'))

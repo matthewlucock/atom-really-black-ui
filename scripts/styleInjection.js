@@ -45,16 +45,19 @@ const init = () => {
   document.head.appendChild(styleElement)
 }
 
-const injectStyles = () => {
-  return customisableStylesReadPromise.then(css => {
-    css = insertStyleVariablesIntoCSS(css)
-    styleElement.textContent = css
-  })
+const injectStyles = async () => {
+  const {css} = insertStyleVariablesIntoCSS(await customisableStylesReadPromise)
+  styleElement.textContent = css
 }
 
 const updateStyleVariablesFile = () => {
-  styleVariablesWritePromise = Promise.resolve(styleVariablesWritePromise)
-    .then(writeStyleVariables, writeStyleVariables)
+  styleVariablesWritePromise = (async () => {
+    try {
+      await styleVariablesWritePromise
+    } catch (_) {}
+
+    return writeStyleVariables()
+  })()
 }
 
 module.exports = {

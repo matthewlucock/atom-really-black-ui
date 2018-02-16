@@ -9,9 +9,7 @@ const DONT_STYLE_THE_EDITOR_CLASS = 'really-black-ui-dont-style-the-editor'
 
 const secondaryColor = secondaryColor => {
   secondaryColor = util.handleAtomColor(secondaryColor)
-
   const variables = util.generateVariablesFromSecondaryColor(secondaryColor)
-
   mapAssign(styleInjection.styleVariables, variables)
 }
 

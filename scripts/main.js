@@ -14,10 +14,7 @@ const CONFIG_KEYS = [
   'styleTheEditor'
 ]
 
-const CONFIG_KEYS_WITH_OBSERVER_TIMEOUTS = [
-  'mainFontSize',
-  'statusBarFontSize'
-]
+const CONFIG_KEYS_WITH_OBSERVER_TIMEOUTS = ['mainFontSize', 'statusBarFontSize']
 
 const activate = () => {
   styleInjection.init()
@@ -39,7 +36,4 @@ const deactivate = () => {
   util.themeHasActivated = false
 }
 
-module.exports = {
-  activate,
-  deactivate
-}
+module.exports = {activate, deactivate}
