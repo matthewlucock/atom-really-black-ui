@@ -1,4 +1,11 @@
-@main-font-size: 16px;
+@font-size: 16px;
+
+@git-text-color-added-selected: #73c990;
+@git-text-color-modified-selected: #e2c08d;
+@git-text-color-removed-selected: #ff6347;
+@git-text-color-renamed-selected: #6494ed;
+@git-text-color-ignored-selected: #b3b3b3;
+
 @status-bar-font-size: .9em;
 @style-the-editor: true;
 
@@ -6,12 +13,8 @@
 @secondary-color-first-shade: lighten(@secondary-color, 10%);
 @secondary-color-second-shade: darken(@secondary-color, 10%);
 
-@secondary-color-text-color: white;
-@secondary-color-first-shade-text-color: @secondary-color-text-color;
-@secondary-color-second-shade-text-color: @secondary-color-text-color;
-
-@git-text-color-added-selected: #73c990;
-@git-text-color-modified-selected: #e2c08d;
-@git-text-color-removed-selected: #ff6347;
-@git-text-color-renamed-selected: #6494ed;
-@git-text-color-ignored-selected: #b3b3b3;
+@secondary-color-text-color: contrast(@secondary-color);
+@secondary-color-first-shade-text-color: contrast(@secondary-color-first-shade);
+@secondary-color-second-shade-text-color: contrast(
+  @secondary-color-second-shade
+);

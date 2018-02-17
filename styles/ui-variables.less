@@ -1,21 +1,19 @@
 @import "user-defined-variables";
 
-@main-background-color: black;
+@base-background-color: black;
+@app-background-color: @base-background-color;
 
-@miscellaneous-background-color: lighten(@main-background-color, 15%);
+// Custom variable
+@miscellaneous-background-color: lighten(@base-background-color, 15%);
 
 @text-color: white;
 @text-color-subtle: darken(@text-color, 30%);
-
+@text-color-highlight: @text-color;
+@text-color-selected: @text-color;
 @text-color-info: #6494ed;
 @text-color-success: #73c990;
 @text-color-warning: #e2c08d;
 @text-color-error: #ff6347;
-
-@background-color-info: #0088ff;
-@background-color-success: #1c9c71;
-@background-color-warning: #cc8533;
-@background-color-error: #d92626;
 
 @git-text-color-added: @text-color-success;
 @git-text-color-modified: @text-color-warning;
@@ -23,31 +21,29 @@
 @git-text-color-renamed: @text-color-info;
 @git-text-color-ignored: @text-color-subtle;
 
-@base-border-color: red;
+@background-color-highlight: @secondary-color;
+@background-color-selected: @secondary-color;
+@background-color-info: #0088ff;
+@background-color-success: #1c9c71;
+@background-color-warning: #cc8533;
+@background-color-error: #d92626;
 
-@pane-item-background-color: @main-background-color;
-@pane-item-border-color: @base-border-color;
+@button-background-color: @secondary-color;
+@button-background-color-hover: lighten(@button-background-color, 5%);
+@button-background-color-selected: @button-background-color-hover;
 
-@input-background-color: @app-background-color;
-@input-border-color: @base-border-color;
-
-@tool-panel-background-color: @main-background-color;
-@tool-panel-border-color: @base-border-color;
-
-@inset-panel-background-color: lighten(@main-background-color, 4%);
-@inset-panel-border-color: @base-border-color;
-
-@panel-heading-background-color: lighten(@main-background-color, 4%);
-@panel-heading-border-color: @base-border-color;
-
-@overlay-background-color: lighten(@main-background-color, 5%);
-@overlay-border-color: @base-border-color;
-
-@tab-bar-background-color: @main-background-color;
-@tab-bar-border-color: @base-border-color;
+@tab-height: 2.5em;
 @tab-background-color: @tab-bar-background-color;
+@tab-background-color-active: @secondary-color;
 
-@tree-view-background-color: @main-background-color;
+@font-family: '.SFNSText-Regular', 'SF UI Text', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
+@input-font-size: 14px;
+
+@component-padding: 10px;
+@component-icon-padding: 5px;
+@component-icon-size: 16px;
+@component-line-height: 25px;
+@disclosure-arrow-size: 12px;
 
 @ui-site-color-1: #0088ff;
 @ui-site-color-2: #20b684;
@@ -55,33 +51,23 @@
 @ui-site-color-4: #d831b0;
 @ui-site-color-5: #ebdd5b;
 
-@font-size: @main-font-size;
-@input-font-size: 14px;
-
-@disclosure-arrow-size: 12px;
-
-@component-padding: 10px;
-@component-icon-padding: 5px;
-@component-icon-size: 16px;
-@component-line-height: 25px;
-
-@tab-height: 40px;
-
-@font-family: '.SFNSText-Regular', 'SF UI Text', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
-
-// Atom variables
-@base-background-color: @main-background-color;
-@text-color-highlight: @text-color;
-@text-color-selected: @text-color;
-@app-background-color: @main-background-color;
+@base-border-color: red;
 @tree-view-border-color: @base-border-color;
-@background-color-highlight: @secondary-color;
-@background-color-selected: @secondary-color;
-
-@button-background-color: @secondary-color;
-@button-background-color-hover: lighten(@button-background-color, 5%);
-@button-background-color-selected: @button-background-color-hover;
+@tool-panel-border-color: @base-border-color;
+@pane-item-border-color: @base-border-color;
+@input-border-color: @base-border-color;
+@inset-panel-border-color: @base-border-color;
+@panel-heading-border-color: @base-border-color;
+@overlay-border-color: @base-border-color;
+@tab-bar-border-color: @base-border-color;
 @button-border-color: @base-border-color;
-
-@tab-background-color-active: @secondary-color;
 @tab-border-color: @base-border-color;
+
+@pane-item-background-color: @base-background-color;
+@input-background-color: @base-background-color;
+@tool-panel-background-color: @base-background-color;
+@inset-panel-background-color: @miscellaneous-background-color;
+@panel-heading-background-color: @miscellaneous-background-color;
+@overlay-background-color: @miscellaneous-background-color;
+@tab-bar-background-color: @base-background-color;
+@tree-view-background-color: @base-background-color;

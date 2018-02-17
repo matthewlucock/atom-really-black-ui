@@ -12,7 +12,7 @@ const secondaryColor = secondaryColor => {
 }
 
 const mainFontSize = fontSize => {
-  styleInjection.variables['main-font-size'] = `${fontSize}px`
+  styleInjection.variables['font-size'] = `${fontSize}px`
 }
 
 const statusBarFontSize = fontSize => {
