@@ -1,7 +1,9 @@
 'use strict'
 
+const {CompositeDisposable} = require('atom')
+
 const configObserverCallbacks = require('./configObserverCallbacks')
-const makeConfigObserver = require('./makeConfigObserver')
+const {makeConfigObserver, observerTimeouts} = require('./makeConfigObserver')
 const styleInjection = require('./styleInjection')
 const util = require('./util')
 
@@ -16,6 +18,8 @@ const CONFIG_KEYS = [
 
 const CONFIG_KEYS_WITH_OBSERVER_TIMEOUTS = ['mainFontSize', 'statusBarFontSize']
 
+const disposables = new CompositeDisposable()
+
 const activate = () => {
   styleInjection.init()
 
@@ -27,13 +31,15 @@ const activate = () => {
       timeout: CONFIG_KEYS_WITH_OBSERVER_TIMEOUTS.includes(key)
     })
 
-    atom.config.observe(key, observer)
+    disposables.add(atom.config.observe(key, observer))
   }
 
   util.themeHasActivated = true
 }
 
 const deactivate = () => {
+  disposables.dispose()
+  observerTimeouts.forEach(clearTimeout)
   styleInjection.styleElement.remove()
   util.themeHasActivated = false
 }

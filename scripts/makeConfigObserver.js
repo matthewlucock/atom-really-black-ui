@@ -17,7 +17,7 @@ const wrapCallback = callback => {
   }
 }
 
-module.exports = ({callback, timeout}) => {
+const makeConfigObserver = ({callback, timeout}) => {
   callback = wrapCallback(callback)
   const observerId = Math.random()
 
@@ -33,3 +33,5 @@ module.exports = ({callback, timeout}) => {
     }
   }
 }
+
+module.exports = {makeConfigObserver, observerTimeouts}
