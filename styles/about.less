@@ -1,49 +1,65 @@
 .about {
   justify-content: center;
-  padding: 2em;
 
   .group-start {
+    // Decrease spacing between elements.
     margin-top: 2em;
   }
 }
 
 .about-version-container {
+  // Put version on separate line.
   display: block;
+  // Fix horizontal offsetting
   margin-right: 0;
 }
 
-.about-copy-version::before {
-  position: relative;
-  top: 2px;
-  margin-right: 0;
+.about-copy-version {
+  cursor: pointer;
+
+  // The copy icon.
+  &::before {
+    // Fix vertical offsetting.
+    top: 2px;
+    // Fix horizontal offsetting.
+    margin-right: 0;
+  }
 }
 
 .about-header-release-notes {
+  // Fix horizontal offsetting.
   margin-left: 0;
 }
 
 .about-updates-box {
-  flex-direction: column;
-  background: none;
   border: none;
+  background: none;
+  // Arrange up-to-date message and check for updates button on top of each
+  // other.
+  flex-direction: column;
+  // Decrease spacing between elements.
   padding: 0;
 }
 
 .about-updates-item .icon::before {
-  position: relative;
+  // Fix vertical offsetting.
   bottom: 2px;
 }
 
 .about-updates-status {
+  // Fix horizontal offsetting.
   margin-left: 0;
-  margin-bottom: .5em;
+  // Increase spacing between elements.
+  margin-bottom: @component-padding;
 }
 
 .about-auto-updates {
-  margin-top: 1em;
+  // Decrease spacing between elements.
+  margin-top: @component-padding;
 }
 
 .about-credits {
-  margin-top: .5em;
   color: inherit;
+  // Decrease spacing between elements.
+  margin-top: .5em !important;
 }

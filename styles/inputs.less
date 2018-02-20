@@ -1,25 +1,39 @@
-.input-text, .input-textarea, .input-search {
-  border: none;
+.input-text,
+.input-textarea,
+.input-search,
+.input-number,
+.input-select,
+input[type="color"] {
+  border: none !important;
+}
+
+.input-text,
+.input-textarea,
+.input-search,
+.input-checkbox,
+.settings-view input[type="checkbox"],
+.input-range,
+.input-number,
+.input-select {
   border-radius: 0;
+}
+
+input[type="color"] {
+  background: none !important;
+}
+
+.input-text, .input-textarea, .input-search {
   background: @miscellaneous-background-color;
 }
 
 .input-radio {
-  transition: none;
-
   &:active, &:checked {
     background: white;
-  }
-
-  &:before {
-    transition: none;
   }
 }
 
 .input-checkbox, .settings-view input[type="checkbox"] {
-  border-radius: 0;
   margin-top: 0;
-  transition: none;
 
   &:focus, &:checked {
     box-shadow: none;
@@ -30,43 +44,17 @@
   }
 }
 
-.input-toggle {
-  transition: none;
-
-  &:checked {
-    background: white;
-  }
-}
-
-.input-range {
-  border-radius: 0;
-
-  &::-webkit-slider-thumb {
-    background: white;
-  }
-}
-
-input[type="color"] {
-  border: none !important;
-}
-
-.input-number {
-  border: none;
-  border-radius: 0;
-}
-
-.input-select {
-  border: none;
-  border-radius: 0;
+.input-toggle:checked, .input-range::-webkit-slider-thumb {
+  background: white;
 }
 
 atom-text-editor[mini] {
-  padding-left: @component-padding / 2;
-  color: @text-color;
+  padding-left: .5em;
   background-color: @miscellaneous-background-color;
+  color: inherit;
   font-family: inherit;
 
-  &.is-focused {
-    background-color: @miscellaneous-background-color;
+  .settings-view .section & {
+    opacity: 1
   }
 }

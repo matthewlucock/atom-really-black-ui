@@ -1,23 +1,26 @@
 .tooltip {
-  &.in {
-    opacity: 1;
-  }
-  
   .tooltip-inner {
-    line-height: 1;
-    padding: .75em;
-    white-space: nowrap;
-    max-width: none;
+    padding: @component-padding / 2 @component-padding;
     border-radius: 0;
+
+    // Ensure tooltips don't wrap.
+    max-width: none;
+    white-space: nowrap;
   }
 
-  .keystroke {
-    padding: .15em .4em;
-    margin: 0 -.3em 0 .25em;
-    background: @miscellaneous-background-color;
+  &.in {
+    // Stop tab tooltips (and potentially others) from being translucent.
+    opacity: 1;
   }
 
   .tooltip-arrow {
+    // If tooltip arrows are made visible, they will need to be styled to be
+    // the same color as the rest of the tooltip.
     display: none;
+  }
+
+  .keystroke {
+    padding: .1em .4em;
+    background: @miscellaneous-background-color;
   }
 }

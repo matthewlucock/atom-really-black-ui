@@ -1,4 +1,4 @@
-body:not(.really-black-ui-dont-style-the-editor) atom-text-editor:not([mini]) {
+body:not(.really-black-ui-dont-style-the-editor) .item-views > .editor {
   background: none !important;
 
   .gutter {
@@ -13,10 +13,6 @@ body:not(.really-black-ui-dont-style-the-editor) atom-text-editor:not([mini]) {
       &.cursor-line {
         background: @secondary-color !important;
         color: @secondary-color-text-color !important;
-      }
-
-      &[data-screen-row="undefined"] {
-        visibility: hidden;
       }
     }
   }

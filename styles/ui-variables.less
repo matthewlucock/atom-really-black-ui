@@ -39,7 +39,7 @@
 @font-family: '.SFNSText-Regular', 'SF UI Text', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
 @input-font-size: 14px;
 
-@component-padding: 10px;
+@component-padding: .5em;
 @component-icon-padding: 5px;
 @component-icon-size: 16px;
 @component-line-height: 25px;
@@ -63,11 +63,18 @@
 @button-border-color: @base-border-color;
 @tab-border-color: @base-border-color;
 
-@pane-item-background-color: @base-background-color;
+@pane-item-background-color: transparent;
 @input-background-color: @base-background-color;
-@tool-panel-background-color: @base-background-color;
-@inset-panel-background-color: @miscellaneous-background-color;
+@tool-panel-background-color: transparent;
+@inset-panel-background-color: transparent;
 @panel-heading-background-color: @miscellaneous-background-color;
-@overlay-background-color: @miscellaneous-background-color;
+@overlay-background-color: @base-background-color;
 @tab-bar-background-color: @base-background-color;
-@tree-view-background-color: @base-background-color;
+@tree-view-background-color: transparent;
+
+// Custom variables
+@tab-maximum-width: 12.5em;
+@tab-top-and-bottom-padding: .5em;
+@tab-left-and-right-padding: 25px;
+
+@settings-padding: @component-padding * 3;

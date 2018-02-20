@@ -1,0 +1,22 @@
+.markdown-preview:not([data-use-github-style]) {
+  background: none;
+  color: inherit;
+  // Reduce padding
+  padding: 1em;
+
+  blockquote {
+    color: inherit;
+    // Increase border width.
+    border-left-width: 5px;
+  }
+
+  atom-text-editor {
+    background: @miscellaneous-background-color;
+    border-radius: 0;
+  }
+
+  hr {
+    // Make horizontal rules solid instead of dashed.
+    border-style: solid;
+  }
+}

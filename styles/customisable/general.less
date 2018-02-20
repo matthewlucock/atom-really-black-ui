@@ -16,7 +16,9 @@ body {
 .list-group li.selected,
 .settings-view .config-menu .nav > li.active > a,
 .styleguide-sections > section.collapsed > .section-heading:hover,
-.settings-view select.form-control {
+.settings-view select.form-control,
+.atom-dock-toggle-button .atom-dock-toggle-button-inner,
+thead {
   background: @secondary-color;
   color: @secondary-color-text-color;
 }
@@ -27,7 +29,7 @@ body {
 .input-select,
 atom-text-editor[mini].editor .selection .region,
 ::-webkit-scrollbar-thumb {
-  background: @secondary-color !important;
+  background: @secondary-color;
 }
 
 .btn {
@@ -76,30 +78,6 @@ atom-text-editor[mini].editor .selection .region,
   }
 }
 
-body:not(.really-black-ui-dont-style-the-editor) atom-text-editor:not([mini]) {
-  background: none !important;
-
-  .gutter {
-    background: none !important;
-    color: #b3b3b3 !important;
-
-    .line-number {
-      &, .icon-right {
-        opacity: 1 !important;
-      }
-
-      &.cursor-line {
-        background: @secondary-color !important;
-        color: @secondary-color-text-color !important;
-      }
-
-      &[data-screen-row="undefined"] {
-        visibility: hidden;
-      }
-    }
-  }
-}
-
 .status-added.selected {
   & > .name, & > .header > .name {
     color: @git-text-color-added-selected;
@@ -112,20 +90,14 @@ body:not(.really-black-ui-dont-style-the-editor) atom-text-editor:not([mini]) {
   }
 }
 
-.status-removed {
-  & > .name, & > .header > .name {
-    color: @git-text-color-removed-selected;
-  }
-}
-
-.status-renamed.selected {
-  & > .name, & > .header > .name {
-    color: @git-text-color-renamed-selected;
-  }
-}
-
 .status-ignored.selected {
   & > .name, & > .header > .name {
     color: @git-text-color-ignored-selected;
+  }
+}
+
+.markdown-preview:not([data-use-github-style]) {
+  blockquote, hr {
+    border-color: @secondary-color;
   }
 }

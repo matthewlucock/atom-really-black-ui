@@ -1,34 +1,55 @@
 .btn {
+  // Ensure buttons don't have borders rounded corners.
+  border: none !important;
   border-radius: 0 !important;
 
-  // This snippet fixes the "Open config menu" button in the settings sidebar.
+  // Fix the "Open config menu" button in the settings sidebar.
   height: auto;
   white-space: normal;
 
-  &:focus {
-    &, &:active {
-      outline: none;
+  // Remove focus outlines.
+  &:focus,
+  &.focus,
+  &:active:focus,
+  &.active:focus,
+  &:active.focus,
+  &.active.focus {
+    outline: none;
+  }
+
+  // Remove box shadows when active.
+  &:active, &.active {
+    box-shadow: none;
+  }
+
+  // Enforce spacing between buttons in button groups.
+  .btn-group > &:not(:last-child) {
+    margin-right: 1em;
+  }
+}
+
+// Apply custom button styles, including hover and active styles.
+.button-type(@type) {
+  @background-variable: "background-color-@{type}";
+  @lighter-background: lighten(@@background-variable, 10%);
+  @darker-background: darken(@@background-variable, 10%);
+
+  .btn.btn-@{type} {
+    background: @@background-variable;
+    color: contrast(@@background-variable);
+
+    &:hover, &:focus, &.selected {
+      background: @lighter-background;
+      color: contrast(@lighter-background);
+    }
+
+    &:active {
+      background: @darker-background;
+      color: contrast(@darker-background);
     }
   }
-
-  &.btn-success {
-    .button-color(@background-color-success);
-  }
-
-  &.btn-warning {
-    .button-color(@background-color-warning);
-  }
-
-  &.btn-error {
-    .button-color(@background-color-error);
-  }
 }
 
-.btn-group > .btn {
-  border: none;
-  margin-right: 1em;
-
-  &:last-child {
-    margin-right: 0;
-  }
-}
+.button-type(success);
+.button-type(warning);
+.button-type(error);

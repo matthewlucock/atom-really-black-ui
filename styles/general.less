@@ -1,0 +1,67 @@
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+// Style links.
+atom-pane-container a,
+.link,
+.settings-view .link,
+.settings-view .package-card .meta-user .author,
+.welcome a {
+  color: @text-color;
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: none;
+}
+
+label {
+  // Reduce font weight
+  font-weight: normal;
+}
+
+code {
+  background: @miscellaneous-background-color;
+}
+
+th, td {
+  border: none !important;
+}
+
+th {
+  font-weight: normal;
+}
+
+pre {
+  white-space: pre-wrap;
+}
+
+.section-heading {
+  font-weight: normal !important;
+
+  &.icon::before {
+    // Attempt to vertically center icons in headings.
+    bottom: .25em;
+  }
+}
+
+// Key bindings for commands in the command pallette.
+.key-binding {
+  display: inline-block;
+  padding: 0 @component-padding;
+  background: @miscellaneous-background-color;
+  font-family: inherit;
+  font-size: .9em;
+  letter-spacing: 1px;
+}
+
+// Sidebar pane collapse/expand button.
+.atom-dock-toggle-button .atom-dock-toggle-button-inner {
+  border: none;
+}
+
+.alert {
+  border: none;
+  border-radius: 0;
+}
