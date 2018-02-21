@@ -1,7 +1,7 @@
 'use strict'
 
-const styleInjection = require('./styleInjection')
-const util = require('./util')
+const styleInjection = require('../styleInjection')
+const util = require('../util')
 
 const observerTimeouts = new Map()
 const timeoutDuration = 500
@@ -17,14 +17,14 @@ const wrapCallback = callback => {
   }
 }
 
-const makeConfigObserver = ({callback, timeout}) => {
+const makeObserver = ({callback, delayed}) => {
   callback = wrapCallback(callback)
   const observerId = Math.random()
 
   return value => {
     const boundCallback = callback.bind(undefined, value)
 
-    if (timeout && util.themeHasActivated) {
+    if (delayed && util.themeHasActivated) {
       clearTimeout(observerTimeouts.get(observerId))
       const timeoutId = setTimeout(boundCallback, timeoutDuration)
       observerTimeouts.set(observerId, timeoutId)
@@ -34,4 +34,8 @@ const makeConfigObserver = ({callback, timeout}) => {
   }
 }
 
-module.exports = {makeConfigObserver, observerTimeouts}
+const clearObserverTimeouts = () => {
+  observerTimeouts.forEach(clearTimeout)
+}
+
+module.exports = {makeObserver, clearObserverTimeouts}
