@@ -9,7 +9,8 @@ const CUSTOMISABLE_STYLES_DIRECTORY_PATH = 'styles/customisable'
 
 const LESS_PATHS = [
   path.join(CUSTOMISABLE_STYLES_DIRECTORY_PATH, 'general.less'),
-  path.join(CUSTOMISABLE_STYLES_DIRECTORY_PATH, 'editor.less')
+  path.join(CUSTOMISABLE_STYLES_DIRECTORY_PATH, 'editor.less'),
+  path.join(CUSTOMISABLE_STYLES_DIRECTORY_PATH, 'image-background.less')
 ]
 
 const DESTINATION_CSS_PATH = path.join(

@@ -1,0 +1,30 @@
+.pure-manage-background-images {
+  padding: 2em;
+  overflow: auto;
+}
+
+.pure-background-images-list {
+  margin: 3em 1em;
+  padding: 1em;
+  background: @secondary-color;
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+.pure-background-image-thumbnail-container {
+  padding: 1em;
+  cursor: pointer;
+
+  &:not(.pure-background-image-thumbnail-container-selected):hover {
+    background: @secondary-color-first-shade;
+  }
+
+  &.pure-background-image-thumbnail-container-selected {
+    background: @miscellaneous-background-color;
+  }
+}
+
+.pure-background-image-thumbnail {
+  width: 175px;
+}

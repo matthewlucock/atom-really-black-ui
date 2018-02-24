@@ -58,8 +58,14 @@ const generateSecondaryColorVariables = secondaryColor => {
   return variables
 }
 
+const getFileUri = absolutePath => {
+  absolutePath = absolutePath.replace(/\\/g, '/')
+  return `file:///${absolutePath}`
+}
+
 module.exports = {
   handleAtomColor,
   generateSecondaryColorVariables,
+  getFileUri,
   themeHasActivated: false
 }

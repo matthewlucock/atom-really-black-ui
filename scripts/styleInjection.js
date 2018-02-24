@@ -1,22 +1,34 @@
 'use strict'
 
 const fse = require('fs-extra')
+const memoize = require('mem')
 
 const PATHS = {
   customisableStyles: 'styles/customisable/compiled.css',
   variables: 'styles/user-defined-variables.less'
 }
 
-const variables = {}
-let customisableStylesReadPromise
-let variablesWritePromise
+const variables = {
+  synced: {},
+  unsynced: {}
+}
 
 const styleElement = document.createElement('style')
 
 const generateLessVariableSyntax = (name, value) => `@${name}: ${value};`
 
+const readCustomisableStyles = memoize(
+  () => fse.readFile(PATHS.customisableStyles, 'utf8')
+)
+
 const insertStyleVariablesIntoCss = css => {
-  for (const [name, value] of Object.entries(variables)) {
+  const combinedVariables = Object.assign(
+    {},
+    variables.synced,
+    variables.unsynced
+  )
+
+  for (const [name, value] of Object.entries(combinedVariables)) {
     css = css.replace(RegExp(`"${name}"`, 'g'), value)
   }
 
@@ -24,33 +36,22 @@ const insertStyleVariablesIntoCss = css => {
 }
 
 const generateVariablesText = () => {
-  return Object.entries(variables)
+  return Object.entries(variables.synced)
     .map(variableData => generateLessVariableSyntax(...variableData))
     .join('\n')
 }
 
 const init = () => {
-  customisableStylesReadPromise = fse.readFile(PATHS.customisableStyles, 'utf8')
   document.head.appendChild(styleElement)
 }
 
 const injectStyles = async () => {
-  styleElement.textContent = insertStyleVariablesIntoCss(
-    await customisableStylesReadPromise
-  )
+  const css = insertStyleVariablesIntoCss(await readCustomisableStyles())
+  styleElement.textContent = css
 }
 
-const writeVariables = async () => {
-  try {
-    await variablesWritePromise
-  } catch (_) {}
-
-  variablesWritePromise = fse.writeFile(
-    PATHS.variables,
-    generateVariablesText()
-  )
-
-  await variablesWritePromise
+const writeVariables = () => {
+  return fse.writeFile(PATHS.variables, generateVariablesText())
 }
 
 module.exports = {
