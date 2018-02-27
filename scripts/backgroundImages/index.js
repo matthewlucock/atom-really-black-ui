@@ -3,7 +3,7 @@
 const {CompositeDisposable} = require('atom')
 
 const BackgroundImageManager = require('./manager')
-const {ManageBackgroundImagesView, VIEW_URI} = require('./managerView')
+const {BackgroundImagesView, VIEW_URI} = require('./view')
 
 const disposables = new CompositeDisposable()
 
@@ -13,11 +13,11 @@ const activate = () => {
   manager.activate()
 
   const opener = atom.workspace.addOpener(uri => {
-    if (uri === VIEW_URI) return new ManageBackgroundImagesView(manager)
+    if (uri === VIEW_URI) return new BackgroundImagesView(manager)
   })
 
   const commands = atom.commands.add('atom-workspace', {
-    'pure:manage-background-images': () => atom.workspace.open(VIEW_URI)
+    'pure:background-images': () => atom.workspace.open(VIEW_URI)
   })
 
   disposables.add(opener, commands)

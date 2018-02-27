@@ -1,14 +1,14 @@
 'use strict'
 
-const VIEW_URI = 'atom://pure-manage-background-images'
+const VIEW_URI = 'atom://pure-background-images'
 const VIEW_TITLE = 'Background images'
 
 const CLASS_NAMES = {
-  panel: 'pure-manage-background-images',
+  panel: 'pure-background-images-view',
   imagesList: 'pure-background-images-list'
 }
 
-class ManageBackgroundImagesView {
+class BackgroundImagesView {
   constructor (manager) {
     this.manager = manager
 
@@ -47,4 +47,4 @@ class ManageBackgroundImagesView {
   }
 }
 
-module.exports = {ManageBackgroundImagesView, VIEW_URI}
+module.exports = {BackgroundImagesView, VIEW_URI}
