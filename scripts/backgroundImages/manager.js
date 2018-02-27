@@ -6,10 +6,12 @@ const fse = require('fs-extra')
 const memoize = require('mem')
 const randomItem = require('random-item')
 
-const BackgroundImage = require('./backgroundImage')
+const {
+  BackgroundImage,
+  BACKGROUND_IMAGES_DIRECTORY
+} = require('./backgroundImage')
 const styleInjection = require('../styleInjection')
 
-const BACKGROUND_IMAGES_DIRECTORY = 'background-images'
 const DEFAULT_SUBDIRECTORY = 'default'
 const SELECTED_DATA_PATH = path.join(
   BACKGROUND_IMAGES_DIRECTORY,
@@ -26,7 +28,7 @@ class BackgroundImageManager {
     const fileNames = await fse.readdir(directoryPath)
 
     return fileNames.map(fileName => {
-      const filePath = path.join(directoryPath, fileName)
+      const filePath = path.join(subdirectory, fileName)
       return new BackgroundImage(filePath)
     })
   }

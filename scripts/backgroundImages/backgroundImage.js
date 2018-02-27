@@ -6,6 +6,8 @@ const memoize = require('mem')
 
 const util = require('../util')
 
+const BACKGROUND_IMAGES_DIRECTORY = 'background-images'
+
 const CLASS_NAMES = {
   thumbnail: 'pure-background-image-thumbnail',
   thumbnailContainer: 'pure-background-image-thumbnail-container',
@@ -15,7 +17,11 @@ const CLASS_NAMES = {
 class BackgroundImage {
   constructor (filePath) {
     this.filePath = filePath
-    this.absolutePath = path.join(process.cwd(), filePath)
+    this.absolutePath = path.join(
+      process.cwd(),
+      BACKGROUND_IMAGES_DIRECTORY,
+      filePath
+    )
     this.uri = util.getFileUri(this.absolutePath)
 
     this.element = document.createElement('img')
@@ -52,4 +58,4 @@ class BackgroundImage {
   }
 }
 
-module.exports = BackgroundImage
+module.exports = {BackgroundImage, BACKGROUND_IMAGES_DIRECTORY}
