@@ -23,6 +23,7 @@ class BackgroundImage {
       filePath
     )
     this.uri = util.getFileUri(this.absolutePath)
+    this.cssString = `url(${this.uri})`
 
     this.element = document.createElement('img')
     this.thumbnail = this._makeThumbnail()

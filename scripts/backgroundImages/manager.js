@@ -10,6 +10,7 @@ const {
   BackgroundImage,
   BACKGROUND_IMAGES_DIRECTORY
 } = require('./backgroundImage')
+const TemporaryBackground = require('./temporaryBackground')
 const styleInjection = require('../styleInjection')
 
 const DEFAULT_SUBDIRECTORY = 'default'
@@ -20,6 +21,7 @@ const SELECTED_DATA_PATH = path.join(
 
 class BackgroundImageManager {
   constructor () {
+    this._temporaryBackground = new TemporaryBackground()
     this._loadSubdirectory = memoize(this._loadSubdirectory)
   }
 
@@ -61,6 +63,12 @@ class BackgroundImageManager {
   }
 
   async activate () {
+    document.body.append(this._temporaryBackground.element)
+
+    this._temporaryBackground.on('animated', image => {
+      this._animationCallback(image)
+    })
+
     const selectedImage = await this._getSelectedImage()
 
     if (selectedImage) {
@@ -79,6 +87,10 @@ class BackgroundImageManager {
     if (this._selectedImage) this._selectedImage.deselect()
     this._selectedImage = image
     image.select()
+    this._temporaryBackground.animate(image)
+  }
+
+  _animationCallback (image) {
     styleInjection.variables.unsynced['background-image-uri'] = image.uri
     styleInjection.injectStyles()
   }
