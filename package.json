@@ -15,34 +15,44 @@
     "build": "npm run lint && node less.js"
   },
   "configSchema": {
-    "secondaryColor": {
-      "title": "Secondary color",
-      "type": "color",
-      "default": "rgb(77, 77, 77)"
+    "general": {
+      "type": "object",
+      "title": "General settings",
+      "properties": {
+        "backgroundMode": {
+          "type": "string",
+          "title": "Background mode",
+          "enum": ["Solid color", "Image"],
+          "default": "Image"
+        },
+        "mainFontSize": {
+          "type": "integer",
+          "title": "Main font size",
+          "minimum": 0,
+          "default": 16
+        },
+        "statusBarFontSize": {
+          "type": "string",
+          "title": "Status bar font size",
+          "default": ".9em"
+        },
+        "styleTheEditor": {
+          "type": "boolean",
+          "title": "Style the editor",
+          "default": true
+        }
+      }
     },
-    "mainFontSize": {
-      "title": "Main font size",
-      "type": "integer",
-      "default": 16,
-      "minimum": 0
-    },
-    "statusBarFontSize": {
-      "title": "Status bar font size",
-      "type": "string",
-      "default": ".9em"
-    },
-    "styleTheEditor": {
-      "title": "Style the editor",
-      "type": "boolean",
-      "default": true
-    },
-    "backgroundMode": {
-      "type": "string",
-      "enum": [
-        "Solid color",
-        "Image"
-      ],
-      "default": "Image"
+    "solidColorBackgrounds": {
+      "type": "object",
+      "title": "Solid color background settings",
+      "properties": {
+        "secondaryColor": {
+          "type": "color",
+          "title": "Secondary color",
+          "default": "rgb(77, 77, 77)"
+        }
+      }
     }
   },
   "dependencies": {
