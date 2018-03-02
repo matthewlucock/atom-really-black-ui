@@ -65,6 +65,7 @@ const getFileUri = absolutePath => {
 
 module.exports = {
   handleAtomColor,
+  getMainTextColorFromBackgroundColor,
   generateSecondaryColorVariables,
   getFileUri,
   themeHasActivated: false

@@ -47,6 +47,11 @@
       "type": "object",
       "title": "Solid color background settings",
       "properties": {
+        "backgroundColor": {
+          "type": "color",
+          "title": "Background color",
+          "default": "black"
+        },
         "secondaryColor": {
           "type": "color",
           "title": "Secondary color",
