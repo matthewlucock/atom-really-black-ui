@@ -4,7 +4,7 @@ const styleInjection = require('../styleInjection')
 const util = require('../util')
 
 const IMAGE_BACKGROUND_MODE = 'Image'
-const DONT_STYLE_THE_EDITOR_CLASS = 'really-black-ui-dont-style-the-editor'
+const DONT_STYLE_THE_EDITOR_CLASS = 'pure-dont-style-the-editor'
 
 const observers = {
   'general.backgroundMode': {

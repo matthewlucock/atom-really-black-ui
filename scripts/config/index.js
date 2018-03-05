@@ -7,7 +7,7 @@ const {makeObserver, clearObserverTimeouts} = require('./makeObserver')
 
 const disposables = new CompositeDisposable()
 
-const makeKey = (keySuffix) => `really-black-ui.${keySuffix}`
+const makeKey = (keySuffix) => `pure-ui.${keySuffix}`
 
 const activate = () => {
   for (const [keySuffix, observerConfig] of Object.entries(observers)) {
