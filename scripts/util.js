@@ -1,5 +1,7 @@
 'use strict'
 
+const path = require('path')
+
 const Color = require('color')
 const mapObject = require('map-obj')
 
@@ -63,10 +65,16 @@ const getFileUri = absolutePath => {
   return `file:///${absolutePath}`
 }
 
+const getPathInTheme = path.join.bind(
+  undefined,
+  atom.packages.resolvePackagePath('pure-ui')
+)
+
 module.exports = {
   handleAtomColor,
   getMainTextColorFromBackgroundColor,
   generateSecondaryColorVariables,
   getFileUri,
+  getPathInTheme,
   themeHasActivated: false
 }

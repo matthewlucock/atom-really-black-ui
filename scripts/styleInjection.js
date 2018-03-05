@@ -3,9 +3,11 @@
 const fse = require('fs-extra')
 const memoize = require('mem')
 
+const util = require('./util')
+
 const PATHS = {
-  customisableStyles: 'styles/customisable/compiled.css',
-  variables: 'styles/user-defined-variables.less'
+  customisableStyles: util.getPathInTheme('styles/customisable/compiled.css'),
+  variables: util.getPathInTheme('styles/user-defined-variables.less')
 }
 
 const variables = {
