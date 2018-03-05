@@ -14,10 +14,7 @@ const TemporaryBackground = require('./temporaryBackground')
 const styleInjection = require('../styleInjection')
 
 const DEFAULT_SUBDIRECTORY = 'default'
-const SELECTED_DATA_PATH = path.join(
-  BACKGROUND_IMAGES_DIRECTORY,
-  'selected.json'
-)
+const SELECTED_DATA_PATH = path.join(BACKGROUND_IMAGES_DIRECTORY, 'selected')
 
 class BackgroundImageManager {
   constructor () {
@@ -56,7 +53,7 @@ class BackgroundImageManager {
     let selectedImagePath
 
     try {
-      selectedImagePath = await fse.readJson(SELECTED_DATA_PATH)
+      selectedImagePath = await fse.readFile(SELECTED_DATA_PATH)
     } catch (_) {}
 
     if (selectedImagePath) return this._getImageFromPath(selectedImagePath)
@@ -79,7 +76,7 @@ class BackgroundImageManager {
   }
 
   async select (image) {
-    await fse.writeJson(SELECTED_DATA_PATH, image.filePath)
+    await fse.writeFile(SELECTED_DATA_PATH, image.filePath)
     this._applySelectedImage(image)
   }
 
