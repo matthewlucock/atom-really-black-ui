@@ -24,8 +24,8 @@ atom-workspace {
 .settings-view select.form-control,
 .atom-dock-toggle-button .atom-dock-toggle-button-inner,
 thead {
-  background: @secondary-color;
-  color: @secondary-color-text-color;
+  background: @accent-color-opaque;
+  color: @accented-text-color;
 }
 
 .input-radio,
@@ -34,75 +34,75 @@ thead {
 .input-select,
 atom-text-editor[mini].editor .selection .region,
 ::-webkit-scrollbar-thumb {
-  background: @secondary-color;
+  background: @accent-color-opaque;
 }
 
 .btn {
   &, &.btn-primary, &.btn-info {
-    background: @secondary-color;
-    color: @secondary-color-text-color;
+    background: @accent-color-opaque;
+    color: @accented-text-color;
 
     &:hover, &:focus, &.selected {
-      background: @secondary-color-first-shade;
-      color: @secondary-color-first-shade-text-color;
+      background: @accent-color-opaque;
+      color: @accented-text-color;
     }
 
     &:active {
-      background: @secondary-color-second-shade;
-      color: @secondary-color-second-shade-text-color;
+      background: @accent-color-opaque;
+      color: @accented-text-color;
     }
   }
 }
 
 .input-checkbox, .settings-view input[type="checkbox"] {
   &, &:checked:active {
-    background: @secondary-color;
+    background: @accent-color-opaque;
   }
 }
 
 .nav > li > a {
   &:hover, &:focus {
-    background: @secondary-color !important;
-    color: @secondary-color-text-color !important;
+    background: @accent-color-opaque !important;
+    color: @accented-text-color !important;
   }
 }
 
 .tab-bar .tab.active.modified:not(:hover) .close-icon {
-  background: @secondary-color-text-color;
+  background: @accented-text-color;
 }
 
 .list-group, .list-tree {
   .selected {
     &::before {
-      background: @secondary-color;
+      background: @accent-color-opaque;
     }
 
     & > .name {
-      color: @secondary-color-text-color;
+      color: @accented-text-color;
     }
   }
 }
 
 .status-added.selected {
   & > .name, & > .header > .name {
-    color: @git-text-color-added-selected;
+    color: @git-text-color-added;
   }
 }
 
 .status-modified.selected {
   & > .name, & > .header > .name {
-    color: @git-text-color-modified-selected;
+    color: @git-text-color-modified;
   }
 }
 
 .status-ignored.selected {
   & > .name, & > .header > .name {
-    color: @git-text-color-ignored-selected;
+    color: @git-text-color-ignored;
   }
 }
 
 .markdown-preview:not([data-use-github-style]) {
   blockquote, hr {
-    border-color: @secondary-color;
+    border-color: @accent-color-opaque;
   }
 }

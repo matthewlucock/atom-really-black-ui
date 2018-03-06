@@ -42,14 +42,18 @@ const observers = {
         backgroundColor.hex()
       )
       styleInjection.variables.synced['text-color'] = textColor.hex()
-      console.log(1)
     }
   },
-  'solidColorBackgrounds.secondaryColor': {
-    callback (secondaryColor) {
-      secondaryColor = util.handleAtomColor(secondaryColor)
-      const variables = util.generateSecondaryColorVariables(secondaryColor)
-      Object.assign(styleInjection.variables.synced, variables)
+  'solidColorBackgrounds.accentColor': {
+    callback (accentColor) {
+      accentColor = util.handleAtomColor(accentColor)
+      const textColor = util.getMainTextColorFromBackgroundColor(accentColor)
+
+      Object.assign(styleInjection.variables.synced, {
+        'accent-color-translucent': accentColor.hex(),
+        'accent-color-opaque': accentColor.hex(),
+        'accented-text-color': textColor.hex()
+      })
     }
   }
 }

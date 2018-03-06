@@ -50,11 +50,13 @@
         "backgroundColor": {
           "type": "color",
           "title": "Background color",
+          "order": 1,
           "default": "black"
         },
-        "secondaryColor": {
+        "accentColor": {
           "type": "color",
-          "title": "Secondary color",
+          "title": "Accent color",
+          "order": 2,
           "default": "rgb(77, 77, 77)"
         }
       }
