@@ -14,24 +14,28 @@ const observers = {
     }
   },
   'general.mainFontSize': {
+    delayed: true,
+    sync: true,
     callback (fontSize) {
       styleInjection.variables.synced['font-size'] = `${fontSize}px`
-    },
-    delayed: true
+    }
   },
   'general.statusBarFontSize': {
+    delayed: true,
+    sync: true,
     callback (fontSize) {
       styleInjection.variables.synced['status-bar-font-size'] = fontSize
-    },
-    delayed: true
+    }
   },
   'general.styleTheEditor': {
+    sync: true,
     callback (styleTheEditor) {
       styleInjection.variables.synced['style-the-editor'] = styleTheEditor
       document.body.classList.toggle(DONT_STYLE_THE_EDITOR_CLASS, !styleTheEditor)
-    }
+    },
   },
   "solidColorBackgrounds.backgroundColor": {
+    sync: true,
     callback (backgroundColor) {
       backgroundColor = util.handleAtomColor(backgroundColor)
       const textColor = util.getMainTextColorFromBackgroundColor(
@@ -45,6 +49,7 @@ const observers = {
     }
   },
   'solidColorBackgrounds.accentColor': {
+    sync: true,
     callback (accentColor) {
       accentColor = util.handleAtomColor(accentColor)
       const textColor = util.getMainTextColorFromBackgroundColor(accentColor)

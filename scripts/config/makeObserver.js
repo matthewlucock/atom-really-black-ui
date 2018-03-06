@@ -6,19 +6,19 @@ const util = require('../util')
 const observerTimeouts = new Map()
 const timeoutDuration = 500
 
-const wrapCallback = callback => {
+const wrapCallback = ({callback, sync}) => {
   return value => {
     callback(value)
 
     if (util.themeHasActivated) {
       styleInjection.injectStyles()
-      styleInjection.writeVariables()
+      if (sync) styleInjection.writeVariables()
     }
   }
 }
 
-const makeObserver = ({callback, delayed}) => {
-  callback = wrapCallback(callback)
+const makeObserver = ({callback, delayed, sync}) => {
+  callback = wrapCallback({callback, sync})
   const observerId = Math.random()
 
   return value => {
