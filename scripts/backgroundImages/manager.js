@@ -27,8 +27,8 @@ class BackgroundImageManager {
     const fileNames = await fse.readdir(directoryPath)
 
     return fileNames.map(fileName => {
-      const filePath = path.join(subdirectory, fileName)
-      return new BackgroundImage(filePath)
+      const relativePath = path.join(subdirectory, fileName)
+      return new BackgroundImage(relativePath)
     })
   }
 
@@ -42,9 +42,9 @@ class BackgroundImageManager {
     await this.select(imageToSelect)
   }
 
-  async _getImageFromPath (filePath) {
+  async getImageFromRelativePath (relativePath) {
     const defaultImages = await this.loadDefaultImages()
-    return defaultImages.find(image => image.filePath === filePath)
+    return defaultImages.find(image => image.relativePath === relativePath)
   }
 
   async _getSelectedImage () {
@@ -56,7 +56,9 @@ class BackgroundImageManager {
       selectedImagePath = await fse.readFile(SELECTED_DATA_PATH)
     } catch (_) {}
 
-    if (selectedImagePath) return this._getImageFromPath(selectedImagePath)
+    if (selectedImagePath) {
+      return this.getImageFromRelativePath(selectedImagePath)
+    }
   }
 
   async activate () {
@@ -76,7 +78,7 @@ class BackgroundImageManager {
   }
 
   async select (image) {
-    await fse.writeFile(SELECTED_DATA_PATH, image.filePath)
+    await fse.writeFile(SELECTED_DATA_PATH, image.relativePath)
     this._applySelectedImage(image)
   }
 

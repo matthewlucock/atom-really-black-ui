@@ -43,8 +43,12 @@ const generateVariablesText = () => {
     .join('\n')
 }
 
-const init = () => {
+const activate = () => {
   document.head.appendChild(styleElement)
+}
+
+const deactivate = () => {
+  styleElement.remove()
 }
 
 const injectStyles = async () => {
@@ -58,8 +62,8 @@ const writeVariables = () => {
 
 module.exports = {
   variables,
-  styleElement,
-  init,
+  activate,
+  deactivate,
   injectStyles,
   writeVariables
 }

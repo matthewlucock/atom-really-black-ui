@@ -7,16 +7,16 @@ const util = require('./util')
 
 const activate = () => {
   config.activate()
-  styleInjection.init()
+  styleInjection.activate()
   manageBackgroundImages.activate()
-  util.themeHasActivated = true
+  util.themeIsActive = true
 }
 
 const deactivate = () => {
   config.deactivate()
-  styleInjection.styleElement.remove()
+  styleInjection.deactivate()
   manageBackgroundImages.deactivate()
-  util.themeHasActivated = false
+  util.themeIsActive = false
 }
 
 module.exports = {activate, deactivate}

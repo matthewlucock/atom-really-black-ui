@@ -22,7 +22,10 @@
         "backgroundMode": {
           "type": "string",
           "title": "Background mode",
-          "enum": ["Solid color", "Image"],
+          "enum": [
+            "Solid color",
+            "Image"
+          ],
           "default": "Image"
         },
         "mainFontSize": {
@@ -65,7 +68,6 @@
   "dependencies": {
     "color": "^3.0.0",
     "fs-extra": "^5.0.0",
-    "map-obj": "^2.0.0",
     "mem": "^3.0.0",
     "random-item": "^1.0.0"
   },

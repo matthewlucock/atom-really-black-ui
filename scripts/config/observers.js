@@ -4,13 +4,20 @@ const styleInjection = require('../styleInjection')
 const util = require('../util')
 
 const IMAGE_BACKGROUND_MODE = 'Image'
-const DONT_STYLE_THE_EDITOR_CLASS = 'pure-dont-style-the-editor'
+
+const CLASS_NAMES = {
+  imageBackgroundMode: `${util.SHORT_PACKAGE_NAME}-background-image`,
+  dontStyleTheEditor: `${util.SHORT_PACKAGE_NAME}-dont-style-the-editor`
+}
 
 const observers = {
   'general.backgroundMode': {
     callback (backgroundMode) {
       const isImageMode = backgroundMode === IMAGE_BACKGROUND_MODE
-      document.body.classList.toggle('pure-background-image', isImageMode)
+      document.body.classList.toggle(
+        CLASS_NAMES.imageBackgroundMode,
+        isImageMode
+      )
     }
   },
   'general.mainFontSize': {
@@ -31,33 +38,34 @@ const observers = {
     sync: true,
     callback (styleTheEditor) {
       styleInjection.variables.synced['style-the-editor'] = styleTheEditor
-      document.body.classList.toggle(DONT_STYLE_THE_EDITOR_CLASS, !styleTheEditor)
-    },
+      document.body.classList.toggle(
+        CLASS_NAMES.dontStyleTheEditor,
+        !styleTheEditor
+      )
+    }
   },
-  "solidColorBackgrounds.backgroundColor": {
+  'solidColorBackgrounds.backgroundColor': {
     sync: true,
     callback (backgroundColor) {
-      backgroundColor = util.handleAtomColor(backgroundColor)
-      const textColor = util.getMainTextColorFromBackgroundColor(
-        backgroundColor
-      )
+      backgroundColor = util.wrapAtomColor(backgroundColor)
+      const textColor = util.getTextColorFromBackgroundColor(backgroundColor)
 
       styleInjection.variables.synced['base-background-color'] = (
-        backgroundColor.hex()
+        backgroundColor.string()
       )
-      styleInjection.variables.synced['text-color'] = textColor.hex()
+      styleInjection.variables.synced['text-color'] = textColor.string()
     }
   },
   'solidColorBackgrounds.accentColor': {
     sync: true,
     callback (accentColor) {
-      accentColor = util.handleAtomColor(accentColor)
-      const textColor = util.getMainTextColorFromBackgroundColor(accentColor)
+      accentColor = util.wrapAtomColor(accentColor)
+      const textColor = util.getTextColorFromBackgroundColor(accentColor)
 
       Object.assign(styleInjection.variables.synced, {
-        'accent-color-translucent': accentColor.hex(),
-        'accent-color-opaque': accentColor.hex(),
-        'accented-text-color': textColor.hex()
+        'accent-color-translucent': accentColor.string(),
+        'accent-color-opaque': accentColor.string(),
+        'accented-text-color': textColor.string()
       })
     }
   }

@@ -2,9 +2,11 @@
 
 const {EventEmitter} = require('events')
 
+const util = require('../util')
+
 const CLASS_NAMES = {
-  main: 'pure-temporary-background',
-  animating: 'pure-temporary-background-animating'
+  main: `${util.SHORT_PACKAGE_NAME}-temporary-background`,
+  animating: `${util.SHORT_PACKAGE_NAME}-temporary-background-animating`
 }
 
 class TemporaryBackground extends EventEmitter {
@@ -21,7 +23,7 @@ class TemporaryBackground extends EventEmitter {
 
   animate (image) {
     this._image = image
-    this.element.style.backgroundImage = image.cssString
+    this.element.style.backgroundImage = util.getCssUrl(image.uri)
     this.element.classList.add(CLASS_NAMES.animating)
   }
 

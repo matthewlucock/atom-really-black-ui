@@ -15,11 +15,10 @@ const CLASS_NAMES = {
 }
 
 class BackgroundImage {
-  constructor (filePath) {
-    this.filePath = filePath
-    this.absolutePath = path.join(BACKGROUND_IMAGES_DIRECTORY, filePath)
+  constructor (relativePath) {
+    this.relativePath = relativePath
+    this.absolutePath = path.join(BACKGROUND_IMAGES_DIRECTORY, relativePath)
     this.uri = util.getFileUri(this.absolutePath)
-    this.cssString = `url(${this.uri})`
 
     this.element = document.createElement('img')
     this.thumbnail = this._makeThumbnail()
@@ -41,6 +40,7 @@ class BackgroundImage {
     container.className = CLASS_NAMES.thumbnailContainer
 
     this.element.className = CLASS_NAMES.thumbnail
+    this.element.setAttribute('data-relative-path', this.relativePath)
     container.append(this.element)
 
     return container
@@ -55,4 +55,8 @@ class BackgroundImage {
   }
 }
 
-module.exports = {BackgroundImage, BACKGROUND_IMAGES_DIRECTORY}
+module.exports = {
+  BackgroundImage,
+  BACKGROUND_IMAGES_DIRECTORY,
+  THUMBNAIL_CLASS_NAME: CLASS_NAMES.thumbnail
+}

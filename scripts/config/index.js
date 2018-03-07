@@ -4,10 +4,11 @@ const {CompositeDisposable} = require('atom')
 
 const observers = require('./observers')
 const {makeObserver, clearObserverTimeouts} = require('./makeObserver')
+const util = require('../util')
 
 const disposables = new CompositeDisposable()
 
-const makeKey = (keySuffix) => `pure-ui.${keySuffix}`
+const makeKey = (keySuffix) => `${util.LONG_PACKAGE_NAME}.${keySuffix}`
 
 const activate = () => {
   for (const [keySuffix, observerConfig] of Object.entries(observers)) {

@@ -1,11 +1,14 @@
 'use strict'
 
-const VIEW_URI = 'atom://pure-background-images'
+const {THUMBNAIL_CLASS_NAME} = require('./backgroundImage')
+const util = require('../util')
+
+const VIEW_URI = util.getAtomUri(`${util.SHORT_PACKAGE_NAME}-background-images`)
 const VIEW_TITLE = 'Background images'
 
 const CLASS_NAMES = {
-  panel: 'pure-background-images-view',
-  imagesList: 'pure-background-images-list'
+  view: `${util.SHORT_PACKAGE_NAME}-background-images-view`,
+  imagesList: `${util.SHORT_PACKAGE_NAME}-background-images-list`
 }
 
 class BackgroundImagesView {
@@ -13,7 +16,7 @@ class BackgroundImagesView {
     this.manager = manager
 
     this.element = document.createElement('div')
-    this.element.className = CLASS_NAMES.panel
+    this.element.className = CLASS_NAMES.view
 
     this.defaultImagesList = this._makeImagesList()
     this.element.append(this.defaultImagesList)
@@ -29,9 +32,22 @@ class BackgroundImagesView {
     return VIEW_TITLE
   }
 
+  async _imagesListClickListener ({target}) {
+    if (!target.classList.contains(THUMBNAIL_CLASS_NAME)) return
+
+    const relativePath = target.getAttribute('data-relative-path')
+    const image = await this.manager.getImageFromRelativePath(relativePath)
+    this.manager.select(image)
+  }
+
   _makeImagesList () {
     const imagesList = document.createElement('ul')
     imagesList.className = CLASS_NAMES.imagesList
+    imagesList.addEventListener(
+      'click',
+      this._imagesListClickListener.bind(this)
+    )
+
     return imagesList
   }
 
@@ -40,9 +56,6 @@ class BackgroundImagesView {
 
     for (const image of defaultImages) {
       this.defaultImagesList.append(image.thumbnail)
-      image.thumbnail.addEventListener('click', () => {
-        this.manager.select(image)
-      })
     }
   }
 }
