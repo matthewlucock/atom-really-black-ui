@@ -53,7 +53,7 @@ class BackgroundImageManager {
     let selectedImagePath
 
     try {
-      selectedImagePath = await fse.readFile(SELECTED_DATA_PATH)
+      selectedImagePath = await fse.readFile(SELECTED_DATA_PATH, 'utf8')
     } catch (_) {}
 
     if (selectedImagePath) {
