@@ -46,6 +46,34 @@
         }
       }
     },
+    "imageBackgrounds": {
+      "type": "object",
+      "title": "Image background settings",
+      "properties": {
+        "overlayAlphaChannel": {
+          "type": "number",
+          "title": "Overlay alpha channel",
+          "order": 1,
+          "default": 0.9,
+          "minimum": 0,
+          "maximum": 1
+        },
+        "accentColor": {
+          "type": "color",
+          "title": "Accent color",
+          "order": 2,
+          "default": "white"
+        },
+        "accentAlphaChannel": {
+          "type": "number",
+          "title": "Accent alpha channel",
+          "order": 3,
+          "default": 0.2,
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
     "solidColorBackgrounds": {
       "type": "object",
       "title": "Solid color background settings",

@@ -11,8 +11,13 @@ body:not(.pure-dont-style-the-editor) .item-views > .editor {
       }
 
       &.cursor-line {
-        background: @accent-color-opaque !important;
-        color: @accented-text-color !important;
+        background: @solid-color-background-accent-color !important;
+        color: @solid-color-background-accented-text-color !important;
+
+        .pure-background-image & {
+          background: @image-background-accent-color-translucent !important;
+          color: @image-background-accented-text-color !important;
+        }
       }
     }
   }

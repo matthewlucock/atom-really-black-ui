@@ -2,17 +2,15 @@
 
 const {CompositeDisposable} = require('atom')
 
+const configUtil = require('./util')
 const observers = require('./observers')
 const {makeObserver, clearObserverTimeouts} = require('./makeObserver')
-const util = require('../util')
 
 const disposables = new CompositeDisposable()
 
-const makeKey = (keySuffix) => `${util.LONG_PACKAGE_NAME}.${keySuffix}`
-
 const activate = () => {
   for (const [keySuffix, observerConfig] of Object.entries(observers)) {
-    const key = makeKey(keySuffix)
+    const key = configUtil.makeKey(keySuffix)
     const observer = makeObserver(observerConfig)
     disposables.add(atom.config.observe(key, observer))
   }

@@ -13,7 +13,6 @@ atom-workspace {
 
 .tab-bar .tab.active,
 .panel-heading,
-.tooltip .tooltip-inner,
 .badge,
 .badge.badge-info,
 .highlight,
@@ -24,8 +23,23 @@ atom-workspace {
 .settings-view select.form-control,
 .atom-dock-toggle-button .atom-dock-toggle-button-inner,
 thead {
-  background: @accent-color-opaque;
-  color: @accented-text-color;
+  background: @solid-color-background-accent-color;
+  color: @solid-color-background-accented-text-color;
+
+  .pure-background-image & {
+    background: @image-background-accent-color-translucent;
+    color: @image-background-accented-text-color;
+  }
+}
+
+.tooltip .tooltip-inner {
+  background: @solid-color-background-accent-color;
+  color: @solid-color-background-accented-text-color;
+
+  .pure-background-image & {
+    background: @image-background-accent-color-opaque;
+    color: @image-background-accented-text-color;
+  }
 }
 
 .input-radio,
@@ -34,51 +48,76 @@ thead {
 .input-select,
 atom-text-editor[mini].editor .selection .region,
 ::-webkit-scrollbar-thumb {
-  background: @accent-color-opaque;
+  background: @solid-color-background-accent-color;
+
+  .pure-background-image & {
+    background: @image-background-accent-color-translucent;
+  }
 }
 
 .btn {
   &, &.btn-primary, &.btn-info {
-    background: @accent-color-opaque;
-    color: @accented-text-color;
+    background: @solid-color-background-accent-color;
+    color: @solid-color-background-accented-text-color;
 
     &:hover, &:focus, &.selected {
-      background: @accent-color-opaque;
-      color: @accented-text-color;
+      background: @solid-color-background-accent-color;
+      color: @solid-color-background-accented-text-color;
     }
 
     &:active {
-      background: @accent-color-opaque;
-      color: @accented-text-color;
+      background: @solid-color-background-accent-color;
+      color: @solid-color-background-accented-text-color;
     }
   }
 }
 
 .input-checkbox, .settings-view input[type="checkbox"] {
   &, &:checked:active {
-    background: @accent-color-opaque;
+    background: @solid-color-background-accent-color;
+
+    .pure-background-image & {
+      background: @image-background-accent-color-opaque;
+    }
   }
 }
 
 .nav > li > a {
   &:hover, &:focus {
-    background: @accent-color-opaque !important;
-    color: @accented-text-color !important;
+    background: @solid-color-background-accent-color !important;
+    color: @solid-color-background-accented-text-color !important;
+
+    .pure-background-image & {
+      background: @image-background-accent-color-translucent !important;
+      color: @image-background-accented-text-color !important;
+    }
   }
 }
 
 .tab-bar .tab.active.modified:not(:hover) .close-icon {
-  background: @accented-text-color;
+  background: @solid-color-background-accented-text-color;
+
+  .pure-background-image & {
+    background: @image-background-accented-text-color;
+  }
 }
 
 .list-group, .list-tree {
   .selected {
     &::before {
-      background: @accent-color-opaque;
+      background: @solid-color-background-accent-color;
+
+      .pure-background-image & {
+        background: @image-background-accent-color-translucent;
+      }
     }
 
     & > .name {
-      color: @accented-text-color;
+      color: @solid-color-background-accented-text-color;
+
+      .pure-background-image & {
+        color: @image-background-accented-text-color;
+      }
     }
   }
 }
@@ -103,6 +142,10 @@ atom-text-editor[mini].editor .selection .region,
 
 .markdown-preview:not([data-use-github-style]) {
   blockquote, hr {
-    border-color: @accent-color-opaque;
+    border-color: @solid-color-background-accent-color;
+
+    .pure-background-image & {
+      border-color: @image-background-accent-color-translucent;
+    }
   }
 }

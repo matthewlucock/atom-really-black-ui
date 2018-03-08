@@ -34,6 +34,8 @@ const getTextColorFromBackgroundColor = backgroundColor => {
 module.exports = {
   SHORT_PACKAGE_NAME,
   LONG_PACKAGE_NAME,
+  BLACK,
+  WHITE,
   getPathInTheme,
   getAtomUri,
   getFileUri,

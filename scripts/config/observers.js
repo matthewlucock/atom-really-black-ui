@@ -1,5 +1,6 @@
 'use strict'
 
+const configUtil = require('./util')
 const styleInjection = require('../styleInjection')
 const util = require('../util')
 
@@ -44,6 +45,55 @@ const observers = {
       )
     }
   },
+  'imageBackgrounds.overlayAlphaChannel': {
+    delayed: true,
+    callback (overlayAlphaChannel) {
+      const overlayColor = util.BLACK.alpha(overlayAlphaChannel)
+      styleInjection.variables.unsynced['image-background-overlay'] = (
+        overlayColor.string()
+      )
+    }
+  },
+  'imageBackgrounds.accentColor': {
+    callback (accentColor) {
+      accentColor = util.wrapAtomColor(accentColor)
+      const accentAlphaChannel = configUtil.get(
+        'imageBackgrounds.accentAlphaChannel'
+      )
+
+      const blendedAccentColor = util.BLACK.mix(accentColor, accentAlphaChannel)
+      const translucentAccentColor = accentColor.alpha(accentAlphaChannel)
+      const textColor = util.getTextColorFromBackgroundColor(
+        blendedAccentColor
+      )
+
+      Object.assign(styleInjection.variables.unsynced, {
+        'image-background-accent-color-opaque': blendedAccentColor.string(),
+        'image-background-accent-color-translucent': (
+          translucentAccentColor.string()
+        ),
+        'image-background-accented-text-color': textColor.string()
+      })
+    }
+  },
+  'imageBackgrounds.accentAlphaChannel': {
+    delayed: true,
+    callback (accentAlphaChannel) {
+      const accentColor = configUtil.get('imageBackgrounds.accentColor')
+
+      const blendedAccentColor = util.BLACK.mix(accentColor, accentAlphaChannel)
+      const translucentAccentColor = accentColor.alpha(accentAlphaChannel)
+      const textColor = util.getTextColorFromBackgroundColor(blendedAccentColor)
+
+      Object.assign(styleInjection.variables.unsynced, {
+        'image-background-accent-color-opaque': blendedAccentColor.string(),
+        'image-background-accent-color-translucent': (
+          translucentAccentColor.string()
+        ),
+        'image-background-accented-text-color': textColor.string()
+      })
+    }
+  },
   'solidColorBackgrounds.backgroundColor': {
     sync: true,
     callback (backgroundColor) {
@@ -63,9 +113,8 @@ const observers = {
       const textColor = util.getTextColorFromBackgroundColor(accentColor)
 
       Object.assign(styleInjection.variables.synced, {
-        'accent-color-translucent': accentColor.string(),
-        'accent-color-opaque': accentColor.string(),
-        'accented-text-color': textColor.string()
+        'solid-color-background-accent-color': accentColor.string(),
+        'solid-color-background-accented-text-color': textColor.string()
       })
     }
   }
