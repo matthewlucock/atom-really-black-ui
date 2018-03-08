@@ -25,7 +25,7 @@ const observers = {
     delayed: true,
     sync: true,
     callback (fontSize) {
-      styleInjection.variables.synced['font-size'] = `${fontSize}px`
+      styleInjection.variables.synced['font-size'] = fontSize
     }
   },
   'general.statusBarFontSize': {

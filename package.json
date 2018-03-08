@@ -29,10 +29,9 @@
           "default": "Image"
         },
         "mainFontSize": {
-          "type": "integer",
+          "type": "string",
           "title": "Main font size",
-          "minimum": 0,
-          "default": 16
+          "default": "16px"
         },
         "statusBarFontSize": {
           "type": "string",
