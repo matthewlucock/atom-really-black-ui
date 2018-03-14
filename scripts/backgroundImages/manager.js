@@ -12,6 +12,7 @@ const {
 } = require('./backgroundImage')
 const TemporaryBackground = require('./temporaryBackground')
 const styleInjection = require('../styleInjection')
+const configUtil = require('../config/util')
 
 const DEFAULT_SUBDIRECTORY = 'default'
 const SELECTED_DATA_PATH = path.join(BACKGROUND_IMAGES_DIRECTORY, 'selected')
@@ -68,7 +69,15 @@ class BackgroundImageManager {
       this._animationCallback(image)
     })
 
-    const selectedImage = await this._getSelectedImage()
+    const selectNewImageOnActivation = configUtil.get(
+      'imageBackgrounds.selectNewImageOnActivation'
+    )
+
+    let selectedImage
+
+    if (!selectNewImageOnActivation) {
+      selectedImage = await this._getSelectedImage()
+    }
 
     if (selectedImage) {
       this._applySelectedImage(selectedImage)

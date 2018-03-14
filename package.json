@@ -70,6 +70,12 @@
           "default": 0.2,
           "minimum": 0,
           "maximum": 1
+        },
+        "selectNewImageOnActivation": {
+          "type": "boolean",
+          "title": "Select new image each time Atom loads",
+          "order": 4,
+          "default": true
         }
       }
     },
