@@ -1,5 +1,7 @@
 'use strict'
 
+const Color = require('color')
+
 const styleInjection = require('./styleInjection')
 const util = require('./util')
 
@@ -11,8 +13,7 @@ const get = keySuffix => {
   const key = makeKey(keySuffix)
   let value = atom.config.get(key)
 
-  const schema = atom.config.getSchema(key)
-  if (schema.type === 'color') value = util.wrapAtomColor(value)
+  if (value.toHexString) value = Color(value.toHexString())
 
   return value
 }
@@ -32,6 +33,8 @@ const makeObserver = ({callback, delayed, sync}) => {
   callback = wrapObserverCallback({callback, sync})
 
   return value => {
+    if (value.toHexString) value = Color(value.toHexString())
+
     if (delayed && util.themeIsActive) {
       setTimeout(() => callback(value), OBSERVER_TIMEOUT_DURATION)
     } else {

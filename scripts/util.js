@@ -1,7 +1,5 @@
 'use strict'
 
-const path = require('path')
-
 const Color = require('color')
 
 const SHORT_PACKAGE_NAME = 'pure'
@@ -11,8 +9,6 @@ const THEME_PATH = atom.packages.resolvePackagePath(LONG_PACKAGE_NAME)
 
 const BLACK = Color('black')
 const WHITE = Color('white')
-
-const getPathInTheme = path.join.bind(undefined, THEME_PATH)
 
 const getAtomUri = uriFragment => `atom://${uriFragment}`
 
@@ -25,8 +21,6 @@ const getCssUrl = url => `url(${url})`
 
 const getPackageCommandName = name => `${SHORT_PACKAGE_NAME}:${name}`
 
-const wrapAtomColor = atomColor => Color(atomColor.toHexString())
-
 const getTextColorFromBackgroundColor = backgroundColor => {
   return backgroundColor.isDark() ? WHITE : BLACK
 }
@@ -36,12 +30,11 @@ module.exports = {
   LONG_PACKAGE_NAME,
   BLACK,
   WHITE,
-  getPathInTheme,
+  THEME_PATH,
   getAtomUri,
   getFileUri,
   getCssUrl,
   getPackageCommandName,
-  wrapAtomColor,
   getTextColorFromBackgroundColor,
   themeIsActive: false
 }

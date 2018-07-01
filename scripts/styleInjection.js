@@ -1,5 +1,7 @@
 'use strict'
 
+const path = require('path')
+
 const fse = require('fs-extra')
 const memoize = require('mem')
 
@@ -8,8 +10,11 @@ const {Disposable} = require('atom')
 const util = require('./util')
 
 const PATHS = {
-  customisableStyles: util.getPathInTheme('styles/customisable/compiled.css'),
-  variables: util.getPathInTheme('styles/user-defined-variables.less')
+  customisableStyles: path.join(
+    util.THEME_PATH,
+    'styles/customisable/compiled.css'
+  ),
+  variables: path.join(util.THEME_PATH, 'styles/user-defined-variables.less')
 }
 
 const variables = {

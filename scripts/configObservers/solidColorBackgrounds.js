@@ -6,7 +6,6 @@ const util = require('../util')
 const backgroundColor = {
   sync: true,
   callback (backgroundColor) {
-    backgroundColor = util.wrapAtomColor(backgroundColor)
     const textColor = util.getTextColorFromBackgroundColor(backgroundColor)
 
     styleInjection.variables.synced['base-background-color'] = (
@@ -19,7 +18,6 @@ const backgroundColor = {
 const accentColor = {
   sync: true,
   callback (accentColor) {
-    accentColor = util.wrapAtomColor(accentColor)
     const textColor = util.getTextColorFromBackgroundColor(accentColor)
 
     Object.assign(styleInjection.variables.synced, {

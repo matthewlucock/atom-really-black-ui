@@ -16,7 +16,6 @@ const overlayAlphaChannel = {
 
 const accentColor = {
   callback (accentColor) {
-    accentColor = util.wrapAtomColor(accentColor)
     const accentAlphaChannel = config.get('imageBackgrounds.accentAlphaChannel')
 
     const blendedAccentColor = util.BLACK.mix(accentColor, accentAlphaChannel)

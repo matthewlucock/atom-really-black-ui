@@ -6,7 +6,10 @@ const memoize = require('mem')
 
 const util = require('../util')
 
-const BACKGROUND_IMAGES_DIRECTORY = util.getPathInTheme('background-images')
+const BACKGROUND_IMAGES_DIRECTORY = path.join(
+  util.THEME_PATH,
+  'background-images'
+)
 
 const CLASS_NAMES = {
   thumbnail: 'pure-background-image-thumbnail',
