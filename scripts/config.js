@@ -6,6 +6,7 @@ const styleInjection = require('./styleInjection')
 const util = require('./util')
 
 const OBSERVER_TIMEOUT_DURATION = 500
+const observerTimeouts = new Map()
 
 const makeKey = (keySuffix) => `${util.LONG_PACKAGE_NAME}.${keySuffix}`
 
@@ -31,14 +32,18 @@ const wrapObserverCallback = ({callback, sync}) => {
 
 const makeObserver = ({callback, delayed, sync}) => {
   callback = wrapObserverCallback({callback, sync})
+  const observerId = Math.random()
 
   return value => {
     if (value.toHexString) value = Color(value.toHexString())
+    const boundCallback = () => callback(value)
 
     if (delayed && util.themeIsActive) {
-      setTimeout(() => callback(value), OBSERVER_TIMEOUT_DURATION)
+      clearTimeout(observerTimeouts.get(observerId))
+      const timeoutId = setTimeout(boundCallback, OBSERVER_TIMEOUT_DURATION)
+      observerTimeouts.set(observerId, timeoutId)
     } else {
-      callback(value)
+      boundCallback()
     }
   }
 }
