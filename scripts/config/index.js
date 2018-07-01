@@ -4,7 +4,7 @@ const {CompositeDisposable} = require('atom')
 
 const configUtil = require('./util')
 const observers = require('./observers')
-const {makeObserver, clearObserverTimeouts} = require('./makeObserver')
+const makeObserver = require('./makeObserver')
 
 const disposables = new CompositeDisposable()
 
@@ -18,7 +18,6 @@ const activate = () => {
 
 const deactivate = () => {
   disposables.dispose()
-  clearObserverTimeouts()
 }
 
 module.exports = {activate, deactivate}

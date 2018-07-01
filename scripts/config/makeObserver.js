@@ -3,7 +3,6 @@
 const styleInjection = require('../styleInjection')
 const util = require('../util')
 
-const observerTimeouts = new Map()
 const timeoutDuration = 500
 
 const wrapCallback = ({callback, sync}) => {
@@ -17,25 +16,14 @@ const wrapCallback = ({callback, sync}) => {
   }
 }
 
-const makeObserver = ({callback, delayed, sync}) => {
+module.exports = ({callback, delayed, sync}) => {
   callback = wrapCallback({callback, sync})
-  const observerId = Math.random()
 
   return value => {
-    const boundCallback = callback.bind(undefined, value)
-
     if (delayed && util.themeIsActive) {
-      clearTimeout(observerTimeouts.get(observerId))
-      const timeoutId = setTimeout(boundCallback, timeoutDuration)
-      observerTimeouts.set(observerId, timeoutId)
+      setTimeout(() => callback(value), timeoutDuration)
     } else {
-      boundCallback()
+      callback(value)
     }
   }
 }
-
-const clearObserverTimeouts = () => {
-  observerTimeouts.forEach(clearTimeout)
-}
-
-module.exports = {makeObserver, clearObserverTimeouts}
