@@ -1,8 +1,10 @@
 'use strict'
 
-const configUtil = require('./util')
-const styleInjection = require('../styleInjection')
-const util = require('../util')
+const {CompositeDisposable} = require('atom')
+
+const config = require('./config')
+const styleInjection = require('./styleInjection')
+const util = require('./util')
 
 const IMAGE_BACKGROUND_MODE = 'Image'
 
@@ -57,7 +59,7 @@ const observers = {
   'imageBackgrounds.accentColor': {
     callback (accentColor) {
       accentColor = util.wrapAtomColor(accentColor)
-      const accentAlphaChannel = configUtil.get(
+      const accentAlphaChannel = config.get(
         'imageBackgrounds.accentAlphaChannel'
       )
 
@@ -79,7 +81,7 @@ const observers = {
   'imageBackgrounds.accentAlphaChannel': {
     delayed: true,
     callback (accentAlphaChannel) {
-      const accentColor = configUtil.get('imageBackgrounds.accentColor')
+      const accentColor = config.get('imageBackgrounds.accentColor')
 
       const blendedAccentColor = util.BLACK.mix(accentColor, accentAlphaChannel)
       const translucentAccentColor = accentColor.alpha(accentAlphaChannel)
@@ -120,4 +122,14 @@ const observers = {
   }
 }
 
-module.exports = observers
+const activate = () => {
+  const disposables = new CompositeDisposable()
+
+  for (const [keySuffix, observerConfig] of Object.entries(observers)) {
+    disposables.add(config.observe(keySuffix, observerConfig))
+  }
+
+  return disposables
+}
+
+module.exports = {activate}
