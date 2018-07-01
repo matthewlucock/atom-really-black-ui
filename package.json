@@ -101,12 +101,12 @@
   "dependencies": {
     "color": "^3.0.0",
     "fs-extra": "^5.0.0",
-    "mem": "^3.0.0",
+    "mem": "^3.0.1",
     "random-item": "^1.0.0"
   },
   "devDependencies": {
-    "less": "^3.0.1",
-    "snazzy": "^7.0.0",
+    "less": "^3.0.4",
+    "snazzy": "^7.1.1",
     "standard": "^10.0.3"
   }
 }
