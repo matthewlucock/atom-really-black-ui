@@ -6,8 +6,6 @@ const BackgroundImageManager = require('./manager')
 const {BackgroundImagesView, VIEW_URI} = require('./view')
 const util = require('../util')
 
-const disposables = new CompositeDisposable()
-
 const manager = new BackgroundImageManager()
 
 const activate = () => {
@@ -23,11 +21,7 @@ const activate = () => {
     }
   })
 
-  disposables.add(opener, commands)
+  return new CompositeDisposable(opener, commands)
 }
 
-const deactivate = () => {
-  disposables.dispose()
-}
-
-module.exports = {activate, deactivate}
+module.exports = {activate}

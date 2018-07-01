@@ -3,6 +3,8 @@
 const fse = require('fs-extra')
 const memoize = require('mem')
 
+const {Disposable} = require('atom')
+
 const util = require('./util')
 
 const PATHS = {
@@ -45,10 +47,7 @@ const generateVariablesText = () => {
 
 const activate = () => {
   document.head.appendChild(styleElement)
-}
-
-const deactivate = () => {
-  styleElement.remove()
+  return new Disposable(() => styleElement.remove())
 }
 
 const injectStyles = async () => {
@@ -63,7 +62,6 @@ const writeVariables = () => {
 module.exports = {
   variables,
   activate,
-  deactivate,
   injectStyles,
   writeVariables
 }
