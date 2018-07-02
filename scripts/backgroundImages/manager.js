@@ -11,7 +11,7 @@ const {
   BACKGROUND_IMAGES_DIRECTORY
 } = require('./backgroundImage')
 const TemporaryBackground = require('./temporaryBackground')
-const styleInjection = require('../styleInjection')
+const styles = require('../styles')
 const config = require('../config')
 
 const DEFAULT_SUBDIRECTORY = 'default'
@@ -99,8 +99,8 @@ class BackgroundImageManager {
   }
 
   _animationCallback (image) {
-    styleInjection.variables['background-image-uri'] = image.uri
-    styleInjection.injectStyles()
+    styles.variables['background-image-uri'] = image.uri
+    styles.inject()
   }
 }
 

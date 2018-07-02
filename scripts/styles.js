@@ -27,7 +27,7 @@ const readCustomisableStyles = memoize(
   () => fse.readFile(PATHS.customisableStyles, 'utf8')
 )
 
-const insertStyleVariablesIntoCss = css => {
+const insertVariablesIntoCss = css => {
   for (const [name, value] of Object.entries(variables)) {
     css = css.replace(RegExp(`"${name}"`, 'g'), value)
   }
@@ -41,13 +41,8 @@ const generateVariablesText = () => {
     .join('\n')
 }
 
-const activate = () => {
-  document.head.appendChild(styleElement)
-  return new Disposable(() => styleElement.remove())
-}
-
-const injectStyles = async () => {
-  const css = insertStyleVariablesIntoCss(await readCustomisableStyles())
+const inject = async () => {
+  const css = insertVariablesIntoCss(await readCustomisableStyles())
   styleElement.textContent = css
 }
 
@@ -55,9 +50,14 @@ const writeVariables = () => {
   return fse.writeFile(PATHS.variables, generateVariablesText())
 }
 
+const activate = () => {
+  document.head.appendChild(styleElement)
+  return new Disposable(() => styleElement.remove())
+}
+
 module.exports = {
   variables,
-  activate,
-  injectStyles,
-  writeVariables
+  inject,
+  writeVariables,
+  activate
 }

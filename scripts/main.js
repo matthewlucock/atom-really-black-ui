@@ -4,7 +4,7 @@ const {Disposable, CompositeDisposable} = require('atom')
 
 const activateConfigObservers = require('./configObservers/activate')
 const manageBackgroundImages = require('./backgroundImages')
-const styleInjection = require('./styleInjection')
+const styles = require('./styles')
 const util = require('./util')
 
 const disposables = new CompositeDisposable()
@@ -12,7 +12,7 @@ const disposables = new CompositeDisposable()
 const activate = () => {
   disposables.add(
     activateConfigObservers(),
-    styleInjection.activate(),
+    styles.activate(),
     manageBackgroundImages.activate(),
     new Disposable(() => {
       util.themeIsActive = false

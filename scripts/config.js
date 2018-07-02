@@ -2,7 +2,7 @@
 
 const Color = require('color')
 
-const styleInjection = require('./styleInjection')
+const styles = require('./styles')
 const util = require('./util')
 
 const OBSERVER_TIMEOUT_DURATION = 500
@@ -24,8 +24,8 @@ const wrapObserverCallback = (callback) => {
     callback(value)
 
     if (util.themeIsActive) {
-      styleInjection.injectStyles()
-      styleInjection.writeVariables()
+      styles.inject()
+      styles.writeVariables()
     }
   }
 }

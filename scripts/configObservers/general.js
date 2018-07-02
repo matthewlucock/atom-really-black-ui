@@ -1,6 +1,6 @@
 'use strict'
 
-const styleInjection = require('../styleInjection')
+const styles = require('../styles')
 const util = require('../util')
 
 const IMAGE_BACKGROUND_MODE = 'Image'
@@ -22,20 +22,20 @@ const backgroundMode = {
 const mainFontSize = {
   delayed: true,
   callback (fontSize) {
-    styleInjection.variables['font-size'] = fontSize
+    styles.variables['font-size'] = fontSize
   }
 }
 
 const statusBarFontSize = {
   delayed: true,
   callback (fontSize) {
-    styleInjection.variables['status-bar-font-size'] = fontSize
+    styles.variables['status-bar-font-size'] = fontSize
   }
 }
 
 const styleTheEditor = {
   callback (styleTheEditor) {
-    styleInjection.variables['style-the-editor'] = styleTheEditor
+    styles.variables['style-the-editor'] = styleTheEditor
 
     document.body.classList.toggle(
       CLASS_NAMES.dontStyleTheEditor,

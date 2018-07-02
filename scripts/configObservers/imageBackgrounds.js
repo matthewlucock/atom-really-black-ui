@@ -1,14 +1,14 @@
 'use strict'
 
 const config = require('../config')
-const styleInjection = require('../styleInjection')
+const styles = require('../styles')
 const util = require('../util')
 
 const overlayAlphaChannel = {
   delayed: true,
   callback (overlayAlphaChannel) {
     const overlayColor = util.BLACK.alpha(overlayAlphaChannel)
-    styleInjection.variables['image-background-overlay'] = overlayColor.string()
+    styles.variables['image-background-overlay'] = overlayColor.string()
   }
 }
 
@@ -20,7 +20,7 @@ const accentColor = {
     const translucentAccentColor = accentColor.alpha(accentAlphaChannel)
     const textColor = util.getTextColorFromBackgroundColor(blendedAccentColor)
 
-    Object.assign(styleInjection.variables, {
+    Object.assign(styles.variables, {
       'image-background-accent-color-opaque': blendedAccentColor.string(),
       'image-background-accent-color-translucent': (
         translucentAccentColor.string()
@@ -39,7 +39,7 @@ const accentAlphaChannel = {
     const translucentAccentColor = accentColor.alpha(accentAlphaChannel)
     const textColor = util.getTextColorFromBackgroundColor(blendedAccentColor)
 
-    Object.assign(styleInjection.variables, {
+    Object.assign(styles.variables, {
       'image-background-accent-color-opaque': blendedAccentColor.string(),
       'image-background-accent-color-translucent': (
         translucentAccentColor.string()
