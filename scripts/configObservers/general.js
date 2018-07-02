@@ -21,24 +21,21 @@ const backgroundMode = {
 
 const mainFontSize = {
   delayed: true,
-  sync: true,
   callback (fontSize) {
-    styleInjection.variables.synced['font-size'] = fontSize
+    styleInjection.variables['font-size'] = fontSize
   }
 }
 
 const statusBarFontSize = {
   delayed: true,
-  sync: true,
   callback (fontSize) {
-    styleInjection.variables.synced['status-bar-font-size'] = fontSize
+    styleInjection.variables['status-bar-font-size'] = fontSize
   }
 }
 
 const styleTheEditor = {
-  sync: true,
   callback (styleTheEditor) {
-    styleInjection.variables.synced['style-the-editor'] = styleTheEditor
+    styleInjection.variables['style-the-editor'] = styleTheEditor
 
     document.body.classList.toggle(
       CLASS_NAMES.dontStyleTheEditor,

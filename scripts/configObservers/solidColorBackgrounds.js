@@ -4,23 +4,21 @@ const styleInjection = require('../styleInjection')
 const util = require('../util')
 
 const backgroundColor = {
-  sync: true,
   callback (backgroundColor) {
     const textColor = util.getTextColorFromBackgroundColor(backgroundColor)
 
-    styleInjection.variables.synced['base-background-color'] = (
-      backgroundColor.string()
-    )
-    styleInjection.variables.synced['text-color'] = textColor.string()
+    Object.assign(styleInjection.variables, {
+      'base-background-color': backgroundColor.string(),
+      'text-color': textColor.string()
+    })
   }
 }
 
 const accentColor = {
-  sync: true,
   callback (accentColor) {
     const textColor = util.getTextColorFromBackgroundColor(accentColor)
 
-    Object.assign(styleInjection.variables.synced, {
+    Object.assign(styleInjection.variables, {
       'solid-color-background-accent-color': accentColor.string(),
       'solid-color-background-accented-text-color': textColor.string()
     })

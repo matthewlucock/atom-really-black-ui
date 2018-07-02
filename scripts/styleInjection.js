@@ -17,10 +17,7 @@ const PATHS = {
   variables: path.join(util.THEME_PATH, 'styles/user-defined-variables.less')
 }
 
-const variables = {
-  synced: {},
-  unsynced: {}
-}
+const variables = {}
 
 const styleElement = document.createElement('style')
 
@@ -31,13 +28,7 @@ const readCustomisableStyles = memoize(
 )
 
 const insertStyleVariablesIntoCss = css => {
-  const combinedVariables = Object.assign(
-    {},
-    variables.synced,
-    variables.unsynced
-  )
-
-  for (const [name, value] of Object.entries(combinedVariables)) {
+  for (const [name, value] of Object.entries(variables)) {
     css = css.replace(RegExp(`"${name}"`, 'g'), value)
   }
 
@@ -45,7 +36,7 @@ const insertStyleVariablesIntoCss = css => {
 }
 
 const generateVariablesText = () => {
-  return Object.entries(variables.synced)
+  return Object.entries(variables)
     .map(variableData => generateLessVariableSyntax(...variableData))
     .join('\n')
 }

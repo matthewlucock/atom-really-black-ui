@@ -99,7 +99,7 @@ class BackgroundImageManager {
   }
 
   _animationCallback (image) {
-    styleInjection.variables.unsynced['background-image-uri'] = image.uri
+    styleInjection.variables['background-image-uri'] = image.uri
     styleInjection.injectStyles()
   }
 }

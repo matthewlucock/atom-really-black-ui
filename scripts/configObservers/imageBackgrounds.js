@@ -8,9 +8,7 @@ const overlayAlphaChannel = {
   delayed: true,
   callback (overlayAlphaChannel) {
     const overlayColor = util.BLACK.alpha(overlayAlphaChannel)
-    styleInjection.variables.unsynced['image-background-overlay'] = (
-      overlayColor.string()
-    )
+    styleInjection.variables['image-background-overlay'] = overlayColor.string()
   }
 }
 
@@ -22,7 +20,7 @@ const accentColor = {
     const translucentAccentColor = accentColor.alpha(accentAlphaChannel)
     const textColor = util.getTextColorFromBackgroundColor(blendedAccentColor)
 
-    Object.assign(styleInjection.variables.unsynced, {
+    Object.assign(styleInjection.variables, {
       'image-background-accent-color-opaque': blendedAccentColor.string(),
       'image-background-accent-color-translucent': (
         translucentAccentColor.string()
@@ -41,7 +39,7 @@ const accentAlphaChannel = {
     const translucentAccentColor = accentColor.alpha(accentAlphaChannel)
     const textColor = util.getTextColorFromBackgroundColor(blendedAccentColor)
 
-    Object.assign(styleInjection.variables.unsynced, {
+    Object.assign(styleInjection.variables, {
       'image-background-accent-color-opaque': blendedAccentColor.string(),
       'image-background-accent-color-translucent': (
         translucentAccentColor.string()

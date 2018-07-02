@@ -19,19 +19,19 @@ const get = keySuffix => {
   return value
 }
 
-const wrapObserverCallback = ({callback, sync}) => {
+const wrapObserverCallback = (callback) => {
   return value => {
     callback(value)
 
     if (util.themeIsActive) {
       styleInjection.injectStyles()
-      if (sync) styleInjection.writeVariables()
+      styleInjection.writeVariables()
     }
   }
 }
 
-const makeObserver = ({callback, delayed, sync}) => {
-  callback = wrapObserverCallback({callback, sync})
+const makeObserver = ({callback, delayed}) => {
+  callback = wrapObserverCallback(callback)
   const observerId = Math.random()
 
   return value => {
