@@ -5,7 +5,7 @@ const path = require('path')
 const fse = require('fs-extra')
 const less = require('less')
 
-const DIRECTORY = 'styles/customisable'
+const DIRECTORY = 'styles/customizable'
 
 const FILES = [
   'general',

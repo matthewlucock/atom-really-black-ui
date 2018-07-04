@@ -9,13 +9,9 @@ const {Disposable} = require('atom')
 
 const util = require('./util')
 
-const PATHS = {
-  customisableStyles: path.join(
-    util.THEME_PATH,
-    'styles/customisable/compiled.css'
-  ),
-  variables: path.join(util.THEME_PATH, 'styles/user-defined-variables.less')
-}
+const DIRECTORY = path.join(util.THEME_PATH, 'styles/customizable')
+const CUSTOMIZABLE_STYLES_PATH = path.join(DIRECTORY, 'compiled.css')
+const VARIABLES_PATH = path.join(DIRECTORY, 'variables.less')
 
 const variables = {}
 
@@ -23,8 +19,8 @@ const styleElement = document.createElement('style')
 
 const generateLessVariableSyntax = (name, value) => `@${name}: ${value};`
 
-const readCustomisableStyles = memoize(
-  () => fse.readFile(PATHS.customisableStyles, 'utf8')
+const readCustomizableStyles = memoize(
+  () => fse.readFile(CUSTOMIZABLE_STYLES_PATH, 'utf8')
 )
 
 const insertVariablesIntoCss = css => {
@@ -42,12 +38,12 @@ const generateVariablesText = () => {
 }
 
 const inject = async () => {
-  const css = insertVariablesIntoCss(await readCustomisableStyles())
+  const css = insertVariablesIntoCss(await readCustomizableStyles())
   styleElement.textContent = css
 }
 
 const writeVariables = () => {
-  return fse.writeFile(PATHS.variables, generateVariablesText())
+  return fse.writeFile(VARIABLES_PATH, generateVariablesText())
 }
 
 const activate = () => {
