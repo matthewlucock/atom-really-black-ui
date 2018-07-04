@@ -31,7 +31,7 @@
         "mainFontSize": {
           "type": "string",
           "title": "Main font size",
-          "default": "16px"
+          "default": "15px"
         },
         "statusBarFontSize": {
           "type": "string",
@@ -53,7 +53,7 @@
           "type": "number",
           "title": "Overlay alpha channel",
           "order": 1,
-          "default": 0.9,
+          "default": 0.85,
           "minimum": 0,
           "maximum": 1
         },
@@ -67,7 +67,7 @@
           "type": "number",
           "title": "Accent alpha channel",
           "order": 3,
-          "default": 0.2,
+          "default": 0.1,
           "minimum": 0,
           "maximum": 1
         },
