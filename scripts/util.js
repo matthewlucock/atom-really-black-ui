@@ -21,7 +21,7 @@ const getCssUrl = url => `url(${url})`
 
 const getPackageCommandName = name => `${SHORT_PACKAGE_NAME}:${name}`
 
-const getTextColorFromBackgroundColor = backgroundColor => {
+const getContrastingTextColor = backgroundColor => {
   return backgroundColor.isDark() ? WHITE : BLACK
 }
 
@@ -35,6 +35,6 @@ module.exports = {
   getFileUri,
   getCssUrl,
   getPackageCommandName,
-  getTextColorFromBackgroundColor,
+  getContrastingTextColor,
   themeIsActive: false
 }
