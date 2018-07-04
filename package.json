@@ -37,11 +37,6 @@
           "type": "string",
           "title": "Status bar font size",
           "default": ".9em"
-        },
-        "styleTheEditor": {
-          "type": "boolean",
-          "title": "Style the editor",
-          "default": true
         }
       }
     },

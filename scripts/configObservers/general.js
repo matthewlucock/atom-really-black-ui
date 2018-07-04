@@ -4,16 +4,12 @@ const styles = require('../styles')
 const util = require('../util')
 
 const IMAGE_BACKGROUND_MODE = 'Image'
-
-const CLASS_NAMES = {
-  imageBackgroundMode: `${util.SHORT_PACKAGE_NAME}-background-image`,
-  dontStyleTheEditor: `${util.SHORT_PACKAGE_NAME}-dont-style-the-editor`
-}
+const IMAGE_BACKGROUND_CLASS = `${util.SHORT_PACKAGE_NAME}-background-image`
 
 const backgroundMode = {
   callback (backgroundMode) {
     document.body.classList.toggle(
-      CLASS_NAMES.imageBackgroundMode,
+      IMAGE_BACKGROUND_CLASS,
       backgroundMode === IMAGE_BACKGROUND_MODE
     )
   }
@@ -33,20 +29,8 @@ const statusBarFontSize = {
   }
 }
 
-const styleTheEditor = {
-  callback (styleTheEditor) {
-    styles.variables['style-the-editor'] = styleTheEditor
-
-    document.body.classList.toggle(
-      CLASS_NAMES.dontStyleTheEditor,
-      !styleTheEditor
-    )
-  }
-}
-
 module.exports = {
   backgroundMode,
   mainFontSize,
-  statusBarFontSize,
-  styleTheEditor
+  statusBarFontSize
 }
