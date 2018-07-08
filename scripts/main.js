@@ -13,12 +13,13 @@ const activate = () => {
   disposables.add(
     activateConfigObservers(),
     styles.activate(),
-    manageBackgroundImages.activate(),
     new Disposable(() => {
+      manageBackgroundImages.deactivate()
       util.themeIsActive = false
     })
   )
 
+  manageBackgroundImages.activate()
   util.themeIsActive = true
 }
 

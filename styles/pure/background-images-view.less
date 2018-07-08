@@ -1,48 +1,113 @@
 .pure-background-images-view {
   padding: 2em;
   overflow: auto;
+  text-align: center;
 }
 
-.pure-background-images-list {
-  margin: 3em 1em;
-  padding: 1em;
-  background: @solid-color-background-accent-color;
+.pure-background-images-view-default-list,
+.pure-background-images-view-custom-list {
   display: flex;
   justify-content: center;
-  list-style: none;
   flex-wrap: wrap;
   align-items: center;
+  padding: 2em;
+  list-style: none;
 }
 
-.pure-background-image-thumbnail-container {
+.pure-background-images-view-loading {
+  .pure-background-images-view-thumbnail,
+  .pure-background-images-view-custom-add-image-message {
+    display: none;
+  }
+}
+
+.pure-background-images-view-custom {
+  position: relative;
+}
+
+.pure-background-images-view-thumbnail {
+  position: relative;
   padding: 1em;
   cursor: pointer;
 
-  &:not(.pure-background-image-thumbnail-container-selected):hover {
+  &:not(.pure-background-images-view-thumbnail-selected):hover {
     background: red;
   }
 
-  &.pure-background-image-thumbnail-container-selected {
+  &.pure-background-images-view-thumbnail-selected {
     background: @miscellaneous-background-color;
+    cursor: initial;
+  }
+
+  &.pure-background-images-view-thumbnail-loading {
+    display: none;
   }
 }
 
-.pure-background-image-thumbnail {
+.pure-background-images-view-thumbnail-delete-button {
+  position: absolute;
+  right: 1em;
+  visibility: hidden;
+  opacity: 0;
+  transition-property: visibility, opacity;
+  transition-duration: .5s;
+
+  .icon::before {
+    margin: 0;
+  }
+
+  .pure-background-images-view-thumbnail:hover & {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.pure-background-images-view-thumbnail-loading {
+  display: none;
+}
+
+.pure-background-images-view-thumbnail-image {
   width: 150px;
 }
 
-.pure-temporary-background {
+.pure-background-images-view-custom-drop-zone {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  visibility: hidden;
   opacity: 0;
-  transition: opacity 1s;
-  background-size: cover;
-  background-position: center;
+  background: rgba(255,255,255,0.3);
+  transition-property: visibility, opacity;
+  transition-duration: .5s;
+
+  &.pure-background-images-view-custom-drop-zone-active {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
-.pure-temporary-background-animating {
-  opacity: 1;
+.pure-background-images-view-custom-browse-button {
+  margin: 0 .5em;
+}
+
+@keyframes pure-full-rotation {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.pure-background-images-view-loading-spinner {
+  display: none;
+  margin: 2em auto;
+  animation: pure-full-rotation linear 1s infinite;
+
+  .pure-background-images-view-loading & {
+    display: block;
+  }
 }

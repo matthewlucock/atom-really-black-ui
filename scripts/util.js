@@ -1,5 +1,7 @@
 'use strict'
 
+const path = require('path')
+
 const Color = require('color')
 
 const SHORT_PACKAGE_NAME = 'pure'
@@ -25,6 +27,14 @@ const getContrastingTextColor = backgroundColor => {
   return backgroundColor.isDark() ? WHITE : BLACK
 }
 
+const BACKGROUND_IMAGES_DIRECTORY = path.join(THEME_PATH, 'background-images')
+const BACKGROUND_IMAGES_VIEW_URI = getAtomUri(
+  `${SHORT_PACKAGE_NAME}-background-images`
+)
+const BACKGROUND_IMAGES_VIEW_CLASS = (
+  `${SHORT_PACKAGE_NAME}-background-images-view`
+)
+
 module.exports = {
   SHORT_PACKAGE_NAME,
   LONG_PACKAGE_NAME,
@@ -36,5 +46,8 @@ module.exports = {
   getCssUrl,
   getPackageCommandName,
   getContrastingTextColor,
+  BACKGROUND_IMAGES_DIRECTORY,
+  BACKGROUND_IMAGES_VIEW_URI,
+  BACKGROUND_IMAGES_VIEW_CLASS,
   themeIsActive: false
 }

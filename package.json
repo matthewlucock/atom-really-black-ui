@@ -68,9 +68,20 @@
         },
         "selectNewImageOnActivation": {
           "type": "boolean",
-          "title": "Select new image each time Atom loads",
+          "title": "Select new image on activation",
           "order": 4,
           "default": true
+        },
+        "selectNewImagesFrom": {
+          "type": "string",
+          "title": "Select new images from",
+          "enum": [
+            "Default images",
+            "Custom images",
+            "Both"
+          ],
+          "order": 5,
+          "default": "Default images"
         }
       }
     },
@@ -95,6 +106,7 @@
   },
   "dependencies": {
     "color": "^3.0.0",
+    "docrel": "^1.6.0",
     "fs-extra": "^5.0.0",
     "mem": "^3.0.1",
     "random-item": "^1.0.0"
