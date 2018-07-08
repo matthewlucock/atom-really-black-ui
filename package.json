@@ -11,7 +11,7 @@
   },
   "main": "scripts/main",
   "scripts": {
-    "lint": "standard renderCustomizableStyles.js | snazzy && standard \"scripts/**/*.js\" --global atom | snazzy",
+    "lint": "standard \"build/**/*.js\" | snazzy && standard \"scripts/**/*.js\" --global atom | snazzy",
     "build": "npm run lint && node less.js"
   },
   "configSchema": {
