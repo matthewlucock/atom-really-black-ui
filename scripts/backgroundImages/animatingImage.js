@@ -17,12 +17,14 @@ module.exports = class AnimatingBackgroundImage {
     this.animating = false
   }
 
-  animate ({image, out}) {
-    return new Promise(resolve => {
-      const animationClassName = (
-        out ? ANIMATION_CLASS_NAMES.out : ANIMATION_CLASS_NAMES.in
-      )
+  async animate ({image, out}) {
+    const animationClassName = (
+      out ? ANIMATION_CLASS_NAMES.out : ANIMATION_CLASS_NAMES.in
+    )
 
+    await image.load()
+
+    await new Promise(resolve => {
       this.element.addEventListener(
         'animationend',
         () => {

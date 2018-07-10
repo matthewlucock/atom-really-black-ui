@@ -2,12 +2,15 @@
 
 const path = require('path')
 
+const memoize = require('mem')
+
 const util = require('../util')
 
 module.exports = class BackgroundImage {
   constructor (directoryName, fileName) {
     this.directoryName = directoryName
     this.fileName = fileName
+    this.load = memoize(this.load)
   }
 
   get absolutePath () {
@@ -20,6 +23,14 @@ module.exports = class BackgroundImage {
 
   get uri () {
     return util.getFileUri(this.absolutePath)
+  }
+
+  load () {
+    return new Promise(resolve => {
+      const element = document.createElement('img')
+      element.onload = () => resolve()
+      element.src = this.uri
+    })
   }
 
   toJSON () {

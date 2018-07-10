@@ -45,16 +45,10 @@ module.exports = class BackgroundImageThumbnail {
     }
   }
 
-  load () {
-    return new Promise((resolve, reject) => {
-      this.imageElement.onload = () => {
-        this.element.classList.remove(LOADING_CLASS)
-        resolve()
-      }
-      this.imageElement.onerror = () => reject(new Error())
-
-      this.imageElement.src = this.image.uri
-    })
+  async load () {
+    await this.image.load()
+    this.element.classList.remove(LOADING_CLASS)
+    this.imageElement.src = this.image.uri
   }
 
   select () {
