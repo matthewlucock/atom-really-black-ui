@@ -5,11 +5,11 @@ const {Disposable} = require('atom')
 const {EventEmitter} = require('events')
 const path = require('path')
 
+const {createElement} = require('docrel')
 const fse = require('fs-extra')
 const memoize = require('mem')
 const randomItem = require('random-item')
 
-const AnimatingBackgroundImage = require('./animatingImage')
 const BackgroundImage = require('./image')
 const {BACKGROUND_IMAGES_DIRECTORY} = require('../data')
 const config = require('../config')
@@ -27,8 +27,10 @@ const getBackgroundImageCss = image => {
 module.exports = class BackgroundImageManager {
   constructor () {
     this.emitter = new EventEmitter()
-    this.styleElement = document.createElement('style')
-    this.animatingBackgroundImage = new AnimatingBackgroundImage()
+    this.styleElement = createElement('style')
+    this.animationElement = createElement('div', {
+      class: 'pure-background-image-animation'
+    })
     this.getDirectory = memoize(this.getDirectory)
   }
 
@@ -57,6 +59,19 @@ module.exports = class BackgroundImageManager {
     })
   }
 
+  async animate ({image, animateOut}) {
+    const opacity = animateOut ? [1, 0] : [0, 1]
+
+    await image.load()
+
+    this.animationElement.style.backgroundImage = utilities.getCssUrl(image.uri)
+    const animation = this.animationElement.animate({opacity}, {
+      duration: 1000,
+      fill: 'forwards'
+    })
+    await animation.finished
+  }
+
   async select ({image, write}) {
     if (this.selectedImage && !this.selectedImage.deleted) {
       this.emitter.emit('deselect', this.selectedImage)
@@ -64,8 +79,7 @@ module.exports = class BackgroundImageManager {
 
     this.selectedImage = image
     this.emitter.emit('select', image)
-
-    await this.animatingBackgroundImage.animate({image})
+    await this.animate({image})
     this.styleElement.textContent = getBackgroundImageCss(image)
 
     if (write) await fse.writeJson(SELECTED_IMAGE_JSON_PATH, image)
@@ -157,13 +171,13 @@ module.exports = class BackgroundImageManager {
   }
 
   activate () {
-    document.body.append(this.animatingBackgroundImage.element)
+    document.body.append(this.animationElement)
     document.head.append(this.styleElement)
 
     this.handleImageSelectionOnActivation()
 
     return new Disposable(() => {
-      this.animatingBackgroundImage.element.remove()
+      this.animationElement.remove()
       this.styleElement.remove()
     })
   }
