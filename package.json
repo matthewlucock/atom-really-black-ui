@@ -9,7 +9,7 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "main": "scripts/main",
+  "main": "scripts/index",
   "scripts": {
     "lint": "standard \"build/**/*.js\" | snazzy && standard \"scripts/**/*.js\" --global atom | snazzy",
     "build": "npm run lint && node less.js"

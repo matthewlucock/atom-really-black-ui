@@ -7,9 +7,9 @@ const memoize = require('mem')
 
 const {Disposable} = require('atom')
 
-const util = require('./util')
+const {THEME_PATH} = require('./data')
 
-const DIRECTORY = path.join(util.THEME_PATH, 'styles/customizable')
+const DIRECTORY = path.join(THEME_PATH, 'styles/customizable')
 const CUSTOMIZABLE_STYLES_PATH = path.join(DIRECTORY, 'compiled.css')
 const VARIABLES_PATH = path.join(DIRECTORY, 'variables.less')
 

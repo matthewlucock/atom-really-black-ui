@@ -2,9 +2,9 @@
 
 const {createElement} = require('docrel')
 
-const util = require('../util')
+const utilities = require('../utilities')
 
-const MAIN_CLASS_NAME = `${util.SHORT_PACKAGE_NAME}-animating-background-image`
+const MAIN_CLASS_NAME = `pure-animating-background-image`
 
 const ANIMATION_CLASS_NAMES = {
   in: `${MAIN_CLASS_NAME}-animate-in`,
@@ -35,7 +35,7 @@ module.exports = class AnimatingBackgroundImage {
         {once: true}
       )
 
-      this.element.style.backgroundImage = util.getCssUrl(image.uri)
+      this.element.style.backgroundImage = utilities.getCssUrl(image.uri)
       this.element.classList.add(animationClassName)
       this.animating = true
     })

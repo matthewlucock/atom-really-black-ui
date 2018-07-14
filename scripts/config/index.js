@@ -2,13 +2,13 @@
 
 const Color = require('color')
 
+const data = require('../data')
 const styles = require('../styles')
-const util = require('../util')
 
 const OBSERVER_TIMEOUT_DURATION = 500
 const observerTimeouts = new Map()
 
-const makeKey = (keySuffix) => `${util.LONG_PACKAGE_NAME}.${keySuffix}`
+const makeKey = (keySuffix) => `pure-ui.${keySuffix}`
 
 const get = keySuffix => {
   const key = makeKey(keySuffix)
@@ -23,7 +23,7 @@ const wrapObserverCallback = ({callback, updateStyles}) => {
   return value => {
     callback(value)
 
-    if (util.themeIsActive && updateStyles !== false) {
+    if (data.themeIsActive && updateStyles !== false) {
       styles.inject()
       styles.writeVariables()
     }
@@ -38,7 +38,7 @@ const makeObserver = ({callback, delayed, updateStyles}) => {
     if (value.toRGBAString) value = new Color(value.toRGBAString())
     const boundCallback = () => callback(value)
 
-    if (delayed && util.themeIsActive) {
+    if (delayed && data.themeIsActive) {
       clearTimeout(observerTimeouts.get(observerId))
       const timeoutId = setTimeout(boundCallback, OBSERVER_TIMEOUT_DURATION)
       observerTimeouts.set(observerId, timeoutId)

@@ -4,20 +4,18 @@ const {EventEmitter} = require('events')
 
 const {createElement} = require('docrel')
 
-const util = require('../util')
+const {BACKGROUND_IMAGES_VIEW_CLASS} = require('../data')
 
-const BASE_CLASS = `${util.BACKGROUND_IMAGES_VIEW_CLASS}-thumbnail`
+const BASE_CLASS = `${BACKGROUND_IMAGES_VIEW_CLASS}-thumbnail`
 const LOADING_CLASS = `${BASE_CLASS}-loading`
 const SELECTED_CLASS = `${BASE_CLASS}-selected`
-const IMAGE_CLASS = `${BASE_CLASS}-image`
-const DELETE_BUTTON_CLASS = `${BASE_CLASS}-delete-button`
 
 module.exports = class BackgroundImageThumbnail {
   constructor ({image, deletable}) {
     this.image = image
     this.emitter = new EventEmitter()
 
-    this.imageElement = createElement('img', {class: IMAGE_CLASS})
+    this.imageElement = createElement('img', {class: `${BASE_CLASS}-image`})
 
     this.element = createElement(
       'div',
@@ -32,7 +30,7 @@ module.exports = class BackgroundImageThumbnail {
       this.element.append(createElement(
         'button',
         {
-          classList: ['btn', DELETE_BUTTON_CLASS],
+          classList: ['btn', `${BASE_CLASS}-delete-button`],
           events: {
             click: event => {
               event.stopPropagation()

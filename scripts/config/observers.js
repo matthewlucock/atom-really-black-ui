@@ -5,11 +5,11 @@ const {CompositeDisposable} = require('atom')
 const backgroundImages = require('../backgroundImages')
 const config = require('.')
 const styles = require('../styles')
-const util = require('../util')
+const utilities = require('../utilities')
 
 const setAccent = (color, alphaChannel) => {
-  const blendedColor = util.BLACK.mix(color, alphaChannel)
-  const textColor = util.getContrastingTextColor(blendedColor)
+  const blendedColor = utilities.BLACK.mix(color, alphaChannel)
+  const textColor = utilities.getContrastingTextColor(blendedColor)
   const translucentColor = color.alpha(alphaChannel)
 
   Object.assign(styles.variables, {
@@ -24,7 +24,14 @@ const observers = {
     updateStyles: false,
     callback (backgroundMode) {
       const imageMode = backgroundMode === 'Image'
-      document.body.classList.toggle('pure-background-image', imageMode)
+
+      if (imageMode) {
+        document.body.classList.add('pure-background-image', imageMode)
+        backgroundImages.activate()
+      } else {
+        document.body.classList.remove('pure-background-image', imageMode)
+        backgroundImages.deactivate()
+      }
     }
   },
   'general.mainFontSize': {
@@ -42,7 +49,7 @@ const observers = {
   'imageBackgrounds.overlayAlphaChannel': {
     delayed: true,
     callback (overlayAlphaChannel) {
-      const overlayColor = util.BLACK.alpha(overlayAlphaChannel)
+      const overlayColor = utilities.BLACK.alpha(overlayAlphaChannel)
       styles.variables['image-background-overlay'] = overlayColor
     }
   },
@@ -61,7 +68,7 @@ const observers = {
   },
   'solidColorBackgrounds.backgroundColor': {
     callback (backgroundColor) {
-      const textColor = util.getContrastingTextColor(backgroundColor)
+      const textColor = utilities.getContrastingTextColor(backgroundColor)
 
       Object.assign(styles.variables, {
         'base-background-color': backgroundColor,
@@ -71,7 +78,7 @@ const observers = {
   },
   'solidColorBackgrounds.accentColor': {
     callback (accentColor) {
-      const textColor = util.getContrastingTextColor(accentColor)
+      const textColor = utilities.getContrastingTextColor(accentColor)
 
       Object.assign(styles.variables, {
         'solid-color-background-accent-color': accentColor,
@@ -83,12 +90,10 @@ const observers = {
 
 module.exports = {
   activate () {
-    const disposables = new CompositeDisposable()
-
-    for (const [key, observerConfig] of Object.entries(observers)) {
-      disposables.add(config.observe(key, observerConfig))
-    }
-
-    return disposables
+    return new CompositeDisposable(
+      ...Object.entries(observers).map(([key, observerConfig]) => {
+        return config.observe(key, observerConfig)
+      })
+    )
   }
 }

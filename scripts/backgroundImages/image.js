@@ -4,7 +4,8 @@ const path = require('path')
 
 const memoize = require('mem')
 
-const util = require('../util')
+const {BACKGROUND_IMAGES_DIRECTORY} = require('../data')
+const utilities = require('../utilities')
 
 module.exports = class BackgroundImage {
   constructor (directoryName, fileName) {
@@ -15,14 +16,14 @@ module.exports = class BackgroundImage {
 
   get absolutePath () {
     return path.join(
-      util.BACKGROUND_IMAGES_DIRECTORY,
+      BACKGROUND_IMAGES_DIRECTORY,
       this.directoryName,
       this.fileName
     )
   }
 
   get uri () {
-    return util.getFileUri(this.absolutePath)
+    return utilities.getFileUri(this.absolutePath)
   }
 
   load () {

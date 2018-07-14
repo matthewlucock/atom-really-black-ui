@@ -9,23 +9,19 @@ const fse = require('fs-extra')
 const memoize = require('mem')
 const randomItem = require('random-item')
 
-const BackgroundImage = require('./image')
 const AnimatingBackgroundImage = require('./animatingImage')
+const BackgroundImage = require('./image')
+const {BACKGROUND_IMAGES_DIRECTORY} = require('../data')
 const config = require('../config')
-const util = require('../util')
+const utilities = require('../utilities')
 
 const SELECTED_IMAGE_JSON_PATH = path.join(
-  util.BACKGROUND_IMAGES_DIRECTORY,
+  BACKGROUND_IMAGES_DIRECTORY,
   'selected.json'
 )
 
-const SELECT_NEW_IMAGES_FROM = {
-  default: 'Default images',
-  custom: 'Custom images'
-}
-
 const getBackgroundImageCss = image => {
-  return `body {background-image: ${util.getCssUrl(image.uri)}}`
+  return `body {background-image: ${utilities.getCssUrl(image.uri)}}`
 }
 
 module.exports = class BackgroundImageManager {
@@ -37,10 +33,7 @@ module.exports = class BackgroundImageManager {
   }
 
   async getDirectory (directoryName) {
-    const directoryPath = path.join(
-      util.BACKGROUND_IMAGES_DIRECTORY,
-      directoryName
-    )
+    const directoryPath = path.join(BACKGROUND_IMAGES_DIRECTORY, directoryName)
     await fse.ensureDir(directoryPath)
     const fileNames = await fse.readdir(directoryPath)
 
@@ -49,27 +42,19 @@ module.exports = class BackgroundImageManager {
     })
   }
 
-  async getAllImages () {
-    const [defaultImages, customImages] = await Promise.all([
-      this.getDirectory('default'),
-      this.getDirectory('custom')
-    ])
-
-    return [...defaultImages, ...customImages]
+  async optionallyGetCustomImages () {
+    const customImages = await this.getDirectory('custom')
+    if (customImages.length) return customImages
+    return this.getDirectory('default')
   }
 
-  async getWrittenSelectedImage () {
-    await fse.ensureFile(SELECTED_IMAGE_JSON_PATH)
-    const selectedImageData = await fse.readJson(
-      SELECTED_IMAGE_JSON_PATH,
-      {throws: false}
-    )
+  async selectRandomImage ({images, currentImage}) {
+    images = images.filter(image => image !== currentImage)
 
-    if (!selectedImageData) return
-    const {directoryName, fileName} = selectedImageData
-
-    const images = await this.getDirectory(directoryName)
-    return images.find(image => image.fileName === fileName)
+    await this.select({
+      image: images.length ? randomItem(images) : currentImage,
+      write: true
+    })
   }
 
   async select ({image, write}) {
@@ -86,42 +71,10 @@ module.exports = class BackgroundImageManager {
     if (write) await fse.writeJson(SELECTED_IMAGE_JSON_PATH, image)
   }
 
-  async getImagesToSelectNewImageFrom () {
-    const selectNewImagesFrom = config.get(
-      'imageBackgrounds.selectNewImagesFrom'
-    )
-
-    if (selectNewImagesFrom === SELECT_NEW_IMAGES_FROM.default) {
-      return this.getDirectory('default')
-    }
-
-    if (selectNewImagesFrom === SELECT_NEW_IMAGES_FROM.custom) {
-      const customImages = await this.getDirectory('custom')
-      if (customImages.length) return customImages
-    }
-
-    return this.getAllImages()
-  }
-
-  async selectRandomNewImage (currentImage) {
-    const imagesToSelectFrom = (await this.getImagesToSelectNewImageFrom())
-      .filter(image => image !== currentImage)
-
-    let image
-
-    if (imagesToSelectFrom.length) {
-      image = randomItem(imagesToSelectFrom)
-    } else {
-      image = currentImage
-    }
-
-    await this.select({image, write: true})
-  }
-
   async addCustomImage (sourcePath) {
     const fileName = Math.random() + path.extname(sourcePath)
     const destinationPath = path.join(
-      util.BACKGROUND_IMAGES_DIRECTORY,
+      BACKGROUND_IMAGES_DIRECTORY,
       'custom',
       fileName
     )
@@ -148,7 +101,43 @@ module.exports = class BackgroundImageManager {
     image.deleted = true
     this.emitter.emit('deleteCustomImage', image)
 
-    if (image === this.selectedImage) this.selectRandomNewImage()
+    if (image === this.selectedImage) {
+      this.selectRandomImage({images: await this.optionallyGetCustomImages()})
+    }
+  }
+
+  async getWrittenSelectedImage () {
+    await fse.ensureFile(SELECTED_IMAGE_JSON_PATH)
+    const selectedImageData = await fse.readJson(
+      SELECTED_IMAGE_JSON_PATH,
+      {throws: false}
+    )
+
+    if (!selectedImageData) return
+    const {directoryName, fileName} = selectedImageData
+
+    const images = await this.getDirectory(directoryName)
+    return images.find(image => image.fileName === fileName)
+  }
+
+  async getImagesToSelectNewImageFrom () {
+    const selectNewImagesFrom = config.get(
+      'imageBackgrounds.selectNewImagesFrom'
+    )
+
+    if (selectNewImagesFrom === 'Default images') {
+      return this.getDirectory('default')
+    }
+
+    if (selectNewImagesFrom === 'Custom images') {
+      return this.optionallyGetCustomImages()
+    }
+
+    const [defaultImages, customImages] = await Promise.all([
+      this.getDirectory('default'),
+      this.getDirectory('custom')
+    ])
+    return [...defaultImages, ...customImages]
   }
 
   async handleImageSelectionOnActivation () {
@@ -160,7 +149,10 @@ module.exports = class BackgroundImageManager {
     if (!selectNewImageOnActivation && writtenSelectedImage) {
       await this.select({image: writtenSelectedImage})
     } else {
-      await this.selectRandomNewImage(writtenSelectedImage)
+      await this.selectRandomImage({
+        images: await this.getImagesToSelectNewImageFrom(),
+        currentImage: writtenSelectedImage
+      })
     }
   }
 

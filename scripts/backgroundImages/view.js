@@ -5,48 +5,18 @@ const {Disposable, CompositeDisposable} = require('atom')
 const {createElement} = require('docrel')
 
 const BackgroundImageThumbnail = require('./thumbnail')
-const util = require('../util')
+const {
+  BACKGROUND_IMAGES_VIEW_CLASS,
+  BACKGROUND_IMAGES_VIEW_URI
+} = require('../data')
 
-const VIEW_TITLE = 'Background images'
-
-const DEFAULT_LIST_CLASS = `${util.BACKGROUND_IMAGES_VIEW_CLASS}-default-list`
-const CUSTOM_CONTAINER_CLASS = `${util.BACKGROUND_IMAGES_VIEW_CLASS}-custom`
-const CUSTOM_LIST_CLASS = `${CUSTOM_CONTAINER_CLASS}-list`
-const ADD_IMAGE_MESSAGE_CLASS = `${CUSTOM_CONTAINER_CLASS}-add-image-message`
-const BROWSE_BUTTON_CLASS = `${CUSTOM_CONTAINER_CLASS}-browse-button`
-
-const LOADING_CLASS = `${util.BACKGROUND_IMAGES_VIEW_CLASS}-loading`
-const LOADING_SPINNER_CLASS = (
-  `${util.BACKGROUND_IMAGES_VIEW_CLASS}-loading-spinner`
-)
-
+const CUSTOM_CONTAINER_CLASS = `${BACKGROUND_IMAGES_VIEW_CLASS}-custom`
+const LOADING_CLASS = `${BACKGROUND_IMAGES_VIEW_CLASS}-loading`
 const DROP_ZONE_CLASS = `${CUSTOM_CONTAINER_CLASS}-drop-zone`
 const DROP_ZONE_ACTIVE_CLASS = `${DROP_ZONE_CLASS}-active`
 
-const LOADING_SPINNER_SIZE = 100
-
 const SUPPORTED_FILE_TYPES = ['image/jpeg', 'image/png']
 const MAXIMUM_FILE_SIZE = 20 * 1000 * 1000
-
-const makeLoadingSpinner = () => {
-  const canvas = createElement('canvas', {
-    class: LOADING_SPINNER_CLASS,
-    attrs: {height: LOADING_SPINNER_SIZE, width: LOADING_SPINNER_SIZE}
-  })
-  const canvasContext = canvas.getContext('2d')
-
-  const center = LOADING_SPINNER_SIZE / 2
-  const width = LOADING_SPINNER_SIZE / 10
-  const radius = center - width
-
-  canvasContext.beginPath()
-  canvasContext.arc(center, center, radius, 0, Math.PI)
-  canvasContext.lineWidth = width
-  canvasContext.strokeStyle = 'red'
-  canvasContext.stroke()
-
-  return canvas
-}
 
 module.exports = class BackgroundImagesView {
   constructor (manager) {
@@ -64,21 +34,17 @@ module.exports = class BackgroundImagesView {
     })
     this.disposables = new CompositeDisposable()
 
-    this.defaultList = createElement(
-      'div',
-      {classList: [DEFAULT_LIST_CLASS, LOADING_CLASS]},
-      [makeLoadingSpinner()]
-    )
-    this.customList = createElement(
-      'div',
-      {class: CUSTOM_LIST_CLASS},
-      [makeLoadingSpinner()]
-    )
+    this.defaultList = createElement('div', {
+      classList: [`${BACKGROUND_IMAGES_VIEW_CLASS}-default-list`, LOADING_CLASS]
+    })
+    this.customList = createElement('div', {
+      class: `${CUSTOM_CONTAINER_CLASS}-list`
+    })
 
     const browseButton = createElement(
       'button',
       {
-        classList: ['btn', BROWSE_BUTTON_CLASS],
+        classList: ['btn', `${CUSTOM_CONTAINER_CLASS}-browse-button`],
         events: {click: () => this.fileInput.click()}
       },
       [
@@ -89,7 +55,7 @@ module.exports = class BackgroundImagesView {
 
     const addImageMessage = createElement(
       'div',
-      {class: ADD_IMAGE_MESSAGE_CLASS},
+      {class: `${CUSTOM_CONTAINER_CLASS}-add-image-message`},
       [
         document.createTextNode('Drag images here or'),
         browseButton,
@@ -107,7 +73,7 @@ module.exports = class BackgroundImagesView {
 
     this.element = createElement(
       'div',
-      {class: util.BACKGROUND_IMAGES_VIEW_CLASS},
+      {class: BACKGROUND_IMAGES_VIEW_CLASS},
       [
         createElement('h2', {textContent: 'Default images'}),
         this.defaultList,
@@ -120,20 +86,23 @@ module.exports = class BackgroundImagesView {
   }
 
   getURI () {
-    return util.BACKGROUND_IMAGES_VIEW_URI
+    return BACKGROUND_IMAGES_VIEW_URI
   }
 
   getTitle () {
-    return VIEW_TITLE
+    return 'Background images'
+  }
+
+  getIconName () {
+    return 'file-media'
   }
 
   makeThumbnail ({image, deletable}) {
     const thumbnail = new BackgroundImageThumbnail({image, deletable})
 
-    thumbnail.emitter.on(
-      'select',
-      () => this.manager.select({image, write: true})
-    )
+    thumbnail.emitter.on('select', () => {
+      this.manager.select({image, write: true})
+    })
     thumbnail.emitter.on('delete', () => this.manager.deleteCustomImage(image))
 
     return thumbnail
@@ -215,13 +184,11 @@ module.exports = class BackgroundImagesView {
 
     for (const [event, listener] of Object.entries(listeners)) {
       this.manager.emitter.on(event, listener)
-    }
 
-    return new Disposable(() => {
-      for (const [event, listener] of Object.entries(listeners)) {
+      this.disposables.add(new Disposable(() => {
         this.manager.emitter.off(event, listener)
-      }
-    })
+      }))
+    }
   }
 
   bindDragListeners () {
@@ -259,7 +226,7 @@ module.exports = class BackgroundImagesView {
       this.getThumbnailFromImage(this.manager.selectedImage).select()
     }
 
-    this.disposables.add(this.bindManagerListeners())
+    this.bindManagerListeners()
     this.bindDragListeners()
   }
 }
