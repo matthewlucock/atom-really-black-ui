@@ -2,8 +2,6 @@
 
 const Color = require('color')
 
-const data = require('./data')
-
 const BLACK = new Color('black')
 const WHITE = new Color('white')
 
