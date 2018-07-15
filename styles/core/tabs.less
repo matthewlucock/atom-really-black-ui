@@ -9,11 +9,25 @@
   }
 
   &.modified {
-    &:not(:hover) .close-icon {
-      top: 50%;
-      margin-top: -4px;
-      border: none;
-      background: @text-color;
+    &:not(:hover) {
+      .close-icon {
+        top: 50%;
+        margin-top: -4px;
+        border: none;
+        background: @text-color;
+      }
+
+      &.active .close-icon {
+        background: pure-customizable-variable(
+          solid-color-background-accented-text-color
+        );
+
+        .pure-background-image & {
+          background: pure-customizable-variable(
+            image-background-accented-text-color
+          );
+        }
+      }
     }
 
     &:hover .close-icon {

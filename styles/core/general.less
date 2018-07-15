@@ -1,5 +1,12 @@
 ::-webkit-scrollbar {
   width: 15px;
+  background: pure-customizable-variable(solid-color-background-accent-color);
+
+  .pure-background-image & {
+    background: pure-customizable-variable(
+      image-background-accent-color-translucent
+    );
+  }
 }
 
 ::-webkit-scrollbar-corner {
@@ -72,4 +79,71 @@ pre {
 
 atom-workspace {
   z-index: 2;
+  background: pure-customizable-variable(base-background-color);
+  color: pure-customizable-variable(text-color);
+
+  .pure-background-image & {
+    background: pure-customizable-variable(image-background-overlay);
+  }
+}
+
+body {
+  font-size: pure-customizable-variable(font-size);
+}
+
+.status-bar {
+  font-size: pure-customizable-variable(status-bar-font-size);
+}
+
+.status-added.selected {
+  & > .name, & > .header > .name {
+    color: pure-customizable-variable(git-text-color-added);
+  }
+}
+
+.status-modified.selected {
+  & > .name, & > .header > .name {
+    color: pure-customizable-variable(git-text-color-modified);
+  }
+}
+
+.status-ignored.selected {
+  & > .name, & > .header > .name {
+    color: pure-customizable-variable(git-text-color-ignored);
+  }
+}
+
+.tab-bar .tab.active,
+.panel-heading,
+.badge,
+.badge.badge-info,
+.highlight,
+.highlight-info,
+.list-group li.selected,
+.settings-view .config-menu .nav > li.active > a,
+.styleguide-sections > section.collapsed > .section-heading:hover,
+.settings-view select.form-control,
+.atom-dock-toggle-button .atom-dock-toggle-button-inner,
+thead {
+  background: pure-customizable-variable(solid-color-background-accent-color);
+  color: pure-customizable-variable(solid-color-background-accented-text-color);
+
+  .pure-background-image & {
+    background: pure-customizable-variable(
+      image-background-accent-color-translucent
+    );
+    color: pure-customizable-variable(image-background-accented-text-color);
+  }
+}
+
+.nav > li > a {
+  &:hover, &:focus {
+    background: pure-customizable-variable(solid-color-background-accent-color) !important;
+    color: pure-customizable-variable(solid-color-background-accented-text-color) !important;
+
+    .pure-background-image & {
+      background: pure-customizable-variable(image-background-accent-color-translucent) !important;
+      color: pure-customizable-variable(image-background-accented-text-color) !important;
+    }
+  }
 }

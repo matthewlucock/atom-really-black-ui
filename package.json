@@ -11,7 +11,7 @@
   },
   "main": "scripts/index",
   "scripts": {
-    "lint": "standard \"build/**/*.js\" | snazzy && standard \"scripts/**/*.js\" --global atom | snazzy",
+    "lint": "standard \"scripts/**/*.js\" --global atom | snazzy && standard \"styles/**/*.js\" --global functions --global tree | snazzy",
     "build": "npm run lint && node less.js"
   },
   "configSchema": {
@@ -112,7 +112,6 @@
     "random-item": "^1.0.0"
   },
   "devDependencies": {
-    "less": "^3.0.4",
     "snazzy": "^7.1.1",
     "standard": "^10.0.3"
   }

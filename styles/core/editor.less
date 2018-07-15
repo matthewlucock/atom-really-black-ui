@@ -1,4 +1,4 @@
-body:not(.pure-dont-style-the-editor) .item-views > .editor {
+.item-views > .editor {
   background: none !important;
 
   .gutter {
@@ -8,6 +8,24 @@ body:not(.pure-dont-style-the-editor) .item-views > .editor {
     .line-number {
       &, .icon-right {
         opacity: 1 !important;
+      }
+
+      &.cursor-line {
+        background: pure-customizable-variable(
+          solid-color-background-accent-color
+        ) !important;
+        color: pure-customizable-variable(
+          solid-color-background-accented-text-color
+        ) !important;
+
+        .pure-background-image & {
+          background: pure-customizable-variable(
+            image-background-accent-color-translucent
+          ) !important;
+          color: pure-customizable-variable(
+            image-background-accented-text-color
+          ) !important;
+        }
       }
     }
   }

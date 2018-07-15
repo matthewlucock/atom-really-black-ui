@@ -3,7 +3,7 @@
 const Color = require('color')
 
 const data = require('../data')
-const styles = require('../styles')
+const styleVariables = require('../styleVariables')
 
 const OBSERVER_TIMEOUT_DURATION = 500
 const observerTimeouts = new Map()
@@ -24,8 +24,8 @@ const wrapObserverCallback = ({callback, updateStyles}) => {
     callback(value)
 
     if (data.themeIsActive && updateStyles !== false) {
-      styles.inject()
-      styles.writeVariables()
+      styleVariables.inject()
+      styleVariables.write()
     }
   }
 }

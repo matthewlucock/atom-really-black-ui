@@ -35,6 +35,16 @@ input[type="color"] {
 .input-checkbox, .settings-view input[type="checkbox"] {
   margin-top: 0;
 
+  &, &:checked:active {
+    background: pure-customizable-variable(solid-color-background-accent-color);
+
+    .pure-background-image & {
+      background: pure-customizable-variable(
+        image-background-accent-color-opaque
+      );
+    }
+  }
+
   &:focus, &:checked {
     box-shadow: none;
   }
@@ -56,5 +66,19 @@ atom-text-editor[mini] {
 
   .settings-view .section & {
     opacity: 1
+  }
+}
+
+.input-radio,
+.input-toggle,
+.input-range,
+.input-select,
+atom-text-editor[mini].editor .selection .region {
+  background: pure-customizable-variable(solid-color-background-accent-color);
+
+  .pure-background-image & {
+    background: pure-customizable-variable(
+      image-background-accent-color-translucent
+    );
   }
 }

@@ -19,4 +19,16 @@
     // Make horizontal rules solid instead of dashed.
     border-style: solid;
   }
+
+  blockquote, hr {
+    border-color: pure-customizable-variable(
+      solid-color-background-accent-color
+    );
+
+    .pure-background-image & {
+      border-color: pure-customizable-variable(
+        image-background-accent-color-translucent
+      );
+    }
+  }
 }

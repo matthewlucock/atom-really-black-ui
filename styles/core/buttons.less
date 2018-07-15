@@ -7,6 +7,31 @@
   height: auto;
   white-space: normal;
 
+  &, &.btn-primary, &.btn-info {
+    background: pure-customizable-variable(solid-color-background-accent-color);
+    color: pure-customizable-variable(
+      solid-color-background-accented-text-color
+    );
+
+    &:hover, &:focus, &.selected {
+      background: pure-customizable-variable(
+        solid-color-background-accent-color
+      );
+      color: pure-customizable-variable(
+        solid-color-background-accented-text-color
+      );
+    }
+
+    &:active {
+      background: pure-customizable-variable(
+        solid-color-background-accent-color
+      );
+      color: pure-customizable-variable(
+        solid-color-background-accented-text-color
+      );
+    }
+  }
+
   // Remove focus outlines.
   &:focus,
   &.focus,

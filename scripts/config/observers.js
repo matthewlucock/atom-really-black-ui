@@ -4,7 +4,7 @@ const {CompositeDisposable} = require('atom')
 
 const backgroundImages = require('../backgroundImages')
 const config = require('.')
-const styles = require('../styles')
+const styleVariables = require('../styleVariables')
 const utilities = require('../utilities')
 
 const setAccent = (color, alphaChannel) => {
@@ -12,7 +12,7 @@ const setAccent = (color, alphaChannel) => {
   const textColor = utilities.getContrastingTextColor(blendedColor)
   const translucentColor = color.alpha(alphaChannel)
 
-  Object.assign(styles.variables, {
+  Object.assign(styleVariables.values, {
     'image-background-accent-color-opaque': blendedColor,
     'image-background-accent-color-translucent': translucentColor,
     'image-background-accented-text-color': textColor
@@ -37,20 +37,20 @@ const observers = {
   'general.mainFontSize': {
     delayed: true,
     callback (fontSize) {
-      styles.variables['font-size'] = fontSize
+      styleVariables.values['font-size'] = fontSize
     }
   },
   'general.statusBarFontSize': {
     delayed: true,
     callback (fontSize) {
-      styles.variables['status-bar-font-size'] = fontSize
+      styleVariables.values['status-bar-font-size'] = fontSize
     }
   },
   'imageBackgrounds.overlayAlphaChannel': {
     delayed: true,
     callback (overlayAlphaChannel) {
       const overlayColor = utilities.BLACK.alpha(overlayAlphaChannel)
-      styles.variables['image-background-overlay'] = overlayColor
+      styleVariables.values['image-background-overlay'] = overlayColor
     }
   },
   'imageBackgrounds.accentColor': {
@@ -70,7 +70,7 @@ const observers = {
     callback (backgroundColor) {
       const textColor = utilities.getContrastingTextColor(backgroundColor)
 
-      Object.assign(styles.variables, {
+      Object.assign(styleVariables.values, {
         'base-background-color': backgroundColor,
         'text-color': textColor
       })
@@ -80,7 +80,7 @@ const observers = {
     callback (accentColor) {
       const textColor = utilities.getContrastingTextColor(accentColor)
 
-      Object.assign(styles.variables, {
+      Object.assign(styleVariables.values, {
         'solid-color-background-accent-color': accentColor,
         'solid-color-background-accented-text-color': textColor
       })

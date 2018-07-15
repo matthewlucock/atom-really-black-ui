@@ -6,6 +6,18 @@
     // Ensure tooltips don't wrap.
     max-width: none;
     white-space: nowrap;
+
+    background: pure-customizable-variable(solid-color-background-accent-color);
+    color: pure-customizable-variable(
+      solid-color-background-accented-text-color
+    );
+
+    .pure-background-image & {
+      background: pure-customizable-variable(
+        image-background-accent-color-opaque
+      );
+      color: pure-customizable-variable(image-background-accented-text-color);
+    }
   }
 
   &.in {

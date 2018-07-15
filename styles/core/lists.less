@@ -30,8 +30,29 @@
 }
 
 .list-group, .list-tree {
-  .selected::before {
-    height: 28px;
+  .selected {
+    &::before {
+      height: 28px;
+      background: pure-customizable-variable(
+        solid-color-background-accent-color
+      );
+
+      .pure-background-image & {
+        background: pure-customizable-variable(
+          image-background-accent-color-translucent
+        );
+      }
+    }
+
+    & > .name {
+      color: pure-customizable-variable(
+        solid-color-background-accented-text-color
+      );
+
+      .pure-background-image & {
+        color: pure-customizable-variable(image-background-accented-text-color);
+      }
+    }
   }
 
   .icon::before {
