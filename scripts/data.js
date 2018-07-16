@@ -2,7 +2,7 @@
 
 const path = require('path')
 
-exports.THEME_PATH = atom.packages.resolvePackagePath('pure-ui')
+exports.THEME_PATH = path.resolve(atom.packages.resolvePackagePath('pure-ui'))
 
 exports.BACKGROUND_IMAGES_DIRECTORY = path.join(
   exports.THEME_PATH,
