@@ -3,7 +3,6 @@
 const Color = require('color')
 
 const data = require('../data')
-const styleVariables = require('../styleVariables')
 
 const OBSERVER_TIMEOUT_DURATION = 500
 const observerTimeouts = new Map()
@@ -19,19 +18,7 @@ const get = keySuffix => {
   return value
 }
 
-const wrapObserverCallback = ({callback, updateStyles}) => {
-  return value => {
-    callback(value)
-
-    if (data.themeIsActive && updateStyles !== false) {
-      styleVariables.inject()
-      styleVariables.write()
-    }
-  }
-}
-
-const makeObserver = ({callback, delayed, updateStyles}) => {
-  callback = wrapObserverCallback({callback, updateStyles})
+const makeObserver = ({callback, delayed}) => {
   const observerId = Math.random()
 
   return value => {

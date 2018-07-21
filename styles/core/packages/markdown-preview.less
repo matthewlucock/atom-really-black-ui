@@ -1,0 +1,27 @@
+.markdown-preview:not([data-use-github-style]) {
+  padding: 1em;
+  background: none;
+  color: inherit;
+
+  atom-text-editor {
+    .customizable-property(background, accent-color);
+    .general-transition(background);
+    border-radius: 0;
+  }
+
+  blockquote, hr {
+    .customizable-property(border-color, accent-color);
+    .general-transition(border-color);
+  }
+
+  blockquote {
+    color: inherit;
+    // Increase border width.
+    border-left-width: 5px;
+  }
+
+  hr {
+    // Make horizontal rules solid instead of dashed.
+    border-style: solid;
+  }
+}

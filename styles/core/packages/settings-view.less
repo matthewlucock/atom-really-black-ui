@@ -1,6 +1,6 @@
 .settings-view {
   .section {
-    padding: @settings-padding !important;
+    padding: 1.5em !important;
     // Remove borders between sections.
     border: none !important;
   }
@@ -10,13 +10,24 @@
     padding: 0;
     border: none;
     background: none;
+
+    .nav > li {
+      & > a {
+        .interactive-transition(background, color;);
+      }
+
+      &.active > a {
+        .customizable-property(background, accent-color);
+        .customizable-property(color, accent-text-color);
+      }
+    }
   }
 
   // Settings headings.
   .section-heading, .sub-section-heading {
     &.icon::before {
       // Increase spacing between icons and heading text.
-      margin-right: @component-padding;
+      margin-right: .5em;
     }
   }
 
@@ -26,7 +37,7 @@
     // atom-text-editor[mini]s have their own margins by default, except for
     // when they are a settings field. Giving the label a margin achieves the
     // same effect in these cases.
-    margin-bottom: @component-padding;
+    margin-bottom: .5em;
   }
 
   .package-card {
@@ -34,8 +45,12 @@
     border-radius: 0;
   }
 
-  .installed-packages .package-card:hover {
-    background: @miscellaneous-background-color;
+  .installed-packages .package-card {
+    .interactive-transition(background);
+
+    &:hover {
+      .customizable-property(background, accent-color);
+    }
   }
 
   // The view of the package card and other details on the package's and theme's
@@ -54,13 +69,13 @@
 
   // Info alerts are used for loading packages, themes, and updates.
   .alert-info {
-    background: @miscellaneous-background-color;
+    background: none;
     color: inherit;
   }
 
   // Breadcrumbs are used at the top of package and theme settings pages.
   .breadcrumb {
-    padding: @settings-padding @settings-padding 0;
+    padding: 1.5em 1.5em 0;
   }
 
   // Reduce the font weight of subheadings and the UI theme and syntax theme
@@ -79,6 +94,9 @@
 
   // Styles for select inputs.
   select.form-control {
+    .customizable-property(background, accent-color);
+    .customizable-property(color, accent-text-color);
+    .interactive-transition(background, color;);
     border: none;
     border-radius: 0;
     box-shadow: none;

@@ -23,7 +23,8 @@ input[type="color"] {
 }
 
 .input-text, .input-textarea, .input-search {
-  background: @miscellaneous-background-color;
+  .customizable-property(background, accent-color);
+  .general-transition(background);
 }
 
 .input-radio {
@@ -36,13 +37,8 @@ input[type="color"] {
   margin-top: 0;
 
   &, &:checked:active {
-    background: pure-customizable-variable(solid-color-background-accent-color);
-
-    .pure-background-image & {
-      background: pure-customizable-variable(
-        image-background-accent-color-opaque
-      );
-    }
+    .customizable-property(background, accent-color);
+    .general-transition(background);
   }
 
   &:focus, &:checked {
@@ -59,13 +55,18 @@ input[type="color"] {
 }
 
 atom-text-editor[mini] {
+  .customizable-property(background, accent-color);
+  .general-transition(background);
   padding-left: .5em;
-  background-color: @miscellaneous-background-color;
   color: inherit;
   font-family: inherit;
 
   .settings-view .section & {
     opacity: 1
+  }
+
+  div:not(.region) {
+    background: none !important;
   }
 }
 
@@ -74,11 +75,6 @@ atom-text-editor[mini] {
 .input-range,
 .input-select,
 atom-text-editor[mini].editor .selection .region {
-  background: pure-customizable-variable(solid-color-background-accent-color);
-
-  .pure-background-image & {
-    background: pure-customizable-variable(
-      image-background-accent-color-translucent
-    );
-  }
+  .customizable-property(background, active-accent-color);
+  .general-transition(background);
 }

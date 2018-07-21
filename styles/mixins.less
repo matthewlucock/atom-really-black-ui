@@ -1,0 +1,14 @@
+.customizable-property(@property, @variable) {
+  @variable-name: 'pure-@{variable}';
+  @{property}: var(e('--@{variable-name}'), @@variable-name);
+}
+
+.general-transition(@properties) {
+  transition: @properties;
+  transition-duration: @pure-general-transition-duration;
+}
+
+.interactive-transition(@properties) {
+  transition: @properties;
+  transition-duration: @pure-interactive-transition-duration;
+}

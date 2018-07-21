@@ -1,78 +1,77 @@
-@import "customizable-variables";
+@import "variables";
 
-@app-background-color: @base-background-color;
+@text-color: @pure-workspace-text-color;
+@text-color-subtle: @pure-workspace-subtle-text-color;
+@text-color-highlight: @pure-accent-text-color;
+@text-color-selected: @pure-accent-text-color;
 
-// Custom variable
-@miscellaneous-background-color: lighten(@base-background-color, 15%);
+@text-color-info: @pure-info-color;
+@text-color-success: @pure-success-color;
+@text-color-warning: @pure-warning-color;
+@text-color-error: @pure-error-color;
 
-@text-color-subtle: darken(@text-color, 30%);
-@text-color-highlight: @text-color;
-@text-color-selected: @text-color;
-@text-color-info: #6494ed;
-@text-color-success: #73c990;
-@text-color-warning: #e2c08d;
-@text-color-error: #ff6347;
+@background-color-info: @pure-info-color;
+@background-color-success: @pure-success-color;
+@background-color-warning: @pure-warning-color;
+@background-color-error: @pure-error-color;
+@background-color-highlight: @pure-accent-color;
+@background-color-selected: @pure-accent-color;
 
-@git-text-color-added: @text-color-success;
-@git-text-color-modified: @text-color-warning;
-@git-text-color-removed: @text-color-error;
-@git-text-color-renamed: @text-color-info;
-@git-text-color-ignored: @text-color-subtle;
+@app-background-color: @pure-app-background-color;
 
-@background-color-highlight: @solid-color-background-accent-color;
-@background-color-selected: @solid-color-background-accent-color;
-@background-color-info: #0088ff;
-@background-color-success: #1c9c71;
-@background-color-warning: #cc8533;
-@background-color-error: #d92626;
+@base-background-color: transparent;
+@base-border-color: transparent;
 
-@button-background-color: @solid-color-background-accent-color;
-@button-background-color-hover: lighten(@button-background-color, 5%);
-@button-background-color-selected: @button-background-color-hover;
-
-@tab-height: 2.5em;
-@tab-background-color: @tab-bar-background-color;
-@tab-background-color-active: @solid-color-background-accent-color;
-
-@font-family: '.SFNSText-Regular', 'SF UI Text', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
-@input-font-size: 14px;
-
-@component-padding: .5em;
-@component-icon-padding: 5px;
-@component-icon-size: 16px;
-@component-line-height: 25px;
-@disclosure-arrow-size: 12px;
-
-@ui-site-color-1: #0088ff;
-@ui-site-color-2: #20b684;
-@ui-site-color-3: #cc8533;
-@ui-site-color-4: #d831b0;
-@ui-site-color-5: #ebdd5b;
-
-@base-border-color: red;
-@tree-view-border-color: @base-border-color;
-@tool-panel-border-color: @base-border-color;
+@pane-item-background-color: @base-background-color;
 @pane-item-border-color: @base-border-color;
+
+@input-background-color: @pure-accent-color;
 @input-border-color: @base-border-color;
+
+@tool-panel-background-color: @base-background-color;
+@tool-panel-border-color: @base-border-color;
+
+@inset-panel-background-color: @base-background-color;
 @inset-panel-border-color: @base-border-color;
+
+@panel-heading-background-color: @pure-accent-color;
 @panel-heading-border-color: @base-border-color;
+
+@overlay-background-color: @app-background-color;
 @overlay-border-color: @base-border-color;
-@tab-bar-border-color: @base-border-color;
+
+@button-background-color: @pure-accent-color;
+@button-background-color-hover: @pure-active-accent-color;
+@button-background-color-selected: @pure-active-accent-color;
 @button-border-color: @base-border-color;
+
+@tab-bar-background-color: @base-background-color;
+@tab-bar-border-color: @base-border-color;
+@tab-background-color: @base-background-color;
+@tab-background-color-active: @pure-accent-color;
 @tab-border-color: @base-border-color;
 
-@pane-item-background-color: transparent;
-@input-background-color: @base-background-color;
-@tool-panel-background-color: transparent;
-@inset-panel-background-color: transparent;
-@panel-heading-background-color: @miscellaneous-background-color;
-@overlay-background-color: @base-background-color;
-@tab-bar-background-color: @base-background-color;
-@tree-view-background-color: transparent;
+@tree-view-background-color: @base-background-color;
+@tree-view-border-color: @base-border-color;
 
-// Custom variables
-@tab-maximum-width: 12.5em;
-@tab-top-and-bottom-padding: .5em;
-@tab-left-and-right-padding: 25px;
+@ui-site-color-1: @pure-success-color;
+@ui-site-color-2: @pure-info-color;
+@ui-site-color-3: @pure-warning-color;
+@ui-site-color-4: #db2ff4;
+@ui-site-color-5: #f5e11d;
 
-@settings-padding: @component-padding * 3;
+@font-size: @pure-base-font-size;
+@input-font-size: @font-size;
+
+@disclosure-arrow-size: .8em;
+
+@component-padding: .5em;
+@component-icon-padding: .3em;
+@component-icon-size: 16px;
+@component-line-height: 1.5em;
+@component-border-radius: 0;
+
+@tab-height: 2.5em;
+
+@font-family: @pure-font-family;
+@use-custom-controls: true;

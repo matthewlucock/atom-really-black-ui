@@ -16,14 +16,25 @@ const getContrastingTextColor = backgroundColor => {
   return backgroundColor.isDark() ? WHITE : BLACK
 }
 
+const modifyColorLightness = (color, amount) => {
+  return color.lightness(color.lightness() + amount)
+}
+
+const modifyColorAlpha = (color, amount) => {
+  return color.alpha(color.alpha() + amount)
+}
+
 const registerCommand = (commandName, callback) => {
   return atom.commands.add('atom-workspace', `pure:${commandName}`, callback)
 }
 
 module.exports = {
   BLACK,
+  WHITE,
   getFileUri,
   getCssUrl,
   getContrastingTextColor,
+  modifyColorLightness,
+  modifyColorAlpha,
   registerCommand
 }

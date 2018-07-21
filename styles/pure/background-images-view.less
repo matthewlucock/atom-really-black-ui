@@ -8,17 +8,9 @@
 .pure-background-images-view-custom-list {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   align-items: center;
-  padding: 2em;
-  list-style: none;
-}
-
-.pure-background-images-view-loading {
-  .pure-background-images-view-thumbnail,
-  .pure-background-images-view-custom-add-image-message {
-    display: none;
-  }
+  flex-wrap: wrap;
+  margin: 2em 0;
 }
 
 .pure-background-images-view-custom {
@@ -26,17 +18,20 @@
 }
 
 .pure-background-images-view-thumbnail {
+  .interactive-transition(background);
   position: relative;
-  padding: 1em;
-  cursor: pointer;
+  padding: @pure-background-images-view-thumbnail-padding;
 
-  &:not(.pure-background-images-view-thumbnail-selected):hover {
-    background: red;
+  &:not(.pure-background-images-view-thumbnail-selected) {
+    cursor: pointer;
+
+    &:hover {
+      .customizable-property(background, accent-color);
+    }
   }
 
   &.pure-background-images-view-thumbnail-selected {
-    background: @miscellaneous-background-color;
-    cursor: initial;
+    .customizable-property(background, active-accent-color);
   }
 
   &.pure-background-images-view-thumbnail-loading {
@@ -45,25 +40,20 @@
 }
 
 .pure-background-images-view-thumbnail-delete-button {
+  .interactive-transition(visibility, opacity;);
   position: absolute;
-  right: 1em;
+  right: @pure-background-images-view-thumbnail-padding;
   visibility: hidden;
   opacity: 0;
-  transition-property: visibility, opacity;
-  transition-duration: .5s;
-
-  .icon::before {
-    margin: 0;
-  }
 
   .pure-background-images-view-thumbnail:hover & {
     visibility: visible;
     opacity: 1;
   }
-}
 
-.pure-background-images-view-thumbnail-loading {
-  display: none;
+  .icon::before {
+    margin: 0;
+  }
 }
 
 .pure-background-images-view-thumbnail-image {
@@ -71,6 +61,8 @@
 }
 
 .pure-background-images-view-custom-drop-zone {
+  .customizable-property(background, accent-color);
+  .interactive-transition(visibility, opacity;);
   position: absolute;
   top: 0;
   bottom: 0;
@@ -78,9 +70,6 @@
   right: 0;
   visibility: hidden;
   opacity: 0;
-  background: rgba(255,255,255,0.3);
-  transition-property: visibility, opacity;
-  transition-duration: .5s;
 
   &.pure-background-images-view-custom-drop-zone-active {
     visibility: visible;
@@ -92,22 +81,13 @@
   margin: 0 .5em;
 }
 
-@keyframes pure-full-rotation {
-  0% {
-    transform: rotate(0);
-  }
-
-  100% {
-    transform: rotate(360deg);
+.pure-background-images-view-loading {
+  .pure-background-images-view-thumbnail,
+  .pure-background-images-view-custom-add-image-message {
+    display: none;
   }
 }
 
-.pure-background-images-view-loading-spinner {
+.pure-background-images-view-thumbnail-loading {
   display: none;
-  margin: 2em auto;
-  animation: pure-full-rotation linear 1s infinite;
-
-  .pure-background-images-view-loading & {
-    display: block;
-  }
 }

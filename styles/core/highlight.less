@@ -1,18 +1,8 @@
 .highlight, .highlight-info {
+  .customizable-property(background, accent-color);
+  .customizable-property(color, accent-text-color);
+  .general-transition(background, color;);
   padding: 1px 4px;
   font-weight: normal;
   border-radius: 0;
 }
-
-.highlight-mixin(@type) {
-  @background-variable-name: "background-color-@{type}";
-
-  .highlight-@{type} {
-    .highlight;
-    background: @@background-variable-name;
-  }
-}
-
-.highlight-mixin(success);
-.highlight-mixin(warning);
-.highlight-mixin(error);

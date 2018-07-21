@@ -1,23 +1,14 @@
 .tooltip {
   .tooltip-inner {
-    padding: @component-padding / 2 @component-padding;
+    .customizable-property(background, opaque-accent-color);
+    .customizable-property(color, accent-text-color);
+    .general-transition(background, color;);
+    padding: .25em .5em;
     border-radius: 0;
 
     // Ensure tooltips don't wrap.
     max-width: none;
     white-space: nowrap;
-
-    background: pure-customizable-variable(solid-color-background-accent-color);
-    color: pure-customizable-variable(
-      solid-color-background-accented-text-color
-    );
-
-    .pure-background-image & {
-      background: pure-customizable-variable(
-        image-background-accent-color-opaque
-      );
-      color: pure-customizable-variable(image-background-accented-text-color);
-    }
   }
 
   &.in {
@@ -32,7 +23,8 @@
   }
 
   .keystroke {
-    padding: .1em .4em;
-    background: @miscellaneous-background-color;
+    .customizable-property(background, accent-color);
+    .general-transition(background);
+    padding: .25em .5em;
   }
 }

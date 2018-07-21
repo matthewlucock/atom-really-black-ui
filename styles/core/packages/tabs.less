@@ -1,0 +1,48 @@
+.tab-bar .tab {
+  .interactive-transition(background, color;);
+  max-width: @pure-maximum-tab-width;
+  padding: .5em 1.5em;
+  font-size: inherit;
+  text-align: center;
+
+  .close-icon {
+    top: .5em;
+  }
+
+  &.modified {
+    &:not(:hover) {
+      .close-icon {
+        .customizable-property(background, workspace-text-color);
+        .general-transition(background);
+        top: 50%;
+        margin-top: -4px;
+        border: none;
+      }
+
+      &.active .close-icon {
+        .customizable-property(color, accent-text-color);
+      }
+    }
+
+    &:hover .close-icon {
+      .customizable-property(color, workspace-text-color);
+      .general-transition(color);
+    }
+  }
+
+  &.active {
+    .customizable-property(background, accent-color);
+    .customizable-property(color, accent-text-color);
+
+    .title {
+      // Fix horizontal offsetting.
+      padding: 0;
+    }
+  }
+
+  &.is-dragging .close-icon {
+    // Hide the close icon when dragging the tab, just because it doesn't
+    // need to be there and it being there looks weird.
+    display: none;
+  }
+}

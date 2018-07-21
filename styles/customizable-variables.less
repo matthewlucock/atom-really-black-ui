@@ -1,10 +1,24 @@
-@font-size: 15px;
-@status-bar-font-size: .9em;
-@image-background-overlay: rgba(0, 0, 0, 0.85);
-@image-background-accent-color-opaque: rgb(26, 26, 26);
-@image-background-accent-color-translucent: rgba(255, 255, 255, 0.1);
-@image-background-accented-text-color: rgb(255, 255, 255);
-@base-background-color: rgb(0, 0, 0);
-@text-color: rgb(255, 255, 255);
-@solid-color-background-accent-color: rgb(77, 77, 77);
-@solid-color-background-accented-text-color: rgb(255, 255, 255);
+@pure-base-font-size: 15px;
+@pure-status-bar-font-size: .9em;
+@pure-font-family: system-ui;
+@pure-scrollbar-width: 10px;
+
+@pure-app-background-color: black;
+@pure-workspace-background-color: fade(black, 85);
+@pure-workspace-text-color: contrast(mix(black, white, 95));
+@pure-workspace-subtle-text-color: contrast(
+  @pure-workspace-text-color,
+  lighten(@pure-workspace-text-color, 30),
+  darken(@pure-workspace-text-color, 30)
+);
+
+@pure-accent-color: fade(white, 10);
+@pure-opaque-accent-color: mix(white, black, 20);
+@pure-accent-text-color: contrast(@pure-opaque-accent-color);
+@pure-accent-subtle-text-color: contrast(
+  @pure-accent-text-color,
+  lighten(@pure-accent-text-color, 30),
+  darken(@pure-accent-text-color, 30)
+);
+@pure-active-accent-color: fade(white, 30);
+@pure-active-accent-text-color: contrast(mix(white, black, 40));

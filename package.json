@@ -11,8 +11,7 @@
   },
   "main": "scripts/index",
   "scripts": {
-    "lint": "standard \"scripts/**/*.js\" --global atom | snazzy && standard \"styles/**/*.js\" --global functions --global tree | snazzy",
-    "build": "npm run lint && node less.js"
+    "lint": "standard \"scripts/**/*.js\" --global atom | snazzy"
   },
   "configSchema": {
     "general": {
@@ -37,6 +36,16 @@
           "type": "string",
           "title": "Status bar font size",
           "default": ".9em"
+        },
+        "fontFamily": {
+          "type": "string",
+          "title": "Font family",
+          "default": "system-ui"
+        },
+        "scrollbarWidth": {
+          "type": "string",
+          "title": "Scrollbar width",
+          "default": "10px"
         }
       }
     },
@@ -99,7 +108,7 @@
           "type": "color",
           "title": "Accent color",
           "order": 2,
-          "default": "rgb(77, 77, 77)"
+          "default": "rgb(51, 51, 51)"
         }
       }
     }

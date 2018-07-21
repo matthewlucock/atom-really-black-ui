@@ -1,14 +1,20 @@
 .list-group li {
-  padding-left: @component-padding;
+  .general-transition(background, color;);
+  padding-left: .5em;
 
-  &.selected:before {
-    display: none;
+  &.selected {
+    .customizable-property(background, accent-color);
+    .customizable-property(color, accent-text-color);
+
+    &:before {
+      display: none;
+    }
   }
 }
 
 .select-list {
   li {
-    padding: @component-padding / 2 @component-padding;
+    padding: .25em .5em;
   }
 
   .status {
@@ -17,14 +23,15 @@
 }
 
 .select-list.popover-list {
-  padding: @component-padding / 2;
-  background-color: @base-background-color;
+  .customizable-property(background, opaque-accent-color);
+  .general-transition(background);
+  padding: .25em;
 
   .list-group {
-    margin-top: @component-padding / 2;
+    margin-top: .25em;
 
     li {
-      padding-left: @component-padding / 2;
+      padding-left: .25em;
     }
   }
 }
@@ -32,26 +39,14 @@
 .list-group, .list-tree {
   .selected {
     &::before {
+      .customizable-property(background, accent-color);
+      .general-transition(background);
       height: 28px;
-      background: pure-customizable-variable(
-        solid-color-background-accent-color
-      );
-
-      .pure-background-image & {
-        background: pure-customizable-variable(
-          image-background-accent-color-translucent
-        );
-      }
     }
 
     & > .name {
-      color: pure-customizable-variable(
-        solid-color-background-accented-text-color
-      );
-
-      .pure-background-image & {
-        color: pure-customizable-variable(image-background-accented-text-color);
-      }
+      .customizable-property(color, accent-text-color);
+      .general-transition(color);
     }
   }
 
@@ -72,7 +67,8 @@
   :not(.status-added):not(.status-modified):not(.status-ignored) {
     &.file, &.directory > .header {
       & > .name {
-        color: @text-color;
+        .customizable-property(color, workspace-text-color);
+        .general-transition(color);
       }
     }
   }

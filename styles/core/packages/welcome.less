@@ -46,8 +46,10 @@
   text-align: center;
 
   .welcome-summary {
+    .interactive-transition(background);
+
     &:hover {
-      background: @miscellaneous-background-color;
+      .customizable-property(background, accent-color);
     }
 
     &:before {
