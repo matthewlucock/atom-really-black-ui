@@ -5,7 +5,7 @@
   "description": "",
   "keywords": [],
   "repository": "https://github.com/matthewlucock/pure-ui",
-  "license": "MIT",
+  "license": "ISC",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
