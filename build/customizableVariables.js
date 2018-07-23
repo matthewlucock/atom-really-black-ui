@@ -9,26 +9,26 @@ const FILE_PATH = 'styles/customizable-variables.less'
 
 const lessVariable = ([name, value]) => `@pure-${name}:${value};`
 
-const {general, imageBackgrounds, solidColorBackgrounds} = metadata.configSchema
+const {general, imageBackground, solidBackground} = metadata.configSchema
 
 const data = {
-  baseFontSize: general.properties.mainFontSize.default,
-  statusBarFontSize: general.properties.statusBarFontSize.default,
+  image: general.properties.background.default === 'Image',
   fontFamily: general.properties.fontFamily.default,
-  scrollbarWidth: general.properties.scrollbarWidth.default,
-  image: general.properties.backgroundMode.default === 'Image'
+  baseFontSize: general.properties.baseFontSize.default,
+  statusBarFontSize: general.properties.statusBarFontSize.default,
+  scrollbarWidth: general.properties.scrollbarWidth.default
 }
 
 if (data.image) {
   Object.assign(data, {
-    workspaceAlpha: imageBackgrounds.properties.overlayAlphaChannel.default,
-    accent: imageBackgrounds.properties.accentColor.default,
-    accentAlpha: imageBackgrounds.properties.accentAlphaChannel.default
+    workspaceAlpha: imageBackground.properties.workspaceAlpha.default,
+    accent: imageBackground.properties.accent.default,
+    accentAlpha: imageBackground.properties.accentAlpha.default
   })
 } else {
   Object.assign(data, {
-    workspaceColor: solidColorBackgrounds.properties.backgroundColor.default,
-    accent: solidColorBackgrounds.properties.accentColor.default
+    workspaceColor: solidBackground.properties.workspaceColor.default,
+    accent: solidBackground.properties.accent.default
   })
 }
 

@@ -7,7 +7,7 @@ const config = require('.')
 const customizableVariables = require('../customizableVariables')
 
 const observers = {
-  'general.backgroundMode': {
+  'general.background': {
     callback (backgroundMode) {
       if (backgroundMode === 'Image') {
         backgroundImages.activate()
@@ -18,29 +18,29 @@ const observers = {
       customizableVariables.set()
     }
   },
-  'general.mainFontSize': {callback: customizableVariables.set, delayed: true},
+  'general.fontFamily': {callback: customizableVariables.set},
+  'general.baseFontSize': {callback: customizableVariables.set, delayed: true},
   'general.statusBarFontSize': {
     callback: customizableVariables.set,
     delayed: true
   },
-  'general.fontFamily': {callback: customizableVariables.set},
   'general.scrollbarWidth': {
     callback: customizableVariables.set,
     delayed: true
   },
-  'imageBackgrounds.overlayAlphaChannel': {
+  'imageBackground.workspaceAlpha': {
     callback: customizableVariables.set,
     delayed: true
   },
-  'imageBackgrounds.accentColor': {callback: customizableVariables.set},
-  'imageBackgrounds.accentAlphaChannel': {
+  'imageBackground.accent': {callback: customizableVariables.set},
+  'imageBackground.accentAlpha': {
     callback: customizableVariables.set,
     delayed: true
   },
-  'solidColorBackgrounds.backgroundColor': {
+  'solidBackground.workspaceColor': {
     callback: customizableVariables.set
   },
-  'solidColorBackgrounds.accentColor': {callback: customizableVariables.set}
+  'solidBackground.accent': {callback: customizableVariables.set}
 }
 
 const activate = () => {

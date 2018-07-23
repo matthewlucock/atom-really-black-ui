@@ -136,7 +136,7 @@ module.exports = class BackgroundImageManager {
 
   async getImagesToSelectNewImageFrom () {
     const selectNewImagesFrom = config.get(
-      'imageBackgrounds.selectNewImagesFrom'
+      'imageBackground.selectNewImagesFrom'
     )
 
     if (selectNewImagesFrom === 'Default images') {
@@ -156,7 +156,7 @@ module.exports = class BackgroundImageManager {
 
   async handleImageSelectionOnActivation () {
     const selectNewImageOnActivation = config.get(
-      'imageBackgrounds.selectNewImageOnActivation'
+      'imageBackground.selectNewImageOnActivation'
     )
     const writtenSelectedImage = await this.getWrittenSelectedImage()
 

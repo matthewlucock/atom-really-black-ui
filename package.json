@@ -18,97 +18,95 @@
       "type": "object",
       "title": "General settings",
       "properties": {
-        "backgroundMode": {
+        "background": {
           "type": "string",
-          "title": "Background mode",
-          "enum": [
-            "Solid color",
-            "Image"
-          ],
-          "default": "Image"
-        },
-        "mainFontSize": {
-          "type": "string",
-          "title": "Main font size",
-          "default": "15px"
-        },
-        "statusBarFontSize": {
-          "type": "string",
-          "title": "Status bar font size",
-          "default": ".9em"
+          "title": "Background",
+          "enum": ["Image", "Solid color"],
+          "default": "Image",
+          "order": 1
         },
         "fontFamily": {
           "type": "string",
           "title": "Font family",
-          "default": "system-ui"
+          "default": "system-ui",
+          "order": 2
+        },
+        "baseFontSize": {
+          "type": "string",
+          "title": "Base font size",
+          "default": "15px",
+          "order": 3
+        },
+        "statusBarFontSize": {
+          "type": "string",
+          "title": "Status bar font size",
+          "default": ".9em",
+          "order": 4
         },
         "scrollbarWidth": {
           "type": "string",
           "title": "Scrollbar width",
-          "default": "10px"
+          "default": "10px",
+          "order": 5
         }
       }
     },
-    "imageBackgrounds": {
+    "imageBackground": {
       "type": "object",
-      "title": "Image background settings",
+      "title": "Image background",
       "properties": {
-        "overlayAlphaChannel": {
+        "workspaceAlpha": {
           "type": "number",
-          "title": "Overlay alpha channel",
-          "order": 1,
+          "title": "Overlay alpha",
           "default": 0.85,
           "minimum": 0,
-          "maximum": 1
+          "maximum": 1,
+          "order": 1
         },
-        "accentColor": {
+        "accent": {
           "type": "color",
-          "title": "Accent color",
-          "order": 2,
-          "default": "white"
+          "title": "Accent",
+          "default": "white",
+          "order": 2
         },
-        "accentAlphaChannel": {
+        "accentAlpha": {
           "type": "number",
-          "title": "Accent alpha channel",
-          "order": 3,
+          "title": "Accent alpha",
           "default": 0.1,
           "minimum": 0,
-          "maximum": 1
+          "maximum": 1,
+          "order": 3
         },
         "selectNewImageOnActivation": {
           "type": "boolean",
           "title": "Select new image on activation",
-          "order": 4,
-          "default": true
+          "default": true,
+          "order": 4
         },
         "selectNewImagesFrom": {
           "type": "string",
           "title": "Select new images from",
-          "enum": [
-            "Default images",
-            "Custom images",
-            "Both"
-          ],
-          "order": 5,
-          "default": "Default images"
+          "enum": ["Custom images", "Default images", "Both"],
+          "default": "Custom images",
+          "order": 5
         }
       }
     },
-    "solidColorBackgrounds": {
+    "solidBackground": {
       "type": "object",
-      "title": "Solid color background settings",
+      "title": "Solid color background",
       "properties": {
-        "backgroundColor": {
+        "workspaceColor": {
           "type": "color",
           "title": "Background color",
-          "order": 1,
-          "default": "black"
+          "default": "black",
+          "order": 1
         },
-        "accentColor": {
+        "accent": {
           "type": "color",
-          "title": "Accent color",
-          "order": 2,
-          "default": "rgb(51, 51, 51)"
+          "title": "Accent",
+          "default": "rgb(51, 51, 51)",
+          "order": 2
         }
       }
     }

@@ -29,23 +29,23 @@ const write = async variables => {
 
 const set = async () => {
   const data = {
-    baseFontSize: config.get('general.mainFontSize'),
-    statusBarFontSize: config.get('general.statusBarFontSize'),
+    image: config.get('general.background') === 'Image',
     fontFamily: config.get('general.fontFamily'),
-    scrollbarWidth: config.get('general.scrollbarWidth'),
-    image: config.get('general.backgroundMode') === 'Image'
+    baseFontSize: config.get('general.baseFontSize'),
+    statusBarFontSize: config.get('general.statusBarFontSize'),
+    scrollbarWidth: config.get('general.scrollbarWidth')
   }
 
   if (data.image) {
     Object.assign(data, {
-      workspaceAlpha: config.get('imageBackgrounds.overlayAlphaChannel'),
-      accent: config.get('imageBackgrounds.accentColor'),
-      accentAlpha: config.get('imageBackgrounds.accentAlphaChannel')
+      workspaceAlpha: config.get('imageBackground.workspaceAlpha'),
+      accent: config.get('imageBackground.accent'),
+      accentAlpha: config.get('imageBackground.accentAlpha')
     })
   } else {
     Object.assign(data, {
-      workspaceColor: config.get('solidColorBackgrounds.backgroundColor'),
-      accent: config.get('solidColorBackgrounds.accentColor')
+      workspaceColor: config.get('solidBackground.workspaceColor'),
+      accent: config.get('solidBackground.accent')
     })
   }
 
