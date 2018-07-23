@@ -4,6 +4,7 @@ const path = require('path')
 
 const {Disposable} = require('atom')
 
+const delay = require('delay')
 const fse = require('fs-extra')
 
 const config = require('./config')
@@ -12,14 +13,20 @@ const {THEME_PATH} = require('./data')
 
 const FILE_PATH = path.join(THEME_PATH, 'styles/customizable-variables.less')
 
+const INTERFACE_TRANSITION_CLASS = 'pure-interface-transition'
+const INTERFACE_TRANSITION_DURATION = 1000
+
 const cssVariable = ([name, value]) => `--pure-${name}:${value};`
 const lessVariable = ([name, value]) => `@pure-${name}:${value};`
 
 const styleElement = document.createElement('style')
 
-const inject = variables => {
+const inject = async variables => {
   const variablesText = Object.entries(variables).map(cssVariable).join('')
+  document.body.classList.add(INTERFACE_TRANSITION_CLASS)
   styleElement.textContent = `:root {${variablesText}}`
+  await delay(INTERFACE_TRANSITION_DURATION)
+  document.body.classList.remove(INTERFACE_TRANSITION_CLASS)
 }
 
 const write = async variables => {
@@ -50,8 +57,7 @@ const set = async () => {
   }
 
   const variables = makeCustomizableVariables(data)
-  inject(variables)
-  await write(variables)
+  await Promise.all([inject(variables), write(variables)])
 }
 
 const activate = () => {
@@ -59,6 +65,7 @@ const activate = () => {
   return new Disposable(() => {
     styleElement.remove()
     styleElement.textContent = ''
+    document.body.classList.remove(INTERFACE_TRANSITION_CLASS)
   })
 }
 

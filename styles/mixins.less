@@ -4,8 +4,10 @@
 }
 
 .general-transition(@properties) {
-  transition: @properties;
-  transition-duration: @pure-general-transition-duration;
+  .pure-interface-transition & {
+    transition: @properties;
+    transition-duration: @pure-general-transition-duration;
+  }
 }
 
 .interactive-transition(@properties) {

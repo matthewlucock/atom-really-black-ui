@@ -21,7 +21,10 @@
         "background": {
           "type": "string",
           "title": "Background",
-          "enum": ["Image", "Solid color"],
+          "enum": [
+            "Image",
+            "Solid color"
+          ],
           "default": "Image",
           "order": 1
         },
@@ -86,7 +89,11 @@
         "selectNewImagesFrom": {
           "type": "string",
           "title": "Select new images from",
-          "enum": ["Custom images", "Default images", "Both"],
+          "enum": [
+            "Custom images",
+            "Default images",
+            "Both"
+          ],
           "default": "Custom images",
           "order": 5
         }
@@ -113,6 +120,7 @@
   },
   "dependencies": {
     "color": "^3.0.0",
+    "delay": "^3.0.0",
     "docrel": "^1.6.0",
     "fs-extra": "^5.0.0",
     "mem": "^3.0.1",
