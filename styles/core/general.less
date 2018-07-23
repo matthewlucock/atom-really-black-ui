@@ -4,7 +4,7 @@ body {
 }
 
 atom-workspace {
-  .customizable-property(background, workspace-background-color);
+  .customizable-property(background, workspace-color);
   .customizable-property(color, workspace-text-color);
   .customizable-property(font-size, base-font-size);
   .customizable-property(font-family, font-family);
@@ -18,7 +18,7 @@ atom-workspace {
 }
 
 ::-webkit-scrollbar-thumb {
-  .customizable-property(background, accent-color);
+  .customizable-property(background, accent);
   .general-transition(background);
 }
 
@@ -42,7 +42,7 @@ label {
 }
 
 code {
-  .customizable-property(background, accent-color);
+  .customizable-property(background, accent);
   .general-transition(background);
 }
 
@@ -69,7 +69,7 @@ pre {
 
 // Key bindings for commands in the command pallette.
 .key-binding {
-  .customizable-property(background, accent-color);
+  .customizable-property(background, accent);
   .general-transition(background);
   display: inline-block;
   padding: 0 .5em;
@@ -93,14 +93,14 @@ pre {
 .badge.badge-info,
 .atom-dock-toggle-button .atom-dock-toggle-button-inner,
 thead {
-  .customizable-property(background, accent-color);
+  .customizable-property(background, accent);
   .customizable-property(color, accent-text-color);
   .general-transition(background, color;);
 }
 
 .nav > li > a {
   &:hover, &:focus {
-    .customizable-property(background, accent-color);
+    .customizable-property(background, accent);
     .customizable-property(color, accent-text-color);
     .general-transition(background, color;);
   }

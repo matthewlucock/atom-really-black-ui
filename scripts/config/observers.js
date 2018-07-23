@@ -4,7 +4,7 @@ const {CompositeDisposable} = require('atom')
 
 const backgroundImages = require('../backgroundImages')
 const config = require('.')
-const setStyleVariables = require('../styleVariables/set')
+const customizableVariables = require('../customizableVariables')
 
 const observers = {
   'general.backgroundMode': {
@@ -15,24 +15,32 @@ const observers = {
         backgroundImages.deactivate()
       }
 
-      setStyleVariables()
+      customizableVariables.set()
     }
   },
-  'general.mainFontSize': {callback: setStyleVariables, delayed: true},
-  'general.statusBarFontSize': {callback: setStyleVariables, delayed: true},
-  'general.fontFamily': {callback: setStyleVariables},
-  'general.scrollbarWidth': {callback: setStyleVariables, delayed: true},
+  'general.mainFontSize': {callback: customizableVariables.set, delayed: true},
+  'general.statusBarFontSize': {
+    callback: customizableVariables.set,
+    delayed: true
+  },
+  'general.fontFamily': {callback: customizableVariables.set},
+  'general.scrollbarWidth': {
+    callback: customizableVariables.set,
+    delayed: true
+  },
   'imageBackgrounds.overlayAlphaChannel': {
-    callback: setStyleVariables,
+    callback: customizableVariables.set,
     delayed: true
   },
-  'imageBackgrounds.accentColor': {callback: setStyleVariables},
+  'imageBackgrounds.accentColor': {callback: customizableVariables.set},
   'imageBackgrounds.accentAlphaChannel': {
-    callback: setStyleVariables,
+    callback: customizableVariables.set,
     delayed: true
   },
-  'solidColorBackgrounds.backgroundColor': {callback: setStyleVariables},
-  'solidColorBackgrounds.accentColor': {callback: setStyleVariables}
+  'solidColorBackgrounds.backgroundColor': {
+    callback: customizableVariables.set
+  },
+  'solidColorBackgrounds.accentColor': {callback: customizableVariables.set}
 }
 
 const activate = () => {

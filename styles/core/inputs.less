@@ -23,7 +23,7 @@ input[type="color"] {
 }
 
 .input-text, .input-textarea, .input-search {
-  .customizable-property(background, accent-color);
+  .customizable-property(background, accent);
   .general-transition(background);
 }
 
@@ -37,7 +37,7 @@ input[type="color"] {
   margin-top: 0;
 
   &, &:checked:active {
-    .customizable-property(background, accent-color);
+    .customizable-property(background, accent);
     .general-transition(background);
   }
 
@@ -55,7 +55,7 @@ input[type="color"] {
 }
 
 atom-text-editor[mini] {
-  .customizable-property(background, accent-color);
+  .customizable-property(background, accent);
   .general-transition(background);
   padding-left: .5em;
   color: inherit;
@@ -75,6 +75,6 @@ atom-text-editor[mini] {
 .input-range,
 .input-select,
 atom-text-editor[mini].editor .selection .region {
-  .customizable-property(background, active-accent-color);
+  .customizable-property(background, active-accent);
   .general-transition(background);
 }

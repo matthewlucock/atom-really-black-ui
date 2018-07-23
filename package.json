@@ -11,7 +11,7 @@
   },
   "main": "scripts/index",
   "scripts": {
-    "lint": "standard \"scripts/**/*.js\" --global atom | snazzy"
+    "lint": "standard \"scripts/**/*.js\" --global atom | snazzy && standard \"build/**/*.js\" \"styles/**/*.js\" | snazzy"
   },
   "configSchema": {
     "general": {

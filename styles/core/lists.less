@@ -3,7 +3,7 @@
   padding-left: .5em;
 
   &.selected {
-    .customizable-property(background, accent-color);
+    .customizable-property(background, accent);
     .customizable-property(color, accent-text-color);
 
     &:before {
@@ -23,7 +23,7 @@
 }
 
 .select-list.popover-list {
-  .customizable-property(background, opaque-accent-color);
+  .customizable-property(background, opaque-accent);
   .general-transition(background);
   padding: .25em;
 
@@ -39,7 +39,7 @@
 .list-group, .list-tree {
   .selected {
     &::before {
-      .customizable-property(background, accent-color);
+      .customizable-property(background, accent);
       .general-transition(background);
       height: 28px;
     }

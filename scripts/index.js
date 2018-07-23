@@ -6,7 +6,7 @@ const backgroundImages = require('./backgroundImages')
 const configObservers = require('./config/observers')
 const data = require('./data')
 const opener = require('./opener')
-const styleVariables = require('./styleVariables')
+const customizableVariables = require('./customizableVariables')
 
 let disposables
 
@@ -14,7 +14,7 @@ const activate = () => {
   disposables = new CompositeDisposable(
     configObservers.activate(),
     opener.activate(),
-    styleVariables.activate()
+    customizableVariables.activate()
   )
 
   data.themeIsActive = true
