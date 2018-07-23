@@ -1,7 +1,6 @@
 'use strict'
 
 const {CompositeDisposable} = require('atom')
-
 const backgroundImages = require('../backgroundImages')
 const config = require('.')
 const customizableVariables = require('../customizableVariables')

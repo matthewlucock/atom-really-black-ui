@@ -1,15 +1,12 @@
 'use strict'
 
 const path = require('path')
-
 const {Disposable} = require('atom')
-
 const delay = require('delay')
 const fse = require('fs-extra')
-
 const config = require('./config')
 const makeCustomizableVariables = require('../styles/customizableVariables')
-const {THEME_PATH} = require('./data')
+const {THEME_PATH} = require('./utilities')
 
 const FILE_PATH = path.join(THEME_PATH, 'styles/customizable-variables.less')
 
@@ -46,13 +43,13 @@ const set = async () => {
   if (data.image) {
     Object.assign(data, {
       workspaceAlpha: config.get('imageBackground.workspaceAlpha'),
-      accent: config.get('imageBackground.accent'),
+      accent: String(config.get('imageBackground.accent')),
       accentAlpha: config.get('imageBackground.accentAlpha')
     })
   } else {
     Object.assign(data, {
-      workspaceColor: config.get('solidBackground.workspaceColor'),
-      accent: config.get('solidBackground.accent')
+      workspaceColor: String(config.get('solidBackground.workspaceColor')),
+      accent: String(config.get('solidBackground.accent'))
     })
   }
 

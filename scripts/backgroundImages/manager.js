@@ -1,19 +1,15 @@
 'use strict'
 
 const {Disposable} = require('atom')
-
 const {EventEmitter} = require('events')
 const path = require('path')
-
 const {createElement} = require('docrel')
 const fse = require('fs-extra')
-const memoize = require('mem')
+const mem = require('mem')
 const randomItem = require('random-item')
-
 const BackgroundImage = require('./image')
-const {BACKGROUND_IMAGES_DIRECTORY} = require('../data')
+const {BACKGROUND_IMAGES_DIRECTORY, getCssUrl} = require('../utilities')
 const config = require('../config')
-const utilities = require('../utilities')
 
 const SELECTED_IMAGE_JSON_PATH = path.join(
   BACKGROUND_IMAGES_DIRECTORY,
@@ -21,7 +17,7 @@ const SELECTED_IMAGE_JSON_PATH = path.join(
 )
 
 const getBackgroundImageCss = image => {
-  return `body {background-image: ${utilities.getCssUrl(image.uri)}}`
+  return `body {background-image: ${getCssUrl(image.uri)}}`
 }
 
 module.exports = class BackgroundImageManager {
@@ -31,7 +27,7 @@ module.exports = class BackgroundImageManager {
     this.animationElement = createElement('div', {
       class: 'pure-background-image-animation'
     })
-    this.getDirectory = memoize(this.getDirectory)
+    this.getDirectory = mem(this.getDirectory)
   }
 
   async getDirectory (directoryName) {
@@ -64,7 +60,7 @@ module.exports = class BackgroundImageManager {
 
     await image.load()
 
-    this.animationElement.style.backgroundImage = utilities.getCssUrl(image.uri)
+    this.animationElement.style.backgroundImage = getCssUrl(image.uri)
     const animation = this.animationElement.animate({opacity}, {
       duration: 1000,
       fill: 'forwards'

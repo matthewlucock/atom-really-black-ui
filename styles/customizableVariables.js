@@ -13,9 +13,6 @@ const ACTIVE_ACCENT_LIGHTNESS_MODIFIER = ACTIVE_ACCENT_ALPHA_MODIFIER * 100
 const ACTIVE_ACCENT_LIGHTNESS_THRESHOLD = ACTIVE_ACCENT_ALPHA_THRESHOLD * 100
 const SUBTLE_TEXT_LIGHTNESS_MODIFIER = 30
 
-const lighten = (color, amount) => color.lightness(color.lightness() + amount)
-const darken = (color, amount) => lighten(color, -amount)
-
 const contrastingTextColor = background => background.isDark() ? WHITE : BLACK
 
 const modifyValue = ({value, modifier, threshold}) => {
@@ -24,11 +21,11 @@ const modifyValue = ({value, modifier, threshold}) => {
 }
 
 const subtleTextColor = textColor => {
-  if (textColor.isLight()) {
-    return darken(textColor, SUBTLE_TEXT_LIGHTNESS_MODIFIER)
-  }
+  const lightness = textColor.isDark()
+    ? textColor.lightness() + SUBTLE_TEXT_LIGHTNESS_MODIFIER
+    : textColor.lightness() - SUBTLE_TEXT_LIGHTNESS_MODIFIER
 
-  return lighten(textColor, SUBTLE_TEXT_LIGHTNESS_MODIFIER)
+  return textColor.lightness(lightness)
 }
 
 const imageVariables = mem(({workspaceAlpha, baseAccent, accentAlpha}) => {

@@ -1,17 +1,14 @@
 'use strict'
 
 const path = require('path')
-
-const memoize = require('mem')
-
-const {BACKGROUND_IMAGES_DIRECTORY} = require('../data')
-const utilities = require('../utilities')
+const mem = require('mem')
+const {BACKGROUND_IMAGES_DIRECTORY, getFileUri} = require('../utilities')
 
 module.exports = class BackgroundImage {
   constructor (directoryName, fileName) {
     this.directoryName = directoryName
     this.fileName = fileName
-    this.load = memoize(this.load)
+    this.load = mem(this.load)
   }
 
   get absolutePath () {
@@ -23,7 +20,7 @@ module.exports = class BackgroundImage {
   }
 
   get uri () {
-    return utilities.getFileUri(this.absolutePath)
+    return getFileUri(this.absolutePath)
   }
 
   load () {

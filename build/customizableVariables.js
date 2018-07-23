@@ -1,7 +1,6 @@
 'use strict'
 
 const fse = require('fs-extra')
-
 const makeCustomizableVariables = require('../styles/customizableVariables')
 const metadata = require('../package.json')
 

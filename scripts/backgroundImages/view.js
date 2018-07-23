@@ -1,14 +1,12 @@
 'use strict'
 
 const {Disposable, CompositeDisposable} = require('atom')
-
 const {createElement} = require('docrel')
-
 const BackgroundImageThumbnail = require('./thumbnail')
 const {
   BACKGROUND_IMAGES_VIEW_CLASS,
   BACKGROUND_IMAGES_VIEW_URI
-} = require('../data')
+} = require('../utilities')
 
 const CUSTOM_CONTAINER_CLASS = `${BACKGROUND_IMAGES_VIEW_CLASS}-custom`
 const LOADING_CLASS = `${BACKGROUND_IMAGES_VIEW_CLASS}-loading`
@@ -192,11 +190,13 @@ module.exports = class BackgroundImagesView {
   }
 
   bindDragListeners () {
-    this.customContainer.addEventListener('dragenter', () => {
+    this.customContainer.addEventListener('dragenter', event => {
+      event.stopPropagation()
       this.dropZone.classList.add(DROP_ZONE_ACTIVE_CLASS)
     })
 
-    this.dropZone.addEventListener('dragleave', () => {
+    this.dropZone.addEventListener('dragleave', event => {
+      event.stopPropagation()
       this.dropZone.classList.remove(DROP_ZONE_ACTIVE_CLASS)
     })
 

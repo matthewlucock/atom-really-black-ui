@@ -1,10 +1,8 @@
 'use strict'
 
 const {EventEmitter} = require('events')
-
 const {createElement} = require('docrel')
-
-const {BACKGROUND_IMAGES_VIEW_CLASS} = require('../data')
+const {BACKGROUND_IMAGES_VIEW_CLASS} = require('../utilities')
 
 const BASE_CLASS = `${BACKGROUND_IMAGES_VIEW_CLASS}-thumbnail`
 const LOADING_CLASS = `${BASE_CLASS}-loading`
