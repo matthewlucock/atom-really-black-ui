@@ -9,6 +9,8 @@
   height: auto;
   white-space: normal;
 
+  vertical-align: top;
+
   &, &.btn-primary, &.btn-info {
     .customizable-property(background, accent);
     .customizable-property(color, accent-text-color);
@@ -35,7 +37,9 @@
   }
 
   // Enforce spacing between buttons in button groups.
-  .btn-group > &:not(:last-child) {
-    margin-right: 1em;
+  &:not(:last-child) {
+    .btn-group > &, .btn-toolbar > & {
+      margin-right: 1em;
+    }
   }
 }

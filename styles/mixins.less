@@ -14,3 +14,17 @@
   transition: @properties;
   transition-duration: @pure-interactive-transition-duration;
 }
+
+.notification-type(@type) {
+  @background-variable: 'pure-@{type}-color';
+
+  background: fade(@@background-variable, 80);
+
+  .btn-@{type} {
+    background: darken(@@background-variable, 30);
+
+    &:hover {
+      background: darken(@@background-variable, 20);
+    }
+  }
+}
