@@ -164,11 +164,23 @@ module.exports = class BackgroundImagesView {
     }))
 
     if (unsupportedFileTypes) {
-      atom.notifications.addError('Unsupported file types')
+      atom.notifications.addError(
+        'Unsupported file type(s)',
+        {
+          dismissable: true,
+          description: 'Images must be JPG or PNG files.'
+        }
+      )
     }
 
     if (extremeFileSizes) {
-      atom.notifications.addError('Extreme file sizes')
+      atom.notifications.addError(
+        'Extreme file size(s)',
+        {
+          dismissable: true,
+          description: 'Images must be smaller than 10MB.'
+        }
+      )
     }
   }
 
