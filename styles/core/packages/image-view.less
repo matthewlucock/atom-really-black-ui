@@ -1,4 +1,18 @@
 .image-view .image-controls {
   padding: 1em;
   background: none;
+
+  // The background controls (transparency grids etc.).
+  a {
+    // The controls have text labels that are hidden with a font size of 0.
+    // As a result, lengths can't be defined in units of em.
+    margin-right: 1rem;
+    border-radius: 100%;
+    box-shadow: none;
+
+    &, &:hover, &:active {
+      .customizable-property(border-color, workspace-text-color);
+      .general-transition(border-color);
+    }
+  }
 }

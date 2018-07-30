@@ -1,29 +1,23 @@
 .list-group li {
   .general-transition(background, color;);
-  padding-left: .5em;
+  padding: .25em .5em;
 
   &.selected {
     .customizable-property(background, accent);
     .customizable-property(color, accent-text-color);
 
-    &:before {
+    &::before {
       display: none;
     }
   }
 }
 
-.select-list {
-  li {
-    padding: .25em .5em;
-  }
-
-  .status {
-    float: right;
-  }
+.select-list .status {
+  float: right;
 }
 
-.select-list.popover-list {
-  .customizable-property(background, opaque-accent);
+.popover-list {
+  .customizable-property(background, opaque-accent) !important;
   .general-transition(background);
   padding: .25em;
 
@@ -36,40 +30,20 @@
   }
 }
 
-.list-group, .list-tree {
-  .selected {
-    &::before {
-      .customizable-property(background, accent);
-      .general-transition(background);
-      height: 28px;
-    }
-
-    & > .name {
-      .customizable-property(color, accent-text-color);
-      .general-transition(color);
-    }
-  }
-
-  .icon::before {
-    top: 0;
-  }
-}
-
-.tree-view {
-  & > .entry:first-child {
-    padding-top: 0;
-  }
-
+.list-tree {
   .entry {
-    padding: 3px 0;
-  }
+    padding: .25em 0;
 
-  :not(.status-added):not(.status-modified):not(.status-ignored) {
-    &.file, &.directory > .header {
-      & > .name {
-        .customizable-property(color, workspace-text-color);
-        .general-transition(color);
-      }
+    &:last-child {
+      padding-bottom: 0;
     }
+  }
+  
+  .selected::before {
+    .customizable-property(background, accent);
+    .general-transition(background);
+    .interactive-transition(background);
+    height: 1.97em;
+    margin-top: -.1em;
   }
 }

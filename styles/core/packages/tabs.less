@@ -1,5 +1,5 @@
 .tab-bar .tab {
-  .interactive-transition(background, color;);
+  .interactive-transition(background, color, max-width;);
   max-width: @pure-maximum-tab-width;
   padding: .5em 1.5em;
   font-size: inherit;
@@ -41,8 +41,6 @@
   }
 
   &.is-dragging .close-icon {
-    // Hide the close icon when dragging the tab, just because it doesn't
-    // need to be there and it being there looks weird.
     display: none;
   }
 }

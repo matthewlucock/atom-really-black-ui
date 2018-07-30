@@ -1,4 +1,6 @@
 .tooltip {
+  opacity: 1 !important;
+
   .tooltip-inner {
     .customizable-property(background, opaque-accent);
     .customizable-property(color, accent-text-color);
@@ -11,20 +13,11 @@
     white-space: nowrap;
   }
 
-  &.in {
-    // Stop tab tooltips (and potentially others) from being translucent.
-    opacity: 1;
-  }
-
   .tooltip-arrow {
-    // If tooltip arrows are made visible, they will need to be styled to be
-    // the same color as the rest of the tooltip.
     display: none;
   }
 
   .keystroke {
-    .customizable-property(background, accent);
-    .general-transition(background);
-    padding: .25em .5em;
+    &:extend(kbd);
   }
 }

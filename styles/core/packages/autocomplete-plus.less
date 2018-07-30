@@ -1,0 +1,18 @@
+.autocomplete-plus {
+  .suggestion-description {
+    background: none !important;
+  }
+
+  .suggestion-description-more-link {
+    color: inherit !important;
+  }
+
+  li {
+    .interactive-transition(background, color;);
+
+    &.selected {
+      .customizable-property(background, active-accent);
+      .customizable-property(color, active-accent-text-color);
+    }
+  }
+}

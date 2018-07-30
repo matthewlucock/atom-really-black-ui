@@ -14,12 +14,10 @@ atom-workspace {
 
 ::-webkit-scrollbar {
   .customizable-property(width, scrollbar-width);
-  .general-transition(width);
 }
 
 ::-webkit-scrollbar-thumb {
   .customizable-property(background, accent);
-  .general-transition(background);
 }
 
 // Style links.
@@ -28,8 +26,8 @@ atom-pane-container a,
 .settings-view .link,
 .settings-view .package-card .meta-user .author,
 .welcome a {
-  color: inherit;
-  text-decoration: underline;
+    color: inherit;
+    text-decoration: underline;
 }
 
 a:focus {
@@ -67,17 +65,6 @@ pre {
   }
 }
 
-// Key bindings for commands in the command pallette.
-.key-binding {
-  .customizable-property(background, accent);
-  .general-transition(background);
-  display: inline-block;
-  padding: 0 .5em;
-  font-family: inherit;
-  font-size: .9em;
-  letter-spacing: 1px;
-}
-
 // Sidebar pane collapse/expand button.
 .atom-dock-toggle-button .atom-dock-toggle-button-inner {
   border: none;
@@ -88,7 +75,6 @@ pre {
   border-radius: 0;
 }
 
-.panel-heading,
 .badge,
 .badge.badge-info,
 .atom-dock-toggle-button .atom-dock-toggle-button-inner,
@@ -104,4 +90,19 @@ thead {
     .customizable-property(color, accent-text-color);
     .general-transition(background, color;);
   }
+}
+
+.icon::before {
+  margin-right: .5em;
+}
+
+kbd {
+  .customizable-property(background, opaque-active-accent);
+  .customizable-property(color, active-accent-text-color);
+  .general-transition(background, color;);
+  display: inline-block;
+  padding: 0 .5em;
+  font-family: inherit;
+  font-size: .9em;
+  letter-spacing: 1px;
 }

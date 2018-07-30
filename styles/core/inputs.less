@@ -1,80 +1,123 @@
-.input-text,
-.input-textarea,
-.input-search,
-.input-number,
-.input-select,
-input[type="color"] {
-  border: none !important;
-}
-
-.input-text,
-.input-textarea,
-.input-search,
-.input-checkbox,
-.settings-view input[type="checkbox"],
-.input-range,
-.input-number,
-.input-select {
-  border-radius: 0;
-}
-
-input[type="color"] {
-  background: none !important;
-}
-
-.input-text, .input-textarea, .input-search {
+.input-text, .input-textarea, .input-search, .input-number {
   .customizable-property(background, accent);
   .general-transition(background);
+  .interactive-transition(background);
+  border: none !important;
+
+  &:hover, &:focus {
+    .customizable-property(background, active-accent);
+  }
 }
 
 .input-radio {
-  &:active, &:checked {
-    background: white;
+  .customizable-property(background, accent);
+  .general-transition(background);
+  .interactive-transition(background);
+
+  &:hover, &:checked {
+    .customizable-property(background, active-accent);
   }
 }
 
-.input-checkbox, .settings-view input[type="checkbox"] {
-  margin-top: 0;
+.input-checkbox {
+  .general-transition(background);
+  .interactive-transition(background);
 
   &, &:checked:active {
     .customizable-property(background, accent);
+  }
+
+  &:checked, &:active {
+    .customizable-property(background, active-accent);
+  }
+
+  &::before, &::after {
+    .customizable-property(background, active-accent-text-color);
     .general-transition(background);
-  }
-
-  &:focus, &:checked {
-    box-shadow: none;
-  }
-
-  &:active, &:checked {
-    background: white;
   }
 }
 
-.input-toggle:checked, .input-range::-webkit-slider-thumb {
-  background: white;
+.input-toggle {
+  .general-transition(background);
+  .interactive-transition(background);
+
+  &::before {
+    .general-transition(background);
+    .interactive-transition(background, transform;);
+    opacity: 1 !important;
+  }
+
+  &, &:checked:active {
+    .customizable-property(background, accent);
+
+    &::before {
+      .customizable-property(background, accent-text-color);
+    }
+  }
+
+  &:checked, &:active {
+    .customizable-property(background, active-accent);
+
+    &::before {
+      .customizable-property(background, active-accent-text-color);
+    }
+  }
+}
+
+.input-range {
+  .customizable-property(background, accent);
+  .general-transition(background);
+
+  &::-webkit-slider-thumb {
+    .customizable-property(background, accent-text-color);
+    .general-transition(background);
+
+    &:active {
+      transform: initial;
+    }
+  }
+}
+
+.input-color {
+  .customizable-property(border-color, workspace-text-color);
+  .general-transition(border-color);
+}
+
+select {
+  .customizable-property(background, accent) !important;
+  .customizable-property(color, accent-text-color);
+  .general-transition(background, color;) !important;
+  .interactive-transition(background, color;) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  &:hover, &:focus {
+    .customizable-property(background, active-accent) !important;
+    .customizable-property(color, active-accent-text-color);
+  }
+}
+
+option {
+  .customizable-property(background, opaque-accent);
+  .customizable-property(color, accent-text-color);
 }
 
 atom-text-editor[mini] {
   .customizable-property(background, accent);
   .general-transition(background);
   padding-left: .5em;
+  opacity: 1 !important;
   color: inherit;
+  font-size: .9em;
   font-family: inherit;
 
-  .settings-view .section & {
-    opacity: 1
+  &.editor .selection .region {
+    .customizable-property(background, active-accent);
+    .general-transition(background);
   }
 
   div:not(.region) {
     background: none !important;
   }
-}
-
-.input-radio,
-.input-toggle,
-.input-range,
-.input-select,
-atom-text-editor[mini].editor .selection .region {
-  .customizable-property(background, active-accent);
-  .general-transition(background);
 }

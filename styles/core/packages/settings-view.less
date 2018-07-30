@@ -1,12 +1,16 @@
 .settings-view {
-  .section {
-    padding: 1.5em !important;
-    // Remove borders between sections.
-    border: none !important;
+  .section:not(.themes-panel) {
+    width: 75%;
+    margin: 0 auto;
+    border: none;
   }
 
-  // The settings sidebar.
   .config-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: @pure-maximum-tab-width;
+    max-width: initial;
     padding: 0;
     border: none;
     background: none;
@@ -19,87 +23,82 @@
       &.active > a {
         .customizable-property(background, accent);
         .customizable-property(color, accent-text-color);
+        .general-transition(background, color;);
       }
     }
   }
 
-  // Settings headings.
   .section-heading, .sub-section-heading {
+    text-align: center;
+
     &.icon::before {
-      // Increase spacing between icons and heading text.
-      margin-right: .5em;
+      margin-right: 1em;
     }
   }
 
-  // Labels for text and select inputs.
   .control-label {
-    // Increase spacing between labels and their inputs.
-    // atom-text-editor[mini]s have their own margins by default, except for
-    // when they are a settings field. Giving the label a margin achieves the
-    // same effect in these cases.
     margin-bottom: .5em;
   }
 
   .package-card {
+    .interactive-transition(background);
     border: none;
     border-radius: 0;
-  }
-
-  .installed-packages .package-card {
-    .interactive-transition(background);
 
     &:hover {
       .customizable-property(background, accent);
+      .general-transition(background);
+    }
+
+    .icon {
+      color: inherit !important;
     }
   }
 
-  // The view of the package card and other details on the package's and theme's
-  // page.
   .package-detail {
     .package-card {
       padding: 0;
+
+      &:hover {
+        background: none;
+      }
     }
 
-    // The repository link and start-up time.
-    .repo-link, .icon-dashboard {
-      // Fix offsetting to the right.
+    .repo-link {
+      margin-bottom: 1.5em;
       margin-left: 0;
+    }
+
+    .text {
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 1em;
+    }
+
+    .btn-wrap-group {
+      text-align: center;
     }
   }
 
-  // Info alerts are used for loading packages, themes, and updates.
   .alert-info {
     background: none;
     color: inherit;
+    text-align: center
   }
 
-  // Breadcrumbs are used at the top of package and theme settings pages.
   .breadcrumb {
     padding: 1.5em 1.5em 0;
+    text-align: center;
   }
 
-  // Reduce the font weight of subheadings and the UI theme and syntax theme
-  // headings in the themes panel.
   .sub-section .sub-section-heading, .packages .themes-label {
     font-weight: normal;
   }
 
   .checkbox, .color {
-    // Input labels.
     .setting-title {
-      // Fix vertical offsetting.
       line-height: 1;
     }
-  }
-
-  // Styles for select inputs.
-  select.form-control {
-    .customizable-property(background, accent);
-    .customizable-property(color, accent-text-color);
-    .interactive-transition(background, color;);
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
   }
 
   // Styles for keymap tables.
@@ -109,5 +108,44 @@
       // Stop tables from overflowing the panel horizontally.
       white-space: normal;
     }
+  }
+
+  .themes-picker-item, .text {
+    text-align: center;
+  }
+
+  .updates-heading-container {
+    flex-direction: column;
+  }
+
+  .sub-section {
+    .sub-section-heading.has-items::after {
+      // The Octicons code for triangle-down.
+      content: "\f05b";
+      margin-top: .25em;
+      color: inherit;
+    }
+
+    &.collapsed .sub-section-heading.has-items::after {
+      // The Octicons code for triangle-up.
+      content: "\f0aa";
+    }
+  }
+
+  .link {
+    &, &:hover, &:focus {
+      color: inherit;
+      text-decoration: underline;
+    }
+  }
+
+  input[type="color"] {
+    .customizable-property(background, workspace-text-color);
+    .general-transition(background);
+    border: none !important;
+  }
+
+  input[type="checkbox"] {
+    .input-checkbox();
   }
 }

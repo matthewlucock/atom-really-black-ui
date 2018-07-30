@@ -1,29 +1,18 @@
-.welcome {
-  background: transparent;
+.welcome-container {
+  display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  min-width: initial;
+  max-width: initial;
 
   label {
     margin-top: 2em;
   }
 }
 
-.welcome-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: initial;
-  min-width: initial;
-  max-width: initial;
-}
-
-.welcome-logo {
-  margin-bottom: 0;
-}
-
 .welcome-title {
   font-weight: normal;
-  line-height: 1;
+  margin-top: 0;
 }
 
 .welcome-panel:first-of-type {
@@ -41,35 +30,32 @@
 .welcome-card {
   margin: 0;
   border: none;
-  border-radius: 0;
-  background: none;
   text-align: center;
+}
 
-  .welcome-summary {
-    .interactive-transition(background);
+.welcome-summary {
+  .interactive-transition(background);
 
-    &:hover {
-      .customizable-property(background, accent);
-    }
-
-    &:before {
-      bottom: 1px;
-      color: inherit;
-    }
+  &:hover {
+    .customizable-property(background, accent);
   }
 
-  .welcome-detail {
-    border: none;
-
-    .welcome-img {
-      border: none;
-      border-radius: 0;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .welcome-note {
-      color: inherit;
-    }
+  &:before {
+    color: inherit;
   }
+}
+
+.welcome-detail {
+  border: none;
+}
+
+.welcome-img {
+  border: none;
+  border-radius: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.welcome-note {
+  color: inherit;
 }

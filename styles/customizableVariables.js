@@ -66,6 +66,7 @@ const imageVariables = mem(({workspaceAlpha, baseAccent, accentAlpha}) => {
     'accent-text-color': accentTextColor,
     'subtle-accent-text-color': subtleAccentTextColor,
     'active-accent': activeAccent,
+    'opaque-active-accent': opaqueActiveAccent,
     'active-accent-text-color': activeAccentTextColor
   }
 })
@@ -97,6 +98,7 @@ const solidVariables = mem(({workspaceColor, accent}) => {
     'accent-text-color': accentTextColor,
     'subtle-accent-text-color': subtleAccentTextColor,
     'active-accent': activeAccent,
+    'opaque-active-accent': activeAccent,
     'active-accent-text-color': activeAccentTextColor
   }
 })

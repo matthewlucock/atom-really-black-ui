@@ -18,7 +18,7 @@
 .notification-type(@type) {
   @background-variable: 'pure-@{type}-color';
 
-  background: fade(@@background-variable, 80);
+  background: @@background-variable;
 
   .btn-@{type} {
     background: darken(@@background-variable, 30);

@@ -1,0 +1,18 @@
+.tree-view-root {
+   .directory:not(.collapsed) > .header {
+     padding-bottom: .25em;
+   }
+
+   .entries:empty {
+     margin-top: -.25em;
+   }
+
+  :not(.status-added):not(.status-modified):not(.status-ignored) {
+    &.file, &.directory > .header {
+      & > .name, &::before {
+        .customizable-property(color, workspace-text-color);
+        .general-transition(color);
+      }
+    }
+  }
+}
