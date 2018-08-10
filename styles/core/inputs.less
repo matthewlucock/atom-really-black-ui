@@ -85,7 +85,7 @@
 
 select {
   .customizable-property(background, accent) !important;
-  .customizable-property(color, accent-text-color);
+  .customizable-property(color, accent-text-color) !important;
   .general-transition(background, color;) !important;
   .interactive-transition(background, color;) !important;
   border: none !important;
@@ -94,7 +94,7 @@ select {
 
   &:hover, &:focus {
     .customizable-property(background, active-accent) !important;
-    .customizable-property(color, active-accent-text-color);
+    .customizable-property(color, active-accent-text-color) !important;
   }
 }
 

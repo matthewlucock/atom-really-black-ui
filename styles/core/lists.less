@@ -38,12 +38,21 @@
       padding-bottom: 0;
     }
   }
-  
-  .selected::before {
-    .customizable-property(background, accent);
-    .general-transition(background);
-    .interactive-transition(background);
-    height: 1.97em;
-    margin-top: -.1em;
+
+  li {
+    .general-transition(color);
+    .interactive-transition(color);
+
+    &.selected {
+      .customizable-property(color, accent-text-color);
+
+      &::before {
+        .customizable-property(background, accent);
+        .general-transition(background);
+        .interactive-transition(background);
+        height: 1.97em;
+        margin-top: -.1em;
+      }
+    }
   }
 }
