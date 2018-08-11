@@ -14,5 +14,11 @@
         .general-transition(color);
       }
     }
+
+    &.file.selected, &.directory.selected > .header {
+      & > .name, &::before {
+        .customizable-property(color, accent-text-color);
+      }
+    }
   }
 }

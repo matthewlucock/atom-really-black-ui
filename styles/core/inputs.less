@@ -105,11 +105,10 @@ option {
 
 atom-text-editor[mini] {
   .customizable-property(background, accent);
-  .general-transition(background);
+  .customizable-property(color, accent-text-color);
+  .general-transition(background, color;);
   padding-left: .5em;
   opacity: 1 !important;
-  color: inherit;
-  //font-size: .9em;
   font-family: inherit;
 
   &.editor .selection .region {
@@ -120,4 +119,9 @@ atom-text-editor[mini] {
   div:not(.region) {
     background: none !important;
   }
+}
+
+atom-text-editor .placeholder-text {
+  .customizable-property(color, subtle-accent-text-color);
+  .general-transition(color);
 }

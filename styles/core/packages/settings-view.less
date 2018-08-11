@@ -20,10 +20,12 @@
         .interactive-transition(background, color;);
       }
 
-      &.active > a {
-        .customizable-property(background, accent);
-        .customizable-property(color, accent-text-color);
-        .general-transition(background, color;);
+      &:hover, &.active {
+        & > a {
+          .customizable-property(background, accent);
+          .customizable-property(color, accent-text-color);
+          .general-transition(background, color;);
+        }
       }
     }
   }
