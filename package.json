@@ -114,6 +114,12 @@
           "title": "Accent",
           "default": "rgb(51, 51, 51)",
           "order": 2
+        },
+        "setAccentAutomatically": {
+          "type": "boolean",
+          "title": "Set accent automatically",
+          "default": true,
+          "order": 3
         }
       }
     }

@@ -33,6 +33,8 @@ const lessVariable = ([name, value]) => `@pure-${name}:${value};`
 
 const styleElement = document.createElement('style')
 
+let configListenersLocked = false
+
 const inject = async variables => {
   const variablesText = Object.entries(variables).map(cssVariable).join('')
   document.body.classList.add(INTERFACE_TRANSITION_CLASS)
@@ -56,6 +58,10 @@ const set = async () => {
     scrollbarWidth: config.get('general.scrollbarWidth')
   }
 
+  const setAccentAutomatically = (
+    config.get('solidBackground.setAccentAutomatically') && !data.image
+  )
+
   if (data.image) {
     Object.assign(data, {
       workspaceAlpha: config.get('imageBackground.workspaceAlpha'),
@@ -65,11 +71,20 @@ const set = async () => {
   } else {
     Object.assign(data, {
       workspaceColor: String(config.get('solidBackground.workspaceColor')),
-      accent: String(config.get('solidBackground.accent'))
+      accent: !setAccentAutomatically && String(
+        config.get('solidBackground.accent')
+      )
     })
   }
 
   const variables = makeCustomizableVariables(data)
+
+  if (setAccentAutomatically) {
+    configListenersLocked = true
+    config.set('solidBackground.accent', String(variables.accent))
+    configListenersLocked = false
+  }
+
   await Promise.all([inject(variables), write(variables)])
 }
 
@@ -83,7 +98,12 @@ const activate = () => {
       document.body.classList.remove(INTERFACE_TRANSITION_CLASS)
     }),
     ...Object.entries(CONFIG_KEYS_DELAYED).map(([key, delayed]) => {
-      return config.onDidChange(key, {callback: set, delayed})
+      return config.onDidChange(key, {
+        callback: () => {
+          if (!configListenersLocked) set()
+        },
+        delayed
+      })
     })
   )
 }

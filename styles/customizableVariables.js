@@ -7,6 +7,9 @@ const BLACK = new Color('black')
 const WHITE = new Color('white')
 const AVERAGE_OF_BLACK_AND_WHITE = BLACK.mix(WHITE, 0.5)
 
+const SOLID_ACCENT_LIGHTNESS_MODIFIER = 30
+const SOLID_ACCENT_LIGHTNESS_THRESHOLD = 70
+
 const ACTIVE_ACCENT_ALPHA_MODIFIER = 0.2
 const ACTIVE_ACCENT_ALPHA_THRESHOLD = 0.5
 const ACTIVE_ACCENT_LIGHTNESS_MODIFIER = ACTIVE_ACCENT_ALPHA_MODIFIER * 100
@@ -73,7 +76,18 @@ const imageVariables = mem(({workspaceAlpha, baseAccent, accentAlpha}) => {
 
 const solidVariables = mem(({workspaceColor, accent}) => {
   workspaceColor = new Color(workspaceColor)
-  accent = new Color(accent)
+
+  if (accent) {
+    accent = new Color(accent)
+  } else {
+    const accentLightness = modifyValue({
+      value: workspaceColor.lightness(),
+      modifier: SOLID_ACCENT_LIGHTNESS_MODIFIER,
+      threshold: SOLID_ACCENT_LIGHTNESS_THRESHOLD
+    })
+
+    accent = workspaceColor.lightness(accentLightness)
+  }
 
   const workspaceTextColor = contrastingTextColor(workspaceColor)
   const subtleWorkspaceTextColor = subtleTextColor(workspaceTextColor)

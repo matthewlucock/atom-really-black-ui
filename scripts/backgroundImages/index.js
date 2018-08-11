@@ -27,7 +27,7 @@ const activate = () => {
 }
 
 const deactivate = () => {
-  disposables.dispose()
+  if (disposables) disposables.dispose()
   manager = null
 }
 

@@ -5,6 +5,7 @@ const timeouts = new Map()
 
 const makeKey = keySuffix => `pure-ui.${keySuffix}`
 const get = keySuffix => atom.config.get(makeKey(keySuffix))
+const set = (keySuffix, value) => atom.config.set(makeKey(keySuffix), value)
 
 const makeCallback = ({callback, delayed}) => {
   const callbackID = Math.random()
@@ -36,4 +37,4 @@ const makeListenFunction = fn => {
 const onDidChange = makeListenFunction(atom.config.onDidChange)
 const observe = makeListenFunction(atom.config.observe)
 
-module.exports = {get, onDidChange, observe}
+module.exports = {get, set, onDidChange, observe}
