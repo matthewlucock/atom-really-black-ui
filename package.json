@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "description": "",
   "keywords": [],
-  "repository": "https://github.com/matthewlucock/pure-ui",
+  "repository": "https://github.com/matthewlucock/pure-atom",
   "license": "ISC",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
