@@ -1,28 +1,25 @@
 'use strict'
 
-const {CompositeDisposable} = require('atom')
+const {Disposable, CompositeDisposable} = require('atom')
 const backgroundImages = require('./backgroundImages')
-const configObservers = require('./config/observers')
 const customizableVariables = require('./customizableVariables')
 const opener = require('./opener')
 const utilities = require('./utilities')
 
 let disposables
 
-const activate = () => {
-  disposables = new CompositeDisposable(
-    configObservers.activate(),
-    opener.activate(),
-    customizableVariables.activate()
-  )
+module.exports = {
+  activate: () => {
+    disposables = new CompositeDisposable(
+      backgroundImages.bindConfigListener(),
+      customizableVariables.activate(),
+      opener.activate(),
+      new Disposable(() => {
+        utilities.themeIsActive = false
+      })
+    )
 
-  utilities.themeIsActive = true
+    utilities.themeIsActive = true
+  },
+  deactivate: () => disposables.dispose()
 }
-
-const deactivate = () => {
-  disposables.dispose()
-  backgroundImages.deactivate()
-  utilities.themeIsActive = false
-}
-
-module.exports = {activate, deactivate}

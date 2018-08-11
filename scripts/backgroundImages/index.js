@@ -1,9 +1,11 @@
 'use strict'
 
-const {CompositeDisposable} = require('atom')
+const {Disposable, CompositeDisposable} = require('atom')
 const BackgroundImageManager = require('./manager')
 const BackgroundImagesView = require('./view')
 const {BACKGROUND_IMAGES_VIEW_URI, registerCommand} = require('../utilities')
+const config = require('../config')
+const customizableVariables = require('../customizableVariables')
 const opener = require('../opener')
 
 let manager
@@ -29,4 +31,21 @@ const deactivate = () => {
   manager = null
 }
 
-module.exports = {activate, deactivate}
+const bindConfigListener = () => {
+  const callback = backgroundMode => {
+    if (backgroundMode === 'Image') {
+      activate()
+    } else {
+      deactivate()
+    }
+
+    customizableVariables.set()
+  }
+
+  return new CompositeDisposable(
+    config.observe('general.background', {callback}),
+    new Disposable(deactivate)
+  )
+}
+
+module.exports = {bindConfigListener}

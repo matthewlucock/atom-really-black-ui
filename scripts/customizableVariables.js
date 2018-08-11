@@ -1,17 +1,32 @@
 'use strict'
 
 const path = require('path')
-const {Disposable} = require('atom')
+const {Disposable, CompositeDisposable} = require('atom')
 const delay = require('delay')
-const fse = require('fs-extra')
+const {writeFile} = require('fs-extra')
 const config = require('./config')
 const makeCustomizableVariables = require('../styles/customizableVariables')
-const {THEME_PATH} = require('./utilities')
+const utilities = require('./utilities')
 
-const FILE_PATH = path.join(THEME_PATH, 'styles/customizable-variables.less')
+const FILE_PATH = path.join(
+  utilities.THEME_PATH,
+  'styles/customizable-variables.less'
+)
 
 const INTERFACE_TRANSITION_CLASS = 'pure-interface-transition'
 const INTERFACE_TRANSITION_DURATION = 1000
+
+const CONFIG_KEYS_DELAYED = {
+  'general.fontFamily': false,
+  'general.baseFontSize': true,
+  'general.statusBarFontSize': true,
+  'general.scrollbarWidth': true,
+  'imageBackground.workspaceAlpha': true,
+  'imageBackground.accent': false,
+  'imageBackground.accentAlpha': true,
+  'solidBackground.workspaceColor': false,
+  'solidBackground.accent': false
+}
 
 const cssVariable = ([name, value]) => `--pure-${name}:${value};`
 const lessVariable = ([name, value]) => `@pure-${name}:${value};`
@@ -27,8 +42,9 @@ const inject = async variables => {
 }
 
 const write = async variables => {
+  if (!utilities.themeIsActive) return
   const variablesText = Object.entries(variables).map(lessVariable).join('')
-  await fse.writeFile(FILE_PATH, variablesText)
+  await writeFile(FILE_PATH, variablesText)
 }
 
 const set = async () => {
@@ -59,11 +75,17 @@ const set = async () => {
 
 const activate = () => {
   document.head.appendChild(styleElement)
-  return new Disposable(() => {
-    styleElement.remove()
-    styleElement.textContent = ''
-    document.body.classList.remove(INTERFACE_TRANSITION_CLASS)
-  })
+
+  return new CompositeDisposable(
+    new Disposable(() => {
+      styleElement.remove()
+      styleElement.textContent = ''
+      document.body.classList.remove(INTERFACE_TRANSITION_CLASS)
+    }),
+    ...Object.entries(CONFIG_KEYS_DELAYED).map(([key, delayed]) => {
+      return config.onDidChange(key, {callback: set, delayed})
+    })
+  )
 }
 
 module.exports = {set, activate}
