@@ -39,13 +39,7 @@ a:focus {
 }
 
 label {
-  // Reduce font weight
   font-weight: normal;
-}
-
-code {
-  .customizable-property(background, accent);
-  .general-transition(background);
 }
 
 th, td {
@@ -109,4 +103,10 @@ kbd {
   font-family: inherit;
   font-size: .9em;
   letter-spacing: 1px;
+}
+
+.highlight, code {
+  .customizable-property(background, accent);
+  .customizable-property(color, accent-text-color);
+  .general-transition(background, color;);
 }
