@@ -15,6 +15,7 @@
 
 .pure-background-images-view-custom {
   position: relative;
+  padding-bottom: 2em;
 }
 
 .pure-background-images-view-thumbnail {
@@ -40,11 +41,21 @@
 }
 
 .pure-background-images-view-thumbnail-delete-button {
-  .interactive-transition(visibility, opacity;);
+  .customizable-property(background, opaque-accent);
+  .general-transition(background);
+  .interactive-transition(visibility, opacity, background;);
   position: absolute;
   right: @pure-background-images-view-thumbnail-padding;
   visibility: hidden;
   opacity: 0;
+
+  &:hover {
+    .customizable-property(background, opaque-active-accent);
+
+    .icon::before {
+      .customizable-property(color, active-accent-text-color);
+    }
+  }
 
   .pure-background-images-view-thumbnail:hover & {
     visibility: visible;
@@ -52,6 +63,9 @@
   }
 
   .icon::before {
+    .customizable-property(color, accent-text-color);
+    .general-transition(color);
+    .interactive-transition(color);
     margin: 0;
   }
 }
