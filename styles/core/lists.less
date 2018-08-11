@@ -44,7 +44,9 @@
     .interactive-transition(color);
 
     &.selected {
-      .customizable-property(color, accent-text-color);
+      &:not(.status-added):not(.status-modified):not(.status-ignored) {
+        .customizable-property(color, accent-text-color);
+      }
 
       &::before {
         .customizable-property(background, accent);
