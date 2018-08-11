@@ -12,7 +12,10 @@
 
     &.selected {
       .customizable-property(background, active-accent);
-      .customizable-property(color, active-accent-text-color);
+
+      .word {
+        .customizable-property(color, active-accent-text-color) !important;
+      }
     }
   }
 }
