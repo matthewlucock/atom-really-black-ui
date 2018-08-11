@@ -1,6 +1,11 @@
 .item-views > .editor {
   background: none !important;
 
+  .selection .region {
+    .customizable-property(background, accent);
+    .general-transition(background);
+  }
+
   .gutter {
     .customizable-property(color, subtle-workspace-text-color) !important;
     .general-transition(color);
