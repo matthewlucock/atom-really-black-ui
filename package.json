@@ -51,6 +51,13 @@
           "title": "Scrollbar width",
           "default": "10px",
           "order": 5
+        },
+        "settingsDelay": {
+          "type": "boolean",
+          "title": "Delay when changing some settings",
+          "description": "Factor in a small, artificial delay when changing some settings. This can make changing some settings feel less responsive, but helps prevent awkward mishaps.",
+          "default": true,
+          "order": 6
         }
       }
     },

@@ -16,7 +16,7 @@ const makeCallback = ({callback, delayed}) => {
       callback(value)
     }
 
-    if (delayed) {
+    if (delayed && get('general.settingsDelay')) {
       clearTimeout(timeouts.get(callbackID))
       const timeoutID = setTimeout(timeoutCallback, TIMEOUT_DURATION)
       timeouts.set(callbackID, timeoutID)
