@@ -25,6 +25,7 @@
             "Image",
             "Solid color"
           ],
+          "description": "Customize your background image when the image background is selected with Packages > Pure > Background images, or the \"Pure: Background images\" command in the command palette.",
           "default": "Image",
           "order": 1
         },

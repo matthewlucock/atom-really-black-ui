@@ -22,7 +22,17 @@ const activate = () => {
     }),
     registerCommand('background-images', () => {
       atom.workspace.open(BACKGROUND_IMAGES_VIEW_URI)
-    })
+    }),
+    atom.menu.add([{
+      label: 'Packages',
+      submenu: [{
+        label: 'Pure',
+        submenu: [{
+          label: 'Background images',
+          command: 'pure:background-images'
+        }]
+      }]
+    }])
   )
 }
 
