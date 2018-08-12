@@ -68,6 +68,7 @@
         "workspaceAlpha": {
           "type": "number",
           "title": "Overlay alpha",
+          "description": "The alpha channel of the dark overlay of the background image.",
           "default": 0.85,
           "minimum": 0,
           "maximum": 1,
@@ -89,13 +90,15 @@
         },
         "selectNewImageOnActivation": {
           "type": "boolean",
-          "title": "Select new image on activation",
+          "title": "Select a new image on activation",
+          "description": "Automatically select a new background image each time Atom loads.",
           "default": true,
           "order": 4
         },
         "selectNewImagesFrom": {
           "type": "string",
           "title": "Select new images from",
+          "description": "The images to choose from when automatically selecting a new image. If you don't have any custom images, Pure will use the default images instead.",
           "enum": [
             "Custom images",
             "Default images",
@@ -112,19 +115,20 @@
       "properties": {
         "workspaceColor": {
           "type": "color",
-          "title": "Background color",
+          "title": "Background",
           "default": "black",
           "order": 1
         },
         "accent": {
           "type": "color",
           "title": "Accent",
-          "default": "rgb(51, 51, 51)",
+          "default": "rgb(77, 77, 77)",
           "order": 2
         },
         "setAccentAutomatically": {
           "type": "boolean",
-          "title": "Set accent automatically",
+          "title": "Adjust accent automatically",
+          "description": "Automatically pick a new accent color when you change your background color.",
           "default": true,
           "order": 3
         }
