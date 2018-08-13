@@ -16,24 +16,10 @@ const FILE_PATH = path.join(
 const INTERFACE_TRANSITION_CLASS = 'pure-interface-transition'
 const INTERFACE_TRANSITION_DURATION = 1000
 
-const CONFIG_KEYS_DELAYED = {
-  'general.fontFamily': false,
-  'general.baseFontSize': true,
-  'general.statusBarFontSize': true,
-  'general.scrollbarWidth': true,
-  'imageBackground.workspaceAlpha': true,
-  'imageBackground.accent': false,
-  'imageBackground.accentAlpha': true,
-  'solidBackground.workspaceColor': false,
-  'solidBackground.accent': false
-}
-
 const cssVariable = ([name, value]) => `--pure-${name}:${value};`
 const lessVariable = ([name, value]) => `@pure-${name}:${value};`
 
 const styleElement = document.createElement('style')
-
-let configListenersLocked = false
 
 const inject = async variables => {
   const variablesText = Object.entries(variables).map(cssVariable).join('')
@@ -49,7 +35,7 @@ const write = async variables => {
   await writeFile(FILE_PATH, variablesText)
 }
 
-const set = async () => {
+const set = async options => {
   const data = {
     image: config.get('general.background') === 'Image',
     fontFamily: config.get('general.fontFamily'),
@@ -58,9 +44,7 @@ const set = async () => {
     scrollbarWidth: config.get('general.scrollbarWidth')
   }
 
-  const setAccentAutomatically = (
-    config.get('solidBackground.setAccentAutomatically') && !data.image
-  )
+  const adjustAccentAutomatically = options && options.adjustAccentAutomatically
 
   if (data.image) {
     Object.assign(data, {
@@ -71,7 +55,7 @@ const set = async () => {
   } else {
     Object.assign(data, {
       workspaceColor: String(config.get('solidBackground.workspaceColor')),
-      accent: !setAccentAutomatically && String(
+      accent: !adjustAccentAutomatically && String(
         config.get('solidBackground.accent')
       )
     })
@@ -79,13 +63,47 @@ const set = async () => {
 
   const variables = makeCustomizableVariables(data)
 
-  if (setAccentAutomatically) {
-    configListenersLocked = true
-    config.set('solidBackground.accent', String(variables.accent))
-    configListenersLocked = false
+  if (adjustAccentAutomatically) {
+    config.lockCallbacks()
+    config.set('solidBackground.accent', String(variables.accent.round()))
+    config.unlockCallbacks()
   }
 
   await Promise.all([inject(variables), write(variables)])
+}
+
+const bindConfigListeners = () => {
+  return new CompositeDisposable(
+    config.onDidChange('general.fontFamily', {callback: set}),
+    config.onDidChange('general.baseFontSize', {callback: set, delayed: true}),
+    config.onDidChange('general.statusBarFontSize', {
+      callback: set,
+      delayed: true
+    }),
+    config.onDidChange('general.scrollbarWidth', {
+      callback: set,
+      delayed: true
+    }),
+    config.onDidChange('imageBackground.workspaceAlpha', {
+      callback: set,
+      delayed: true
+    }),
+    config.onDidChange('imageBackground.accent', {callback: set}),
+    config.onDidChange('imageBackground.accentAlpha', {
+      callback: set,
+      delayed: true
+    }),
+    config.onDidChange('solidBackground.workspaceColor', {
+      callback: () => {
+        set({
+          adjustAccentAutomatically: config.get(
+            'solidBackground.adjustAccentAutomatically'
+          )
+        })
+      }
+    }),
+    config.onDidChange('solidBackground.accent', {callback: set})
+  )
 }
 
 const activate = () => {
@@ -97,14 +115,7 @@ const activate = () => {
       styleElement.textContent = ''
       document.body.classList.remove(INTERFACE_TRANSITION_CLASS)
     }),
-    ...Object.entries(CONFIG_KEYS_DELAYED).map(([key, delayed]) => {
-      return config.onDidChange(key, {
-        callback: () => {
-          if (!configListenersLocked) set()
-        },
-        delayed
-      })
-    })
+    bindConfigListeners()
   )
 }
 

@@ -126,7 +126,7 @@
           "default": "rgb(77, 77, 77)",
           "order": 2
         },
-        "setAccentAutomatically": {
+        "adjustAccentAutomatically": {
           "type": "boolean",
           "title": "Adjust accent automatically",
           "description": "Automatically pick a new accent color when you change your background color.",
