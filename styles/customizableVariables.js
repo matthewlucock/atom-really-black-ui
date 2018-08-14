@@ -7,28 +7,27 @@ const BLACK = new Color('black')
 const WHITE = new Color('white')
 const AVERAGE_OF_BLACK_AND_WHITE = BLACK.mix(WHITE, 0.5)
 
-const SOLID_ACCENT_LIGHTNESS_MODIFIER = 30
-const SOLID_ACCENT_LIGHTNESS_THRESHOLD = 70
+const SOLID_ACCENT_LIGHTNESS_MODIFIER = 20
+const SOLID_ACCENT_LIGHTNESS_THRESHOLD = 60
 
 const ACTIVE_ACCENT_ALPHA_MODIFIER = 0.2
 const ACTIVE_ACCENT_ALPHA_THRESHOLD = 0.5
 const ACTIVE_ACCENT_LIGHTNESS_MODIFIER = ACTIVE_ACCENT_ALPHA_MODIFIER * 100
-const ACTIVE_ACCENT_LIGHTNESS_THRESHOLD = ACTIVE_ACCENT_ALPHA_THRESHOLD * 100
 const SUBTLE_TEXT_LIGHTNESS_MODIFIER = 30
 
 const contrastingTextColor = background => background.isDark() ? WHITE : BLACK
 
-const modifyValue = ({value, modifier, threshold}) => {
+const modifyValueWithThreshold = ({value, modifier, threshold}) => {
   if (value + modifier < threshold) return value + modifier
   return value - modifier
 }
 
 const subtleTextColor = textColor => {
-  const lightness = textColor.isDark()
-    ? textColor.lightness() + SUBTLE_TEXT_LIGHTNESS_MODIFIER
-    : textColor.lightness() - SUBTLE_TEXT_LIGHTNESS_MODIFIER
-
-  return textColor.lightness(lightness)
+  return textColor.lightness(
+    textColor.isDark()
+      ? textColor.lightness() + SUBTLE_TEXT_LIGHTNESS_MODIFIER
+      : textColor.lightness() - SUBTLE_TEXT_LIGHTNESS_MODIFIER
+  )
 }
 
 const imageVariables = mem(({workspaceAlpha, baseAccent, accentAlpha}) => {
@@ -47,7 +46,7 @@ const imageVariables = mem(({workspaceAlpha, baseAccent, accentAlpha}) => {
   const accentTextColor = contrastingTextColor(opaqueAccent)
   const subtleAccentTextColor = subtleTextColor(accentTextColor)
 
-  const activeAccentAlpha = modifyValue({
+  const activeAccentAlpha = modifyValueWithThreshold({
     value: accent.alpha(),
     modifier: ACTIVE_ACCENT_ALPHA_MODIFIER,
     threshold: ACTIVE_ACCENT_ALPHA_THRESHOLD
@@ -80,7 +79,7 @@ const solidVariables = mem(({workspaceColor, accent}) => {
   if (accent) {
     accent = new Color(accent)
   } else {
-    const accentLightness = modifyValue({
+    const accentLightness = modifyValueWithThreshold({
       value: workspaceColor.lightness(),
       modifier: SOLID_ACCENT_LIGHTNESS_MODIFIER,
       threshold: SOLID_ACCENT_LIGHTNESS_THRESHOLD
@@ -94,11 +93,9 @@ const solidVariables = mem(({workspaceColor, accent}) => {
   const accentTextColor = contrastingTextColor(accent)
   const subtleAccentTextColor = subtleTextColor(accentTextColor)
 
-  const activeAccentLightness = modifyValue({
-    value: accent.lightness(),
-    modifier: ACTIVE_ACCENT_LIGHTNESS_MODIFIER,
-    threshold: ACTIVE_ACCENT_LIGHTNESS_THRESHOLD
-  })
+  const activeAccentLightness = accent.lightness() > workspaceColor.lightness()
+    ? accent.lightness() + ACTIVE_ACCENT_LIGHTNESS_MODIFIER
+    : accent.lightness() - ACTIVE_ACCENT_LIGHTNESS_MODIFIER
   const activeAccent = accent.lightness(activeAccentLightness)
   const activeAccentTextColor = contrastingTextColor(activeAccent)
 
