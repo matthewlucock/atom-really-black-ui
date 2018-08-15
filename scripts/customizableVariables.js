@@ -1,5 +1,8 @@
 'use strict'
 
+// This modules is used to handle the generation, injection, and writing of
+// customizable style variables.
+
 const path = require('path')
 const {Disposable, CompositeDisposable} = require('atom')
 const delay = require('delay')
@@ -18,6 +21,9 @@ const lessVariable = ([name, value]) => `@pure-${name}:${value};`
 
 const styleElement = document.createElement('style')
 
+/**
+ * @param {Object} variables
+ */
 const inject = async variables => {
   const variablesText = Object.entries(variables).map(cssVariable).join('')
   document.body.classList.add(INTERFACE_TRANSITION_CLASS)
@@ -26,11 +32,18 @@ const inject = async variables => {
   document.body.classList.remove(INTERFACE_TRANSITION_CLASS)
 }
 
+/**
+ * @param {object} variables
+ */
 const write = async variables => {
   const variablesText = Object.entries(variables).map(lessVariable).join('')
   await writeFile(FILE_PATH, variablesText)
 }
 
+/**
+ * @param {object} options
+ * @param {boolean} options.adjustAccentAutomatically
+ */
 const set = async options => {
   const data = {
     image: config.get('general.background') === 'Image',
@@ -61,6 +74,8 @@ const set = async options => {
 
   if (adjustAccentAutomatically) {
     config.disableCallbacks()
+    // Sometimes floating point errors occur such that the color string does not
+    // fit Atom's color config schema. Rounding the color fixes this problem.
     config.set('solidBackground.accent', String(variables.accent.round()))
     config.enableCallbacks()
   }

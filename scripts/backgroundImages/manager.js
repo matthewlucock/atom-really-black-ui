@@ -16,10 +16,20 @@ const SELECTED_IMAGE_JSON_PATH = path.join(
   'selected.json'
 )
 
+/**
+ * @param {BackgroundImage} image
+ * @returns {string}
+ */
 const getBackgroundImageCss = image => {
   return `body {background-image: ${image.cssURL}}`
 }
 
+/**
+ * Read a subdirectory of background images and create an array of
+ * BackgroundImage instances.
+ * @param {string} directoryName
+ * @returns {Promise} Promise representing the array of BackgroundImages.
+ */
 const getDirectory = async directoryName => {
   const directoryPath = path.join(BACKGROUND_IMAGES_DIRECTORY, directoryName)
   await fse.ensureDir(directoryPath)
@@ -40,12 +50,24 @@ module.exports = class BackgroundImageManager {
     this.getDirectory = mem(getDirectory)
   }
 
+  /**
+   * Load and return the custom images directory if it contains any images,
+   * or the default images directory otherwise.
+   * @returns {Promise} Promise representing the array of BackgroundImages.
+   */
   async optionallyGetCustomImages () {
     const customImages = await this.getDirectory('custom')
     if (customImages.length) return customImages
     return this.getDirectory('default')
   }
 
+  /**
+   * Randomly select an image from the provided set of images, provided it isn't
+   * already selected.
+   * @param {object} options
+   * @param {Array#BackgroundImage} options.images The images to select from.
+   * @param {BackgroundImage} options.currentImage
+   */
   async selectRandomImage ({images, currentImage}) {
     images = images.filter(image => image !== currentImage)
 
@@ -55,6 +77,11 @@ module.exports = class BackgroundImageManager {
     })
   }
 
+  /**
+   * @param {object} options
+   * @param {BackgroundImage} options.image
+   * @param {boolean} animateOut If true, the image fades out instead of in.
+   */
   async animate ({image, animateOut}) {
     const opacity = animateOut ? [1, 0] : [0, 1]
 
@@ -68,19 +95,40 @@ module.exports = class BackgroundImageManager {
     await animation.finished
   }
 
+  /**
+   * @param {object} options
+   * @param {BackgroundImage} options.image
+   * @param {boolean} options.write
+   * @emits BackgroundImagesManager#select
+   * @emits BackgroundImagesManager#deselect
+   */
   async select ({image, write}) {
     if (this.selectedImage && !this.selectedImage.deleted) {
+      /**
+       * @event BackgroundImagesManager#deselect
+       * @type {BackgroundImage}
+       */
       this.emitter.emit('deselect', this.selectedImage)
     }
 
     this.selectedImage = image
+
+    /**
+     * @event BackgroundImagesManager#select
+     * @type {BackgroundImage}
+     */
     this.emitter.emit('select', image)
+
     await this.animate({image})
     this.styleElement.textContent = getBackgroundImageCss(image)
 
     if (write) await fse.writeJson(SELECTED_IMAGE_JSON_PATH, image)
   }
 
+  /**
+   * @param {string} sourcePath
+   * @emits BackgroundImagesManager#addCustomImage
+   */
   async addCustomImage (sourcePath) {
     const fileName = Math.random() + path.extname(sourcePath)
     const destinationPath = path.join(
@@ -95,9 +143,18 @@ module.exports = class BackgroundImageManager {
     const customImages = await this.getDirectory('custom')
     customImages.push(image)
 
+    /**
+     * @event BackgroundImagesManager#addCustomImage
+     * @type {BackgroundImage}
+     */
     this.emitter.emit('addCustomImage', image)
   }
 
+  /**
+   * @param {BackgroundImage} image
+   * @emits BackgroundImagesManager#deleteCustomImage
+   * @throws Throws an error when the image is not a custom image.
+   */
   async deleteCustomImage (image) {
     if (image.directoryName !== 'custom') {
       throw new Error('Only custom images can be deleted.')
@@ -109,6 +166,11 @@ module.exports = class BackgroundImageManager {
     customImages.splice(customImages.indexOf(image), 1)
 
     image.deleted = true
+
+    /**
+     * @event BackgroundImagesManager#deleteCustomImage
+     * @type {BackgroundImage}
+     */
     this.emitter.emit('deleteCustomImage', image)
 
     if (image === this.selectedImage) {
@@ -116,6 +178,9 @@ module.exports = class BackgroundImageManager {
     }
   }
 
+  /**
+   * @returns {Promise} Promise representing the retrieved image.
+   */
   async getWrittenSelectedImage () {
     await fse.ensureFile(SELECTED_IMAGE_JSON_PATH)
     const selectedImageData = await fse.readJson(
@@ -130,6 +195,9 @@ module.exports = class BackgroundImageManager {
     return images.find(image => image.fileName === fileName)
   }
 
+  /**
+   * @returns {Promise} Promise representing an array of BackgroundImages.
+   */
   async getImagesToSelectNewImageFrom () {
     const selectNewImagesFrom = config.get(
       'imageBackground.selectNewImagesFrom'
@@ -166,6 +234,9 @@ module.exports = class BackgroundImageManager {
     }
   }
 
+  /**
+   * @returns {Disposable}
+   */
   activate () {
     document.body.append(this.animationElement)
     document.head.append(this.styleElement)

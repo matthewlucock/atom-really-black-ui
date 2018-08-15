@@ -8,7 +8,13 @@ const BASE_CLASS = `${BACKGROUND_IMAGES_VIEW_CLASS}-thumbnail`
 const LOADING_CLASS = `${BASE_CLASS}-loading`
 const SELECTED_CLASS = `${BASE_CLASS}-selected`
 
+// A thumbnail for a background image for use in the background images view.
 module.exports = class BackgroundImageThumbnail {
+  /**
+   * @param {object} options
+   * @param {BackgroundImage} options.image
+   * @param {boolean} options.deletable
+   */
   constructor ({image, deletable}) {
     this.image = image
     this.emitter = new EventEmitter()
@@ -19,7 +25,12 @@ module.exports = class BackgroundImageThumbnail {
       'div',
       {
         classList: [BASE_CLASS, LOADING_CLASS],
-        events: {click: () => this.emitter.emit('select')}
+        events: {
+          /**
+           * @emits BackgroundImageThumbnail#select
+           */
+          click: () => this.emitter.emit('select')
+        }
       },
       [this.imageElement]
     )
@@ -30,6 +41,9 @@ module.exports = class BackgroundImageThumbnail {
         {
           classList: ['btn', `${BASE_CLASS}-delete-button`],
           events: {
+            /**
+             * @emits BackgroundImagesThumbbail#delete
+             */
             click: event => {
               event.stopPropagation()
               this.emitter.emit('delete')

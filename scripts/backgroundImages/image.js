@@ -5,6 +5,10 @@ const mem = require('mem')
 const {BACKGROUND_IMAGES_DIRECTORY, fileURI} = require('../utilities')
 
 module.exports = class BackgroundImage {
+  /**
+   * @param {string} directoryName
+   * @param {string} fileName
+   */
   constructor (directoryName, fileName) {
     this.directoryName = directoryName
     this.fileName = fileName
@@ -27,6 +31,10 @@ module.exports = class BackgroundImage {
     return `url(${this.uri})`
   }
 
+  /**
+   * Load the image from the file system.
+   * @async
+   */
   load () {
     return new Promise(resolve => {
       const element = document.createElement('img')

@@ -100,6 +100,14 @@ module.exports = class BackgroundImagesView {
     this.disposables.dispose()
   }
 
+  /**
+   * @param {object} options
+   * @param {BackgroundImage} options.image
+   * @param {boolean} options.deletable
+   * @listens BackgroundImagesThumbnail#select
+   * @listens BackgroundImagesThumbnail#delete
+   * @returns {BackgroundImageThumbnail}
+   */
   makeThumbnail ({image, deletable}) {
     const thumbnail = new BackgroundImageThumbnail({image, deletable})
 
@@ -111,6 +119,14 @@ module.exports = class BackgroundImagesView {
     return thumbnail
   }
 
+  /**
+   * @param {object} options
+   * @param {BackgroundImage} options.image
+   * @param {boolean} options.deletable
+   * @param {Array#BackgroundImageThumbnail} options.thumbnails
+   * @param {HTMLElement} options.list
+   * @returns {BackgroundImageThumbnail}
+   */
   addThumbnail ({image, deletable, thumbnails, list}) {
     const thumbnail = this.makeThumbnail({image, deletable})
     thumbnails.push(thumbnail)
@@ -118,12 +134,23 @@ module.exports = class BackgroundImagesView {
     return thumbnail
   }
 
+  /**
+   * @param {BackgroundImage} image
+   * @returns {BackgroundImageThumbnail}
+   */
   getThumbnailFromImage (image) {
     return this.thumbnails[image.directoryName].find(thumbnail => {
       return thumbnail.image.fileName === image.fileName
     })
   }
 
+  /**
+   * @param {object} options
+   * @param {string} options.directoryName
+   * @param {HTMLElement} options.list
+   * @param {HTMLElement} options.container
+   * @param {boolean} options.deletable
+   */
   async loadList ({directoryName, list, container, deletable}) {
     const images = await this.manager.getDirectory(directoryName)
     const thumbnails = this.thumbnails[directoryName]
@@ -136,6 +163,9 @@ module.exports = class BackgroundImagesView {
     container.classList.remove(LOADING_CLASS)
   }
 
+  /**
+   * @param {BackgroundImage} image
+   */
   async addCustomImageThumbnail (image) {
     const thumbnail = this.addThumbnail({
       image,
@@ -147,12 +177,18 @@ module.exports = class BackgroundImagesView {
     await thumbnail.load()
   }
 
+  /**
+   * @param {BackgroundImage} image
+   */
   deleteCustomImageThumbnail (image) {
     const thumbnail = this.getThumbnailFromImage(image)
     thumbnail.element.remove()
     this.thumbnails.custom.splice(this.thumbnails.custom.indexOf(thumbnail), 1)
   }
 
+  /**
+   * @param {FileList} files
+   */
   async addCustomImagesFromFileList (files) {
     files = Array.from(files)
     let unsupportedFileTypes = false
@@ -189,6 +225,12 @@ module.exports = class BackgroundImagesView {
     }
   }
 
+  /**
+   * @listens BackgroundImagesManager#select
+   * @listens BackgroundImagesManager#deselect
+   * @listens BackgroundImagesManager#addCustomImage
+   * @listens BackgroundImagesManager#deleteCustomImage
+   */
   bindManagerListeners () {
     const listeners = {
       select: image => this.getThumbnailFromImage(image).select(),

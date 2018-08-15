@@ -1,10 +1,18 @@
 'use strict'
 
+// This module is used to generate the customizable style variables.
+// It is shared between build scripts running outside Atom and the renderer
+// process when the theme is running.
+
 const Color = require('color')
 const mem = require('mem')
 
 const BLACK = new Color('black')
 const WHITE = new Color('white')
+
+// As images are different colours in different places, the avergage of black
+// and white is used to represent the average color of background images.
+// This is not perfect, but it's a sensible solution and provides good results.
 const AVERAGE_OF_BLACK_AND_WHITE = BLACK.mix(WHITE, 0.5)
 
 const SOLID_ACCENT_LIGHTNESS_MODIFIER = 20
@@ -12,8 +20,19 @@ const ACTIVE_ACCENT_ALPHA_MODIFIER = 0.2
 const ACTIVE_ACCENT_LIGHTNESS_MODIFIER = ACTIVE_ACCENT_ALPHA_MODIFIER * 100
 const SUBTLE_TEXT_LIGHTNESS_MODIFIER = 30
 
+/**
+ * Generates a contrasting text color (black or white) for a given background
+ * color.
+ * @param {Color} background
+ * @returns {Color}
+ */
 const contrastingTextColor = background => background.isDark() ? WHITE : BLACK
 
+/**
+ * Generates a subtle text color for a given text color.
+ * @param {Color} textColor
+ * @returns {Color}
+ */
 const subtleTextColor = textColor => {
   const lightness = textColor.isDark()
     ? textColor.lightness() + SUBTLE_TEXT_LIGHTNESS_MODIFIER
@@ -22,6 +41,14 @@ const subtleTextColor = textColor => {
   return textColor.lightness(lightness)
 }
 
+/**
+ * Generate the style variables for image backgrounds.
+ * @param {object} options
+ * @param {number} options.workspaceAlpha
+ * @param {object} options.baseAccent
+ * @param {number} options.accentAlpha
+ * @returns {object}
+ */
 const imageVariables = mem(({workspaceAlpha, baseAccent, accentAlpha}) => {
   baseAccent = new Color(baseAccent)
 
@@ -65,6 +92,13 @@ const imageVariables = mem(({workspaceAlpha, baseAccent, accentAlpha}) => {
   }
 })
 
+/**
+ * Generate the style variables for solid color backgrounds.
+ * @param {object} options
+ * @param {object} options.workspaceColor
+ * @param {object} options.accent
+ * @returns {object}
+ */
 const solidVariables = mem(({workspaceColor, accent}) => {
   workspaceColor = new Color(workspaceColor)
 
