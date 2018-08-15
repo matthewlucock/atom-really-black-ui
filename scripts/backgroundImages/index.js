@@ -6,7 +6,8 @@ const BackgroundImagesView = require('./view')
 const {BACKGROUND_IMAGES_VIEW_URI, registerCommand} = require('../utilities')
 const config = require('../config')
 const customizableVariables = require('../customizableVariables')
-const opener = require('../opener')
+
+const COMMAND_NAME = 'background-images'
 
 let manager
 let disposables
@@ -17,22 +18,29 @@ const activate = () => {
 
   disposables = new CompositeDisposable(
     manager.activate(),
-    opener.add(BACKGROUND_IMAGES_VIEW_URI, () => {
-      return new BackgroundImagesView(manager)
+    atom.workspace.addOpener(uri => {
+      if (uri === BACKGROUND_IMAGES_VIEW_URI) {
+        return new BackgroundImagesView(manager)
+      }
     }),
-    registerCommand('background-images', () => {
+    registerCommand(COMMAND_NAME, () => {
       atom.workspace.open(BACKGROUND_IMAGES_VIEW_URI)
     }),
     atom.menu.add([{
       label: 'Packages',
       submenu: [{
         label: 'Pure',
-        submenu: [{
-          label: 'Background images',
-          command: 'pure:background-images'
-        }]
+        submenu: [{label: 'Background images', command: `pure:${COMMAND_NAME}`}]
       }]
-    }])
+    }]),
+    new Disposable(() => {
+      const pane = atom.workspace.paneForURI(BACKGROUND_IMAGES_VIEW_URI)
+      if (!pane) return
+
+      for (const item of pane.getItems()) {
+        if (item instanceof BackgroundImagesView) pane.destroyItem(item)
+      }
+    })
   )
 }
 
@@ -41,21 +49,16 @@ const deactivate = () => {
   manager = null
 }
 
-const bindConfigListener = () => {
-  const callback = backgroundMode => {
-    if (backgroundMode === 'Image') {
-      activate()
-    } else {
-      deactivate()
-    }
-
-    customizableVariables.set()
-  }
-
+const bindConfigListeners = () => {
   return new CompositeDisposable(
-    config.observe('general.background', {callback}),
+    config.observe('general.background', {
+      callback: background => background === 'Image' ? activate() : deactivate()
+    }),
+    config.onDidChange('general.background', {
+      callback: customizableVariables.set
+    }),
     new Disposable(deactivate)
   )
 }
 
-module.exports = {bindConfigListener}
+module.exports = {bindConfigListeners}

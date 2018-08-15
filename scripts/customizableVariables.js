@@ -6,12 +6,9 @@ const delay = require('delay')
 const {writeFile} = require('fs-extra')
 const config = require('./config')
 const makeCustomizableVariables = require('../styles/customizableVariables')
-const utilities = require('./utilities')
+const {ROOT_PATH} = require('./utilities')
 
-const FILE_PATH = path.join(
-  utilities.THEME_PATH,
-  'styles/customizable-variables.less'
-)
+const FILE_PATH = path.join(ROOT_PATH, 'styles/customizable-variables.less')
 
 const INTERFACE_TRANSITION_CLASS = 'pure-interface-transition'
 const INTERFACE_TRANSITION_DURATION = 1000
@@ -30,7 +27,6 @@ const inject = async variables => {
 }
 
 const write = async variables => {
-  if (!utilities.themeIsActive) return
   const variablesText = Object.entries(variables).map(lessVariable).join('')
   await writeFile(FILE_PATH, variablesText)
 }
@@ -64,9 +60,9 @@ const set = async options => {
   const variables = makeCustomizableVariables(data)
 
   if (adjustAccentAutomatically) {
-    config.lockCallbacks()
+    config.disableCallbacks()
     config.set('solidBackground.accent', String(variables.accent.round()))
-    config.unlockCallbacks()
+    config.enableCallbacks()
   }
 
   await Promise.all([inject(variables), write(variables)])

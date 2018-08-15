@@ -95,6 +95,11 @@ module.exports = class BackgroundImagesView {
     return 'file-media'
   }
 
+  destroy () {
+    this.element.remove()
+    this.disposables.dispose()
+  }
+
   makeThumbnail ({image, deletable}) {
     const thumbnail = new BackgroundImageThumbnail({image, deletable})
 
@@ -196,7 +201,7 @@ module.exports = class BackgroundImagesView {
       this.manager.emitter.on(event, listener)
 
       this.disposables.add(new Disposable(() => {
-        this.manager.emitter.off(event, listener)
+        this.manager.emitter.removeListener(event, listener)
       }))
     }
   }

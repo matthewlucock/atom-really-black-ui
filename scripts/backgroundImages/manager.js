@@ -1,14 +1,14 @@
 'use strict'
 
-const {Disposable} = require('atom')
 const {EventEmitter} = require('events')
 const path = require('path')
+const {Disposable} = require('atom')
 const {createElement} = require('docrel')
 const fse = require('fs-extra')
 const mem = require('mem')
 const randomItem = require('random-item')
 const BackgroundImage = require('./image')
-const {BACKGROUND_IMAGES_DIRECTORY, getCssUrl} = require('../utilities')
+const {BACKGROUND_IMAGES_DIRECTORY} = require('../utilities')
 const config = require('../config')
 
 const SELECTED_IMAGE_JSON_PATH = path.join(
@@ -17,7 +17,17 @@ const SELECTED_IMAGE_JSON_PATH = path.join(
 )
 
 const getBackgroundImageCss = image => {
-  return `body {background-image: ${getCssUrl(image.uri)}}`
+  return `body {background-image: ${image.cssURL}}`
+}
+
+const getDirectory = async directoryName => {
+  const directoryPath = path.join(BACKGROUND_IMAGES_DIRECTORY, directoryName)
+  await fse.ensureDir(directoryPath)
+  const fileNames = await fse.readdir(directoryPath)
+
+  return fileNames.map(fileName => {
+    return new BackgroundImage(directoryName, fileName)
+  })
 }
 
 module.exports = class BackgroundImageManager {
@@ -27,17 +37,7 @@ module.exports = class BackgroundImageManager {
     this.animationElement = createElement('div', {
       class: 'pure-background-image-animation'
     })
-    this.getDirectory = mem(this.getDirectory)
-  }
-
-  async getDirectory (directoryName) {
-    const directoryPath = path.join(BACKGROUND_IMAGES_DIRECTORY, directoryName)
-    await fse.ensureDir(directoryPath)
-    const fileNames = await fse.readdir(directoryPath)
-
-    return fileNames.map(fileName => {
-      return new BackgroundImage(directoryName, fileName)
-    })
+    this.getDirectory = mem(getDirectory)
   }
 
   async optionallyGetCustomImages () {
@@ -60,7 +60,7 @@ module.exports = class BackgroundImageManager {
 
     await image.load()
 
-    this.animationElement.style.backgroundImage = getCssUrl(image.uri)
+    this.animationElement.style.backgroundImage = image.cssURL
     const animation = this.animationElement.animate({opacity}, {
       duration: 1000,
       fill: 'forwards'

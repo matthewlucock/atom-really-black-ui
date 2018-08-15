@@ -2,7 +2,7 @@
 
 const path = require('path')
 const mem = require('mem')
-const {BACKGROUND_IMAGES_DIRECTORY, getFileUri} = require('../utilities')
+const {BACKGROUND_IMAGES_DIRECTORY, fileURI} = require('../utilities')
 
 module.exports = class BackgroundImage {
   constructor (directoryName, fileName) {
@@ -20,13 +20,17 @@ module.exports = class BackgroundImage {
   }
 
   get uri () {
-    return getFileUri(this.absolutePath)
+    return fileURI(this.absolutePath)
+  }
+
+  get cssURL () {
+    return `url(${this.uri})`
   }
 
   load () {
     return new Promise(resolve => {
       const element = document.createElement('img')
-      element.onload = () => resolve()
+      element.onload = resolve
       element.src = this.uri
     })
   }

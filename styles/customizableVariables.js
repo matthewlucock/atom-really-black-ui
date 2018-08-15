@@ -8,26 +8,18 @@ const WHITE = new Color('white')
 const AVERAGE_OF_BLACK_AND_WHITE = BLACK.mix(WHITE, 0.5)
 
 const SOLID_ACCENT_LIGHTNESS_MODIFIER = 20
-const SOLID_ACCENT_LIGHTNESS_THRESHOLD = 60
-
 const ACTIVE_ACCENT_ALPHA_MODIFIER = 0.2
-const ACTIVE_ACCENT_ALPHA_THRESHOLD = 0.5
 const ACTIVE_ACCENT_LIGHTNESS_MODIFIER = ACTIVE_ACCENT_ALPHA_MODIFIER * 100
 const SUBTLE_TEXT_LIGHTNESS_MODIFIER = 30
 
 const contrastingTextColor = background => background.isDark() ? WHITE : BLACK
 
-const modifyValueWithThreshold = ({value, modifier, threshold}) => {
-  if (value + modifier < threshold) return value + modifier
-  return value - modifier
-}
-
 const subtleTextColor = textColor => {
-  return textColor.lightness(
-    textColor.isDark()
-      ? textColor.lightness() + SUBTLE_TEXT_LIGHTNESS_MODIFIER
-      : textColor.lightness() - SUBTLE_TEXT_LIGHTNESS_MODIFIER
-  )
+  const lightness = textColor.isDark()
+    ? textColor.lightness() + SUBTLE_TEXT_LIGHTNESS_MODIFIER
+    : textColor.lightness() - SUBTLE_TEXT_LIGHTNESS_MODIFIER
+
+  return textColor.lightness(lightness)
 }
 
 const imageVariables = mem(({workspaceAlpha, baseAccent, accentAlpha}) => {
@@ -46,11 +38,11 @@ const imageVariables = mem(({workspaceAlpha, baseAccent, accentAlpha}) => {
   const accentTextColor = contrastingTextColor(opaqueAccent)
   const subtleAccentTextColor = subtleTextColor(accentTextColor)
 
-  const activeAccentAlpha = modifyValueWithThreshold({
-    value: accent.alpha(),
-    modifier: ACTIVE_ACCENT_ALPHA_MODIFIER,
-    threshold: ACTIVE_ACCENT_ALPHA_THRESHOLD
-  })
+  const activeAccentAlpha = (
+    accent.alpha() + ACTIVE_ACCENT_ALPHA_MODIFIER < 0.5
+      ? accent.alpha() + ACTIVE_ACCENT_ALPHA_MODIFIER
+      : accent.alpha() - ACTIVE_ACCENT_ALPHA_MODIFIER
+  )
   const activeAccent = baseAccent.alpha(activeAccentAlpha)
   const opaqueActiveAccent = opaqueWorkspaceColor.mix(
     baseAccent,
@@ -79,11 +71,11 @@ const solidVariables = mem(({workspaceColor, accent}) => {
   if (accent) {
     accent = new Color(accent)
   } else {
-    const accentLightness = modifyValueWithThreshold({
-      value: workspaceColor.lightness(),
-      modifier: SOLID_ACCENT_LIGHTNESS_MODIFIER,
-      threshold: SOLID_ACCENT_LIGHTNESS_THRESHOLD
-    })
+    const accentLightness = (
+      workspaceColor.lightness() + SOLID_ACCENT_LIGHTNESS_MODIFIER < 60
+        ? workspaceColor.lightness() + SOLID_ACCENT_LIGHTNESS_MODIFIER
+        : workspaceColor.lightness() - SOLID_ACCENT_LIGHTNESS_MODIFIER
+    )
 
     accent = workspaceColor.lightness(accentLightness)
   }

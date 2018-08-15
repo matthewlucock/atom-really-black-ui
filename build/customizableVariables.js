@@ -1,14 +1,12 @@
 'use strict'
 
-const fse = require('fs-extra')
+const fs = require('fs')
 const makeCustomizableVariables = require('../styles/customizableVariables')
 const metadata = require('../package.json')
 
-const FILE_PATH = 'styles/customizable-variables.less'
+const {general, imageBackground, solidBackground} = metadata.configSchema
 
 const lessVariable = ([name, value]) => `@pure-${name}:${value};`
-
-const {general, imageBackground, solidBackground} = metadata.configSchema
 
 const data = {
   image: general.properties.background.default === 'Image',
@@ -33,4 +31,4 @@ if (data.image) {
 
 const variables = makeCustomizableVariables(data)
 const variablesText = Object.entries(variables).map(lessVariable).join('')
-fse.writeFileSync(FILE_PATH, variablesText)
+fs.writeFileSync('styles/customizable-variables.less', variablesText)

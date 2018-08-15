@@ -7,13 +7,13 @@ const makeKey = keySuffix => `pure-ui.${keySuffix}`
 const get = keySuffix => atom.config.get(makeKey(keySuffix))
 const set = (keySuffix, value) => atom.config.set(makeKey(keySuffix), value)
 
-let callbacksLocked = false
+let callbacksDisabled = false
 
 const makeCallback = ({callback, delayed}) => {
   const callbackID = Math.random()
 
   return value => {
-    if (callbacksLocked) return
+    if (callbacksDisabled) return
 
     const timeoutCallback = () => {
       timeouts.delete(callbackID)
@@ -41,12 +41,12 @@ const makeListenFunction = fn => {
 const onDidChange = makeListenFunction(atom.config.onDidChange)
 const observe = makeListenFunction(atom.config.observe)
 
-const lockCallbacks = () => {
-  callbacksLocked = true
+const disableCallbacks = () => {
+  callbacksDisabled = true
 }
 
-const unlockCallbacks = () => {
-  callbacksLocked = false
+const enableCallbacks = () => {
+  callbacksDisabled = false
 }
 
 module.exports = {
@@ -54,6 +54,6 @@ module.exports = {
   set,
   onDidChange,
   observe,
-  lockCallbacks,
-  unlockCallbacks
+  disableCallbacks,
+  enableCallbacks
 }
