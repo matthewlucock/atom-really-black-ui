@@ -119,8 +119,13 @@ module.exports = class BackgroundImageManager {
      */
     this.emitter.emit('select', image)
 
-    await this.animate({image})
+    if (config.get('imageBackground.animate')) {
+      document.body.append(this.animationElement)
+      await this.animate({image})
+    }
+
     this.styleElement.textContent = getBackgroundImageCss(image)
+    this.animationElement.remove()
 
     if (write) await fse.writeJson(SELECTED_IMAGE_JSON_PATH, image)
   }
@@ -238,7 +243,6 @@ module.exports = class BackgroundImageManager {
    * @returns {Disposable}
    */
   activate () {
-    document.body.append(this.animationElement)
     document.head.append(this.styleElement)
 
     this.handleImageSelectionOnActivation()

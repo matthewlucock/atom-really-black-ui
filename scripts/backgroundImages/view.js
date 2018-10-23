@@ -7,6 +7,7 @@ const {
   BACKGROUND_IMAGES_VIEW_CLASS,
   BACKGROUND_IMAGES_VIEW_URI
 } = require('../utilities')
+const config = require('../config')
 
 const CUSTOM_CONTAINER_CLASS = `${BACKGROUND_IMAGES_VIEW_CLASS}-custom`
 const LOADING_CLASS = `${BACKGROUND_IMAGES_VIEW_CLASS}-loading`
@@ -14,7 +15,33 @@ const DROP_ZONE_CLASS = `${CUSTOM_CONTAINER_CLASS}-drop-zone`
 const DROP_ZONE_ACTIVE_CLASS = `${DROP_ZONE_CLASS}-active`
 
 const SUPPORTED_FILE_TYPES = ['image/jpeg', 'image/png']
+const PERFORMANCE_WARNING_FILE_SIZE = 2 * 1000 * 1000
 const MAXIMUM_FILE_SIZE = 20 * 1000 * 1000
+
+const showPerformanceWarning = () => {
+  atom.notifications.addWarning('Potential performance issues', {
+    dismissable: true,
+    description: (
+      'You may experience performance issues with the background animation ' +
+      'when using custom images of large file sizes. You can disable the ' +
+      'background animation in Pure\'s settings.\n\n' +
+      'Your results will vary, but to ensure optimal performance of the ' +
+      'animation on less powerful systems, keep images below ' +
+      `${PERFORMANCE_WARNING_FILE_SIZE / 1000 / 1000}MB in size.`
+    ),
+    buttons: [{
+      text: 'Don\'t show me this again',
+      onDidClick () {
+        config.set('imageBackground.performanceWarning', false)
+        this.model.dismiss()
+        atom.notifications.addInfo(
+          'You can re-enable the performance warning in Pure\'s settings.',
+          {dismissable: true}
+        )
+      }
+    }]
+  })
+}
 
 module.exports = class BackgroundImagesView {
   constructor (manager) {
@@ -192,36 +219,47 @@ module.exports = class BackgroundImagesView {
   async addCustomImagesFromFileList (files) {
     files = Array.from(files)
     let unsupportedFileTypes = false
+    let performanceWarning = false
     let extremeFileSizes = false
 
     await Promise.all(files.map(async file => {
       if (!SUPPORTED_FILE_TYPES.includes(file.type)) {
         unsupportedFileTypes = true
-      } else if (file.size > MAXIMUM_FILE_SIZE) {
-        extremeFileSizes = true
-      } else {
-        await this.manager.addCustomImage(file.path)
+        return
       }
+
+      if (file.size > MAXIMUM_FILE_SIZE) {
+        extremeFileSizes = true
+        return
+      }
+
+      if (file.size > PERFORMANCE_WARNING_FILE_SIZE) {
+        performanceWarning = true
+      }
+
+      await this.manager.addCustomImage(file.path)
     }))
 
     if (unsupportedFileTypes) {
-      atom.notifications.addError(
-        'Unsupported file type(s)',
-        {
-          dismissable: true,
-          description: 'Images must be JPG or PNG files.'
-        }
-      )
+      atom.notifications.addError('Unsupported file type(s)', {
+        dismissable: true,
+        description: 'Images must be JPG or PNG files.'
+      })
     }
 
     if (extremeFileSizes) {
-      atom.notifications.addError(
-        'Extreme file size(s)',
-        {
-          dismissable: true,
-          description: 'Images must be smaller than 10MB.'
-        }
-      )
+      atom.notifications.addError('Extreme file size(s)', {
+        dismissable: true,
+        description: (
+          `Images must be smaller than ${MAXIMUM_FILE_SIZE / 1000 / 1000}MB.`
+        )
+      })
+    }
+
+    if (
+      performanceWarning && config.get('imageBackground.performanceWarning')
+    ) {
+      showPerformanceWarning()
     }
   }
 

@@ -108,6 +108,19 @@
           ],
           "default": "Custom images",
           "order": 5
+        },
+        "animate": {
+          "type": "boolean",
+          "title": "Animate background",
+          "default": true,
+          "order": 6
+        },
+        "performanceWarning": {
+          "type": "boolean",
+          "title": "Warn of animation performance issues",
+          "description": "Using custom images of large file sizes can cause performance issues with the background animation.",
+          "default": true,
+          "order": 7
         }
       }
     },
