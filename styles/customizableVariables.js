@@ -76,6 +76,7 @@ const imageVariables = mem(({workspaceAlpha, baseAccent, accentAlpha}) => {
     activeAccentAlpha
   )
   const activeAccentTextColor = contrastingTextColor(opaqueActiveAccent)
+  const subtleActiveAccentTextColor = subtleTextColor(activeAccentTextColor)
 
   return {
     'app-color': BLACK,
@@ -88,7 +89,8 @@ const imageVariables = mem(({workspaceAlpha, baseAccent, accentAlpha}) => {
     'subtle-accent-text-color': subtleAccentTextColor,
     'active-accent': activeAccent,
     'opaque-active-accent': opaqueActiveAccent,
-    'active-accent-text-color': activeAccentTextColor
+    'active-accent-text-color': activeAccentTextColor,
+    'subtle-active-accent-text-color': subtleActiveAccentTextColor
   }
 })
 
@@ -124,6 +126,7 @@ const solidVariables = mem(({workspaceColor, accent}) => {
     : accent.lightness() - ACTIVE_ACCENT_LIGHTNESS_MODIFIER
   const activeAccent = accent.lightness(activeAccentLightness)
   const activeAccentTextColor = contrastingTextColor(activeAccent)
+  const subtleActiveAccentTextColor = subtleTextColor(activeAccentTextColor)
 
   return {
     'app-color': workspaceColor,
@@ -136,7 +139,8 @@ const solidVariables = mem(({workspaceColor, accent}) => {
     'subtle-accent-text-color': subtleAccentTextColor,
     'active-accent': activeAccent,
     'opaque-active-accent': activeAccent,
-    'active-accent-text-color': activeAccentTextColor
+    'active-accent-text-color': activeAccentTextColor,
+    'subtle-active-accent-text-color': subtleActiveAccentTextColor
   }
 })
 

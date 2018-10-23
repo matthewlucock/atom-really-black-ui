@@ -1,0 +1,26 @@
+.tooltip {
+  .customizable-property(font-family, font-family);
+  .customizable-property(font-size, base-font-size);
+  .general-transition(font-size);
+  opacity: 1 !important;
+
+  .tooltip-inner {
+    .customizable-property(background, opaque-accent);
+    .customizable-property(color, accent-text-color);
+    .general-transition(background, color;);
+    padding: .25em .5em;
+    max-width: none;
+    white-space: nowrap;
+    border-radius: 0;
+  }
+
+  .tooltip-arrow {
+    display: none;
+  }
+
+  .keystroke {
+    &:extend(kbd);
+    .customizable-property(background, opaque-active-accent) !important;
+    .customizable-property(color, active-accent-text-color) !important;
+  }
+}

@@ -1,0 +1,128 @@
+.input-text, .input-textarea, .input-search, .input-number {
+  .customizable-property(background, accent);
+  .general-transition(background);
+  .interactive-transition(background);
+  border: none !important;
+
+  &:hover, &:focus {
+    .customizable-property(background, active-accent);
+  }
+
+  &::-webkit-input-placeholder {
+    .customizable-property(color, subtle-accent-text-color);
+    .general-transition(color);
+  }
+}
+
+.input-radio {
+  .customizable-property(background, accent);
+  .general-transition(background);
+  .interactive-transition(background);
+
+  &:hover, &:active, &:checked {
+    .customizable-property(background, active-accent);
+  }
+}
+
+.input-checkbox {
+  .general-transition(background);
+  .interactive-transition(background);
+
+  &, &:checked:active {
+    .customizable-property(background, accent);
+  }
+
+  &:checked, &:active {
+    .customizable-property(background, active-accent);
+  }
+
+  &::before, &::after {
+    .customizable-property(background, active-accent-text-color);
+    .general-transition(background);
+  }
+}
+
+.input-toggle {
+  .general-transition(background);
+  .interactive-transition(background);
+
+  &::before {
+    .general-transition(background);
+    .interactive-transition(background, transform;);
+    opacity: 1 !important;
+  }
+
+  &, &:checked:active {
+    .customizable-property(background, accent);
+
+    &::before {
+      .customizable-property(background, accent-text-color);
+    }
+  }
+
+  &:checked, &:active {
+    .customizable-property(background, active-accent);
+
+    &::before {
+      .customizable-property(background, active-accent-text-color);
+    }
+  }
+}
+
+.input-range {
+  .customizable-property(background, accent);
+  .general-transition(background);
+
+  &::-webkit-slider-thumb {
+    .customizable-property(background, accent-text-color);
+    .general-transition(background);
+
+    &:active {
+      transform: initial;
+    }
+  }
+}
+
+input[type="color"] {
+  .customizable-property(background, workspace-text-color) !important;
+  .general-transition(background);
+  height: 3em !important;
+  width: 3em !important;
+  border: none !important;
+  border-radius: 100% !important;
+
+  &::-webkit-color-swatch {
+    border: none !important;
+    border-radius: 100% !important;
+    transform: none !important;
+  }
+}
+
+select {
+  .customizable-property(background, accent) !important;
+  .customizable-property(color, accent-text-color) !important;
+  .general-transition(background, color;) !important;
+  .interactive-transition(background, color;) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  &:hover, &:focus {
+    .customizable-property(background, active-accent) !important;
+    .customizable-property(color, active-accent-text-color) !important;
+  }
+}
+
+option {
+  .customizable-property(background, opaque-accent);
+  .customizable-property(color, accent-text-color);
+}
+
+.input-checkbox,
+.input-radio,
+.input-toggle,
+.input-range,
+input[type="color"],
+select {
+  cursor: pointer;
+}

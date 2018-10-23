@@ -1,0 +1,45 @@
+.deprecation-cop {
+  .deprecation-info {
+    padding: .5em;
+    cursor: pointer;
+
+    &:hover {
+      background: none !important;
+    }
+  }
+
+  .deprecation-message {
+    padding: .5em !important;
+    padding-left: 1.5em !important;
+    font-size: inherit !important;
+
+    ul {
+      list-style: disc;
+
+      &:not(:last-child) {
+        margin-bottom: 1em;
+      }
+    }
+  }
+
+  .icon-alert {
+    margin: 0 !important;
+    line-height: 2.5em;
+  }
+
+  .list-tree {
+    padding: 1em;
+  }
+
+  .list-item {
+    margin: 0 !important;
+  }
+
+  .source-file {
+    padding: .5em;
+  }
+}
+
+.deprecation-cop-status .icon::before {
+  width: 1em !important;
+}

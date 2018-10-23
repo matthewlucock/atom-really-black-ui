@@ -25,14 +25,14 @@
             "Image",
             "Solid color"
           ],
-          "description": "Customize your background image when the image background is selected with Packages > Pure > Background images, or the \"Pure: Background images\" command in the command palette.",
+          "description": "Customize your background image when the image background is selected with the \"Pure: Background images\" command in the command palette, or Packages > Pure > Background images.",
           "default": "Image",
           "order": 1
         },
         "fontFamily": {
           "type": "string",
           "title": "Font family",
-          "default": "system-ui",
+          "default": "Open Sans, system-ui",
           "order": 2
         },
         "baseFontSize": {
@@ -50,7 +50,7 @@
         "scrollbarWidth": {
           "type": "string",
           "title": "Scrollbar width",
-          "default": "10px",
+          "default": ".6em",
           "order": 5
         },
         "settingsDelay": {

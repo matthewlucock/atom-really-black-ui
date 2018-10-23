@@ -1,0 +1,30 @@
+.select-list {
+  .key-binding {
+    .customizable-property(background, opaque-active-accent) !important;
+    .customizable-property(color, active-accent-text-color) !important;
+  }
+
+  .list-group {
+    &::-webkit-scrollbar-thumb {
+      .customizable-property(background, opaque-active-accent);
+    }
+
+    li {
+      .general-transition(background, color;);
+
+      &.selected {
+        .customizable-property(background, opaque-active-accent);
+        .customizable-property(color, active-accent-text-color);
+
+        .key-binding {
+          .customizable-property(background, opaque-accent) !important;
+          .customizable-property(color, accent-text-color) !important;
+        }
+      }
+    }
+  }
+
+  .status {
+    float: right;
+  }
+}

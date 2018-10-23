@@ -1,0 +1,199 @@
+@keyframes pure-spin {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.settings-view {
+  .section {
+    max-width: 45em;
+    margin: 0 auto;
+    border: none;
+  }
+
+  .section-heading, .sub-section-heading {
+    text-align: center;
+
+    &.icon::before {
+      margin-right: 1em;
+    }
+  }
+
+  .themes-picker-item, .text, p {
+    text-align: center;
+  }
+
+  .updates-heading-container {
+    flex-direction: column;
+  }
+
+  .config-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: @pure-maximum-tab-width;
+    max-width: initial;
+    padding: 0;
+    border: none;
+    background: none;
+  }
+
+  .breadcrumb,
+  .text,
+  .section-heading,
+  .sub-section-heading,
+  .sub-section-heading::after,
+  .copy-icon {
+    color: inherit !important;
+  }
+
+  .themes-picker-item .btn {
+    &, &::before {
+      margin: 0 !important;
+    }
+  }
+
+  .setting-description {
+    .customizable-property(color, subtle-workspace-text-color);
+    .general-transition(color);
+  }
+
+  .control-label {
+    margin-bottom: .5em;
+  }
+
+  .breadcrumb {
+    padding: 1.5em 1.5em 0;
+    text-align: center;
+  }
+
+  .sub-section .sub-section-heading, .packages .themes-label {
+    font-weight: normal;
+  }
+
+  .sub-section {
+    .sub-section-heading.has-items::after {
+      // The Octicons code for triangle-down.
+      content: "\f05b";
+      margin-top: .25em;
+      color: inherit;
+    }
+
+    &.collapsed .sub-section-heading.has-items::after {
+      // The Octicons code for triangle-up.
+      content: "\f0aa";
+    }
+  }
+
+  .checkbox .setting-title {
+    line-height: 1;
+  }
+
+  .color .setting-title {
+    line-height: 2;
+  }
+
+  .table {
+    th, td {
+      text-align: center;
+      white-space: normal;
+    }
+  }
+
+  .package-card {
+    .interactive-transition(background);
+    border: none;
+
+    &:hover {
+      .customizable-property(background, accent);
+      .general-transition(background);
+    }
+
+    .icon {
+      color: inherit !important;
+    }
+
+    .avatar {
+      background: none !important;
+    }
+
+    .meta-controls {
+      .install-button.is-installing, .uninstall-button.is-uninstalling {
+        font-size: 0 !important;
+        background: none;
+        padding: 0;
+        border-radius: 100%;
+        height: 2rem !important;
+        width: 2rem !important;
+        margin-top: -.2rem;
+
+        &::before {
+          font-size: 1rem !important;
+          margin: 0 auto !important;
+          position: relative;
+          bottom: .1em;
+        }
+
+        &::after {
+          content: '';
+          display: block;
+          height: 2rem;
+          width: 2rem;
+          border: .1rem solid;
+          .customizable-property(border-color, workspace-text-color);
+          .general-transition(border-color);
+          border-radius: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          border-right-color: transparent;
+          border-bottom-color: transparent;
+          animation: pure-spin 2s linear infinite
+        }
+
+        &:not(:last-child) {
+          margin-right: 1rem !important;
+        }
+      }
+    }
+  }
+
+  .package-detail {
+    .package-card {
+      padding: 0;
+
+      &:hover {
+        background: none;
+      }
+    }
+
+    .repo-link {
+      margin-bottom: 1.5em;
+      margin-left: 0;
+    }
+
+    .text {
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 1em;
+    }
+
+    .btn-wrap-group {
+      text-align: center;
+    }
+  }
+
+  .package-readme {
+    h1, h2, h3, h4 {
+      color: inherit;
+    }
+
+    tr {
+      background: none !important;
+    }
+  }
+}

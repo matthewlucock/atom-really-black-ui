@@ -1,0 +1,76 @@
+@toggle-button-size: 3rem;
+@toggle-button-spacing: .5em;
+@resize-handle-size: .3em;
+
+.atom-dock-toggle-button {
+  .customizable-property(background, opaque-accent);
+  .customizable-property(color, accent-text-color);
+  .general-transition(background, color;);
+  .interactive-transition(opacity);
+  width: @toggle-button-size !important;
+  height: @toggle-button-size !important;
+  border: none;
+  border-radius: 100%;
+  opacity: 0;
+  font-size: 2em;
+
+  &.atom-dock-toggle-button-visible {
+    opacity: 1;
+  }
+
+  &.left {
+    margin-left: @toggle-button-spacing;
+  }
+
+  &.right {
+    margin-right: @toggle-button-spacing;
+  }
+
+  &.bottom {
+    margin-bottom: @toggle-button-spacing;
+  }
+
+  .atom-dock-toggle-button-inner {
+    position: static;
+    width: auto;
+    height: auto;
+    border: none;
+    border-radius: 0;
+    transform: none !important;
+
+    .icon {
+      position: relative;
+      opacity: 1 !important;
+      transform: none !important;
+
+      &::before {
+        margin: 0 !important;
+      }
+    }
+
+    &.left, &.right {
+      .icon {
+        top: .05em;
+        right: .05em;
+
+        .atom-dock-inner:not(.atom-dock-open) & {
+          left: .05em;
+        }
+      }
+    }
+
+    .atom-dock-open &.bottom .icon {
+      top: .1em;
+    }
+  }
+}
+
+.atom-dock-resize-handle {
+  &.left, &.right {
+    width: @resize-handle-size;
+  }
+
+  &.bottom {
+    height: @resize-handle-size;
+  }
+}

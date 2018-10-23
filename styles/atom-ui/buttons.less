@@ -1,0 +1,44 @@
+.button-type(@type) {
+  @background-variable: 'pure-@{type}-color';
+
+  background: @@background-variable;
+
+  &:hover, &:active, &:focus, &.selected {
+    background: darken(@@background-variable, 20%);
+  }
+}
+
+.btn {
+  .customizable-property(font-size, base-font-size) !important;
+  .general-transition(background, color, font-size;);
+  .interactive-transition(background, color;);
+  height: auto !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+
+  // Fix vertical alignment in button groups in notifications.
+  vertical-align: top;
+
+  &, &.btn-primary, &.btn-info {
+    .customizable-property(background, accent);
+    .customizable-property(color, accent-text-color);
+
+    &:hover, &:active, &:focus, &.selected {
+      .customizable-property(background, active-accent);
+      .customizable-property(color, active-accent-text-color);
+    }
+  }
+
+  &.btn-success {
+    .button-type(success);
+  }
+
+  &.btn-warning {
+    .button-type(warning);
+  }
+
+  &.btn-error {
+    .button-type(error);
+  }
+}

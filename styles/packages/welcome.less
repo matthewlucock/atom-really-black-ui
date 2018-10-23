@@ -1,0 +1,80 @@
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: initial;
+  max-width: initial;
+  color: inherit;
+
+  label {
+    margin-top: 2em;
+  }
+}
+
+.welcome-title {
+  font-weight: normal;
+  margin-top: 0;
+}
+
+.welcome-panel:first-of-type {
+  width: 50%;
+}
+
+.welcome-header {
+  margin-bottom: 2em;
+}
+
+.welcome-footer .text-subtle {
+  color: inherit;
+}
+
+.welcome-card {
+  margin: 0;
+  border: none;
+  text-align: center;
+}
+
+.welcome-summary {
+  .interactive-transition(background, color;);
+
+  &:hover {
+    .customizable-property(background, accent);
+    .general-transition(background, color;);
+
+    &, details[open] & {
+      .customizable-property(color, accent-text-color);
+    }
+  }
+
+  details[open] & {
+    color: inherit;
+  }
+
+  &::before {
+    color: inherit !important;
+  }
+}
+
+.welcome-detail {
+  border: none;
+}
+
+.welcome-img {
+  border: none;
+  border-radius: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.welcome-logo, .welcome-note, .welcome-highlight, .welcome-love {
+  color: inherit;
+}
+
+.welcome-key {
+  line-height: inherit;
+}
+
+.welcome-consent {
+  width: 50%;
+  text-align: center;
+}

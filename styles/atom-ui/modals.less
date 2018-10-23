@@ -1,0 +1,24 @@
+atom-panel.modal {
+  .customizable-property(background, opaque-accent);
+  .customizable-property(color, accent-text-color);
+  .general-transition(background, color;);
+
+  &.from-top {
+    top: 25%;
+  }
+
+  &.overlay::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: fade(black, 50);
+    z-index: -1;
+  }
+
+  h1, .message {
+    color: inherit;
+  }
+}

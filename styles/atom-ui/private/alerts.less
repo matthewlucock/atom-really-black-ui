@@ -1,0 +1,50 @@
+@text-color: white;
+
+.alert {
+  padding: 1em;
+  margin-bottom: 1.5em;
+  border: none;
+  border-radius: 0;
+
+  & > p + p {
+    margin-top: .3em;
+  }
+
+  .alert-link {
+    font-weight: inherit;
+  }
+}
+
+.alert-dismissable {
+  padding-right: 3em;
+
+  .close {
+    position: static;
+  }
+}
+
+.alert-info {
+  background: none !important;
+  color: inherit !important;
+  text-align: center
+}
+
+.alert-success, .alert-warning, .alert-error {
+  color: @text-color;
+
+  hr {
+    border-top-color: @text-color;
+  }
+}
+
+.alert-success {
+  background: @pure-success-color;
+}
+
+.alert-warning {
+  background: @pure-warning-color;
+}
+
+.alert-error {
+  background: @pure-error-color;
+}

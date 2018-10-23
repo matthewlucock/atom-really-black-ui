@@ -1,0 +1,50 @@
+autocomplete-suggestion-list {
+  .customizable-property(color, accent-text-color) !important;
+  .general-transition(color);
+
+  .suggestion-description {
+    .customizable-property(font-family, font-family);
+    background: none !important;
+    font-size: 1rem;
+    line-height: inherit !important;
+  }
+
+  .suggestion-description-content, .suggestion-description-more-link {
+    font-family: inherit !important;
+    font-size: inherit !important;
+   }
+
+   li,
+   .word,
+   .character-match,
+   .snippet-completion {
+     color: inherit !important;
+   }
+
+   .character-match {
+     font-weight: normal;
+   }
+
+   .left-label, .right-label {
+     .customizable-property(color, subtle-accent-text-color) !important;
+     .general-transition(color);
+   }
+
+   .selected {
+     .left-label, .right-label {
+       .customizable-property(
+         color,
+         subtle-active-accent-text-color
+        ) !important;
+     }
+   }
+
+   .suggestion-list-scroller::-webkit-scrollbar-thumb {
+     .customizable-property(background, opaque-active-accent);
+   }
+
+   .icon {
+     background: none;
+     color: inherit;
+   }
+}

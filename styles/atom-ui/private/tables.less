@@ -1,0 +1,35 @@
+tr, th, tbody {
+  &, .table-bordered {
+    border: none !important;
+  }
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  .customizable-property(background, accent);
+  .customizable-property(color, accent-text-color);
+  .general-transition(background, color;);
+}
+
+.table-hover > tbody > tr {
+  .general-transition(background, color;);
+  .interactive-transition(background, color;);
+
+  &:hover {
+    .customizable-property(background, accent);
+    .customizable-property(color, accent-text-color);
+  }
+}
+
+th, td {
+  border: none !important;
+}
+
+th {
+  font-weight: normal;
+}
+
+thead {
+  .customizable-property(background, accent);
+  .customizable-property(color, accent-text-color);
+  .general-transition(background, color;);
+}

@@ -10,7 +10,8 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  margin: 2em 0;
+  max-width: 800px;
+  margin: 2em auto;
 }
 
 .pure-background-images-view-custom {
@@ -66,7 +67,7 @@
     .customizable-property(color, accent-text-color);
     .general-transition(color);
     .interactive-transition(color);
-    margin: 0;
+    margin: 0 !important;
   }
 }
 
@@ -83,6 +84,8 @@
   left: 0;
   right: 0;
   visibility: hidden;
+  max-width: 800px;
+  margin: 0 auto;
   opacity: 0;
 
   &.pure-background-images-view-custom-drop-zone-active {

@@ -1,0 +1,18 @@
+section, .section {
+  &.bordered {
+    border: none;
+  }
+
+  .section-heading:first-child {
+    color: inherit !important;
+  }
+}
+
+.section-heading {
+  font-weight: normal !important;
+
+  &.icon::before {
+    // Attempt to vertically center icons in headings.
+    bottom: .25em;
+  }
+}

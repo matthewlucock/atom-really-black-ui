@@ -1,0 +1,107 @@
+.tab-bar .tab {
+  .general-transition(background, color;);
+  .interactive-transition(width);
+  flex: 1 !important;;
+  max-width: none !important;
+  padding: .5em 1.5em;
+  font-size: inherit;
+  text-align: center;
+
+  &:not(:only-child) {
+    .interactive-transition(background, color;)
+  }
+
+  .close-icon {
+    .interactive-transition(opacity);
+    top: 50% !important;
+    right: 1em !important;
+    transform: translateY(-50%);
+
+    &::before {
+      position: relative;
+      height: .5rem;
+      width: .5rem;
+      bottom: .05rem;
+      left: .2rem;
+      font-size: .8rem;
+      visibility: hidden;
+      .interactive-transition(visibility);
+    }
+  }
+
+  &:not(.modified) .close-icon {
+    opacity: 0;
+  }
+
+  &:hover .close-icon {
+    opacity: 1;
+
+    &::before {
+      visibility: visible;
+    }
+  }
+
+  &:not(.active), .close-icon {
+    cursor: pointer;
+  }
+
+  &.modified {
+    &:not(:hover) {
+      .close-icon {
+        .customizable-property(background, workspace-text-color);
+        .general-transition(background);
+        height: .5rem !important;
+        width: .5rem !important;
+        border: none;
+        font-size: .8em;
+        border-radius: 100%;
+      }
+
+      &.active .close-icon {
+        .customizable-property(color, accent-text-color);
+      }
+    }
+
+    &:hover .close-icon {
+      .customizable-property(color, workspace-text-color);
+      .general-transition(color);
+    }
+  }
+
+  &.active:not(:only-child) {
+    .customizable-property(background, accent);
+
+    &, &:hover .close-icon {
+      .customizable-property(color, accent-text-color);
+    }
+
+    &.modified:not(:hover) .close-icon {
+      .customizable-property(background, accent-text-color);
+    }
+
+    .title {
+      padding: 0;
+    }
+  }
+
+  &.is-dragging .close-icon {
+    display: none;
+  }
+}
+
+.tab-bar .placeholder {
+  .customizable-property(background, workspace-text-color) !important;
+
+  &::after {
+    display: none;
+  }
+}
+
+.tabs-layout-overlay {
+  .customizable-property(background, accent);
+  transition-duration: @pure-interactive-transition-duration;
+
+  &.visible {
+    opacity: 1;
+  }
+}

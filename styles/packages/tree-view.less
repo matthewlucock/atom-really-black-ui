@@ -1,0 +1,51 @@
+.tree-view-root {
+  padding: 1em !important;
+
+  .directory:not(.collapsed) > .header {
+    padding-bottom: .25em;
+  }
+
+  .entries:empty {
+    margin-top: -.25em;
+  }
+
+  :not(.status-added):not(.status-modified):not(.status-ignored) {
+    &.file, &.directory > .header {
+      & > .name, &::before {
+        .customizable-property(color, workspace-text-color);
+        .general-transition(color);
+      }
+    }
+
+    &.file.selected, &.directory.selected > .header {
+      & > .name, &::before {
+        .customizable-property(color, accent-text-color);
+      }
+    }
+  }
+
+  .project-root {
+    padding-top: 0;
+    color: inherit !important;
+
+    &:not(:first-child) {
+      margin-top: 1em;
+    }
+
+    &::before {
+      display: none;
+    }
+  }
+
+  .placeholder {
+    .customizable-property(background, workspace-text-color);
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.tab[data-type='TreeView'] {
+  display: none !important;
+}

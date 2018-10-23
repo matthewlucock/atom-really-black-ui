@@ -1,0 +1,13 @@
+.nav > li {
+  & > a {
+    .interactive-transition(background, color;);
+  }
+
+  &:hover, &:focus, &.active {
+    & > a {
+      .customizable-property(background, accent) !important;
+      .customizable-property(color, accent-text-color) !important;
+      .general-transition(background, color;);
+    }
+  }
+}

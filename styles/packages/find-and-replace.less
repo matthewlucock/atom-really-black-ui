@@ -1,0 +1,104 @@
+atom-text-editor {
+  .find-result, .current-result {
+    .customizable-property(border-color, workspace-text-color);
+    .general-transition(border-color);
+  }
+}
+
+.preview-pane {
+  .preview-header {
+    padding: 2em;
+    border: none;
+    background: none;
+  }
+
+  .results-view {
+    padding-left: 2em;
+    overflow: initial;
+    font-family: inherit !important;
+
+    .context-row, .match-row {
+      cursor: pointer;
+      box-shadow: none !important;
+    }
+
+    .line-number {
+      color: inherit !important;
+      font-family: inherit;
+    }
+
+    .list-tree {
+      height: auto !important;
+
+      & > div {
+        position: static !important;
+        margin: .5em 0 !important;
+      }
+
+      li.selected::before {
+        display: none;
+      }
+    }
+
+    .path-match-number {
+      color: inherit;
+    }
+
+    .highlight-info, .highlight-error, .highlight-success {
+      box-shadow: none !important;
+    }
+
+    .preview {
+      color: inherit !important;
+      font-family: inherit;
+    }
+
+    .description .subtle-info-message {
+      padding-left: .5em;
+
+      &, & .highlight {
+        color: inherit;
+      }
+    }
+  }
+}
+
+.find-and-replace, .project-find, .preview-pane {
+  .btn > .icon {
+    height: 1.5em;
+    width: 1.5em;
+  }
+
+  .options-label, .options, .close-button {
+    color: inherit !important;
+  }
+
+  .btn-group-options .btn {
+    width: 2.5em;
+  }
+}
+
+.find-and-replace {
+  .find-container atom-text-editor {
+    padding-right: 10ch;
+  }
+
+  .result-counter {
+    color: inherit;
+  }
+}
+
+.find-wrap-icon {
+  .customizable-property(background, accent);
+  margin: 0;
+  transform: translate(-50%, -50%);
+
+  &::before {
+    .customizable-property(color, accent-text-color);
+    height: 10rem;
+    width: 10rem;
+    opacity: 1;
+    font-size: 8em;
+    line-height: initial;
+  }
+}
