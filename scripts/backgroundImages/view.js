@@ -54,7 +54,15 @@ module.exports = class BackgroundImagesView {
         multiple: true
       },
       events: {
-        change: () => this.addCustomImagesFromFileList(this.fileInput.files)
+        change: () => {
+          this.addCustomImagesFromFileList(this.fileInput.files)
+
+          // If the input isn't cleared, selecting the same file again won't
+          // work as the value of the input will not have actually changed.
+          // The ability to select the same file again is not a feature, but it
+          // not working is weird.
+          this.fileInput.value = ''
+        }
       }
     })
     this.disposables = new CompositeDisposable()
