@@ -170,15 +170,15 @@
     }
   },
   "dependencies": {
-    "color": "^3.0.0",
-    "delay": "^3.0.0",
+    "color": "^3.1.0",
+    "delay": "^4.1.0",
     "docrel": "^1.6.0",
-    "fs-extra": "^5.0.0",
-    "mem": "^3.0.1",
+    "fs-extra": "^7.0.0",
+    "mem": "^4.0.0",
     "random-item": "^1.0.0"
   },
   "devDependencies": {
-    "snazzy": "^7.1.1",
-    "standard": "^10.0.3"
+    "snazzy": "^8.0.0",
+    "standard": "^12.0.1"
   }
 }
