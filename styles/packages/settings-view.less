@@ -77,15 +77,15 @@
 
   .sub-section {
     .sub-section-heading.has-items::after {
-      // The Octicons code for triangle-down.
-      content: "\f05b";
+      // The Octicons code for triangle-up.
+      content: "\f0aa";
       margin-top: .25em;
       color: inherit;
     }
 
     &.collapsed .sub-section-heading.has-items::after {
-      // The Octicons code for triangle-up.
-      content: "\f0aa";
+      // The Octicons code for triangle-down.
+      content: "\f05b";
     }
   }
 
@@ -113,12 +113,21 @@
       .general-transition(background);
     }
 
+    p {
+      text-align: initial;
+    }
+
     .icon {
       color: inherit !important;
     }
 
     .avatar {
       background: none !important;
+    }
+
+    .deprecation-badge {
+      margin-left: 1em;
+      text-transform: initial;
     }
 
     .meta-controls {
