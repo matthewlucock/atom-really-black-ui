@@ -15,6 +15,7 @@ const SELECTED_IMAGE_JSON_PATH = path.join(
   BACKGROUND_IMAGES_DIRECTORY,
   'selected.json'
 )
+const BACKGROUND_ANIMATING_CLASS = 'pure-background-image-animating'
 
 /**
  * @param {BackgroundImage} image
@@ -47,7 +48,17 @@ module.exports = class BackgroundImageManager {
     this.animationElement = createElement('div', {
       class: 'pure-background-image-animation'
     })
+    this._animating = false
     this.getDirectory = mem(getDirectory)
+  }
+
+  get animating () {
+    return this._animating
+  }
+
+  set animating (value) {
+    document.body.classList.toggle(BACKGROUND_ANIMATING_CLASS, value)
+    this._animating = value
   }
 
   /**
@@ -88,11 +99,13 @@ module.exports = class BackgroundImageManager {
     await image.load()
 
     this.animationElement.style.backgroundImage = image.cssURL
+    this.animating = true
     const animation = this.animationElement.animate({opacity}, {
       duration: 1000,
       fill: 'forwards'
     })
     await animation.finished
+    this.animating = false
   }
 
   /**
@@ -119,13 +132,8 @@ module.exports = class BackgroundImageManager {
      */
     this.emitter.emit('select', image)
 
-    if (config.get('imageBackground.animate')) {
-      document.body.append(this.animationElement)
-      await this.animate({image})
-    }
-
+    if (config.get('imageBackground.animate')) await this.animate({image})
     this.styleElement.textContent = getBackgroundImageCss(image)
-    this.animationElement.remove()
 
     if (write) await fse.writeJson(SELECTED_IMAGE_JSON_PATH, image)
   }
@@ -243,6 +251,7 @@ module.exports = class BackgroundImageManager {
    * @returns {Disposable}
    */
   activate () {
+    document.body.append(this.animationElement)
     document.head.append(this.styleElement)
 
     this.handleImageSelectionOnActivation()

@@ -147,7 +147,7 @@ module.exports = class BackgroundImagesView {
     const thumbnail = new BackgroundImageThumbnail({image, deletable})
 
     thumbnail.emitter.on('select', () => {
-      this.manager.select({image, write: true})
+      if (!this.manager.animating) this.manager.select({image, write: true})
     })
     thumbnail.emitter.on('delete', () => this.manager.deleteCustomImage(image))
 

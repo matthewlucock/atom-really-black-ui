@@ -2,6 +2,7 @@
   padding: 2em;
   overflow: auto;
   text-align: center;
+  user-select: none;
 }
 
 .pure-background-images-view-default-list,
@@ -25,10 +26,12 @@
   padding: @pure-background-images-view-thumbnail-padding;
 
   &:not(.pure-background-images-view-thumbnail-selected) {
-    cursor: pointer;
+    body:not(.pure-background-image-animating) & {
+      cursor: pointer;
 
-    &:hover {
-      .customizable-property(background, accent);
+      &:hover {
+        .customizable-property(background, accent);
+      }
     }
   }
 
