@@ -36,9 +36,10 @@
           "order": 2
         },
         "baseFontSize": {
-          "type": "string",
-          "title": "Base font size",
-          "default": "15px",
+          "type": "integer",
+          "title": "Base font size (px)",
+          "default": 15,
+          "minimum": 1,
           "order": 3
         },
         "statusBarFontSize": {

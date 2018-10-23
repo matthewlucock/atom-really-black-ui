@@ -1,7 +1,7 @@
 .tab-bar .tab {
   .general-transition(background, color;);
   .interactive-transition(width);
-  flex: 1 !important;;
+  flex: 1 !important;
   max-width: none !important;
   padding: .5em 1.5em;
   font-size: inherit;
@@ -48,10 +48,13 @@
   &.modified {
     &:not(:hover) {
       .close-icon {
+        // If the height and width are half-pixel values, Chromium may round one
+        // of them up but the other one down, making the icon look oblong
+        // instead of circle.
+        .customizable-property(height, tab-modified-icon-size) !important;
+        .customizable-property(width, tab-modified-icon-size) !important;
         .customizable-property(background, workspace-text-color);
-        .general-transition(background);
-        height: .5rem !important;
-        width: .5rem !important;
+        .general-transition(height, width, background;);
         border: none;
         font-size: .8em;
         border-radius: 100%;

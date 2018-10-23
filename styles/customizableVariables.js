@@ -146,10 +146,11 @@ const solidVariables = mem(({workspaceColor, accent}) => {
 
 module.exports = data => {
   const variables = {
-    'base-font-size': data.baseFontSize,
+    'base-font-size': `${data.baseFontSize}px`,
     'status-bar-font-size': data.statusBarFontSize,
     'font-family': data.fontFamily,
-    'scrollbar-width': data.scrollbarWidth
+    'scrollbar-width': data.scrollbarWidth,
+    'tab-modified-icon-size': `${Math.round(data.baseFontSize / 2)}px`
   }
 
   if (data.image) {
