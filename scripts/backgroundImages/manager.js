@@ -2,7 +2,7 @@
 
 const {EventEmitter} = require('events')
 const path = require('path')
-const {Disposable} = require('atom')
+const {Disposable, CompositeDisposable} = require('atom')
 const {createElement} = require('docrel')
 const fse = require('fs-extra')
 const mem = require('mem')
@@ -16,6 +16,15 @@ const SELECTED_IMAGE_JSON_PATH = path.join(
   'selected.json'
 )
 const BACKGROUND_ANIMATING_CLASS = 'pure-background-image-animating'
+
+const ONE_HOUR = 60 * 60 * 1000
+const SLIDESHOW_DURATION_STRINGS = {
+  '30 minutes': ONE_HOUR / 2,
+  '1 hour': ONE_HOUR,
+  '2 hours': 2 * ONE_HOUR,
+  '4 hours': 4 * ONE_HOUR,
+  '6 hours': 6 * ONE_HOUR
+}
 
 /**
  * @param {BackgroundImage} image
@@ -79,11 +88,17 @@ module.exports = class BackgroundImageManager {
    * @param {Array#BackgroundImage} options.images The images to select from.
    * @param {BackgroundImage} options.currentImage
    */
-  async selectRandomImage ({images, currentImage}) {
+  async selectRandomImage (options) {
+    if (!options) options = {}
+    let {images, currentImage, slowAnimation} = options
+    if (!images) images = await this.getImagesToSelectNewImageFrom()
+    if (!currentImage) currentImage = this.selectedImage
+
     images = images.filter(image => image !== currentImage)
 
     await this.select({
       image: images.length ? randomItem(images) : currentImage,
+      slowAnimation,
       write: true
     })
   }
@@ -91,17 +106,22 @@ module.exports = class BackgroundImageManager {
   /**
    * @param {object} options
    * @param {BackgroundImage} options.image
+   * @param {boolean} slow If true, significantly increase the duration of the
+   * animation.
    * @param {boolean} animateOut If true, the image fades out instead of in.
    */
-  async animate ({image, animateOut}) {
+  async animate ({image, slow, animateOut}) {
     const opacity = animateOut ? [1, 0] : [0, 1]
+
+    let duration = 1000
+    if (slow) duration *= 10
 
     await image.load()
 
     this.animationElement.style.backgroundImage = image.cssURL
     this.animating = true
     const animation = this.animationElement.animate({opacity}, {
-      duration: 1000,
+      duration,
       fill: 'forwards'
     })
     await animation.finished
@@ -111,11 +131,12 @@ module.exports = class BackgroundImageManager {
   /**
    * @param {object} options
    * @param {BackgroundImage} options.image
+   * @param {boolean} options.slowAnimation
    * @param {boolean} options.write
    * @emits BackgroundImagesManager#select
    * @emits BackgroundImagesManager#deselect
    */
-  async select ({image, write}) {
+  async select ({image, slowAnimation, write}) {
     if (this.selectedImage && !this.selectedImage.deleted) {
       /**
        * @event BackgroundImagesManager#deselect
@@ -132,8 +153,12 @@ module.exports = class BackgroundImageManager {
      */
     this.emitter.emit('select', image)
 
-    if (config.get('imageBackground.animate')) await this.animate({image})
+    if (config.get('imageBackground.animate')) {
+      document.body.append(this.animationElement)
+      await this.animate({image, slow: slowAnimation})
+    }
     this.styleElement.textContent = getBackgroundImageCss(image)
+    this.animationElement.remove()
 
     if (write) await fse.writeJson(SELECTED_IMAGE_JSON_PATH, image)
   }
@@ -240,25 +265,55 @@ module.exports = class BackgroundImageManager {
     if (!selectNewImageOnActivation && writtenSelectedImage) {
       await this.select({image: writtenSelectedImage})
     } else {
-      await this.selectRandomImage({
-        images: await this.getImagesToSelectNewImageFrom(),
-        currentImage: writtenSelectedImage
-      })
+      await this.selectRandomImage({currentImage: writtenSelectedImage})
     }
   }
 
+  async applySlideshowDuration () {
+    const duration = SLIDESHOW_DURATION_STRINGS[
+      config.get('imageBackground.slideshowDuration')
+    ]
+    clearInterval(this.slideshowIntervalID)
+    this.slideshowIntervalID = setInterval(
+      () => this.selectRandomImage({slowAnimation: true}),
+      duration
+    )
+  }
+
+  bindConfigListeners () {
+    return new CompositeDisposable(
+      config.observe('imageBackground.slideshow', {
+        callback: slideshow => {
+          if (slideshow) {
+            this.applySlideshowDuration()
+          } else {
+            clearInterval(this.slideshowIntervalID)
+          }
+        }
+      }),
+      config.onDidChange('imageBackground.slideshowDuration', {
+        callback: () => {
+          this.selectRandomImage()
+          this.applySlideshowDuration()
+        }
+      })
+    )
+  }
+
   /**
-   * @returns {Disposable}
+   * @returns {CompositeDisposable}
    */
   activate () {
-    document.body.append(this.animationElement)
     document.head.append(this.styleElement)
 
     this.handleImageSelectionOnActivation()
 
-    return new Disposable(() => {
-      this.animationElement.remove()
-      this.styleElement.remove()
-    })
+    return new CompositeDisposable(
+      this.bindConfigListeners(),
+      new Disposable(() => {
+        this.animationElement.remove()
+        this.styleElement.remove()
+      })
+    )
   }
 }

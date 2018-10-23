@@ -90,13 +90,6 @@
           "maximum": 1,
           "order": 3
         },
-        "selectNewImageOnActivation": {
-          "type": "boolean",
-          "title": "Select a new image on activation",
-          "description": "Automatically select a new background image each time Atom loads.",
-          "default": true,
-          "order": 4
-        },
         "selectNewImagesFrom": {
           "type": "string",
           "title": "Select new images from",
@@ -107,20 +100,46 @@
             "Both"
           ],
           "default": "Custom images",
+          "order": 4
+        },
+        "selectNewImageOnActivation": {
+          "type": "boolean",
+          "title": "Select a new image on activation",
+          "description": "Automatically select a new background image each time Atom loads.",
+          "default": true,
           "order": 5
+        },
+        "slideshow": {
+          "type": "boolean",
+          "title": "Select a new image periodically",
+          "default": true,
+          "order": 6
+        },
+        "slideshowDuration": {
+          "type": "string",
+          "title": "Select a new image every",
+          "enum": [
+            "30 minutes",
+            "1 hour",
+            "2 hours",
+            "4 hours",
+            "6 hours"
+          ],
+          "default": "1 hour",
+          "order": 7
         },
         "animate": {
           "type": "boolean",
           "title": "Animate background",
           "default": true,
-          "order": 6
+          "order": 8
         },
         "performanceWarning": {
           "type": "boolean",
           "title": "Warn of animation performance issues",
           "description": "Using custom images of large file sizes can cause performance issues with the background animation.",
           "default": true,
-          "order": 7
+          "order": 9
         }
       }
     },
