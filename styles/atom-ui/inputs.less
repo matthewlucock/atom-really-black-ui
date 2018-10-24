@@ -4,13 +4,17 @@
   .interactive-transition(background);
   border: none !important;
 
-  &:hover, &:focus {
-    .customizable-property(background, active-accent);
-  }
-
-  &::-webkit-input-placeholder {
+  &::placeholder {
     .customizable-property(color, subtle-accent-text-color);
     .general-transition(color);
+  }
+
+  &:hover, &:focus {
+    .customizable-property(background, active-accent);
+
+    &::placeholder {
+      .customizable-property(color, subtle-active-accent-text-color);
+    }
   }
 }
 

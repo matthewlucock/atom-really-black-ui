@@ -1,14 +1,14 @@
 'use strict'
 
-const {EventEmitter} = require('events')
+const { EventEmitter } = require('events')
 const path = require('path')
-const {Disposable, CompositeDisposable} = require('atom')
-const {createElement} = require('docrel')
+const { Disposable, CompositeDisposable } = require('atom')
+const { createElement } = require('docrel')
 const fse = require('fs-extra')
 const mem = require('mem')
 const randomItem = require('random-item')
 const BackgroundImage = require('./image')
-const {BACKGROUND_IMAGES_DIRECTORY} = require('../utilities')
+const { BACKGROUND_IMAGES_DIRECTORY } = require('../utilities')
 const config = require('../config')
 
 const SELECTED_IMAGE_JSON_PATH = path.join(
@@ -90,7 +90,7 @@ module.exports = class BackgroundImageManager {
    */
   async selectRandomImage (options) {
     if (!options) options = {}
-    let {images, currentImage, slowAnimation} = options
+    let { images, currentImage, slowAnimation } = options
     if (!images) images = await this.getImagesToSelectNewImageFrom()
     if (!currentImage) currentImage = this.selectedImage
 
@@ -110,7 +110,7 @@ module.exports = class BackgroundImageManager {
    * animation.
    * @param {boolean} animateOut If true, the image fades out instead of in.
    */
-  async animate ({image, slow, animateOut}) {
+  async animate ({ image, slow, animateOut }) {
     const opacity = animateOut ? [1, 0] : [0, 1]
 
     let duration = 1000
@@ -120,7 +120,7 @@ module.exports = class BackgroundImageManager {
 
     this.animationElement.style.backgroundImage = image.cssURL
     this.animating = true
-    const animation = this.animationElement.animate({opacity}, {
+    const animation = this.animationElement.animate({ opacity }, {
       duration,
       fill: 'forwards'
     })
@@ -136,7 +136,7 @@ module.exports = class BackgroundImageManager {
    * @emits BackgroundImagesManager#select
    * @emits BackgroundImagesManager#deselect
    */
-  async select ({image, slowAnimation, write}) {
+  async select ({ image, slowAnimation, write }) {
     if (this.selectedImage && !this.selectedImage.deleted) {
       /**
        * @event BackgroundImagesManager#deselect
@@ -155,7 +155,7 @@ module.exports = class BackgroundImageManager {
 
     if (config.get('imageBackground.animate')) {
       document.body.append(this.animationElement)
-      await this.animate({image, slow: slowAnimation})
+      await this.animate({ image, slow: slowAnimation })
     }
     this.styleElement.textContent = getBackgroundImageCss(image)
     this.animationElement.remove()
@@ -212,7 +212,7 @@ module.exports = class BackgroundImageManager {
     this.emitter.emit('deleteCustomImage', image)
 
     if (image === this.selectedImage) {
-      this.selectRandomImage({images: await this.optionallyGetCustomImages()})
+      this.selectRandomImage({ images: await this.optionallyGetCustomImages() })
     }
   }
 
@@ -223,11 +223,11 @@ module.exports = class BackgroundImageManager {
     await fse.ensureFile(SELECTED_IMAGE_JSON_PATH)
     const selectedImageData = await fse.readJson(
       SELECTED_IMAGE_JSON_PATH,
-      {throws: false}
+      { throws: false }
     )
 
     if (!selectedImageData) return
-    const {directoryName, fileName} = selectedImageData
+    const { directoryName, fileName } = selectedImageData
 
     const images = await this.getDirectory(directoryName)
     return images.find(image => image.fileName === fileName)
@@ -257,25 +257,25 @@ module.exports = class BackgroundImageManager {
   }
 
   async handleImageSelectionOnActivation () {
-    const selectNewImageOnActivation = config.get(
-      'imageBackground.selectNewImageOnActivation'
+    const selectNewImageOnLaunch = config.get(
+      'imageBackground.selectNewImageOnLaunch'
     )
     const writtenSelectedImage = await this.getWrittenSelectedImage()
 
-    if (!selectNewImageOnActivation && writtenSelectedImage) {
-      await this.select({image: writtenSelectedImage})
+    if (!selectNewImageOnLaunch && writtenSelectedImage) {
+      await this.select({ image: writtenSelectedImage })
     } else {
-      await this.selectRandomImage({currentImage: writtenSelectedImage})
+      await this.selectRandomImage({ currentImage: writtenSelectedImage })
     }
   }
 
   async applySlideshowDuration () {
-    const duration = SLIDESHOW_DURATION_STRINGS[
-      config.get('imageBackground.slideshowDuration')
-    ]
+    const durationString = config.get('imageBackground.slideshowDuration')
+    const duration = SLIDESHOW_DURATION_STRINGS[durationString]
+
     clearInterval(this.slideshowIntervalID)
     this.slideshowIntervalID = setInterval(
-      () => this.selectRandomImage({slowAnimation: true}),
+      () => this.selectRandomImage({ slowAnimation: true }),
       duration
     )
   }
@@ -313,6 +313,7 @@ module.exports = class BackgroundImageManager {
       new Disposable(() => {
         this.animationElement.remove()
         this.styleElement.remove()
+        clearInterval(this.slideshowIntervalID)
       })
     )
   }

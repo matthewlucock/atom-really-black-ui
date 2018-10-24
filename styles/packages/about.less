@@ -51,6 +51,23 @@
     margin-top: @pure-about-spacing;
   }
 
+  .about-more-expand {
+    &:extend(.btn);
+    margin-top: 1em;
+  }
+
+  .about-love {
+    .icon::before {
+      margin: 0 .25rem !important;
+      vertical-align: middle;
+    }
+
+    .icon-logo-github::before {
+      height: .45em !important;
+      font-size: 3em !important;
+    }
+  }
+
   .about-credits {
     margin-top: @pure-about-spacing !important;
   }

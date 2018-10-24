@@ -2,7 +2,7 @@
 
 const path = require('path')
 const mem = require('mem')
-const {BACKGROUND_IMAGES_DIRECTORY, fileURI} = require('../utilities')
+const { BACKGROUND_IMAGES_DIRECTORY, fileURI } = require('../utilities')
 
 module.exports = class BackgroundImage {
   /**
@@ -44,6 +44,6 @@ module.exports = class BackgroundImage {
   }
 
   toJSON () {
-    return {directoryName: this.directoryName, fileName: this.fileName}
+    return { directoryName: this.directoryName, fileName: this.fileName }
   }
 }

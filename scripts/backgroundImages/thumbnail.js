@@ -1,8 +1,8 @@
 'use strict'
 
-const {EventEmitter} = require('events')
-const {createElement} = require('docrel')
-const {BACKGROUND_IMAGES_VIEW_CLASS} = require('../utilities')
+const { EventEmitter } = require('events')
+const { createElement } = require('docrel')
+const { BACKGROUND_IMAGES_VIEW_CLASS } = require('../utilities')
 
 const BASE_CLASS = `${BACKGROUND_IMAGES_VIEW_CLASS}-thumbnail`
 const LOADING_CLASS = `${BASE_CLASS}-loading`
@@ -15,11 +15,11 @@ module.exports = class BackgroundImageThumbnail {
    * @param {BackgroundImage} options.image
    * @param {boolean} options.deletable
    */
-  constructor ({image, deletable}) {
+  constructor ({ image, deletable }) {
     this.image = image
     this.emitter = new EventEmitter()
 
-    this.imageElement = createElement('img', {class: `${BASE_CLASS}-image`})
+    this.imageElement = createElement('img', { class: `${BASE_CLASS}-image` })
 
     this.element = createElement(
       'div',
@@ -50,7 +50,7 @@ module.exports = class BackgroundImageThumbnail {
             }
           }
         },
-        [createElement('span', {classList: ['icon', 'icon-remove-close']})]
+        [createElement('span', { classList: ['icon', 'icon-remove-close'] })]
       ))
     }
   }

@@ -1,7 +1,7 @@
 'use strict'
 
-const {Disposable, CompositeDisposable} = require('atom')
-const {createElement} = require('docrel')
+const { Disposable, CompositeDisposable } = require('atom')
+const { createElement } = require('docrel')
 const BackgroundImageThumbnail = require('./thumbnail')
 const {
   BACKGROUND_IMAGES_VIEW_CLASS,
@@ -22,11 +22,11 @@ const showPerformanceWarning = () => {
   atom.notifications.addWarning('Potential performance issues', {
     dismissable: true,
     description: (
-      'You may experience performance issues with the background animation ' +
-      'when using custom images of large file sizes. You can disable the ' +
-      'background animation in Pure\'s settings.\n\n' +
-      'Your results will vary, but to ensure optimal performance of the ' +
-      'animation on less powerful systems, keep images below ' +
+      'You may experience performance issues when using custom images of ' +
+      'large file sizes. Disabling the background animation in Pure\'s ' +
+      'settings should help alleviate these issues.\n\n' +
+      'Your results will vary, but to ensure optimal performance on less ' +
+      'powerful systems, keep images below ' +
       `${PERFORMANCE_WARNING_FILE_SIZE / 1000 / 1000}MB in size.`
     ),
     buttons: [{
@@ -35,8 +35,7 @@ const showPerformanceWarning = () => {
         config.set('imageBackground.performanceWarning', false)
         this.model.dismiss()
         atom.notifications.addInfo(
-          'You can re-enable the performance warning in Pure\'s settings.',
-          {dismissable: true}
+          'You can re-enable the performance warning in Pure\'s settings.'
         )
       }
     }]
@@ -46,7 +45,7 @@ const showPerformanceWarning = () => {
 module.exports = class BackgroundImagesView {
   constructor (manager) {
     this.manager = manager
-    this.thumbnails = {default: [], custom: []}
+    this.thumbnails = { default: [], custom: [] }
     this.fileInput = createElement('input', {
       attrs: {
         type: 'file',
@@ -78,17 +77,17 @@ module.exports = class BackgroundImagesView {
       'button',
       {
         classList: ['btn', `${CUSTOM_CONTAINER_CLASS}-browse-button`],
-        events: {click: () => this.fileInput.click()}
+        events: { click: () => this.fileInput.click() }
       },
       [
-        createElement('span', {classList: ['icon', 'icon-file-media']}),
+        createElement('span', { classList: ['icon', 'icon-file-media'] }),
         document.createTextNode('Browse')
       ]
     )
 
     const addImageMessage = createElement(
       'div',
-      {class: `${CUSTOM_CONTAINER_CLASS}-add-image-message`},
+      { class: `${CUSTOM_CONTAINER_CLASS}-add-image-message` },
       [
         document.createTextNode('Drag images here or'),
         browseButton,
@@ -96,21 +95,21 @@ module.exports = class BackgroundImagesView {
       ]
     )
 
-    this.dropZone = createElement('div', {class: DROP_ZONE_CLASS})
+    this.dropZone = createElement('div', { class: DROP_ZONE_CLASS })
 
     this.customContainer = createElement(
       'div',
-      {classList: [CUSTOM_CONTAINER_CLASS, LOADING_CLASS]},
+      { classList: [CUSTOM_CONTAINER_CLASS, LOADING_CLASS] },
       [this.customList, addImageMessage, this.dropZone]
     )
 
     this.element = createElement(
       'div',
-      {class: BACKGROUND_IMAGES_VIEW_CLASS},
+      { class: BACKGROUND_IMAGES_VIEW_CLASS },
       [
-        createElement('h2', {textContent: 'Default images'}),
+        createElement('h2', { textContent: 'Default images' }),
         this.defaultList,
-        createElement('h2', {textContent: 'Custom images'}),
+        createElement('h2', { textContent: 'Custom images' }),
         this.customContainer
       ]
     )
@@ -143,11 +142,11 @@ module.exports = class BackgroundImagesView {
    * @listens BackgroundImagesThumbnail#delete
    * @returns {BackgroundImageThumbnail}
    */
-  makeThumbnail ({image, deletable}) {
-    const thumbnail = new BackgroundImageThumbnail({image, deletable})
+  makeThumbnail ({ image, deletable }) {
+    const thumbnail = new BackgroundImageThumbnail({ image, deletable })
 
     thumbnail.emitter.on('select', () => {
-      if (!this.manager.animating) this.manager.select({image, write: true})
+      if (!this.manager.animating) this.manager.select({ image, write: true })
     })
     thumbnail.emitter.on('delete', () => this.manager.deleteCustomImage(image))
 
@@ -162,8 +161,8 @@ module.exports = class BackgroundImagesView {
    * @param {HTMLElement} options.list
    * @returns {BackgroundImageThumbnail}
    */
-  addThumbnail ({image, deletable, thumbnails, list}) {
-    const thumbnail = this.makeThumbnail({image, deletable})
+  addThumbnail ({ image, deletable, thumbnails, list }) {
+    const thumbnail = this.makeThumbnail({ image, deletable })
     thumbnails.push(thumbnail)
     list.append(thumbnail.element)
     return thumbnail
@@ -186,12 +185,12 @@ module.exports = class BackgroundImagesView {
    * @param {HTMLElement} options.container
    * @param {boolean} options.deletable
    */
-  async loadList ({directoryName, list, container, deletable}) {
+  async loadList ({ directoryName, list, container, deletable }) {
     const images = await this.manager.getDirectory(directoryName)
     const thumbnails = this.thumbnails[directoryName]
 
     for (const image of images) {
-      this.addThumbnail({image, deletable, thumbnails, list})
+      this.addThumbnail({ image, deletable, thumbnails, list })
     }
 
     await Promise.all(thumbnails.map(thumbnail => thumbnail.load()))

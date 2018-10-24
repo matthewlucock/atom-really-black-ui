@@ -18,7 +18,8 @@
     display: none;
   }
 
-  .keystroke {
+  // Repeating .keystroke is necessary due to specificity issues.
+  .keystroke.keystroke {
     &:extend(kbd);
     .customizable-property(background, opaque-active-accent) !important;
     .customizable-property(color, active-accent-text-color) !important;

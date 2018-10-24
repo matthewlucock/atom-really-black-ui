@@ -3,10 +3,10 @@
 // This module is used to activate and deactivate background images, and
 // and provides a method for binding corresponding config listeners.
 
-const {Disposable, CompositeDisposable} = require('atom')
+const { Disposable, CompositeDisposable } = require('atom')
 const BackgroundImageManager = require('./manager')
 const BackgroundImagesView = require('./view')
-const {BACKGROUND_IMAGES_VIEW_URI, registerCommand} = require('../utilities')
+const { BACKGROUND_IMAGES_VIEW_URI, registerCommand } = require('../utilities')
 const config = require('../config')
 const customizableVariables = require('../customizableVariables')
 
@@ -36,7 +36,10 @@ const activate = () => {
       label: 'Packages',
       submenu: [{
         label: 'Pure',
-        submenu: [{label: 'Background images', command: `pure:${VIEW_COMMAND}`}]
+        submenu: [{
+          label: 'Background images',
+          command: `pure:${VIEW_COMMAND}`
+        }]
       }]
     }]),
     // Closed the background images view if it is open when background images

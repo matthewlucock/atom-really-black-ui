@@ -4,12 +4,12 @@
 // customizable style variables.
 
 const path = require('path')
-const {Disposable, CompositeDisposable} = require('atom')
+const { Disposable, CompositeDisposable } = require('atom')
 const delay = require('delay')
-const {writeFile} = require('fs-extra')
+const { writeFile } = require('fs-extra')
 const config = require('./config')
 const makeCustomizableVariables = require('../styles/customizableVariables')
-const {ROOT_PATH} = require('./utilities')
+const { ROOT_PATH } = require('./utilities')
 
 const FILE_PATH = path.join(ROOT_PATH, 'styles/customizable-variables.less')
 
@@ -85,8 +85,11 @@ const set = async options => {
 
 const bindConfigListeners = () => {
   return new CompositeDisposable(
-    config.onDidChange('general.fontFamily', {callback: set}),
-    config.onDidChange('general.baseFontSize', {callback: set, delayed: true}),
+    config.onDidChange('general.fontFamily', { callback: set }),
+    config.onDidChange('general.baseFontSize', {
+      callback: set,
+      delayed: true
+    }),
     config.onDidChange('general.statusBarFontSize', {
       callback: set,
       delayed: true
@@ -99,7 +102,7 @@ const bindConfigListeners = () => {
       callback: set,
       delayed: true
     }),
-    config.onDidChange('imageBackground.accent', {callback: set}),
+    config.onDidChange('imageBackground.accent', { callback: set }),
     config.onDidChange('imageBackground.accentAlpha', {
       callback: set,
       delayed: true
@@ -113,7 +116,7 @@ const bindConfigListeners = () => {
         })
       }
     }),
-    config.onDidChange('solidBackground.accent', {callback: set})
+    config.onDidChange('solidBackground.accent', { callback: set })
   )
 }
 
@@ -130,4 +133,4 @@ const activate = () => {
   )
 }
 
-module.exports = {set, activate}
+module.exports = { set, activate }

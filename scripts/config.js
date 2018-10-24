@@ -37,7 +37,7 @@ const get = keySuffix => atom.config.get(makeKey(keySuffix))
  * @param {boolean} options.delayed Whether the callback should be delayed.
  * @returns {function}
  */
-const makeCallback = ({callback, delayed}) => {
+const makeCallback = ({ callback, delayed }) => {
   // Used to identify the delay timeout of the callback.
   const callbackID = Math.random()
 

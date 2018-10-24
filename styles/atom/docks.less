@@ -52,11 +52,11 @@
       .icon {
         top: .05em;
         right: .05em;
-
-        .atom-dock-inner:not(.atom-dock-open) & {
-          left: .05em;
-        }
       }
+    }
+
+    .atom-dock-inner.atom-dock-open &.right .icon {
+       right: 0;
     }
 
     .atom-dock-open &.bottom .icon {

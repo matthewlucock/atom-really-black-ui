@@ -2,7 +2,7 @@
 
 // This module is the entry point for the theme.
 
-const {CompositeDisposable} = require('atom')
+const { CompositeDisposable } = require('atom')
 const backgroundImages = require('./backgroundImages')
 const customizableVariables = require('./customizableVariables')
 

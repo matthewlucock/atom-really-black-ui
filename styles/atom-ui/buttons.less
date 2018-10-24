@@ -17,6 +17,13 @@
   box-shadow: none !important;
   outline: none !important;
 
+  // These styles are duplicates of styles the buttons already have, but
+  // them being here is necessary for styles to properly inherit from .btn
+  // to make things look like buttons.
+  display: inline-block;
+  padding: 0 .5em;
+  cursor: pointer;
+
   // Fix vertical alignment in button groups in notifications.
   vertical-align: top;
 

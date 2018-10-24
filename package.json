@@ -45,13 +45,13 @@
         "statusBarFontSize": {
           "type": "string",
           "title": "Status bar font size",
-          "default": ".9em",
+          "default": ".9rem",
           "order": 4
         },
         "scrollbarWidth": {
           "type": "string",
           "title": "Scrollbar width",
-          "default": ".6em",
+          "default": ".6rem",
           "order": 5
         },
         "settingsDelay": {
@@ -102,10 +102,9 @@
           "default": "Custom images",
           "order": 4
         },
-        "selectNewImageOnActivation": {
+        "selectNewImageOnLaunch": {
           "type": "boolean",
           "title": "Select a new image on activation",
-          "description": "Automatically select a new background image each time Atom loads.",
           "default": true,
           "order": 5
         },
@@ -136,8 +135,8 @@
         },
         "performanceWarning": {
           "type": "boolean",
-          "title": "Warn of animation performance issues",
-          "description": "Using custom images of large file sizes can cause performance issues with the background animation.",
+          "title": "Warn of potential performance issues",
+          "description": "Using custom images of large file sizes may cause performance issues.",
           "default": true,
           "order": 9
         }
