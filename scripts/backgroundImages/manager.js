@@ -310,10 +310,14 @@ module.exports = class BackgroundImageManager {
 
     return new CompositeDisposable(
       this.bindConfigListeners(),
-      new Disposable(() => {
-        this.animationElement.remove()
-        this.styleElement.remove()
+      new Disposable(async () => {
         clearInterval(this.slideshowIntervalID)
+
+        document.body.append(this.animationElement)
+        await this.animate({ image: this.selectedImage, out: true })
+        this.animationElement.remove()
+
+        this.styleElement.remove()
       })
     )
   }
