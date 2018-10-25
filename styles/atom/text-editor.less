@@ -7,6 +7,10 @@ atom-text-editor .placeholder-text {
 atom-text-editor:not([mini]) {
   background: none;
 
+  .line.cursor-line {
+    background: none !important;
+  }
+
   .gutter {
     .customizable-property(color, subtle-workspace-text-color);
     .general-transition(color);

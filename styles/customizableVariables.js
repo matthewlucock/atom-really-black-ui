@@ -49,7 +49,7 @@ const subtleTextColor = textColor => {
  * @param {number} options.accentAlpha
  * @returns {object}
  */
-const imageVariables = mem(({workspaceAlpha, baseAccent, accentAlpha}) => {
+const imageVariables = mem(({ workspaceAlpha, baseAccent, accentAlpha }) => {
   baseAccent = new Color(baseAccent)
 
   const workspaceColor = BLACK.alpha(workspaceAlpha)
@@ -102,7 +102,7 @@ const imageVariables = mem(({workspaceAlpha, baseAccent, accentAlpha}) => {
  * @param {object} options.accent
  * @returns {object}
  */
-const solidVariables = mem(({workspaceColor, accent}) => {
+const solidVariables = mem(({ workspaceColor, accent }) => {
   workspaceColor = new Color(workspaceColor)
 
   if (accent) {

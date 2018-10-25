@@ -8,7 +8,7 @@ const fs = require('fs')
 const makeCustomizableVariables = require('../styles/customizableVariables')
 const metadata = require('../package.json')
 
-const {general, imageBackground, solidBackground} = metadata.configSchema
+const { general, imageBackground, solidBackground } = metadata.configSchema
 
 const lessVariable = ([name, value]) => `@pure-${name}:${value};`
 
