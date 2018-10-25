@@ -1,3 +1,34 @@
+.list-inline {
+  margin: 0;
+
+  & > li {
+    padding: 0 .5em;
+  }
+}
+
+.list-group-item {
+  padding: .5em 1em;
+  margin: 0;
+  border: none;
+  background: none !important;
+  color: inherit !important;
+  border-radius: 0 !important;
+
+  &.disabled {
+    opacity: .5;
+  }
+
+  &.active {
+    .customizable-property(background, accent);
+    .customizable-property(color, accent-text-color);
+    .general-transition(background, color;);
+  }
+}
+
+.list-group-item-heading {
+  margin-bottom: .5em;
+}
+
 .list-group li {
   .general-transition(background, color;);
   padding: .25em .5em;
@@ -54,10 +85,18 @@
       }
     }
   }
+
+  .list-nested-item > .list-item::before {
+    position: static !important;
+  }
 }
 
 .list-group, .list-tree {
+  .icon::before {
+    position: static;
+  }
+
   .no-icon {
-    padding: none;
+    padding: 0;
   }
 }

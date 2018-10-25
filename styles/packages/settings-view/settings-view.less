@@ -1,13 +1,3 @@
-@keyframes pure-spin {
-  from {
-    transform: rotate(0turn);
-  }
-
-  to {
-    transform: rotate(1turn);
-  }
-}
-
 .settings-view {
   .section {
     max-width: 45em;
@@ -69,6 +59,11 @@
   .breadcrumb {
     padding: 1.5em 1.5em 0;
     text-align: center;
+
+    & > li + li::before {
+      padding-left: .5em;
+      padding-right: .3em;
+    }
   }
 
   .sub-section .sub-section-heading, .packages .themes-label {
@@ -104,82 +99,7 @@
     }
   }
 
-  .package-card {
-    .interactive-transition(background);
-    border: none;
-
-    &:hover {
-      .customizable-property(background, accent);
-      .general-transition(background);
-    }
-
-    p {
-      text-align: initial;
-    }
-
-    .icon {
-      color: inherit !important;
-    }
-
-    .avatar {
-      background: none !important;
-    }
-
-    .deprecation-badge {
-      margin-left: 1em;
-      text-transform: initial;
-    }
-
-    .meta-controls {
-      .install-button.is-installing, .uninstall-button.is-uninstalling {
-        font-size: 0 !important;
-        background: none;
-        padding: 0;
-        border-radius: 100%;
-        height: 2rem !important;
-        width: 2rem !important;
-        margin-top: -.2rem;
-
-        &::before {
-          font-size: 1rem !important;
-          margin: 0 auto !important;
-          position: relative;
-          bottom: .1em;
-        }
-
-        &::after {
-          content: '';
-          display: block;
-          height: 2rem;
-          width: 2rem;
-          border: .1rem solid;
-          .customizable-property(border-color, workspace-text-color);
-          .general-transition(border-color);
-          border-radius: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          border-right-color: transparent;
-          border-bottom-color: transparent;
-          animation: pure-spin 2s linear infinite
-        }
-
-        &:not(:last-child) {
-          margin-right: 1rem !important;
-        }
-      }
-    }
-  }
-
   .package-detail {
-    .package-card {
-      padding: 0;
-
-      &:hover {
-        background: none;
-      }
-    }
-
     .repo-link {
       margin-bottom: 1.5em;
       margin-left: 0;
@@ -193,16 +113,6 @@
 
     .btn-wrap-group {
       text-align: center;
-    }
-  }
-
-  .package-readme {
-    h1, h2, h3, h4 {
-      color: inherit;
-    }
-
-    tr {
-      background: none !important;
     }
   }
 }

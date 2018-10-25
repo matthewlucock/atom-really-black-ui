@@ -1,7 +1,10 @@
 atom-text-editor {
   .find-result, .current-result {
-    .customizable-property(border-color, workspace-text-color);
-    .general-transition(border-color);
+    .region {
+      .customizable-property(border-color, workspace-text-color);
+      .general-transition(border-color);
+      border-width: .05em;
+    }
   }
 }
 

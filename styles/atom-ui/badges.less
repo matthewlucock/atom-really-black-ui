@@ -1,7 +1,27 @@
 .badge {
+  .badge-size(@size) {
+    padding: @size @size * 1.5;
+    min-width: @size * 2;
+    font-size: @size;
+  }
+
+  .badge-size(.8em);
+
   &, &.badge-info {
     .customizable-property(background, accent);
     .customizable-property(color, accent-text-color);
     .general-transition(background, color;);
+  }
+
+  &.badge-large {
+    .badge-size(1.2em);
+  }
+
+  &.badge-medium {
+    .badge-size(.9em);
+  }
+
+  &.badge-small {
+    .badge-size(.6em);
   }
 }

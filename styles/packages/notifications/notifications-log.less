@@ -1,0 +1,55 @@
+.notifications-log {
+  min-width: 15em;
+  max-width: 45em;
+  margin: 0 auto;
+
+  header {
+    margin: 1em auto;
+    border: none;
+
+    .notification-type {
+      .customizable-property(color, subtle-workspace-text-color);
+      .general-transition(color);
+      .interactive-transition(color);
+      width: auto;
+      margin: 0;
+      margin-right: 1em;
+      opacity: 1 !important;
+      font-size: 1.5em !important;
+    }
+  }
+
+  .notifications-log-items .notifications-log-item {
+    max-height: none;
+    border: none;
+
+    .notifications-log-notification {
+      padding: 0;
+
+      &::before {
+        position: static !important;
+        padding: 0 !important;
+        font-size: 1.5em !important;
+      }
+
+      .message {
+        padding: 0;
+        border: none;
+      }
+
+      .btn-toolbar {
+        display: block;
+        margin-left: 2em;
+
+        .btn-copy-report {
+          margin-left: 0;
+        }
+      }
+    }
+
+    .timestamp {
+      padding: 0;
+      line-height: inherit;
+    }
+  }
+}

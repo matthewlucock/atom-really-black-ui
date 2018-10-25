@@ -1,14 +1,18 @@
 .tab-bar .tab {
   .general-transition(background, color;);
-  .interactive-transition(width);
   flex: 1 !important;
+  min-width: 3em !important;
   max-width: none !important;
   padding: .5em 1.5em;
   font-size: inherit;
   text-align: center;
 
   &:not(:only-child) {
-    .interactive-transition(background, color;)
+    .interactive-transition(flex, background, color;);
+  }
+
+  &.active {
+    flex: 2 !important;
   }
 
   .close-icon {
@@ -26,6 +30,24 @@
       font-size: .8rem;
       visibility: hidden;
       .interactive-transition(visibility);
+    }
+  }
+
+  &.active {
+    &:not(:only-child) {
+      .customizable-property(background, accent);
+
+      &, &:hover .close-icon {
+        .customizable-property(color, accent-text-color);
+      }
+
+      &.modified:not(:hover) .close-icon {
+        .customizable-property(background, accent-text-color);
+      }
+    }
+
+    .title {
+      padding: 0;
     }
   }
 
@@ -71,22 +93,6 @@
     }
   }
 
-  &.active:not(:only-child) {
-    .customizable-property(background, accent);
-
-    &, &:hover .close-icon {
-      .customizable-property(color, accent-text-color);
-    }
-
-    &.modified:not(:hover) .close-icon {
-      .customizable-property(background, accent-text-color);
-    }
-
-    .title {
-      padding: 0;
-    }
-  }
-
   &.is-dragging .close-icon {
     display: none;
   }
@@ -95,16 +101,13 @@
 .tab-bar .placeholder {
   .customizable-property(background, workspace-text-color) !important;
 
+  &::before {
+    @width: .2em;
+    width: @width;
+    margin: -@width / 2;
+  }
+
   &::after {
     display: none;
-  }
-}
-
-.tabs-layout-overlay {
-  .customizable-property(background, accent);
-  transition-duration: @pure-interactive-transition-duration;
-
-  &.visible {
-    opacity: 1;
   }
 }

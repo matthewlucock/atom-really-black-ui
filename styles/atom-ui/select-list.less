@@ -1,10 +1,33 @@
 .select-list {
+  &.popover-list {
+    @size: 25em;
+    width: @size;
+    min-width: @size;
+    background: none;
+
+    .list-group {
+      max-height: @size !important;
+    }
+  }
+
+  .loading {
+    .loading-message::before {
+      margin-right: .5em;
+    }
+
+    .badge {
+      margin-left: .75em;
+    }
+  }
+
   .key-binding {
     .customizable-property(background, opaque-active-accent) !important;
     .customizable-property(color, active-accent-text-color) !important;
   }
 
   .list-group {
+    max-height: 20em;
+
     &::-webkit-scrollbar-thumb {
       .customizable-property(background, opaque-active-accent);
     }

@@ -1,7 +1,27 @@
-tr, th, tbody {
-  &, .table-bordered {
-    border: none !important;
+@table-cell-padding: .5em;
+
+caption {
+  .customizable-property(color, subtle-workspace-text-color);
+  .general-transition(color);
+  padding: @table-cell-padding 0;
+}
+
+.table {
+  margin-bottom: 1.5em;
+}
+
+th, td {
+  padding: @table-cell-padding !important;
+  border: none !important;
+  line-height: inherit !important;
+
+  .table-condensed & {
+    padding: @table-cell-padding / 2 !important;
   }
+}
+
+tbody, .table-bordered {
+  border: none !important;
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) {
@@ -25,7 +45,7 @@ th, td {
 }
 
 th {
-  font-weight: normal;
+  font-weight: normal !important;
 }
 
 thead {

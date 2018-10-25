@@ -1,8 +1,27 @@
 .tooltip {
+  @tooltip-offset: .4em;
+
   .customizable-property(font-family, font-family);
   .customizable-property(font-size, base-font-size);
   .general-transition(font-size);
+  padding: 0 !important;
   opacity: 1 !important;
+
+  &.top {
+    margin-top: -@tooltip-offset;
+  }
+
+  &.right {
+    margin-left: @tooltip-offset;
+  }
+
+  &.bottom {
+    margin-top: @tooltip-offset;
+  }
+
+  &.left {
+    margin-left: -@tooltip-offset;
+  }
 
   .tooltip-inner {
     .customizable-property(background, opaque-accent);

@@ -55,12 +55,18 @@
       }
     }
 
-    .atom-dock-inner.atom-dock-open &.right .icon {
+    .atom-dock-inner.atom-dock-open & {
+      &.right .icon {
        right: 0;
+      }
+
+      &.bottom .icon {
+        top: .1em;
+      }
     }
 
-    .atom-dock-open &.bottom .icon {
-      top: .1em;
+    .atom-dock-inner:not(.atom-dock-open) &.left .icon {
+      right: 0;
     }
   }
 }

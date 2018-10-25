@@ -1,7 +1,13 @@
 atom-panel.modal {
+  @width: 35em;
+  @mini-width: 15em;
+
   .customizable-property(background, opaque-accent);
   .customizable-property(color, accent-text-color);
   .general-transition(background, color;);
+  width: @width;
+  margin-left: -(@width / 2);
+  padding: 1em;
 
   &.from-top {
     top: 25%;
@@ -18,6 +24,12 @@ atom-panel.modal {
     z-index: -1;
   }
 
+  &.mini {
+    width: @mini-width;
+    margin-left: -(@mini-width / 2);
+    font-size: .8em;
+  }
+
   h1, .message {
     color: inherit;
   }
@@ -25,5 +37,9 @@ atom-panel.modal {
   .message {
     padding: 0;
     font-size: inherit;
+  }
+
+  atom-text-editor[mini] {
+    margin-bottom: .25em;
   }
 }

@@ -2,16 +2,26 @@ autocomplete-suggestion-list {
   .customizable-property(color, accent-text-color) !important;
   .general-transition(color);
 
+  &.select-list.popover-list {
+    min-width: 25em;
+  }
+
   .suggestion-description {
     .customizable-property(font-family, font-family);
+    padding: .5em .75em !important;
     background: none !important;
     font-size: 1rem;
     line-height: inherit !important;
   }
 
+
   .suggestion-description-content, .suggestion-description-more-link {
     font-family: inherit !important;
     font-size: inherit !important;
+   }
+
+   .list-group {
+     margin: 0 !important;
    }
 
    li,
@@ -32,10 +42,7 @@ autocomplete-suggestion-list {
 
    .selected {
      .left-label, .right-label {
-       .customizable-property(
-         color,
-         subtle-active-accent-text-color
-        ) !important;
+       .customizable-property(color, subtle-active-accent-text-color) !important;
      }
    }
 

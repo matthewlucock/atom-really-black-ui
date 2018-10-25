@@ -1,3 +1,27 @@
+@keyframes pure-notification-show {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pure-notification-hide {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
 .notification-type(@type) {
   @background-variable: 'pure-@{type}-color';
 
@@ -13,20 +37,44 @@
 }
 
 atom-notifications {
+  top: 2em;
   padding: 1em;
 
   atom-notification {
+    @notification-spacing: 1em;
+    @close-size: 2em;
+    // If this is increased above .36s, the hide animation will break as
+    // the notification will get destroyed before the animation finishes.
+    // See NotificationElement.prototype.removeNotificationAfterTimeout().
+    @animation-duration: .2s;
+
     display: flex;
     align-items: center;
-    padding: .5em 1.5em .5em 0;
+    width: 25em !important;
     min-height: 3em;
-    margin-bottom: 1em;
+    max-height: 50em;
+    padding: .5em 1.5em .5em 0;
+    margin-bottom: @notification-spacing;
     color: white;
     word-break: break-word;
+
+    animation: pure-notification-show @animation-duration ease-out !important;
+    animation-iteration-count: initial !important;
+    animation-play-state: initial !important;
 
     &::before, .content, .item, code {
       background: none !important;
       color: inherit !important;
+    }
+
+    &::after {
+      bottom: -@notification-spacing;
+      height: @notification-spacing;
+    }
+
+    &.remove {
+      animation: pure-notification-hide @animation-duration ease-in !important;
+      animation-fill-mode: forwards !important;
     }
 
     &.icon::before {
@@ -53,11 +101,16 @@ atom-notifications {
 
     .close {
       .interactive-transition(opacity);
+      height: @close-size;
+      width: @close-size;
       opacity: 0 !important;
+      line-height: @close-size;
     }
 
     .close-all {
       .interactive-transition(opacity, background;);
+      top: @close-size / 4 !important;
+      right: @close-size * 1.5 !important;
       opacity: 0;
       color: inherit !important;
     }
@@ -65,6 +118,14 @@ atom-notifications {
     &:hover {
       .close, .close-all {
         opacity: 1 !important;
+      }
+    }
+
+    .detail {
+      max-height: 25em;
+
+      &::-webkit-scrollbar-thumb {
+        background: currentColor;
       }
     }
 
@@ -85,7 +146,7 @@ atom-notifications {
     }
 
     .stack-container .line {
-      white-space: pre-wrap;
+      white-space: pre-wrap !important;
     }
 
     .stack-toggle .icon {
@@ -106,61 +167,6 @@ atom-notifications {
 
     &.error, &.fatal {
       .notification-type(error);
-    }
-  }
-}
-
-.notifications-log {
-  max-width: 45em;
-  margin: 0 auto;
-
-  header {
-    margin: 1em auto;
-    border: none;
-
-    .notification-type {
-      .customizable-property(color, subtle-workspace-text-color);
-      .general-transition(color);
-      .interactive-transition(color);
-      width: auto;
-      margin: 0;
-      margin-right: 1em;
-      opacity: 1 !important;
-      font-size: 1.5em !important;
-    }
-  }
-
-  .notifications-log-items .notifications-log-item {
-    max-height: none;
-    border: none;
-
-    .notifications-log-notification {
-      padding: 0;
-
-      &::before {
-        position: static !important;
-        padding: 0 !important;
-        font-size: 1.5em !important;
-      }
-
-      .message {
-        padding: 0;
-        border: none;
-      }
-
-      .btn-toolbar {
-        display: block;
-        margin-left: 2em;
-
-        .btn-copy-report {
-          margin-left: 0;
-        }
-      }
-    }
-
-    .timestamp {
-      padding: 0;
-      line-height: inherit;
     }
   }
 }

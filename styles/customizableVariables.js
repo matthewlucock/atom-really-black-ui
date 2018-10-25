@@ -84,6 +84,7 @@ const imageVariables = mem(({workspaceAlpha, baseAccent, accentAlpha}) => {
     'workspace-text-color': workspaceTextColor,
     'subtle-workspace-text-color': subtleWorkspaceTextColor,
     'accent': accent,
+    'translucent-accent': accent,
     'opaque-accent': opaqueAccent,
     'accent-text-color': accentTextColor,
     'subtle-accent-text-color': subtleAccentTextColor,
@@ -127,13 +128,14 @@ const solidVariables = mem(({workspaceColor, accent}) => {
   const activeAccent = accent.lightness(activeAccentLightness)
   const activeAccentTextColor = contrastingTextColor(activeAccent)
   const subtleActiveAccentTextColor = subtleTextColor(activeAccentTextColor)
-
+  console.log(accent.toString())
   return {
     'app-color': workspaceColor,
     'workspace-color': workspaceColor,
     'workspace-text-color': workspaceTextColor,
     'subtle-workspace-text-color': subtleWorkspaceTextColor,
     'accent': accent,
+    'translucent-accent': accent.alpha(0.3),
     'opaque-accent': accent,
     'accent-text-color': accentTextColor,
     'subtle-accent-text-color': subtleAccentTextColor,

@@ -1,0 +1,135 @@
+@keyframes pure-spin {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.settings-view {
+  .package-card {
+    .interactive-transition(background);
+    border: none;
+
+    &:hover {
+      .customizable-property(background, accent);
+      .general-transition(background);
+    }
+
+    p {
+      text-align: initial;
+    }
+
+    .icon {
+      color: inherit !important;
+    }
+
+    .avatar {
+      @size: 1.3em;
+      height: @size !important;
+      width: @size !important;
+      background: none !important;
+    }
+
+    .deprecation-badge {
+      margin-left: 1em;
+      text-transform: initial;
+    }
+
+    .thumbnail {
+      min-height: 20em;
+      border: none;
+      color: inherit;
+      border-radius: 0;
+    }
+
+    .description {
+      min-height: none;
+      max-height: none;
+      color: inherit;
+    }
+
+    .downloads {
+      color: inherit;
+    }
+
+    .package-status {
+      top: .5em;
+    }
+
+    .stats-item {
+      height: auto !important;
+      line-height: inherit !important;
+    }
+
+    .star-button {
+      padding: 0 .5em !important;
+    }
+
+    .meta {
+      .action {
+        padding: .25em .5em;
+        background: none !important;
+        border-radius: 0;
+      }
+
+      .value {
+        color: inherit;
+      }
+    }
+
+    .meta-controls {
+      .install-button.is-installing, .uninstall-button.is-uninstalling {
+        font-size: 0 !important;
+        background: none;
+        padding: 0;
+        border-radius: 100%;
+        height: 2rem !important;
+        width: 2rem !important;
+        margin-top: -.2rem;
+
+        &::before {
+          font-size: 1rem !important;
+          margin: 0 auto !important;
+          position: relative;
+          bottom: .1em;
+        }
+
+        &::after {
+          content: '';
+          display: block;
+          height: 2rem;
+          width: 2rem;
+          border: .1rem solid;
+          .customizable-property(border-color, workspace-text-color);
+          .general-transition(border-color);
+          border-radius: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          border-right-color: transparent;
+          border-bottom-color: transparent;
+          animation: pure-spin 2s linear infinite
+        }
+
+        &:not(:last-child) {
+          margin-right: 1rem !important;
+        }
+
+        .meta-lower {
+          padding: 1em;
+        }
+      }
+    }
+  }
+
+  .package-detail .package-card {
+    padding: 0;
+
+    &:hover {
+      background: none;
+    }
+  }
+}

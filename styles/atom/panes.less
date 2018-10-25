@@ -1,4 +1,20 @@
-atom-pane-container atom-pane .item-views .pane-item {
-  color: inherit !important;
-  background: none !important
+atom-pane-container {
+  @resize-handle-size: .5em;
+
+  atom-pane-axis {
+    &.vertical > atom-pane-resize-handle::before {
+      height: @resize-handle-size;
+      top: -(@resize-handle-size / 2);
+    }
+
+    &.horizontal > atom-pane-resize-handle::before {
+      width: @resize-handle-size;
+      left: -(@resize-handle-size / 2);
+    }
+  }
+
+  atom-pane .item-views .pane-item {
+    color: inherit !important;
+    background: none !important
+  }
 }

@@ -3,16 +3,13 @@ section, .section {
     border: none;
   }
 
-  .section-heading:first-child {
+  .section-heading {
     color: inherit !important;
-  }
-}
+    font-weight: normal !important;
 
-.section-heading {
-  font-weight: normal !important;
-
-  &.icon::before {
-    // Attempt to vertically center icons in headings.
-    bottom: .25em;
+    &.icon::before {
+      // Attempt to vertically center icons in headings.
+      bottom: .25em;
+    }
   }
 }

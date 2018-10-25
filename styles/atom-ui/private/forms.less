@@ -11,6 +11,10 @@ label {
   font-weight: normal;
 }
 
+input[type="radio"], input[type="checkbox"] {
+  margin-top: 0;
+}
+
 output {
   padding: 0;
   line-height: inherit;
@@ -18,19 +22,16 @@ output {
   color: inherit;
 }
 
-input[type="radio"], input[type="checkbox"] {
-  margin-top: 0;
-}
-
 .form-control {
-  .customizable-property(background, accent);
-  .customizable-property(color, accent-text-color);
+  .customizable-property(background, accent) !important;
+  .customizable-property(color, accent-text-color) !important;
   .general-transition(background, color;);
   height: 2.5em;
   padding: .5em 1em;
   border: none !important;
-  border-radius: 0 !important;
   line-height: inherit;
+  color: inherit !important;
   font-size: inherit;
+  border-radius: 0 !important;
   box-shadow: none !important;
 }
