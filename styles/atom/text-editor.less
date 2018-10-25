@@ -1,50 +1,52 @@
 atom-text-editor .placeholder-text {
-  .customizable-property(color, subtle-accent-text-color);
+  .customizable-property(color, subtle-accent-text-color) !important;
   .general-transition(color);
   .interactive-transition(color);
 }
 
 atom-text-editor:not([mini]) {
-  background: none;
+  background: none !important;
 
   .line.cursor-line {
     background: none !important;
   }
 
   .gutter {
-    .customizable-property(color, subtle-workspace-text-color);
+    .customizable-property(color, subtle-workspace-text-color) !important;
     .general-transition(color);
-    background: none;
+    background: none !important;
 
     .line-number {
+      color: inherit !important;
+
       &, .icon-right {
-        opacity: 1;
+        opacity: 1 !important;
       }
 
       &.cursor-line {
-        .customizable-property(background, accent);
-        .customizable-property(color, accent-text-color);
+        .customizable-property(background, accent) !important;
+        .customizable-property(color, accent-text-color) !important;
         .general-transition(background, color;);
       }
 
       &.git-line-added {
-        border-color: @pure-success-color;
+        border-color: @pure-success-color !important;
       }
 
       &.git-line-modified {
-        border-color: @pure-warning-color;
+        border-color: @pure-warning-color !important;
       }
 
       &.git-line-removed, &.git-previous-line-removed {
         &::before {
-          border-left-color: @pure-error-color;
+          border-left-color: @pure-error-color !important;
         }
       }
     }
   }
 
   .selection .region {
-    .customizable-property(background, accent);
+    .customizable-property(background, accent) !important;
     .general-transition(background);
   }
 }
@@ -72,7 +74,7 @@ atom-text-editor[mini] {
     .customizable-property(color, active-accent-text-color);
 
     .placeholder-text {
-      .customizable-property(color, subtle-active-accent-text-color);
+      .customizable-property(color, subtle-active-accent-text-color) !important;
     }
   }
 
