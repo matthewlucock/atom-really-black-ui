@@ -9,6 +9,8 @@ Pure is a radical new take on the editor theme. It embodies an ultra-minimalist,
 
 Pure is ready for prime-time, but there's bound to be issues that need addressing, and I definitely wouldn't call it finished. If you spot something wrong or you have ideas, feel free to create an issue on GitHub.
 
+Install Pure in Atom's settings or run `apm i pure-ui`.
+
 ## The run-down
 
 - 👀 **Ultra-minimalist. Like, really ultra-minimalist** — Pure completely strips Atom back to reveal its elegant, gorgeous heart. It's just you and your code. This in Atom in its purest form.
@@ -38,33 +40,31 @@ But why are we not all writing code with background images already? I see a few 
 - If you're going to have a background image, it doesn't just need to be an awesome image; it needs to not distract you; it needs to not get in the way. It needs to complement and enhance your work, without obstructing it.
 - What if you just don't like the background image of your theme very much? What if you want to change it?
 
-Traditional image themes feel rough and often don't succeed in any of these areas, but Pure is different. It's the theme that I wanted to use every day; it didn't exist, so I made it myself. I made it for me, and I have gone to great lengths to make it succeed in these areas.
+Traditional image themes feel rough and often don't succeed in any of these areas, but Pure is different. It's the theme that I wanted to use every day; it didn't exist, so I made it myself. I made it for me, and I have gone to great lengths to get this right.
 
-- Pure's extreme minimalism is a perfect match for background images, allowing them to envelop the editor, and to truly define it's appearance like they were always meant to.
-- Pure provides a set of default images built-in to the theme that have been meticulously curated to look beautiful without distracting you or obstructing your work.
-- Pure provides powerful features for customising the background image, including an elegant interface for selecting the image and for adding your own images.
+- The theme's extreme minimalism is a perfect match for background images, allowing them to envelop the editor, and to truly define it's appearance like they were always meant to.
+- The theme provides a set of default images built-in to the theme that have been meticulously curated to look beautiful without distracting you or obstructing your work.
+- The theme provides powerful features for customising the background image, including an elegant interface for selecting the image and for adding your own images.
 
 You don't have to have a background image if you don't want to; Pure is also a great dark theme, or light theme, or hot pink theme. In fact, I never intended to have background images when I first started developing the theme, but at some point I was curious to see what it would look like with a background image, and I can never go back. In some ways, I see background images as the ultimate evolution of the minimalist text editor.
 
 ## Customising Pure
 
-Pure has two background modes: image and solid colour.
+Pure lets you customise the font, font size, and scrollbar width. The theme has two background modes: image and solid colour.
 
 ### Image backgrounds
 
 Pure's background image selection interface can be accessed through "Pure: Background images" in the command palette, or through Packages > Pure > Background images.
 
-<div align="center"><img src="https://matthewlucock.github.io/pure-atom/background-image-customization.png" width="800"></div>
+<div align="center"><img src="https://matthewlucock.github.io/pure-atom/background-image-customization.png" width="600"></div>
 
 Pure provides a curated set of default images, and you can easily add your own. It also provides a slideshow-type feature that can be customised in the settings.
 
-By default, the theme imposes a translucent black overlay on top of the background. How translucent it is can be customised in the settings, and you may wish to make it more or less translucent depending on preference or the background image you are using.
+By default, the theme imposes a translucent black overlay on top of the background. How translucent it is can be customised in the settings, and you may wish to make it more or less translucent depending on preference or the background image you're using.
 
 When using a background image, the theme uses a translucent accent colour throughout the interface. The colour and its translucency can be customised in the settings.
 
 ### Solid colour backgrounds
-
-<div align="center"><img src="https://matthewlucock.github.io/pure-atom/solid-background-customization.png" width="800"></div>
 
 When using a solid colour background, you can set a simple but elegant dichromatic colour scheme. By default, the theme will adapt the accent colour to the background colour that you select.
 
