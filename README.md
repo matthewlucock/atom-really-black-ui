@@ -57,6 +57,7 @@ Pure lets you customise the font, font size, and scrollbar width. The theme has 
 Pure's background image selection interface can be accessed through "Pure: Background images" in the command palette, or through Packages > Pure > Background images.
 
 <div align="center"><img src="https://matthewlucock.github.io/pure-atom/background-image-customization.png" width="600"></div>
+<br>
 
 Pure provides a curated set of default images, and you can easily add your own. It also provides a slideshow-type feature that can be customised in the settings.
 
