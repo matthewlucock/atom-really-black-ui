@@ -1,7 +1,13 @@
-atom-text-editor .placeholder-text {
-  .customizable-property(color, subtle-accent-text-color) !important;
-  .general-transition(color);
-  .interactive-transition(color);
+atom-text-editor {
+  .placeholder-text {
+    .customizable-property(color, subtle-accent-text-color) !important;
+    .general-transition(color);
+    .interactive-transition(color);
+  }
+
+  .cursor {
+    border-left: .05em solid !important;
+  }
 }
 
 atom-text-editor:not([mini]) {
@@ -49,6 +55,10 @@ atom-text-editor:not([mini]) {
     .customizable-property(background, accent) !important;
     .general-transition(background);
   }
+
+  .cursor {
+    .customizable-property(border-color, workspace-text-color) !important;
+  }
 }
 
 atom-text-editor[mini] {
@@ -91,5 +101,9 @@ atom-text-editor[mini] {
     background: none;
     padding-left: 0;
     font-size: 2em !important;
+  }
+
+  .cursor {
+    .customizable-property(border-color, active-accent-text-color) !important;
   }
 }
