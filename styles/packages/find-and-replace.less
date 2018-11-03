@@ -1,10 +1,28 @@
 atom-text-editor {
   .find-result, .current-result {
     .region {
-      .customizable-property(border-color, workspace-text-color);
-      .general-transition(border-color);
-      border-width: .05em;
+      .interactive-transition(background) !important;
+      border: none !important;
+      border-radius: 0 !important;
     }
+  }
+
+  .find-result .region {
+    .customizable-property(background, accent) !important;
+  }
+
+  .current-result .region {
+    .customizable-property(background, active-accent) !important;
+  }
+
+  .bracket-matcher .region {
+    .customizable-property(border-color, workspace-text-color);
+    .general-transition(border-color);
+    border-bottom-width: .05em;
+  }
+
+  .flash .region {
+    animation: initial !important;
   }
 }
 
