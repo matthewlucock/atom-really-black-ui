@@ -1,10 +1,10 @@
-## Expected Behavior
+## Expected behaviour
 
 
-## Actual Behavior
+## Actual behaviour
 
 
-## Steps to Reproduce the Problem
+## Steps to reproduce the problem
 
   1.
   1.
@@ -12,5 +12,8 @@
 
 ## Specifications
 
-  - Version:
+  - Pure version:
+  - Atom version:
   - Platform:
+  - Syntax theme:
+  - Active community packages:
