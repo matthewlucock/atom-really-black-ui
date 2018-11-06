@@ -1,6 +1,12 @@
-.btn:not(:last-child) {
-  .btn-group > &, .btn-toolbar > & {
-    margin-right: 1em;
+//.btn:not(:last-child) {
+ // .btn-group > &, .btn-toolbar > & {
+  //  margin-right: 1em;
+  //}
+//}
+
+.btn-group, .btn-toolbar {
+  & > .btn:not(:first-child):not(:empty) {
+    margin-left: 1em;
   }
 }
 
@@ -11,7 +17,7 @@
 }
 
 .btn-group, .btn-toolbar {
-  .btn {
+  &, .btn {
     vertical-align: top;
   }
 }
