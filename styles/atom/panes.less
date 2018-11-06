@@ -13,8 +13,18 @@ atom-pane-container {
     }
   }
 
-  atom-pane .item-views .pane-item {
-    color: inherit !important;
-    background: none !important
+  atom-pane .item-views {
+    &.item-views {
+      // This never has a background in Atom core, but some packages
+      // (see https://atom.io/packages/zen) give it one.
+      // The specificity of the selector is arbitrary just to really make sure
+      // the style gets applied.
+      background: none !important;
+    }
+
+    .pane-item {
+      color: inherit !important;
+      background: none !important;
+    }
   }
 }
