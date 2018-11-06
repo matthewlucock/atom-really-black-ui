@@ -46,6 +46,9 @@
   }
 }
 
-.tab[data-type='TreeView'] {
+// Only hide the project tab if there are no other tabs in the same dock.
+// Not doing this can result in tree view becoming inaccessible.
+// https://github.com/matthewlucock/pure-atom/issues/3
+.tab[data-type='TreeView']:only-of-type {
   display: none !important;
 }
